@@ -1,0 +1,91 @@
+[
+  {
+    "code": "G0",
+    "type": "LinearMove",
+    "subtype": "NoExtrusion",
+    "link": "https://marlinfw.org/docs/gcode/G000-G001.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Pos" },
+      { "code": "B", "label": "axisB", "type": "Pos" },
+      { "code": "C", "label": "axisC", "type": "Pos" },
+      { "code": "E", "label": "axisExtrusion", "type": "Pos" },
+      { "code": "F", "label": "feedrate", "type": "Rate" },
+      { "code": "S", "label": "laser", "type": "Power" },
+      { "code": "U", "label": "axisU", "type": "Pos" },
+      { "code": "V", "label": "axisV", "type": "Pos" },
+      { "code": "W", "label": "axisW", "type": "Pos" },
+      { "code": "X", "label": "axisX", "type": "Pos" },
+      { "code": "Y", "label": "axisY", "type": "Pos" },
+      { "code": "Z", "label": "axisZ", "type": "Pos" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "E", "F", "S", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "code": "G1",
+    "type": "LinearMove",
+    "subtype": "WithExtrusion",
+    "link": "https://marlinfw.org/docs/gcode/G000-G001.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Pos" },
+      { "code": "B", "label": "axisB", "type": "Pos" },
+      { "code": "C", "label": "axisC", "type": "Pos" },
+      { "code": "E", "label": "axisExtrusion", "type": "Pos" },
+      { "code": "F", "label": "feedrate", "type": "Rate" },
+      { "code": "S", "label": "laser", "type": "Power" },
+      { "code": "U", "label": "axisU", "type": "Pos" },
+      { "code": "V", "label": "axisV", "type": "Pos" },
+      { "code": "W", "label": "axisW", "type": "Pos" },
+      { "code": "X", "label": "axisX", "type": "Pos" },
+      { "code": "Y", "label": "axisY", "type": "Pos" },
+      { "code": "Z", "label": "axisZ", "type": "Pos" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "E", "F", "S", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "LinearMove",
+    "subtype": "Clockwise",
+    "code": "G3",
+    "link": "https://marlinfw.org/docs/gcode/G002-G003.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Pos" },
+      { "code": "B", "label": "axisB", "type": "Pos" },
+      { "code": "C", "label": "axisC", "type": "Pos" },
+      { "code": "E", "label": "axisExtrusion", "type": "Pos" },
+      { "code": "F", "label": "feedrate", "type": "Rate" },
+      { "code": "I", "label": "offsetX", "type": "Offset" },
+      { "code": "J", "label": "offsetY", "type": "Offset" },
+      { "code": "P", "label": "count", "type": "Count" },
+      { "code": "R", "label": "radius", "type": "Radius" },
+      { "code": "S", "label": "laser", "type": "Power" },
+      { "code": "U", "label": "axisU", "type": "Pos" },
+      { "code": "V", "label": "axisV", "type": "Pos" },
+      { "code": "W", "label": "axisW", "type": "Pos" },
+      { "code": "X", "label": "axisX", "type": "Pos" },
+      { "code": "Y", "label": "axisY", "type": "Pos" },
+      { "code": "Z", "label": "axisZ", "type": "Pos" }
+    ],
+    "signatures": [
+      {
+        "name": "FormI",
+        "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
+        "required": ["I"]
+      },
+      {
+        "name": "FormJ",
+        "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
+        "required": ["J"]
+      },
+      {
+        "name": "FormR",
+        "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
+        "required": ["R"]
+      }
+    ]
+  }
+]
