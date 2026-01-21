@@ -41,7 +41,26 @@ extra-doc-files: CHANGELOG.md
 -- extra-source-files:
 common warnings
   ghc-options: -Wall
-
+  -- LANGUAGE extensions used by modules in this package.
+  default-extensions:
+    AllowAmbiguousTypes
+    DataKinds
+    DeriveFunctor
+    DeriveGeneric
+    DerivingVia
+    DuplicateRecordFields
+    FlexibleInstances
+    FlexibleContexts
+    FunctionalDependencies
+    GeneralizedNewtypeDeriving
+    KindSignatures
+    NoImplicitPrelude
+    TypeApplications
+    TypeOperators
+    LambdaCase
+    OverloadedStrings
+    OverloadedRecordDot
+    
 library
   -- Import common warning flags.
   import: warnings
@@ -53,21 +72,6 @@ library
     Marlin.GCode.Class.Upcast
     Marlin.GCode.Generated
     Marlin.GCode.Types
-
-  -- LANGUAGE extensions used by modules in this package.
-  default-extensions:
-    AllowAmbiguousTypes
-    DataKinds
-    DeriveFunctor
-    DeriveGeneric
-    DerivingVia
-    DuplicateRecordFields
-    FlexibleInstances
-    FunctionalDependencies
-    GeneralizedNewtypeDeriving
-    KindSignatures
-    NoImplicitPrelude
-    TypeOperators
 
   -- Other library packages from which modules are imported.
   build-depends:
@@ -100,3 +104,5 @@ test-suite marlin-gcode-test
     marlin-gcode,
     relude,
     row-types,
+    tasty,
+    tasty-hunit,
