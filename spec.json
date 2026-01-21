@@ -189,22 +189,39 @@
     }
   },
   {
-    "unimplemented": true,
     "type": "Retract",
     "code": "G10",
-    "link": "https://marlinfw.org/docs/gcode/G010.html"
+    "link": "https://marlinfw.org/docs/gcode/G010.html",
+    "args": [
+      { "code": "S", "label": "swapRetract", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
   },
   {
-    "unimplemented": true,
     "type": "Recover",
     "code": "G11",
     "link": "https://marlinfw.org/docs/gcode/G011.html"
   },
   {
-    "unimplemented": true,
     "type": "Clean The Nozzle",
     "code": "G12",
-    "link": "https://marlinfw.org/docs/gcode/G012.html"
+    "link": "https://marlinfw.org/docs/gcode/G012.html",
+    "args": [
+      { "code": "P", "label": "pattern", "type": "Index" },
+      { "code": "R", "label": "radius", "type": "Mm" },
+      { "code": "S", "label": "repetitions", "type": "Count" },
+      { "code": "T", "label": "triangles", "type": "Count" },
+      { "code": "X", "label": "includeX", "type": "Flag" },
+      { "code": "Y", "label": "includeY", "type": "Flag" },
+      { "code": "Z", "label": "includeZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["P", "R", "S", "T", "X", "Y", "Z"],
+      "required": []
+    }
   },
   {
     "type": "CNC Workspace Planes",
@@ -235,15 +252,279 @@
     "link": "https://marlinfw.org/docs/gcode/G021.html"
   },
   {
-    "unimplemented": true,
     "type": "Mesh Validation Pattern",
     "code": "G26",
-    "link": "https://marlinfw.org/docs/gcode/G026.html"
+    "link": "https://marlinfw.org/docs/gcode/G026.html",
+    "args": [
+      { "code": "B", "label": "bedTemp", "type": "Celsius" },
+      { "code": "C", "label": "continueClosest", "type": "Flag" },
+      { "code": "D", "label": "disableLeveling", "type": "Flag" },
+      { "code": "F", "label": "filamentDiameter", "type": "Mm" },
+      { "code": "H", "label": "hotendTemp", "type": "Celsius" },
+      { "code": "I", "label": "materialPreset", "type": "Index" },
+      { "code": "K", "label": "keepHeatersOn", "type": "Flag" },
+      { "code": "L", "label": "layerHeight", "type": "Mm" },
+      { "code": "O", "label": "oozeAmount", "type": "Mm" },
+      { "code": "P", "label": "primeLength", "type": "Mm" },
+      { "code": "Q", "label": "retractionMultiplier", "type": "Mm" },
+      { "code": "R", "label": "repetitions", "type": "Count" },
+      { "code": "S", "label": "nozzleSize", "type": "Mm" },
+      { "code": "U", "label": "randomDeviation", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["B", "C", "D", "F", "H", "I", "K", "L", "O", "P", "Q", "R", "S", "U", "X", "Y"],
+      "required": []
+    }
   },
   {
-    "unimplemented": true,
     "type": "Park Toolehead",
     "code": "G27",
-    "link": "https://marlinfw.org/docs/gcode/G027.html"
+    "link": "https://marlinfw.org/docs/gcode/G027.html",
+    "args": [
+      { "code": "P", "label": "parkingBehavior", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["P"],
+      "required": []
+    }
+  },
+  {
+    "type": "Auto Home",
+    "code": "G28",
+    "link": "https://marlinfw.org/docs/gcode/G028.html",
+    "args": [
+      { "code": "A", "label": "homeA", "type": "Flag" },
+      { "code": "B", "label": "homeB", "type": "Flag" },
+      { "code": "C", "label": "homeC", "type": "Flag" },
+      { "code": "H", "label": "holdXY", "type": "Flag" },
+      { "code": "L", "label": "restoreLeveling", "type": "Flag" },
+      { "code": "O", "label": "skipIfTrusted", "type": "Flag" },
+      { "code": "R", "label": "raiseDistance", "type": "Mm" },
+      { "code": "U", "label": "homeU", "type": "Flag" },
+      { "code": "V", "label": "homeV", "type": "Flag" },
+      { "code": "W", "label": "homeW", "type": "Flag" },
+      { "code": "X", "label": "homeX", "type": "Flag" },
+      { "code": "Y", "label": "homeY", "type": "Flag" },
+      { "code": "Z", "label": "homeZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "H", "L", "O", "R", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Bed Leveling",
+    "subtype": "3 Point",
+    "code": "G29",
+    "link": "https://marlinfw.org/docs/gcode/G029-abl-3point.html",
+    "args": [
+      { "code": "A", "label": "abort", "type": "Flag" },
+      { "code": "C", "label": "createFake", "type": "Flag" },
+      { "code": "D", "label": "dryRun", "type": "Flag" },
+      { "code": "E", "label": "engageEach", "type": "Flag" },
+      { "code": "J", "label": "jettison", "type": "Flag" },
+      { "code": "O", "label": "optional", "type": "Flag" },
+      { "code": "Q", "label": "query", "type": "Flag" },
+      { "code": "V", "label": "verbosity", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["A", "C", "D", "E", "J", "O", "Q", "V"],
+      "required": []
+    }
+  },
+  {
+    "type": "Bed Leveling",
+    "subtype": "Bilinear",
+    "code": "G29",
+    "link": "https://marlinfw.org/docs/gcode/G029-abl-bilinear.html",
+    "args": [
+      { "code": "A", "label": "abort", "type": "Flag" },
+      { "code": "B", "label": "backLimit", "type": "Mm" },
+      { "code": "C", "label": "createFake", "type": "Flag" },
+      { "code": "D", "label": "dryRun", "type": "Flag" },
+      { "code": "E", "label": "engageEach", "type": "Flag" },
+      { "code": "F", "label": "frontLimit", "type": "Mm" },
+      { "code": "H", "label": "areaSize", "type": "Mm" },
+      { "code": "I", "label": "meshX", "type": "Index" },
+      { "code": "J", "label": "jettison", "type": "Flag" },
+      { "code": "K", "label": "meshY", "type": "Index" },
+      { "code": "L", "label": "leftLimit", "type": "Mm" },
+      { "code": "O", "label": "optional", "type": "Flag" },
+      { "code": "Q", "label": "query", "type": "Flag" },
+      { "code": "R", "label": "rightLimit", "type": "Mm" },
+      { "code": "S", "label": "travelSpeed", "type": "MmPerMin" },
+      { "code": "V", "label": "verbosity", "type": "Index" },
+      { "code": "W", "label": "writeMesh", "type": "Flag" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "meshZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "D", "E", "F", "H", "I", "J", "K", "L", "O", "Q", "R", "S", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Bed Leveling",
+    "subtype": "Linear",
+    "code": "G29",
+    "link": "https://marlinfw.org/docs/gcode/G029-abl-linear.html",
+    "args": [
+      { "code": "A", "label": "abort", "type": "Flag" },
+      { "code": "B", "label": "backLimit", "type": "Mm" },
+      { "code": "C", "label": "createFake", "type": "Flag" },
+      { "code": "D", "label": "dryRun", "type": "Flag" },
+      { "code": "E", "label": "engageEach", "type": "Flag" },
+      { "code": "F", "label": "frontLimit", "type": "Mm" },
+      { "code": "H", "label": "areaSize", "type": "Mm" },
+      { "code": "J", "label": "jettison", "type": "Flag" },
+      { "code": "L", "label": "leftLimit", "type": "Mm" },
+      { "code": "O", "label": "optional", "type": "Flag" },
+      { "code": "P", "label": "gridSize", "type": "Index" },
+      { "code": "Q", "label": "query", "type": "Flag" },
+      { "code": "R", "label": "rightLimit", "type": "Mm" },
+      { "code": "S", "label": "travelSpeed", "type": "MmPerMin" },
+      { "code": "T", "label": "topology", "type": "Flag" },
+      { "code": "V", "label": "verbosity", "type": "Index" },
+      { "code": "X", "label": "columns", "type": "Index" },
+      { "code": "Y", "label": "rows", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "D", "E", "F", "H", "J", "L", "O", "P", "Q", "R", "S", "T", "V", "X", "Y"],
+      "required": []
+    }
+  },
+  {
+    "type": "Bed Leveling",
+    "subtype": "Manual",
+    "code": "G29",
+    "link": "https://marlinfw.org/docs/gcode/G029-mbl.html",
+    "args": [
+      { "code": "I", "label": "meshX", "type": "Index" },
+      { "code": "J", "label": "meshY", "type": "Index" },
+      { "code": "S", "label": "state", "type": "Index" },
+      { "code": "X", "label": "meshXOld", "type": "Count" },
+      { "code": "Y", "label": "meshYOld", "type": "Count" },
+      { "code": "Z", "label": "meshZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["I", "J", "X", "Y", "Z"],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Bed Leveling",
+    "subtype": "Unified",
+    "code": "G29",
+    "link": "https://marlinfw.org/docs/gcode/G029-ubl.html",
+    "args": [
+      { "code": "A", "label": "activate", "type": "Flag" },
+      { "code": "B", "label": "businessCard", "type": "Mm" },
+      { "code": "C", "label": "constant", "type": "Mm" },
+      { "code": "D", "label": "disable", "type": "Flag" },
+      { "code": "E", "label": "stowEach", "type": "Flag" },
+      { "code": "F", "label": "fadeHeight", "type": "Mm" },
+      { "code": "H", "label": "height", "type": "Mm" },
+      { "code": "I", "label": "invalidate", "type": "Index" },
+      { "code": "J", "label": "grid", "type": "Index" },
+      { "code": "K", "label": "kompare", "type": "Index" },
+      { "code": "L", "label": "load", "type": "Index" },
+      { "code": "P", "label": "phase", "type": "Index" },
+      { "code": "Q", "label": "testPattern", "type": "Index" },
+      { "code": "R", "label": "repeat", "type": "Count" },
+      { "code": "S", "label": "save", "type": "Index" },
+      { "code": "T", "label": "topology", "type": "Index" },
+      { "code": "U", "label": "unlevel", "type": "Flag" },
+      { "code": "V", "label": "verbosity", "type": "Index" },
+      { "code": "W", "label": "what", "type": "Flag" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "D", "E", "F", "H", "I", "J", "K", "L", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"],
+      "required": []
+    }
+  },
+  {
+    "type": "Single Z-Probe",
+    "code": "G30",
+    "link": "https://marlinfw.org/docs/gcode/G030.html",
+    "args": [
+      { "code": "C", "label": "temperatureCompensation", "type": "Flag" },
+      { "code": "E", "label": "engageEach", "type": "Flag" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["C", "E", "X", "Y"],
+      "required": []
+    }
+  },
+  {
+    "type": "Dock Sled",
+    "code": "G31",
+    "link": "https://marlinfw.org/docs/gcode/G031.html"
+  },
+  {
+    "type": "Undock Sled",
+    "code": "G32",
+    "link": "https://marlinfw.org/docs/gcode/G032.html"
+  },
+  {
+    "type": "Delta Auto Calibration",
+    "code": "G33",
+    "link": "https://marlinfw.org/docs/gcode/G033.html",
+    "args": [
+      { "code": "C", "label": "precision", "type": "Mm" },
+      { "code": "E", "label": "engageEach", "type": "Flag" },
+      { "code": "F", "label": "iterations", "type": "Count" },
+      { "code": "O", "label": "probeOffsetRelative", "type": "Flag" },
+      { "code": "P", "label": "probePoints", "type": "Index" },
+      { "code": "R", "label": "reduceGrid", "type": "Mm" },
+      { "code": "S", "label": "saveSensorless", "type": "Flag" },
+      { "code": "T", "label": "disableTowerAngles", "type": "Flag" },
+      { "code": "V", "label": "verbosity", "type": "Index" },
+      { "code": "X", "label": "disableStallguardX", "type": "Flag" },
+      { "code": "Y", "label": "disableStallguardY", "type": "Flag" },
+      { "code": "Z", "label": "disableStallguardZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["C", "E", "F", "O", "P", "R", "S", "T", "V", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Z Steppers Auto-Alignment",
+    "code": "G34",
+    "link": "https://marlinfw.org/docs/gcode/G034-zsaa.html",
+    "args": [
+      { "code": "A", "label": "amplification", "type": "Mm" },
+      { "code": "E", "label": "stowEach", "type": "Flag" },
+      { "code": "I", "label": "iterations", "type": "Index" },
+      { "code": "L", "label": "unlockAll", "type": "Flag" },
+      { "code": "R", "label": "recalculate", "type": "Flag" },
+      { "code": "S", "label": "lockState", "type": "Flag" },
+      { "code": "T", "label": "targetAccuracy", "type": "Mm" },
+      { "code": "Z", "label": "stepper", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["A", "E", "I", "L", "R", "S", "T", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Mechanical Gantry Calibration",
+    "code": "G34",
+    "link": "https://marlinfw.org/docs/gcode/G034-mgc.html",
+    "args": [
+      { "code": "S", "label": "current", "type": "Index" },
+      { "code": "Z", "label": "extraHeight", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["S", "Z"],
+      "required": []
+    }
   }
 ]

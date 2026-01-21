@@ -2,7 +2,7 @@ module Marlin.GCode.Generated where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Count, Degrees, Flag, Index, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
+import Marlin.GCode.Types (ArgValue, Celsius, Count, Degrees, Flag, Index, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
 import Relude
 import qualified Data.Text as T
 
@@ -33,6 +33,12 @@ data GCodeCmd
   | Cmd_MillimeterUnits (MillimeterUnits Required)
   | Cmd_MeshValidationPattern (MeshValidationPattern Required)
   | Cmd_ParkToolehead (ParkToolehead Required)
+  | Cmd_AutoHome (AutoHome Required)
+  | Cmd_BedLeveling_3Point (BedLeveling_3Point Required)
+  | Cmd_BedLeveling_Bilinear (BedLeveling_Bilinear Required)
+  | Cmd_BedLeveling_Linear (BedLeveling_Linear Required)
+  | Cmd_BedLeveling_Manual (BedLeveling_Manual Required)
+  | Cmd_BedLeveling_Unified (BedLeveling_Unified Required)
   | Comment (Maybe GCodeCmd) Text
        deriving (Generic)
 
@@ -61,6 +67,12 @@ instance ToText GCodeCmd where
       Cmd_MillimeterUnits r -> toText r
       Cmd_MeshValidationPattern r -> toText r
       Cmd_ParkToolehead r -> toText r
+      Cmd_AutoHome r -> toText r
+      Cmd_BedLeveling_3Point r -> toText r
+      Cmd_BedLeveling_Bilinear r -> toText r
+      Cmd_BedLeveling_Linear r -> toText r
+      Cmd_BedLeveling_Manual r -> toText r
+      Cmd_BedLeveling_Unified r -> toText r
       Comment Nothing c -> "; " <> c
       Comment (Just cmd) c -> toText cmd <> " ; " <> c
 
@@ -554,12 +566,12 @@ instance ToText (DirectStepperMove Required) where
 --------------------------------------------------------------------------------
 --- Retract (G10)
 --- Docs: https://marlinfw.org/docs/gcode/G010.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data Retract (f :: Type -> Type)
   = Retract
-  {}
+  { swapRetract :: Maybe Flag
+  }
   deriving (Generic)
 
 instance Default (Retract NotDefined)
@@ -568,12 +580,11 @@ instance Upcast (Retract Required) GCodeCmd where
   upcast = Cmd_Retract
 
 instance ToText (Retract Required) where
-  toText r = mkCmd "G10" []
+  toText r = mkCmd "G10" [mkArg 'S' r.swapRetract]
 
 --------------------------------------------------------------------------------
 --- Recover (G11)
 --- Docs: https://marlinfw.org/docs/gcode/G011.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data Recover (f :: Type -> Type)
@@ -592,12 +603,18 @@ instance ToText (Recover Required) where
 --------------------------------------------------------------------------------
 --- Clean The Nozzle (G12)
 --- Docs: https://marlinfw.org/docs/gcode/G012.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data CleanTheNozzle (f :: Type -> Type)
   = CleanTheNozzle
-  {}
+  { pattern :: Maybe Index,
+    radius :: Maybe Mm,
+    repetitions :: Maybe Count,
+    triangles :: Maybe Count,
+    includeX :: Maybe Flag,
+    includeY :: Maybe Flag,
+    includeZ :: Maybe Flag
+  }
   deriving (Generic)
 
 instance Default (CleanTheNozzle NotDefined)
@@ -606,7 +623,13 @@ instance Upcast (CleanTheNozzle Required) GCodeCmd where
   upcast = Cmd_CleanTheNozzle
 
 instance ToText (CleanTheNozzle Required) where
-  toText r = mkCmd "G12" []
+  toText r = mkCmd "G12" [mkArg 'P' r.pattern,
+          mkArg 'R' r.radius,
+          mkArg 'S' r.repetitions,
+          mkArg 'T' r.triangles,
+          mkArg 'X' r.includeX,
+          mkArg 'Y' r.includeY,
+          mkArg 'Z' r.includeZ]
 
 --------------------------------------------------------------------------------
 --- CNC Workspace Planes (G17)
@@ -701,12 +724,27 @@ instance ToText (MillimeterUnits Required) where
 --------------------------------------------------------------------------------
 --- Mesh Validation Pattern (G26)
 --- Docs: https://marlinfw.org/docs/gcode/G026.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data MeshValidationPattern (f :: Type -> Type)
   = MeshValidationPattern
-  {}
+  { bedTemp :: Maybe Celsius,
+    continueClosest :: Maybe Flag,
+    disableLeveling :: Maybe Flag,
+    filamentDiameter :: Maybe Mm,
+    hotendTemp :: Maybe Celsius,
+    materialPreset :: Maybe Index,
+    keepHeatersOn :: Maybe Flag,
+    layerHeight :: Maybe Mm,
+    oozeAmount :: Maybe Mm,
+    primeLength :: Maybe Mm,
+    retractionMultiplier :: Maybe Mm,
+    repetitions :: Maybe Count,
+    nozzleSize :: Maybe Mm,
+    randomDeviation :: Maybe Mm,
+    axisX :: Maybe Mm,
+    axisY :: Maybe Mm
+  }
   deriving (Generic)
 
 instance Default (MeshValidationPattern NotDefined)
@@ -715,17 +753,32 @@ instance Upcast (MeshValidationPattern Required) GCodeCmd where
   upcast = Cmd_MeshValidationPattern
 
 instance ToText (MeshValidationPattern Required) where
-  toText r = mkCmd "G26" []
+  toText r = mkCmd "G26" [mkArg 'B' r.bedTemp,
+          mkArg 'C' r.continueClosest,
+          mkArg 'D' r.disableLeveling,
+          mkArg 'F' r.filamentDiameter,
+          mkArg 'H' r.hotendTemp,
+          mkArg 'I' r.materialPreset,
+          mkArg 'K' r.keepHeatersOn,
+          mkArg 'L' r.layerHeight,
+          mkArg 'O' r.oozeAmount,
+          mkArg 'P' r.primeLength,
+          mkArg 'Q' r.retractionMultiplier,
+          mkArg 'R' r.repetitions,
+          mkArg 'S' r.nozzleSize,
+          mkArg 'U' r.randomDeviation,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY]
 
 --------------------------------------------------------------------------------
 --- Park Toolehead (G27)
 --- Docs: https://marlinfw.org/docs/gcode/G027.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data ParkToolehead (f :: Type -> Type)
   = ParkToolehead
-  {}
+  { parkingBehavior :: Maybe Index
+  }
   deriving (Generic)
 
 instance Default (ParkToolehead NotDefined)
@@ -734,7 +787,281 @@ instance Upcast (ParkToolehead Required) GCodeCmd where
   upcast = Cmd_ParkToolehead
 
 instance ToText (ParkToolehead Required) where
-  toText r = mkCmd "G27" []
+  toText r = mkCmd "G27" [mkArg 'P' r.parkingBehavior]
+
+--------------------------------------------------------------------------------
+--- Auto Home (G28)
+--- Docs: https://marlinfw.org/docs/gcode/G028.html
+--------------------------------------------------------------------------------
+
+data AutoHome (f :: Type -> Type)
+  = AutoHome
+  { homeA :: Maybe Flag,
+    homeB :: Maybe Flag,
+    homeC :: Maybe Flag,
+    holdXY :: Maybe Flag,
+    restoreLeveling :: Maybe Flag,
+    skipIfTrusted :: Maybe Flag,
+    raiseDistance :: Maybe Mm,
+    homeU :: Maybe Flag,
+    homeV :: Maybe Flag,
+    homeW :: Maybe Flag,
+    homeX :: Maybe Flag,
+    homeY :: Maybe Flag,
+    homeZ :: Maybe Flag
+  }
+  deriving (Generic)
+
+instance Default (AutoHome NotDefined)
+
+instance Upcast (AutoHome Required) GCodeCmd where
+  upcast = Cmd_AutoHome
+
+instance ToText (AutoHome Required) where
+  toText r = mkCmd "G28" [mkArg 'A' r.homeA,
+          mkArg 'B' r.homeB,
+          mkArg 'C' r.homeC,
+          mkArg 'H' r.holdXY,
+          mkArg 'L' r.restoreLeveling,
+          mkArg 'O' r.skipIfTrusted,
+          mkArg 'R' r.raiseDistance,
+          mkArg 'U' r.homeU,
+          mkArg 'V' r.homeV,
+          mkArg 'W' r.homeW,
+          mkArg 'X' r.homeX,
+          mkArg 'Y' r.homeY,
+          mkArg 'Z' r.homeZ]
+
+--------------------------------------------------------------------------------
+--- Bed Leveling (G29)
+--- Docs: https://marlinfw.org/docs/gcode/G029-abl-3point.html
+--------------------------------------------------------------------------------
+
+data BedLeveling_3Point (f :: Type -> Type)
+  = BedLeveling_3Point
+  { abort :: Maybe Flag,
+    createFake :: Maybe Flag,
+    dryRun :: Maybe Flag,
+    engageEach :: Maybe Flag,
+    jettison :: Maybe Flag,
+    optional :: Maybe Flag,
+    query :: Maybe Flag,
+    verbosity :: Maybe Index
+  }
+  deriving (Generic)
+
+instance Default (BedLeveling_3Point NotDefined)
+
+instance Upcast (BedLeveling_3Point Required) GCodeCmd where
+  upcast = Cmd_BedLeveling_3Point
+
+instance ToText (BedLeveling_3Point Required) where
+  toText r = mkCmd "G29" [mkArg 'A' r.abort,
+          mkArg 'C' r.createFake,
+          mkArg 'D' r.dryRun,
+          mkArg 'E' r.engageEach,
+          mkArg 'J' r.jettison,
+          mkArg 'O' r.optional,
+          mkArg 'Q' r.query,
+          mkArg 'V' r.verbosity]
+
+--------------------------------------------------------------------------------
+--- Bed Leveling (G29)
+--- Docs: https://marlinfw.org/docs/gcode/G029-abl-bilinear.html
+--------------------------------------------------------------------------------
+
+data BedLeveling_Bilinear (f :: Type -> Type)
+  = BedLeveling_Bilinear
+  { abort :: Maybe Flag,
+    backLimit :: Maybe Mm,
+    createFake :: Maybe Flag,
+    dryRun :: Maybe Flag,
+    engageEach :: Maybe Flag,
+    frontLimit :: Maybe Mm,
+    areaSize :: Maybe Mm,
+    meshX :: Maybe Index,
+    jettison :: Maybe Flag,
+    meshY :: Maybe Index,
+    leftLimit :: Maybe Mm,
+    optional :: Maybe Flag,
+    query :: Maybe Flag,
+    rightLimit :: Maybe Mm,
+    travelSpeed :: Maybe MmPerMin,
+    verbosity :: Maybe Index,
+    writeMesh :: Maybe Flag,
+    axisX :: Maybe Mm,
+    axisY :: Maybe Mm,
+    meshZ :: Maybe Mm
+  }
+  deriving (Generic)
+
+instance Default (BedLeveling_Bilinear NotDefined)
+
+instance Upcast (BedLeveling_Bilinear Required) GCodeCmd where
+  upcast = Cmd_BedLeveling_Bilinear
+
+instance ToText (BedLeveling_Bilinear Required) where
+  toText r = mkCmd "G29" [mkArg 'A' r.abort,
+          mkArg 'B' r.backLimit,
+          mkArg 'C' r.createFake,
+          mkArg 'D' r.dryRun,
+          mkArg 'E' r.engageEach,
+          mkArg 'F' r.frontLimit,
+          mkArg 'H' r.areaSize,
+          mkArg 'I' r.meshX,
+          mkArg 'J' r.jettison,
+          mkArg 'K' r.meshY,
+          mkArg 'L' r.leftLimit,
+          mkArg 'O' r.optional,
+          mkArg 'Q' r.query,
+          mkArg 'R' r.rightLimit,
+          mkArg 'S' r.travelSpeed,
+          mkArg 'V' r.verbosity,
+          mkArg 'W' r.writeMesh,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.meshZ]
+
+--------------------------------------------------------------------------------
+--- Bed Leveling (G29)
+--- Docs: https://marlinfw.org/docs/gcode/G029-abl-linear.html
+--------------------------------------------------------------------------------
+
+data BedLeveling_Linear (f :: Type -> Type)
+  = BedLeveling_Linear
+  { abort :: Maybe Flag,
+    backLimit :: Maybe Mm,
+    createFake :: Maybe Flag,
+    dryRun :: Maybe Flag,
+    engageEach :: Maybe Flag,
+    frontLimit :: Maybe Mm,
+    areaSize :: Maybe Mm,
+    jettison :: Maybe Flag,
+    leftLimit :: Maybe Mm,
+    optional :: Maybe Flag,
+    gridSize :: Maybe Index,
+    query :: Maybe Flag,
+    rightLimit :: Maybe Mm,
+    travelSpeed :: Maybe MmPerMin,
+    topology :: Maybe Flag,
+    verbosity :: Maybe Index,
+    columns :: Maybe Index,
+    rows :: Maybe Index
+  }
+  deriving (Generic)
+
+instance Default (BedLeveling_Linear NotDefined)
+
+instance Upcast (BedLeveling_Linear Required) GCodeCmd where
+  upcast = Cmd_BedLeveling_Linear
+
+instance ToText (BedLeveling_Linear Required) where
+  toText r = mkCmd "G29" [mkArg 'A' r.abort,
+          mkArg 'B' r.backLimit,
+          mkArg 'C' r.createFake,
+          mkArg 'D' r.dryRun,
+          mkArg 'E' r.engageEach,
+          mkArg 'F' r.frontLimit,
+          mkArg 'H' r.areaSize,
+          mkArg 'J' r.jettison,
+          mkArg 'L' r.leftLimit,
+          mkArg 'O' r.optional,
+          mkArg 'P' r.gridSize,
+          mkArg 'Q' r.query,
+          mkArg 'R' r.rightLimit,
+          mkArg 'S' r.travelSpeed,
+          mkArg 'T' r.topology,
+          mkArg 'V' r.verbosity,
+          mkArg 'X' r.columns,
+          mkArg 'Y' r.rows]
+
+--------------------------------------------------------------------------------
+--- Bed Leveling (G29)
+--- Docs: https://marlinfw.org/docs/gcode/G029-mbl.html
+--------------------------------------------------------------------------------
+
+data BedLeveling_Manual (f :: Type -> Type)
+  = BedLeveling_Manual
+  { meshX :: Maybe Index,
+    meshY :: Maybe Index,
+    state :: f Index,
+    meshXOld :: Maybe Count,
+    meshYOld :: Maybe Count,
+    meshZ :: Maybe Mm
+  }
+  deriving (Generic)
+
+instance Default (BedLeveling_Manual NotDefined)
+
+instance Upcast (BedLeveling_Manual Required) GCodeCmd where
+  upcast = Cmd_BedLeveling_Manual
+
+instance ToText (BedLeveling_Manual Required) where
+  toText r = mkCmd "G29" [mkReqArg 'S' r.state,
+          mkArg 'I' r.meshX,
+          mkArg 'J' r.meshY,
+          mkArg 'X' r.meshXOld,
+          mkArg 'Y' r.meshYOld,
+          mkArg 'Z' r.meshZ]
+
+--------------------------------------------------------------------------------
+--- Bed Leveling (G29)
+--- Docs: https://marlinfw.org/docs/gcode/G029-ubl.html
+--------------------------------------------------------------------------------
+
+data BedLeveling_Unified (f :: Type -> Type)
+  = BedLeveling_Unified
+  { activate :: Maybe Flag,
+    businessCard :: Maybe Mm,
+    constant :: Maybe Mm,
+    disable :: Maybe Flag,
+    stowEach :: Maybe Flag,
+    fadeHeight :: Maybe Mm,
+    height :: Maybe Mm,
+    invalidate :: Maybe Index,
+    grid :: Maybe Index,
+    kompare :: Maybe Index,
+    load :: Maybe Index,
+    phase :: Maybe Index,
+    testPattern :: Maybe Index,
+    repeat :: Maybe Count,
+    save :: Maybe Index,
+    topology :: Maybe Index,
+    unlevel :: Maybe Flag,
+    verbosity :: Maybe Index,
+    what :: Maybe Flag,
+    axisX :: Maybe Mm,
+    axisY :: Maybe Mm
+  }
+  deriving (Generic)
+
+instance Default (BedLeveling_Unified NotDefined)
+
+instance Upcast (BedLeveling_Unified Required) GCodeCmd where
+  upcast = Cmd_BedLeveling_Unified
+
+instance ToText (BedLeveling_Unified Required) where
+  toText r = mkCmd "G29" [mkArg 'A' r.activate,
+          mkArg 'B' r.businessCard,
+          mkArg 'C' r.constant,
+          mkArg 'D' r.disable,
+          mkArg 'E' r.stowEach,
+          mkArg 'F' r.fadeHeight,
+          mkArg 'H' r.height,
+          mkArg 'I' r.invalidate,
+          mkArg 'J' r.grid,
+          mkArg 'K' r.kompare,
+          mkArg 'L' r.load,
+          mkArg 'P' r.phase,
+          mkArg 'Q' r.testPattern,
+          mkArg 'R' r.repeat,
+          mkArg 'S' r.save,
+          mkArg 'T' r.topology,
+          mkArg 'U' r.unlevel,
+          mkArg 'V' r.verbosity,
+          mkArg 'W' r.what,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY]
 
 
 --------------------------------------------------------------------------------
