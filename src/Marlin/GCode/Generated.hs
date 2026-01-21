@@ -213,12 +213,12 @@ instance Upcast (LinearMove_Clockwise_OffsetX Required) GCodeCmd where
   upcast = Cmd_LinearMove_Clockwise_OffsetX
 
 instance ToText (LinearMove_Clockwise_OffsetX Required) where
-  toText r = mkCmd "G2" [mkReqArg 'I' r.offsetX,
-          mkArg 'A' r.axisA,
+  toText r = mkCmd "G2" [mkArg 'A' r.axisA,
           mkArg 'B' r.axisB,
           mkArg 'C' r.axisC,
           mkArg 'E' r.axisExtrusion,
           mkArg 'F' r.feedrate,
+          mkReqArg 'I' r.offsetX,
           mkArg 'P' r.count,
           mkArg 'S' r.laser,
           mkArg 'U' r.axisU,
@@ -258,12 +258,12 @@ instance Upcast (LinearMove_Clockwise_OffsetY Required) GCodeCmd where
   upcast = Cmd_LinearMove_Clockwise_OffsetY
 
 instance ToText (LinearMove_Clockwise_OffsetY Required) where
-  toText r = mkCmd "G2" [mkReqArg 'J' r.offsetY,
-          mkArg 'A' r.axisA,
+  toText r = mkCmd "G2" [mkArg 'A' r.axisA,
           mkArg 'B' r.axisB,
           mkArg 'C' r.axisC,
           mkArg 'E' r.axisExtrusion,
           mkArg 'F' r.feedrate,
+          mkReqArg 'J' r.offsetY,
           mkArg 'P' r.count,
           mkArg 'S' r.laser,
           mkArg 'U' r.axisU,
@@ -303,13 +303,13 @@ instance Upcast (LinearMove_Clockwise_Radius Required) GCodeCmd where
   upcast = Cmd_LinearMove_Clockwise_Radius
 
 instance ToText (LinearMove_Clockwise_Radius Required) where
-  toText r = mkCmd "G2" [mkReqArg 'R' r.radius,
-          mkArg 'A' r.axisA,
+  toText r = mkCmd "G2" [mkArg 'A' r.axisA,
           mkArg 'B' r.axisB,
           mkArg 'C' r.axisC,
           mkArg 'E' r.axisExtrusion,
           mkArg 'F' r.feedrate,
           mkArg 'P' r.count,
+          mkReqArg 'R' r.radius,
           mkArg 'S' r.laser,
           mkArg 'U' r.axisU,
           mkArg 'V' r.axisV,
@@ -348,12 +348,12 @@ instance Upcast (LinearMove_CounterClockwise_OffsetX Required) GCodeCmd where
   upcast = Cmd_LinearMove_CounterClockwise_OffsetX
 
 instance ToText (LinearMove_CounterClockwise_OffsetX Required) where
-  toText r = mkCmd "G3" [mkReqArg 'I' r.offsetX,
-          mkArg 'A' r.axisA,
+  toText r = mkCmd "G3" [mkArg 'A' r.axisA,
           mkArg 'B' r.axisB,
           mkArg 'C' r.axisC,
           mkArg 'E' r.axisExtrusion,
           mkArg 'F' r.feedrate,
+          mkReqArg 'I' r.offsetX,
           mkArg 'P' r.count,
           mkArg 'S' r.laser,
           mkArg 'U' r.axisU,
@@ -393,12 +393,12 @@ instance Upcast (LinearMove_CounterClockwise_OffsetY Required) GCodeCmd where
   upcast = Cmd_LinearMove_CounterClockwise_OffsetY
 
 instance ToText (LinearMove_CounterClockwise_OffsetY Required) where
-  toText r = mkCmd "G3" [mkReqArg 'J' r.offsetY,
-          mkArg 'A' r.axisA,
+  toText r = mkCmd "G3" [mkArg 'A' r.axisA,
           mkArg 'B' r.axisB,
           mkArg 'C' r.axisC,
           mkArg 'E' r.axisExtrusion,
           mkArg 'F' r.feedrate,
+          mkReqArg 'J' r.offsetY,
           mkArg 'P' r.count,
           mkArg 'S' r.laser,
           mkArg 'U' r.axisU,
@@ -438,13 +438,13 @@ instance Upcast (LinearMove_CounterClockwise_Radius Required) GCodeCmd where
   upcast = Cmd_LinearMove_CounterClockwise_Radius
 
 instance ToText (LinearMove_CounterClockwise_Radius Required) where
-  toText r = mkCmd "G3" [mkReqArg 'R' r.radius,
-          mkArg 'A' r.axisA,
+  toText r = mkCmd "G3" [mkArg 'A' r.axisA,
           mkArg 'B' r.axisB,
           mkArg 'C' r.axisC,
           mkArg 'E' r.axisExtrusion,
           mkArg 'F' r.feedrate,
           mkArg 'P' r.count,
+          mkReqArg 'R' r.radius,
           mkArg 'S' r.laser,
           mkArg 'U' r.axisU,
           mkArg 'V' r.axisV,
@@ -499,15 +499,15 @@ instance Upcast (BezierCubicSplineMove_Initial Required) GCodeCmd where
   upcast = Cmd_BezierCubicSplineMove_Initial
 
 instance ToText (BezierCubicSplineMove_Initial Required) where
-  toText r = mkCmd "G5" [mkReqArg 'I' r.offsetX1,
+  toText r = mkCmd "G5" [mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkReqArg 'I' r.offsetX1,
           mkReqArg 'J' r.offsetY1,
           mkReqArg 'P' r.offsetX2,
           mkReqArg 'Q' r.offsetY2,
+          mkArg 'S' r.laser,
           mkReqArg 'X' r.axisX,
-          mkReqArg 'Y' r.axisY,
-          mkArg 'E' r.axisExtrusion,
-          mkArg 'F' r.feedrate,
-          mkArg 'S' r.laser]
+          mkReqArg 'Y' r.axisY]
 
 --------------------------------------------------------------------------------
 --- Bezier Cubic Spline Move (G5)
@@ -534,15 +534,15 @@ instance Upcast (BezierCubicSplineMove_Subsequent Required) GCodeCmd where
   upcast = Cmd_BezierCubicSplineMove_Subsequent
 
 instance ToText (BezierCubicSplineMove_Subsequent Required) where
-  toText r = mkCmd "G5" [mkReqArg 'P' r.offsetX2,
-          mkReqArg 'Q' r.offsetY2,
-          mkReqArg 'X' r.axisX,
-          mkReqArg 'Y' r.axisY,
-          mkArg 'E' r.axisExtrusion,
+  toText r = mkCmd "G5" [mkArg 'E' r.axisExtrusion,
           mkArg 'F' r.feedrate,
           mkArg 'I' r.offsetX1,
           mkArg 'J' r.offsetY1,
-          mkArg 'S' r.laser]
+          mkReqArg 'P' r.offsetX2,
+          mkReqArg 'Q' r.offsetY2,
+          mkArg 'S' r.laser,
+          mkReqArg 'X' r.axisX,
+          mkReqArg 'Y' r.axisY]
 
 --------------------------------------------------------------------------------
 --- Direct Stepper Move (G6)
@@ -1009,9 +1009,9 @@ instance Upcast (BedLeveling_Manual Required) GCodeCmd where
   upcast = Cmd_BedLeveling_Manual
 
 instance ToText (BedLeveling_Manual Required) where
-  toText r = mkCmd "G29" [mkReqArg 'S' r.state,
-          mkArg 'I' r.meshX,
+  toText r = mkCmd "G29" [mkArg 'I' r.meshX,
           mkArg 'J' r.meshY,
+          mkReqArg 'S' r.state,
           mkArg 'X' r.meshXOld,
           mkArg 'Y' r.meshYOld,
           mkArg 'Z' r.meshZ]

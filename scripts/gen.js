@@ -41,14 +41,16 @@ const genMkArgCall = (item, signature, arg) => {
 const genSignature = (item, signature) => {
   const typeName = mkTypeName(item, signature);
   const args = item.args || [];
-  const reqArgCalls = args
-    .filter(arg => signature.required && signature.required.includes(arg.code))
-    .map(arg => `mkReqArg '${arg.code}' r.${arg.label}`);
-  const optArgCalls = args
-    .filter(arg => signature.optional && signature.optional.includes(arg.code))
-    .map(arg => `mkArg '${arg.code}' r.${arg.label}`);
-  
-  const allArgCalls = [...reqArgCalls, ...optArgCalls];
+  const allArgCalls = args
+    .map(arg => {
+      if (signature.required && signature.required.includes(arg.code)) {
+        return `mkReqArg '${arg.code}' r.${arg.label}`;
+      } else if (signature.optional && signature.optional.includes(arg.code)) {
+        return `mkArg '${arg.code}' r.${arg.label}`;
+      }
+      return null;
+    })
+    .filter(Boolean);
   const allArgs = allArgCalls.length > 0
     ? allArgCalls.join(",\n          ")
     : "";

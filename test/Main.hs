@@ -77,7 +77,7 @@ tests =
                       axisZ = Just (Mm 30)
                     }
               )
-            @?= "G2 I10.0000 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+            @?= "G2 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 I10.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
           testCase "Linear Move Clockwise OffsetY - maximum args"
             $ toText
               ( MG.Cmd_LinearMove_Clockwise_OffsetY
@@ -98,7 +98,7 @@ tests =
                       axisZ = Just (Mm 30)
                     }
               )
-            @?= "G2 J10.0000 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+            @?= "G2 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 J10.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
           testCase "Linear Move Clockwise Radius - maximum args"
             $ toText
               ( MG.Cmd_LinearMove_Clockwise_Radius
@@ -119,7 +119,7 @@ tests =
                       axisZ = Just (Mm 30)
                     }
               )
-            @?= "G2 R10.0000 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+            @?= "G2 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 R10.0000 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
           testCase "Linear Move CounterClockwise OffsetX - maximum args"
             $ toText
               ( MG.Cmd_LinearMove_CounterClockwise_OffsetX
@@ -140,7 +140,7 @@ tests =
                       axisZ = Just (Mm 30)
                     }
               )
-            @?= "G3 I10.0000 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+            @?= "G3 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 I10.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
           testCase "Linear Move CounterClockwise OffsetY - maximum args"
             $ toText
               ( MG.Cmd_LinearMove_CounterClockwise_OffsetY
@@ -161,7 +161,7 @@ tests =
                       axisZ = Just (Mm 30)
                     }
               )
-            @?= "G3 J10.0000 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+            @?= "G3 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 J10.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
           testCase "Linear Move CounterClockwise Radius - maximum args"
             $ toText
               ( MG.Cmd_LinearMove_CounterClockwise_Radius
@@ -182,7 +182,7 @@ tests =
                       axisZ = Just (Mm 30)
                     }
               )
-            @?= "G3 R10.0000 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+            @?= "G3 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 P5 R10.0000 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
           testCase "Dwell - maximum args"
             $ toText
               ( MG.Cmd_Dwell
@@ -207,7 +207,7 @@ tests =
                       laser = Just (LaserPower 50)
                     }
               )
-            @?= "G5 I1.0000 J2.0000 P3.0000 Q4.0000 X10.0000 Y20.0000 E5.0000 F1500.0000 S50.0000",
+            @?= "G5 E5.0000 F1500.0000 I1.0000 J2.0000 P3.0000 Q4.0000 S50.0000 X10.0000 Y20.0000",
           testCase "Bezier Cubic Spline Move Subsequent - maximum args"
             $ toText
               ( MG.Cmd_BezierCubicSplineMove_Subsequent
@@ -223,7 +223,7 @@ tests =
                       laser = Just (LaserPower 50)
                     }
               )
-            @?= "G5 P3.0000 Q4.0000 X10.0000 Y20.0000 E5.0000 F1500.0000 I1.0000 J2.0000 S50.0000",
+            @?= "G5 E5.0000 F1500.0000 I1.0000 J2.0000 P3.0000 Q4.0000 S50.0000 X10.0000 Y20.0000",
           testCase "Direct Stepper Move - maximum args"
             $ toText
               ( MG.Cmd_DirectStepperMove
@@ -408,7 +408,7 @@ tests =
                       meshZ = Just (Mm 0.1)
                     }
               )
-            @?= "G29 S1 I2 J3 X1 Y2 Z0.1000",
+            @?= "G29 I2 J3 S1 X1 Y2 Z0.1000",
           testCase "Bed Leveling Unified - maximum args"
             $ toText
               ( MG.Cmd_BedLeveling_Unified
