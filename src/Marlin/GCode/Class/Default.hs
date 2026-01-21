@@ -23,6 +23,9 @@ class Default' (f :: Type -> Type) where
 instance (Default' f) => Default' (D1 _1 (C1 ('MetaCons ctor _2 _3) f)) where
   def' = M1 (M1 def')
 
+instance Default' U1 where
+  def' = U1
+
 instance (Default' t1, Default' t2) => Default' (t1 :*: t2) where
   def' = def' :*: def'
 

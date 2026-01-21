@@ -50,6 +50,47 @@
   {
     "type": "LinearMove",
     "subtype": "Clockwise",
+    "code": "G2",
+    "link": "https://marlinfw.org/docs/gcode/G002-G003.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Mm" },
+      { "code": "B", "label": "axisB", "type": "Mm" },
+      { "code": "C", "label": "axisC", "type": "Mm" },
+      { "code": "E", "label": "axisExtrusion", "type": "Mm" },
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "I", "label": "offsetX", "type": "Mm" },
+      { "code": "J", "label": "offsetY", "type": "Mm" },
+      { "code": "P", "label": "count", "type": "Count" },
+      { "code": "R", "label": "radius", "type": "Degrees" },
+      { "code": "S", "label": "laser", "type": "LaserPower" },
+      { "code": "U", "label": "axisU", "type": "Mm" },
+      { "code": "V", "label": "axisV", "type": "Mm" },
+      { "code": "W", "label": "axisW", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signatures": [
+      {
+        "name": "OffsetX",
+        "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
+        "required": ["I"]
+      },
+      {
+        "name": "OffsetY",
+        "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
+        "required": ["J"]
+      },
+      {
+        "name": "Radius",
+        "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
+        "required": ["R"]
+      }
+    ]
+  },
+  {
+    "type": "LinearMove",
+    "subtype": "CounterClockwise",
     "code": "G3",
     "link": "https://marlinfw.org/docs/gcode/G002-G003.html",
     "args": [
@@ -87,5 +128,23 @@
         "required": ["R"]
       }
     ]
+  },
+  {
+    "type": "Dwell",
+    "code": "G4",
+    "link": "https://marlinfw.org/docs/gcode/G004.html",
+    "args": [
+      { "code": "S", "label": "timeSeconds", "type": "Seconds" },
+      { "code": "P", "label": "timeMilliseconds", "type": "Milliseconds" }
+    ],
+    "signature": {
+      "optional": ["S", "P"],
+      "required": []
+    }
+  },
+  {
+    "type": "BezierCubicSplineMove",
+    "code": "G5",
+    "link": "https://marlinfw.org/docs/gcode/G005.html"
   }
 ]

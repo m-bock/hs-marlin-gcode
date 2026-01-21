@@ -4,7 +4,8 @@ const path = require("path");
 const sep = "_"
 
 const mkTypeName = (item, signature) => {
-  return `${item.type}${sep}${item.subtype}${signature.name ? `${sep}${signature.name}` : ""}`;
+  const subtype = item.subtype ? `${sep}${item.subtype}` : "";
+  return `${item.type}${subtype}${signature.name ? `${sep}${signature.name}` : ""}`;
 };
 
 const mkCmdName = (item, signature) => {
@@ -13,18 +14,19 @@ const mkCmdName = (item, signature) => {
 
 const genArg = (item, signature, arg) => {
   const fieldName = arg.label;
-  return signature.required.includes(arg.code) 
-     ? `${fieldName} :: f ${arg.type}` 
-     : signature.optional.includes(arg.code) 
-     ? `${fieldName} :: Maybe ${arg.type}`
-     : null;
+  if (signature.required && signature.required.includes(arg.code)) {
+    return `${fieldName} :: f ${arg.type}`;
+  } else if (signature.optional && signature.optional.includes(arg.code)) {
+    return `${fieldName} :: Maybe ${arg.type}`;
+  }
+  return null;
 };
 
 const genMkArgCall = (item, signature, arg) => {
   const fieldName = arg.label;
-  if (signature.optional.includes(arg.code)) {
+  if (signature.optional && signature.optional.includes(arg.code)) {
     return `mkArg '${arg.code}' r.${fieldName}`;
-  } else if (signature.required.includes(arg.code)) {
+  } else if (signature.required && signature.required.includes(arg.code)) {
     return `mkReqArg '${arg.code}' r.${fieldName}`;
   }
   return null;
@@ -32,18 +34,36 @@ const genMkArgCall = (item, signature, arg) => {
 
 const genSignature = (item, signature) => {
   const typeName = mkTypeName(item, signature);
+  const args = item.args || [];
+  const reqArgCalls = args
+    .filter(arg => signature.required && signature.required.includes(arg.code))
+    .map(arg => `mkReqArg '${arg.code}' r.${arg.label}`);
+  const optArgCalls = args
+    .filter(arg => signature.optional && signature.optional.includes(arg.code))
+    .map(arg => `mkArg '${arg.code}' r.${arg.label}`);
   
-  const allArgs = item.args.map(arg => genMkArgCall(item, signature, arg)).filter(Boolean).join(",\n    ");
+  const allArgCalls = [...reqArgCalls, ...optArgCalls];
+  const allArgs = allArgCalls.length > 0
+    ? allArgCalls.join(",\n          ")
+    : "";
+  
+  const dataFields = args.map(arg => genArg(item, signature, arg)).filter(Boolean);
+  const dataBody = dataFields.length > 0 
+    ? `{ ${dataFields.join(",\n    ")}\n  }`
+    : `{}`;
+  
+  const linkLine = item.link ? `--- ${item.link}` : "";
+  const separator = item.link ? "\n" : "";
+  
   return `
 
 --------------------------------------------------------------------------------
---- ${typeName} (${item.code})
+--- ${typeName} (${item.code})${separator}${linkLine}
 --------------------------------------------------------------------------------
 
 data ${typeName} (f :: Type -> Type)
   = ${typeName}
-  { ${item.args.map(arg => genArg(item, signature, arg)).filter(Boolean).join(",\n    ")}
-  }
+  ${dataBody}
   deriving (Generic)
 
 instance Default (${typeName} NotDefined)
@@ -89,7 +109,14 @@ instance ToText GCodeCmd where
 };
 
 const getSignatures = (item) => {
-  return item.signature ? [item.signature] : item.signatures;
+  if (item.signature) {
+    return [item.signature];
+  } else if (item.signatures) {
+    return item.signatures;
+  } else {
+    // Default empty signature for commands without args
+    return [{ required: [], optional: [] }];
+  }
 };
 
 const genModule = (data) => {
@@ -98,7 +125,7 @@ module Marlin.GCode.Generated where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Degrees, LaserPower, Mm, MmPerMin, NotDefined, Required(..), Count)
+import Marlin.GCode.Types (ArgValue, Degrees, LaserPower, Mm, MmPerMin, NotDefined, Required(..), Count, Seconds, Milliseconds)
 import Relude
 import qualified Data.Text as T
 
