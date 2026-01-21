@@ -526,5 +526,259 @@
       "optional": ["S", "Z"],
       "required": []
     }
+  },
+  {
+    "type": "Tramming Assistant",
+    "code": "G35",
+    "link": "https://marlinfw.org/docs/gcode/G035.html",
+    "args": [
+      { "code": "S", "label": "screwThreadType", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Probe Target",
+    "subtype": "Error On Fail",
+    "code": "G38.2",
+    "link": "https://marlinfw.org/docs/gcode/G038.html",
+    "args": [
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["F", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Probe Target",
+    "subtype": "No Error On Fail",
+    "code": "G38.3",
+    "link": "https://marlinfw.org/docs/gcode/G038.html",
+    "args": [
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["F", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Probe Target",
+    "subtype": "Away Error On Fail",
+    "code": "G38.4",
+    "link": "https://marlinfw.org/docs/gcode/G038.html",
+    "args": [
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["F", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Probe Target",
+    "subtype": "Away No Error On Fail",
+    "code": "G38.5",
+    "link": "https://marlinfw.org/docs/gcode/G038.html",
+    "args": [
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["F", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Move to Mesh Coordinate",
+    "code": "G42",
+    "link": "https://marlinfw.org/docs/gcode/G042.html",
+    "args": [
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "I", "label": "meshColumn", "type": "Index" },
+      { "code": "J", "label": "meshRow", "type": "Index" },
+      { "code": "P", "label": "moveProbe", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["F", "I", "J", "P"],
+      "required": []
+    }
+  },
+  {
+    "type": "Move in Machine Coordinates",
+    "code": "G53",
+    "link": "https://marlinfw.org/docs/gcode/G053.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 1",
+    "code": "G54",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 2",
+    "code": "G55",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 3",
+    "code": "G56",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 4",
+    "code": "G57",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 5",
+    "code": "G58",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 6",
+    "code": "G59",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 7",
+    "code": "G59.1",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 8",
+    "code": "G59.2",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Select Workspace",
+    "subtype": "Workspace 9",
+    "code": "G59.3",
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Stored Positions",
+    "code": "G60",
+    "link": "https://marlinfw.org/docs/gcode/G060.html",
+    "args": [
+      { "code": "D", "label": "deleteSlot", "type": "Index" },
+      { "code": "E", "label": "restoreE", "type": "Mm" },
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "Q", "label": "restoreSlot", "type": "Index" },
+      { "code": "S", "label": "saveSlot", "type": "Index" },
+      { "code": "X", "label": "restoreX", "type": "Mm" },
+      { "code": "Y", "label": "restoreY", "type": "Mm" },
+      { "code": "Z", "label": "restoreZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["D", "E", "F", "Q", "S", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Return to Saved Position",
+    "code": "G61",
+    "link": "https://marlinfw.org/docs/gcode/G061.html",
+    "args": [
+      { "code": "E", "label": "restoreE", "type": "Mm" },
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "S", "label": "slot", "type": "Index" },
+      { "code": "X", "label": "restoreX", "type": "Mm" },
+      { "code": "Y", "label": "restoreY", "type": "Mm" },
+      { "code": "Z", "label": "restoreZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["E", "F", "S", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Probe Temperature Calibration",
+    "code": "G76",
+    "link": "https://marlinfw.org/docs/gcode/G076.html",
+    "args": [
+      { "code": "B", "label": "calibrateBed", "type": "Flag" },
+      { "code": "P", "label": "calibrateProbe", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["B", "P"],
+      "required": []
+    }
+  },
+  {
+    "type": "Cancel Current Motion Mode",
+    "code": "G80",
+    "link": "https://marlinfw.org/docs/gcode/G080.html"
+  },
+  {
+    "type": "Absolute Positioning",
+    "code": "G90",
+    "link": "https://marlinfw.org/docs/gcode/G090.html"
+  },
+  {
+    "type": "Relative Positioning",
+    "code": "G91",
+    "link": "https://marlinfw.org/docs/gcode/G091.html"
+  },
+  {
+    "type": "Set Position",
+    "code": "G92",
+    "link": "https://marlinfw.org/docs/gcode/G092.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Mm" },
+      { "code": "B", "label": "axisB", "type": "Mm" },
+      { "code": "C", "label": "axisC", "type": "Mm" },
+      { "code": "E", "label": "axisExtrusion", "type": "Mm" },
+      { "code": "U", "label": "axisU", "type": "Mm" },
+      { "code": "V", "label": "axisV", "type": "Mm" },
+      { "code": "W", "label": "axisW", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "E", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Backlash Calibration",
+    "code": "G425",
+    "link": "https://marlinfw.org/docs/gcode/G425.html",
+    "args": [
+      { "code": "B", "label": "backlashOnly", "type": "Flag" },
+      { "code": "T", "label": "toolheadIndex", "type": "Index" },
+      { "code": "U", "label": "uncertainty", "type": "Mm" },
+      { "code": "V", "label": "report", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["B", "T", "U", "V"],
+      "required": []
+    }
   }
 ]

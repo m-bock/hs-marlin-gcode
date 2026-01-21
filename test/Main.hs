@@ -496,7 +496,162 @@ tests =
                       extraHeight = Just (Mm 5)
                     }
               )
-            @?= "G34 S1 Z5.0000"
+            @?= "G34 S1 Z5.0000",
+          testCase "Tramming Assistant - maximum args"
+            $ toText
+              ( MG.Cmd_TrammingAssistant
+                  MG.def'
+                    { screwThreadType = Just (Index 40)
+                    }
+              )
+            @?= "G35 S40",
+          testCase "Probe Target Error On Fail - maximum args"
+            $ toText
+              ( MG.Cmd_ProbeTarget_ErrorOnFail
+                  MG.def'
+                    { feedrate = Just (MmPerMin 100),
+                      axisX = Just (Mm 10),
+                      axisY = Just (Mm 20),
+                      axisZ = Just (Mm 5)
+                    }
+              )
+            @?= "G38.2 F100.0000 X10.0000 Y20.0000 Z5.0000",
+          testCase "Probe Target No Error On Fail - maximum args"
+            $ toText
+              ( MG.Cmd_ProbeTarget_NoErrorOnFail
+                  MG.def'
+                    { feedrate = Just (MmPerMin 100),
+                      axisX = Just (Mm 10),
+                      axisY = Just (Mm 20),
+                      axisZ = Just (Mm 5)
+                    }
+              )
+            @?= "G38.3 F100.0000 X10.0000 Y20.0000 Z5.0000",
+          testCase "Probe Target Away Error On Fail - maximum args"
+            $ toText
+              ( MG.Cmd_ProbeTarget_AwayErrorOnFail
+                  MG.def'
+                    { feedrate = Just (MmPerMin 100),
+                      axisX = Just (Mm 10),
+                      axisY = Just (Mm 20),
+                      axisZ = Just (Mm 5)
+                    }
+              )
+            @?= "G38.4 F100.0000 X10.0000 Y20.0000 Z5.0000",
+          testCase "Probe Target Away No Error On Fail - maximum args"
+            $ toText
+              ( MG.Cmd_ProbeTarget_AwayNoErrorOnFail
+                  MG.def'
+                    { feedrate = Just (MmPerMin 100),
+                      axisX = Just (Mm 10),
+                      axisY = Just (Mm 20),
+                      axisZ = Just (Mm 5)
+                    }
+              )
+            @?= "G38.5 F100.0000 X10.0000 Y20.0000 Z5.0000",
+          testCase "Move to Mesh Coordinate - maximum args"
+            $ toText
+              ( MG.Cmd_MovetoMeshCoordinate
+                  MG.def'
+                    { feedrate = Just (MmPerMin 100),
+                      meshColumn = Just (Index 4),
+                      meshRow = Just (Index 4),
+                      moveProbe = Just (Flag True)
+                    }
+              )
+            @?= "G42 F100.0000 I4 J4 P1",
+          testCase "Select Workspace Workspace 1 - maximum args"
+            $ toText (MG.Cmd_SelectWorkspace_Workspace1 (MG.SelectWorkspace_Workspace1 {} :: MG.SelectWorkspace_Workspace1 Required))
+            @?= "G54",
+          testCase "Select Workspace Workspace 2 - maximum args"
+            $ toText (MG.Cmd_SelectWorkspace_Workspace2 (MG.SelectWorkspace_Workspace2 {} :: MG.SelectWorkspace_Workspace2 Required))
+            @?= "G55",
+          testCase "Select Workspace Workspace 3 - maximum args"
+            $ toText (MG.Cmd_SelectWorkspace_Workspace3 (MG.SelectWorkspace_Workspace3 {} :: MG.SelectWorkspace_Workspace3 Required))
+            @?= "G56",
+          testCase "Select Workspace Workspace 4 - maximum args"
+            $ toText (MG.Cmd_SelectWorkspace_Workspace4 (MG.SelectWorkspace_Workspace4 {} :: MG.SelectWorkspace_Workspace4 Required))
+            @?= "G57",
+          testCase "Select Workspace Workspace 5 - maximum args"
+            $ toText (MG.Cmd_SelectWorkspace_Workspace5 (MG.SelectWorkspace_Workspace5 {} :: MG.SelectWorkspace_Workspace5 Required))
+            @?= "G58",
+          testCase "Select Workspace Workspace 6 - maximum args"
+            $ toText (MG.Cmd_SelectWorkspace_Workspace6 (MG.SelectWorkspace_Workspace6 {} :: MG.SelectWorkspace_Workspace6 Required))
+            @?= "G59",
+          testCase "Stored Positions - maximum args"
+            $ toText
+              ( MG.Cmd_StoredPositions
+                  MG.def'
+                    { deleteSlot = Just (Index 1),
+                      restoreE = Just (Mm 10),
+                      feedrate = Just (MmPerMin 100),
+                      restoreSlot = Just (Index 2),
+                      saveSlot = Just (Index 0),
+                      restoreX = Just (Mm 5),
+                      restoreY = Just (Mm 6),
+                      restoreZ = Just (Mm 7)
+                    }
+              )
+            @?= "G60 D1 E10.0000 F100.0000 Q2 S0 X5.0000 Y6.0000 Z7.0000",
+          testCase "Return to Saved Position - maximum args"
+            $ toText
+              ( MG.Cmd_ReturntoSavedPosition
+                  MG.def'
+                    { restoreE = Just (Mm 10),
+                      feedrate = Just (MmPerMin 100),
+                      slot = Just (Index 1),
+                      restoreX = Just (Mm 5),
+                      restoreY = Just (Mm 6),
+                      restoreZ = Just (Mm 7)
+                    }
+              )
+            @?= "G61 E10.0000 F100.0000 S1 X5.0000 Y6.0000 Z7.0000",
+          testCase "Probe Temperature Calibration - maximum args"
+            $ toText
+              ( MG.Cmd_ProbeTemperatureCalibration
+                  MG.def'
+                    { calibrateBed = Just (Flag True),
+                      calibrateProbe = Just (Flag True)
+                    }
+              )
+            @?= "G76 B1 P1",
+          testCase "Cancel Current Motion Mode - maximum args"
+            $ toText (MG.Cmd_CancelCurrentMotionMode (MG.CancelCurrentMotionMode {} :: MG.CancelCurrentMotionMode Required))
+            @?= "G80",
+          testCase "Absolute Positioning - maximum args"
+            $ toText (MG.Cmd_AbsolutePositioning (MG.AbsolutePositioning {} :: MG.AbsolutePositioning Required))
+            @?= "G90",
+          testCase "Relative Positioning - maximum args"
+            $ toText (MG.Cmd_RelativePositioning (MG.RelativePositioning {} :: MG.RelativePositioning Required))
+            @?= "G91",
+          testCase "Set Position - maximum args"
+            $ toText
+              ( MG.Cmd_SetPosition
+                  MG.def'
+                    { axisA = Just (Mm 1),
+                      axisB = Just (Mm 2),
+                      axisC = Just (Mm 3),
+                      axisExtrusion = Just (Mm 4),
+                      axisU = Just (Mm 5),
+                      axisV = Just (Mm 6),
+                      axisW = Just (Mm 7),
+                      axisX = Just (Mm 10),
+                      axisY = Just (Mm 20),
+                      axisZ = Just (Mm 30)
+                    }
+              )
+            @?= "G92 A1.0000 B2.0000 C3.0000 E4.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+          testCase "Backlash Calibration - maximum args"
+            $ toText
+              ( MG.Cmd_BacklashCalibration
+                  MG.def'
+                    { backlashOnly = Just (Flag True),
+                      toolheadIndex = Just (Index 1),
+                      uncertainty = Just (Mm 0.1),
+                      report = Just (Flag True)
+                    }
+              )
+            @?= "G425 B1 T1 U0.1000 V1"
         ],
       testCase "multiple commands"
         $ toText
