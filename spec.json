@@ -171,10 +171,22 @@
     ]
   },
   {
-    "unimplemented": true,
     "type": "Direct Stepper Move",
     "code": "G6",
-    "link": "https://marlinfw.org/docs/gcode/G006.html"
+    "link": "https://marlinfw.org/docs/gcode/G006.html",
+    "args": [
+      { "code": "E", "label": "directionE", "type": "Flag" },
+      { "code": "I", "label": "pageIndex", "type": "Index" },
+      { "code": "R", "label": "stepRate", "type": "MmPerSec" },
+      { "code": "S", "label": "stepCount", "type": "Count" },
+      { "code": "X", "label": "directionX", "type": "Flag" },
+      { "code": "Y", "label": "directionY", "type": "Flag" },
+      { "code": "Z", "label": "directionZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["E", "I", "R", "S", "X", "Y", "Z"],
+      "required": []
+    }
   },
   {
     "unimplemented": true,

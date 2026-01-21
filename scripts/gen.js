@@ -134,7 +134,7 @@ module Marlin.GCode.Generated where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Degrees, LaserPower, Mm, MmPerMin, NotDefined, Required(..), Count, Seconds, Milliseconds)
+import Marlin.GCode.Types (ArgValue, Count, Degrees, Flag, Index, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
 import Relude
 import qualified Data.Text as T
 

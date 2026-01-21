@@ -2,7 +2,7 @@ module Marlin.GCode.Generated where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Degrees, LaserPower, Mm, MmPerMin, NotDefined, Required(..), Count, Seconds, Milliseconds)
+import Marlin.GCode.Types (ArgValue, Count, Degrees, Flag, Index, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
 import Relude
 import qualified Data.Text as T
 
@@ -523,12 +523,18 @@ instance ToText (BezierCubicSplineMove_Subsequent Required) where
 --------------------------------------------------------------------------------
 --- Direct Stepper Move (G6)
 --- Docs: https://marlinfw.org/docs/gcode/G006.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data DirectStepperMove (f :: Type -> Type)
   = DirectStepperMove
-  {}
+  { directionE :: Maybe Flag,
+    pageIndex :: Maybe Index,
+    stepRate :: Maybe MmPerSec,
+    stepCount :: Maybe Count,
+    directionX :: Maybe Flag,
+    directionY :: Maybe Flag,
+    directionZ :: Maybe Flag
+  }
   deriving (Generic)
 
 instance Default (DirectStepperMove NotDefined)
@@ -537,7 +543,13 @@ instance Upcast (DirectStepperMove Required) GCodeCmd where
   upcast = Cmd_DirectStepperMove
 
 instance ToText (DirectStepperMove Required) where
-  toText r = mkCmd "G6" []
+  toText r = mkCmd "G6" [mkArg 'E' r.directionE,
+          mkArg 'I' r.pageIndex,
+          mkArg 'R' r.stepRate,
+          mkArg 'S' r.stepCount,
+          mkArg 'X' r.directionX,
+          mkArg 'Y' r.directionY,
+          mkArg 'Z' r.directionZ]
 
 --------------------------------------------------------------------------------
 --- Retract (G10)
