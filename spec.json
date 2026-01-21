@@ -1,8 +1,8 @@
 [
   {
     "code": "G0",
-    "type": "LinearMove",
-    "subtype": "NoExtrusion",
+    "type": "Linear Move",
+    "subtype": "No Extrusion",
     "link": "https://marlinfw.org/docs/gcode/G000-G001.html",
     "args": [
       { "code": "A", "label": "axisA", "type": "Mm" },
@@ -25,8 +25,8 @@
   },
   {
     "code": "G1",
-    "type": "LinearMove",
-    "subtype": "WithExtrusion",
+    "type": "Linear Move",
+    "subtype": "With Extrusion",
     "link": "https://marlinfw.org/docs/gcode/G000-G001.html",
     "args": [
       { "code": "A", "label": "axisA", "type": "Mm" },
@@ -48,7 +48,7 @@
     }
   },
   {
-    "type": "LinearMove",
+    "type": "Linear Move",
     "subtype": "Clockwise",
     "code": "G2",
     "link": "https://marlinfw.org/docs/gcode/G002-G003.html",
@@ -72,12 +72,12 @@
     ],
     "signatures": [
       {
-        "name": "OffsetX",
+        "name": "Offset X",
         "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
         "required": ["I"]
       },
       {
-        "name": "OffsetY",
+        "name": "Offset Y",
         "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
         "required": ["J"]
       },
@@ -113,12 +113,12 @@
     ],
     "signatures": [
       {
-        "name": "OffsetX",
+        "name": "Offset X",
         "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
         "required": ["I"]
       },
       {
-        "name": "OffsetY",
+        "name": "Offset Y",
         "optional": ["A", "B", "C", "E", "F", "P", "S", "U", "V", "W", "X", "Y", "Z"],
         "required": ["J"]
       },
@@ -143,8 +143,73 @@
     }
   },
   {
-    "type": "BezierCubicSplineMove",
+    "unimplemented": true,
+    "type": "Bezier Cubic Spline Move",
     "code": "G5",
     "link": "https://marlinfw.org/docs/gcode/G005.html"
+  },
+  {
+    "unimplemented": true,
+    "type": "Direct Stepper Move",
+    "code": "G6",
+    "link": "https://marlinfw.org/docs/gcode/G006.html"
+  },
+  {
+    "unimplemented": true,
+    "type": "Retract",
+    "code": "G10",
+    "link": "https://marlinfw.org/docs/gcode/G010.html"
+  },
+  {
+    "unimplemented": true,
+    "type": "Recover",
+    "code": "G11",
+    "link": "https://marlinfw.org/docs/gcode/G011.html"
+  },
+  {
+    "unimplemented": true,
+    "type": "Clean The Nozzle",
+    "code": "G12",
+    "link": "https://marlinfw.org/docs/gcode/G012.html"
+  },
+  {
+    "type": "CNC Workspace Planes",
+    "subtype": "XY",
+    "code": "G17",
+    "link": "https://marlinfw.org/docs/gcode/G017-G019.html"
+  },
+  {
+    "type": "CNC Workspace Planes",
+    "subtype": "ZX",
+    "code": "G18",
+    "link": "https://marlinfw.org/docs/gcode/G017-G019.html"
+  },
+  {
+    "type": "CNC Workspace Planes",
+    "subtype": "YZ",
+    "code": "G19",
+    "link": "https://marlinfw.org/docs/gcode/G017-G019.html"
+  },
+  {
+    "type": "Inch Units",
+    "code": "G20",
+    "link": "https://marlinfw.org/docs/gcode/G020.html"
+  },
+  {
+    "type": "Millimeter Units",
+    "code": "G21",
+    "link": "https://marlinfw.org/docs/gcode/G021.html"
+  },
+  {
+    "unimplemented": true,
+    "type": "Mesh Validation Pattern",
+    "code": "G26",
+    "link": "https://marlinfw.org/docs/gcode/G026.html"
+  },
+  {
+    "unimplemented": true,
+    "type": "Park Toolehead",
+    "code": "G27",
+    "link": "https://marlinfw.org/docs/gcode/G027.html"
   }
 ]

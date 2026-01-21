@@ -3,9 +3,15 @@ const path = require("path");
 
 const sep = "_"
 
+const removeSpaces = (str) => {
+  return str.replace(/\s+/g, "");
+};
+
 const mkTypeName = (item, signature) => {
-  const subtype = item.subtype ? `${sep}${item.subtype}` : "";
-  return `${item.type}${subtype}${signature.name ? `${sep}${signature.name}` : ""}`;
+  const typeWithoutSpaces = removeSpaces(item.type);
+  const subtype = item.subtype ? `${sep}${removeSpaces(item.subtype)}` : "";
+  const signatureName = signature.name ? `${sep}${removeSpaces(signature.name)}` : "";
+  return `${typeWithoutSpaces}${subtype}${signatureName}`;
 };
 
 const mkCmdName = (item, signature) => {
@@ -52,13 +58,16 @@ const genSignature = (item, signature) => {
     ? `{ ${dataFields.join(",\n    ")}\n  }`
     : `{}`;
   
-  const linkLine = item.link ? `--- ${item.link}` : "";
-  const separator = item.link ? "\n" : "";
+  const linkLine = item.link ? `--- Docs: ${item.link}` : "";
+  const unimplementedLine = item.unimplemented ? `--- Status: UNIMPLEMENTED` : "";
+  const lines = [linkLine, unimplementedLine].filter(Boolean);
+  const extraLines = lines.length > 0 ? "\n" + lines.join("\n") : "";
+  const displayTitle = item.type; // Use original type with spaces for display
   
   return `
 
 --------------------------------------------------------------------------------
---- ${typeName} (${item.code})${separator}${linkLine}
+--- ${displayTitle} (${item.code})${extraLines}
 --------------------------------------------------------------------------------
 
 data ${typeName} (f :: Type -> Type)
