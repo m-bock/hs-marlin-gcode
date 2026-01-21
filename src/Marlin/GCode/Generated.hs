@@ -27,8 +27,11 @@ instance ToText GCodeCmd where
       Cmd_LinearMove_Clockwise_OffsetX r -> toText r
       Cmd_LinearMove_Clockwise_OffsetY r -> toText r
       Cmd_LinearMove_Clockwise_Radius r -> toText r
-      Comment Nothing c -> ";" <> c
-      Comment (Just cmd) c -> toText cmd <> " ;" <> c
+      Comment Nothing c -> "; " <> c
+      Comment (Just cmd) c -> toText cmd <> " ; " <> c
+
+instance ToText [GCodeCmd] where
+  toText = T.unlines . map toText
 
 withComment :: GCodeCmd -> Text -> GCodeCmd
 withComment cmd c = Comment (Just cmd) c

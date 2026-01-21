@@ -82,8 +82,8 @@ instance ToText GCodeCmd where
   toText =
     \\case
       ${cases.join("\n      ")}
-      Comment Nothing c -> ";" <> c
-      Comment (Just cmd) c -> toText cmd <> " ;" <> c
+      Comment Nothing c -> "; " <> c
+      Comment (Just cmd) c -> toText cmd <> " ; " <> c
 
   `.trim();
 };
@@ -109,6 +109,9 @@ import qualified Data.Text as T
 ${genCmd(data)}
 
 ${genToTextInstance(data)}
+
+instance ToText [GCodeCmd] where
+  toText = T.unlines . map toText
 
 withComment :: GCodeCmd -> Text -> GCodeCmd
 withComment cmd c = Comment (Just cmd) c
