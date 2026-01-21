@@ -4,7 +4,7 @@ const path = require("path");
 const sep = "_"
 
 const removeSpaces = (str) => {
-  return str.replace(/\s+/g, "").replace(/-/g, sep);
+  return str.replace(/\s+/g, "").replace(/-/g, sep).replace(/\//g, sep).replace(/,/g, sep).replace(/[().]/g, "");
 };
 
 const mkTypeName = (item, signature) => {

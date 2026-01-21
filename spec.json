@@ -780,5 +780,2232 @@
       "optional": ["B", "T", "U", "V"],
       "required": []
     }
+  },
+  {
+    "type": "Unconditional Stop",
+    "code": "M0",
+    "link": "https://marlinfw.org/docs/gcode/M000-M001.html",
+    "args": [
+      { "code": "P", "label": "expireMilliseconds", "type": "Milliseconds" },
+      { "code": "S", "label": "expireSeconds", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": ["P", "S"],
+      "required": []
+    },
+    "unimplemented": true
+  },
+  {
+    "type": "Spindle CW / Laser On",
+    "code": "M3",
+    "link": "https://marlinfw.org/docs/gcode/M003.html",
+    "args": [
+      { "code": "I", "label": "inlineMode", "type": "Flag" },
+      { "code": "O", "label": "powerPWM", "type": "Index" },
+      { "code": "S", "label": "power", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["I", "O", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Spindle CCW / Laser On",
+    "code": "M4",
+    "link": "https://marlinfw.org/docs/gcode/M004.html",
+    "args": [
+      { "code": "I", "label": "inlineMode", "type": "Flag" },
+      { "code": "O", "label": "powerPWM", "type": "Index" },
+      { "code": "S", "label": "power", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["I", "O", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Spindle / Laser Off",
+    "code": "M5",
+    "link": "https://marlinfw.org/docs/gcode/M005.html"
+  },
+  {
+    "type": "Coolant Controls",
+    "subtype": "Mist",
+    "code": "M7",
+    "link": "https://marlinfw.org/docs/gcode/M007-M009.html"
+  },
+  {
+    "type": "Coolant Controls",
+    "subtype": "Flood",
+    "code": "M8",
+    "link": "https://marlinfw.org/docs/gcode/M007-M009.html"
+  },
+  {
+    "type": "Coolant Controls",
+    "subtype": "Off",
+    "code": "M9",
+    "link": "https://marlinfw.org/docs/gcode/M007-M009.html"
+  },
+  {
+    "type": "Vacuum / Blower Control",
+    "subtype": "On",
+    "code": "M10",
+    "link": "https://marlinfw.org/docs/gcode/M010-M011.html"
+  },
+  {
+    "type": "Vacuum / Blower Control",
+    "subtype": "Off",
+    "code": "M11",
+    "link": "https://marlinfw.org/docs/gcode/M010-M011.html"
+  },
+  {
+    "type": "Expected Printer Check",
+    "code": "M16",
+    "link": "https://marlinfw.org/docs/gcode/M016.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Enable Steppers",
+    "code": "M17",
+    "link": "https://marlinfw.org/docs/gcode/M017.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Flag" },
+      { "code": "B", "label": "axisB", "type": "Flag" },
+      { "code": "C", "label": "axisC", "type": "Flag" },
+      { "code": "E", "label": "axisExtrusion", "type": "Flag" },
+      { "code": "U", "label": "axisU", "type": "Flag" },
+      { "code": "V", "label": "axisV", "type": "Flag" },
+      { "code": "W", "label": "axisW", "type": "Flag" },
+      { "code": "X", "label": "axisX", "type": "Flag" },
+      { "code": "Y", "label": "axisY", "type": "Flag" },
+      { "code": "Z", "label": "axisZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "E", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Disable Steppers",
+    "code": "M18",
+    "link": "https://marlinfw.org/docs/gcode/M018.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Flag" },
+      { "code": "B", "label": "axisB", "type": "Flag" },
+      { "code": "C", "label": "axisC", "type": "Flag" },
+      { "code": "E", "label": "axisExtrusion", "type": "Flag" },
+      { "code": "S", "label": "timeoutSeconds", "type": "Seconds" },
+      { "code": "U", "label": "axisU", "type": "Flag" },
+      { "code": "V", "label": "axisV", "type": "Flag" },
+      { "code": "W", "label": "axisW", "type": "Flag" },
+      { "code": "X", "label": "axisX", "type": "Flag" },
+      { "code": "Y", "label": "axisY", "type": "Flag" },
+      { "code": "Z", "label": "axisZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "E", "S", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "List SD Card",
+    "code": "M20",
+    "link": "https://marlinfw.org/docs/gcode/M020.html",
+    "args": [
+      { "code": "F", "label": "binFilesOnly", "type": "Flag" },
+      { "code": "L", "label": "longFilenames", "type": "Flag" },
+      { "code": "T", "label": "timestamp", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["F", "L", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Init SD Card",
+    "code": "M21",
+    "link": "https://marlinfw.org/docs/gcode/M021.html"
+  },
+  {
+    "type": "Release SD Card",
+    "code": "M22",
+    "link": "https://marlinfw.org/docs/gcode/M022.html"
+  },
+  {
+    "type": "Select SD File",
+    "code": "M23",
+    "link": "https://marlinfw.org/docs/gcode/M023.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Start or Resume SD Print",
+    "code": "M24",
+    "link": "https://marlinfw.org/docs/gcode/M024.html",
+    "args": [
+      { "code": "S", "label": "resumePosition", "type": "Count" },
+      { "code": "T", "label": "elapsedTime", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Pause SD Print",
+    "code": "M25",
+    "link": "https://marlinfw.org/docs/gcode/M025.html"
+  },
+  {
+    "type": "Set SD Position",
+    "code": "M26",
+    "link": "https://marlinfw.org/docs/gcode/M026.html",
+    "args": [
+      { "code": "S", "label": "position", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Report SD Print Status",
+    "code": "M27",
+    "link": "https://marlinfw.org/docs/gcode/M027.html",
+    "args": [
+      { "code": "C", "label": "reportFilename", "type": "Flag" },
+      { "code": "S", "label": "autoReportInterval", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": ["C", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Start SD Write",
+    "code": "M28",
+    "link": "https://marlinfw.org/docs/gcode/M028.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Stop SD Write",
+    "code": "M29",
+    "link": "https://marlinfw.org/docs/gcode/M029.html"
+  },
+  {
+    "type": "Delete SD File",
+    "code": "M30",
+    "link": "https://marlinfw.org/docs/gcode/M030.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Report Print Time",
+    "code": "M31",
+    "link": "https://marlinfw.org/docs/gcode/M031.html"
+  },
+  {
+    "type": "Select and Start",
+    "code": "M32",
+    "link": "https://marlinfw.org/docs/gcode/M032.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Get Long Path",
+    "code": "M33",
+    "link": "https://marlinfw.org/docs/gcode/M033.html",
+    "unimplemented": true
+  },
+  {
+    "type": "SDCard Sorting",
+    "code": "M34",
+    "link": "https://marlinfw.org/docs/gcode/M034.html",
+    "args": [
+      { "code": "F", "label": "folderSorting", "type": "Index" },
+      { "code": "S", "label": "sortingOrder", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["F", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Pin State",
+    "code": "M42",
+    "link": "https://marlinfw.org/docs/gcode/M042.html",
+    "args": [
+      { "code": "I", "label": "ignoreProtection", "type": "Flag" },
+      { "code": "P", "label": "pin", "type": "Index" },
+      { "code": "S", "label": "state", "type": "Index" },
+      { "code": "T", "label": "pinMode", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["I", "P", "T"],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Pins Debugging",
+    "code": "M43",
+    "link": "https://marlinfw.org/docs/gcode/M043.html",
+    "args": [
+      { "code": "E", "label": "watchEndstops", "type": "Flag" },
+      { "code": "I", "label": "ignoreProtection", "type": "Flag" },
+      { "code": "P", "label": "pin", "type": "Index" },
+      { "code": "S", "label": "testProbe", "type": "Flag" },
+      { "code": "T", "label": "togglePins", "type": "Flag" },
+      { "code": "W", "label": "watchPins", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["E", "I", "P", "S", "T", "W"],
+      "required": []
+    }
+  },
+  {
+    "type": "Toggle Pins",
+    "code": "M43 T",
+    "link": "https://marlinfw.org/docs/gcode/M043-T.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Probe Repeatability Test",
+    "code": "M48",
+    "link": "https://marlinfw.org/docs/gcode/M048.html",
+    "args": [
+      { "code": "C", "label": "temperatureCompensation", "type": "Flag" },
+      { "code": "E", "label": "engageEach", "type": "Flag" },
+      { "code": "L", "label": "legs", "type": "Count" },
+      { "code": "P", "label": "probeCount", "type": "Count" },
+      { "code": "S", "label": "starPattern", "type": "Index" },
+      { "code": "V", "label": "verbosity", "type": "Index" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["C", "E", "L", "P", "S", "V", "X", "Y"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Print Progress",
+    "code": "M73",
+    "link": "https://marlinfw.org/docs/gcode/M073.html",
+    "args": [
+      { "code": "C", "label": "interactionCountdown", "type": "Count" },
+      { "code": "P", "label": "progressPercent", "type": "Index" },
+      { "code": "R", "label": "remainingTime", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["C", "P", "R"],
+      "required": []
+    }
+  },
+  {
+    "type": "Start Print Job Timer",
+    "code": "M75",
+    "link": "https://marlinfw.org/docs/gcode/M075.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Pause Print Job Timer",
+    "code": "M76",
+    "link": "https://marlinfw.org/docs/gcode/M076.html"
+  },
+  {
+    "type": "Stop Print Job Timer",
+    "code": "M77",
+    "link": "https://marlinfw.org/docs/gcode/M077.html"
+  },
+  {
+    "type": "Print Job Stats",
+    "code": "M78",
+    "link": "https://marlinfw.org/docs/gcode/M078.html"
+  },
+  {
+    "type": "Power On",
+    "code": "M80",
+    "link": "https://marlinfw.org/docs/gcode/M080.html",
+    "args": [
+      { "code": "S", "label": "reportState", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Power Off",
+    "code": "M81",
+    "link": "https://marlinfw.org/docs/gcode/M081.html"
+  },
+  {
+    "type": "E Absolute",
+    "code": "M82",
+    "link": "https://marlinfw.org/docs/gcode/M082.html"
+  },
+  {
+    "type": "E Relative",
+    "code": "M83",
+    "link": "https://marlinfw.org/docs/gcode/M083.html"
+  },
+  {
+    "type": "Inactivity Shutdown",
+    "code": "M85",
+    "link": "https://marlinfw.org/docs/gcode/M085.html",
+    "args": [
+      { "code": "S", "label": "maxInactiveSeconds", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Hotend Idle Timeout",
+    "code": "M86",
+    "link": "https://marlinfw.org/docs/gcode/M086.html",
+    "args": [
+      { "code": "B", "label": "bedIdleTemp", "type": "Celsius" },
+      { "code": "E", "label": "extruderIdleTemp", "type": "Celsius" },
+      { "code": "S", "label": "timeoutSeconds", "type": "Seconds" },
+      { "code": "T", "label": "temperatureTrigger", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["B", "E", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Disable Hotend Idle Timeout",
+    "code": "M87",
+    "link": "https://marlinfw.org/docs/gcode/M087.html"
+  },
+  {
+    "type": "Set Axis Steps-per-unit",
+    "code": "M92",
+    "link": "https://marlinfw.org/docs/gcode/M092.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Mm" },
+      { "code": "B", "label": "axisB", "type": "Mm" },
+      { "code": "C", "label": "axisC", "type": "Mm" },
+      { "code": "E", "label": "axisExtrusion", "type": "Mm" },
+      { "code": "T", "label": "targetExtruder", "type": "Index" },
+      { "code": "U", "label": "axisU", "type": "Mm" },
+      { "code": "V", "label": "axisV", "type": "Mm" },
+      { "code": "W", "label": "axisW", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "E", "T", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Hotend Temperature",
+    "code": "M104",
+    "link": "https://marlinfw.org/docs/gcode/M104.html",
+    "args": [
+      { "code": "B", "label": "maxAutoTemp", "type": "Celsius" },
+      { "code": "F", "label": "autotempFactor", "type": "Mm" },
+      { "code": "I", "label": "materialPreset", "type": "Index" },
+      { "code": "S", "label": "targetTemp", "type": "Celsius" },
+      { "code": "T", "label": "hotendIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["B", "F", "I", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Report Temperatures",
+    "code": "M105",
+    "link": "https://marlinfw.org/docs/gcode/M105.html",
+    "args": [
+      { "code": "R", "label": "includeRedundant", "type": "Flag" },
+      { "code": "T", "label": "hotendIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["R", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Fan Speed",
+    "code": "M106",
+    "link": "https://marlinfw.org/docs/gcode/M106.html",
+    "args": [
+      { "code": "I", "label": "materialPreset", "type": "Index" },
+      { "code": "P", "label": "fanIndex", "type": "Index" },
+      { "code": "S", "label": "speed", "type": "Index" },
+      { "code": "T", "label": "secondarySpeed", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["I", "P", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Fan Off",
+    "code": "M107",
+    "link": "https://marlinfw.org/docs/gcode/M107.html",
+    "args": [
+      { "code": "P", "label": "fanIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["P"],
+      "required": []
+    }
+  },
+  {
+    "type": "Break and Continue",
+    "code": "M108",
+    "link": "https://marlinfw.org/docs/gcode/M108.html"
+  },
+  {
+    "type": "Wait for Hotend Temperature",
+    "code": "M109",
+    "link": "https://marlinfw.org/docs/gcode/M109.html",
+    "args": [
+      { "code": "B", "label": "maxAutoTemp", "type": "Celsius" },
+      { "code": "F", "label": "autotempFactor", "type": "Mm" },
+      { "code": "I", "label": "materialPreset", "type": "Index" },
+      { "code": "R", "label": "targetTempWait", "type": "Celsius" },
+      { "code": "S", "label": "targetTemp", "type": "Celsius" },
+      { "code": "T", "label": "hotendIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["B", "F", "I", "R", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set / Get Line Number",
+    "code": "M110",
+    "link": "https://marlinfw.org/docs/gcode/M110.html",
+    "args": [
+      { "code": "N", "label": "lineNumber", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["N"],
+      "required": []
+    }
+  },
+  {
+    "type": "Debug Level",
+    "code": "M111",
+    "link": "https://marlinfw.org/docs/gcode/M111.html",
+    "args": [
+      { "code": "S", "label": "debugFlags", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Full Shutdown",
+    "code": "M112",
+    "link": "https://marlinfw.org/docs/gcode/M112.html"
+  },
+  {
+    "type": "Host Keepalive",
+    "code": "M113",
+    "link": "https://marlinfw.org/docs/gcode/M113.html",
+    "args": [
+      { "code": "S", "label": "keepaliveInterval", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Get Current Position",
+    "code": "M114",
+    "link": "https://marlinfw.org/docs/gcode/M114.html",
+    "args": [
+      { "code": "D", "label": "detailedInfo", "type": "Flag" },
+      { "code": "E", "label": "reportEStepper", "type": "Flag" },
+      { "code": "R", "label": "realPosition", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["D", "E", "R"],
+      "required": []
+    }
+  },
+  {
+    "type": "Firmware Info",
+    "code": "M115",
+    "link": "https://marlinfw.org/docs/gcode/M115.html"
+  },
+  {
+    "type": "Set LCD Message",
+    "code": "M117",
+    "link": "https://marlinfw.org/docs/gcode/M117.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Serial Print",
+    "code": "M118",
+    "link": "https://marlinfw.org/docs/gcode/M118.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Endstop States",
+    "code": "M119",
+    "link": "https://marlinfw.org/docs/gcode/M119.html"
+  },
+  {
+    "type": "Enable Endstops",
+    "code": "M120",
+    "link": "https://marlinfw.org/docs/gcode/M120.html"
+  },
+  {
+    "type": "Disable Endstops",
+    "code": "M121",
+    "link": "https://marlinfw.org/docs/gcode/M121.html"
+  },
+  {
+    "type": "Set Bed Temperature",
+    "code": "M140",
+    "link": "https://marlinfw.org/docs/gcode/M140.html",
+    "args": [
+      { "code": "I", "label": "materialPreset", "type": "Index" },
+      { "code": "S", "label": "targetTemp", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["I", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Chamber Temperature",
+    "code": "M141",
+    "link": "https://marlinfw.org/docs/gcode/M141.html",
+    "args": [
+      { "code": "S", "label": "targetTemp", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Wait for Bed Temperature",
+    "code": "M190",
+    "link": "https://marlinfw.org/docs/gcode/M190.html",
+    "args": [
+      { "code": "I", "label": "materialPreset", "type": "Index" },
+      { "code": "R", "label": "targetTempWait", "type": "Celsius" },
+      { "code": "S", "label": "targetTemp", "type": "Celsius" },
+      { "code": "T", "label": "coolingTime", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": ["I", "R", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Volumetric Extrusion Diameter",
+    "code": "M200",
+    "link": "https://marlinfw.org/docs/gcode/M200.html",
+    "args": [
+      { "code": "D", "label": "filamentDiameter", "type": "Mm" },
+      { "code": "L", "label": "extruderLimit", "type": "Mm" },
+      { "code": "S", "label": "volumetricOn", "type": "Flag" },
+      { "code": "T", "label": "extruderIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["D", "L", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Print / Travel Move Limits",
+    "code": "M201",
+    "link": "https://marlinfw.org/docs/gcode/M201.html",
+    "args": [
+      { "code": "E", "label": "axisExtrusion", "type": "Mm" },
+      { "code": "F", "label": "frequencyLimit", "type": "Count" },
+      { "code": "S", "label": "frequencyMinSpeed", "type": "Mm" },
+      { "code": "T", "label": "targetExtruder", "type": "Index" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["E", "F", "S", "T", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Max Feedrate",
+    "code": "M203",
+    "link": "https://marlinfw.org/docs/gcode/M203.html",
+    "args": [
+      { "code": "E", "label": "axisExtrusion", "type": "MmPerSec" },
+      { "code": "T", "label": "targetExtruder", "type": "Index" },
+      { "code": "X", "label": "axisX", "type": "MmPerSec" },
+      { "code": "Y", "label": "axisY", "type": "MmPerSec" },
+      { "code": "Z", "label": "axisZ", "type": "MmPerSec" }
+    ],
+    "signature": {
+      "optional": ["E", "T", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Starting Acceleration",
+    "code": "M204",
+    "link": "https://marlinfw.org/docs/gcode/M204.html",
+    "args": [
+      { "code": "P", "label": "printingAccel", "type": "Mm" },
+      { "code": "R", "label": "retractAccel", "type": "Mm" },
+      { "code": "S", "label": "legacyAccel", "type": "Mm" },
+      { "code": "T", "label": "travelAccel", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["P", "R", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Advanced Settings",
+    "code": "M205",
+    "link": "https://marlinfw.org/docs/gcode/M205.html",
+    "args": [
+      { "code": "B", "label": "minSegmentTime", "type": "Milliseconds" },
+      { "code": "E", "label": "axisExtrusion", "type": "Mm" },
+      { "code": "J", "label": "junctionDeviation", "type": "Mm" },
+      { "code": "S", "label": "minFeedratePrint", "type": "MmPerSec" },
+      { "code": "T", "label": "minFeedrateTravel", "type": "MmPerSec" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["B", "E", "J", "S", "T", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Home Offsets",
+    "code": "M206",
+    "link": "https://marlinfw.org/docs/gcode/M206.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "Mm" },
+      { "code": "B", "label": "axisB", "type": "Mm" },
+      { "code": "C", "label": "axisC", "type": "Mm" },
+      { "code": "P", "label": "scaraPsi", "type": "Mm" },
+      { "code": "T", "label": "scaraTheta", "type": "Mm" },
+      { "code": "U", "label": "axisU", "type": "Mm" },
+      { "code": "V", "label": "axisV", "type": "Mm" },
+      { "code": "W", "label": "axisW", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "P", "T", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Feedrate Percentage",
+    "code": "M220",
+    "link": "https://marlinfw.org/docs/gcode/M220.html",
+    "args": [
+      { "code": "B", "label": "backupFactor", "type": "Flag" },
+      { "code": "R", "label": "restoreFactor", "type": "Flag" },
+      { "code": "S", "label": "feedratePercent", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["B", "R", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Flow Percentage",
+    "code": "M221",
+    "link": "https://marlinfw.org/docs/gcode/M221.html",
+    "args": [
+      { "code": "S", "label": "flowPercent", "type": "Index" },
+      { "code": "T", "label": "targetExtruder", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["T"],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Finish Moves",
+    "code": "M400",
+    "link": "https://marlinfw.org/docs/gcode/M400.html"
+  },
+  {
+    "type": "Deploy Probe",
+    "code": "M401",
+    "link": "https://marlinfw.org/docs/gcode/M401.html",
+    "args": [
+      { "code": "H", "label": "reportHSMode", "type": "Flag" },
+      { "code": "R", "label": "remainInPlace", "type": "Flag" },
+      { "code": "S", "label": "setHSMode", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["H", "R", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Stow Probe",
+    "code": "M402",
+    "link": "https://marlinfw.org/docs/gcode/M402.html",
+    "args": [
+      { "code": "R", "label": "remainInPlace", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["R"],
+      "required": []
+    }
+  },
+  {
+    "type": "Quickstop",
+    "code": "M410",
+    "link": "https://marlinfw.org/docs/gcode/M410.html"
+  },
+  {
+    "type": "Save Settings",
+    "code": "M500",
+    "link": "https://marlinfw.org/docs/gcode/M500.html"
+  },
+  {
+    "type": "Restore Settings",
+    "code": "M501",
+    "link": "https://marlinfw.org/docs/gcode/M501.html"
+  },
+  {
+    "type": "Factory Reset",
+    "code": "M502",
+    "link": "https://marlinfw.org/docs/gcode/M502.html"
+  },
+  {
+    "type": "Report Settings",
+    "code": "M503",
+    "link": "https://marlinfw.org/docs/gcode/M503.html",
+    "args": [
+      { "code": "C", "label": "saveConfig", "type": "Flag" },
+      { "code": "S", "label": "detailedOutput", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["C", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "STOP Restart",
+    "code": "M999",
+    "link": "https://marlinfw.org/docs/gcode/M999.html",
+    "args": [
+      { "code": "S", "label": "resumeWithoutFlush", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Free Memory",
+    "code": "M100",
+    "link": "https://marlinfw.org/docs/gcode/M100.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Configure Bed Distance Sensor",
+    "code": "M102",
+    "link": "https://marlinfw.org/docs/gcode/M102.html",
+    "args": [
+      { "code": "S", "label": "state", "type": "Index" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "TMC Debugging",
+    "code": "M122",
+    "link": "https://marlinfw.org/docs/gcode/M122.html",
+    "args": [
+      { "code": "E", "label": "axisExtrusion", "type": "Flag" },
+      { "code": "I", "label": "reinitialize", "type": "Flag" },
+      { "code": "P", "label": "reportInterval", "type": "Milliseconds" },
+      { "code": "S", "label": "enableDebug", "type": "Flag" },
+      { "code": "V", "label": "rawRegisters", "type": "Flag" },
+      { "code": "X", "label": "axisX", "type": "Flag" },
+      { "code": "Y", "label": "axisY", "type": "Flag" },
+      { "code": "Z", "label": "axisZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["E", "I", "P", "S", "V", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Fan Tachometers",
+    "code": "M123",
+    "link": "https://marlinfw.org/docs/gcode/M123.html",
+    "args": [
+      { "code": "S", "label": "autoReportInterval", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Park Head",
+    "code": "M125",
+    "link": "https://marlinfw.org/docs/gcode/M125.html",
+    "args": [
+      { "code": "L", "label": "retractLength", "type": "Mm" },
+      { "code": "P", "label": "showPrompt", "type": "Flag" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "zRaise", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["L", "P", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Baricuda 1 Open",
+    "code": "M126",
+    "link": "https://marlinfw.org/docs/gcode/M126.html",
+    "args": [
+      { "code": "S", "label": "pressure", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Baricuda 1 Close",
+    "code": "M127",
+    "link": "https://marlinfw.org/docs/gcode/M127.html"
+  },
+  {
+    "type": "Baricuda 2 Open",
+    "code": "M128",
+    "link": "https://marlinfw.org/docs/gcode/M128.html",
+    "args": [
+      { "code": "S", "label": "pressure", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Baricuda 2 Close",
+    "code": "M129",
+    "link": "https://marlinfw.org/docs/gcode/M129.html"
+  },
+  {
+    "type": "Set Laser Cooler Temperature",
+    "code": "M143",
+    "link": "https://marlinfw.org/docs/gcode/M143.html",
+    "args": [
+      { "code": "S", "label": "targetTemp", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Material Preset",
+    "code": "M145",
+    "link": "https://marlinfw.org/docs/gcode/M145.html",
+    "args": [
+      { "code": "B", "label": "bedTemp", "type": "Celsius" },
+      { "code": "F", "label": "fanSpeed", "type": "Index" },
+      { "code": "H", "label": "hotendTemp", "type": "Celsius" },
+      { "code": "S", "label": "materialIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["B", "F", "H", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Temperature Units",
+    "code": "M149",
+    "link": "https://marlinfw.org/docs/gcode/M149.html",
+    "args": [
+      { "code": "C", "label": "celsius", "type": "Flag" },
+      { "code": "F", "label": "fahrenheit", "type": "Flag" },
+      { "code": "K", "label": "kelvin", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["C", "F", "K"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set RGB(W) Color",
+    "code": "M150",
+    "link": "https://marlinfw.org/docs/gcode/M150.html",
+    "args": [
+      { "code": "B", "label": "blue", "type": "Index" },
+      { "code": "I", "label": "pixelIndex", "type": "Index" },
+      { "code": "K", "label": "keepUnspecified", "type": "Flag" },
+      { "code": "P", "label": "brightness", "type": "Index" },
+      { "code": "R", "label": "red", "type": "Index" },
+      { "code": "S", "label": "stripIndex", "type": "Index" },
+      { "code": "U", "label": "green", "type": "Index" },
+      { "code": "W", "label": "white", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["B", "I", "K", "P", "R", "S", "U", "W"],
+      "required": []
+    }
+  },
+  {
+    "type": "Position Auto-Report",
+    "code": "M154",
+    "link": "https://marlinfw.org/docs/gcode/M154.html",
+    "args": [
+      { "code": "S", "label": "intervalSeconds", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Temperature Auto-Report",
+    "code": "M155",
+    "link": "https://marlinfw.org/docs/gcode/M155.html",
+    "args": [
+      { "code": "S", "label": "intervalSeconds", "type": "Seconds" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Mix Factor",
+    "code": "M163",
+    "link": "https://marlinfw.org/docs/gcode/M163.html",
+    "args": [
+      { "code": "P", "label": "mixFactor", "type": "Mm" },
+      { "code": "S", "label": "componentIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["P", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Save Mix",
+    "code": "M164",
+    "link": "https://marlinfw.org/docs/gcode/M164.html",
+    "args": [
+      { "code": "S", "label": "toolIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Set Mix",
+    "code": "M165",
+    "link": "https://marlinfw.org/docs/gcode/M165.html",
+    "args": [
+      { "code": "A", "label": "mixFactor1", "type": "Mm" },
+      { "code": "B", "label": "mixFactor2", "type": "Mm" },
+      { "code": "C", "label": "mixFactor3", "type": "Mm" },
+      { "code": "D", "label": "mixFactor4", "type": "Mm" },
+      { "code": "H", "label": "mixFactor5", "type": "Mm" },
+      { "code": "I", "label": "mixFactor6", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "D", "H", "I"],
+      "required": []
+    }
+  },
+  {
+    "type": "Gradient Mix",
+    "code": "M166",
+    "link": "https://marlinfw.org/docs/gcode/M166.html",
+    "args": [
+      { "code": "A", "label": "startingZ", "type": "Mm" },
+      { "code": "I", "label": "startingTool", "type": "Index" },
+      { "code": "J", "label": "endingTool", "type": "Index" },
+      { "code": "S", "label": "enable", "type": "Flag" },
+      { "code": "T", "label": "toolIndex", "type": "Index" },
+      { "code": "Z", "label": "endingZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["S", "T"],
+      "required": ["A", "I", "J", "Z"]
+    }
+  },
+  {
+    "type": "Wait for Chamber Temperature",
+    "code": "M191",
+    "link": "https://marlinfw.org/docs/gcode/M191.html",
+    "args": [
+      { "code": "R", "label": "targetTempWait", "type": "Celsius" },
+      { "code": "S", "label": "targetTemp", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["R", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Wait for Probe Temperature",
+    "code": "M192",
+    "link": "https://marlinfw.org/docs/gcode/M192.html",
+    "args": [
+      { "code": "R", "label": "targetTemp", "type": "Celsius" },
+      { "code": "S", "label": "minTemp", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["R", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Wait For Laser Cooler Temperature",
+    "code": "M193",
+    "link": "https://marlinfw.org/docs/gcode/M193.html",
+    "args": [
+      { "code": "S", "label": "targetTemp", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Firmware Retraction Settings",
+    "code": "M207",
+    "link": "https://marlinfw.org/docs/gcode/M207.html",
+    "args": [
+      { "code": "F", "label": "retractFeedrate", "type": "MmPerMin" },
+      { "code": "S", "label": "retractLength", "type": "Mm" },
+      { "code": "W", "label": "retractSwapLength", "type": "Mm" },
+      { "code": "Z", "label": "zLift", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["F", "S", "W", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Firmware Recover Settings",
+    "code": "M208",
+    "link": "https://marlinfw.org/docs/gcode/M208.html",
+    "args": [
+      { "code": "F", "label": "recoverFeedrate", "type": "MmPerMin" },
+      { "code": "R", "label": "swapRecoverFeedrate", "type": "MmPerMin" },
+      { "code": "S", "label": "additionalRecoverLength", "type": "Mm" },
+      { "code": "W", "label": "additionalRecoverSwapLength", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["F", "R", "S", "W"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Auto Retract",
+    "code": "M209",
+    "link": "https://marlinfw.org/docs/gcode/M209.html",
+    "args": [
+      { "code": "S", "label": "enable", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Homing Feedrate",
+    "code": "M210",
+    "link": "https://marlinfw.org/docs/gcode/M210.html",
+    "args": [
+      { "code": "A", "label": "axisA", "type": "MmPerMin" },
+      { "code": "B", "label": "axisB", "type": "MmPerMin" },
+      { "code": "C", "label": "axisC", "type": "MmPerMin" },
+      { "code": "U", "label": "axisU", "type": "MmPerMin" },
+      { "code": "V", "label": "axisV", "type": "MmPerMin" },
+      { "code": "W", "label": "axisW", "type": "MmPerMin" },
+      { "code": "X", "label": "axisX", "type": "MmPerMin" },
+      { "code": "Y", "label": "axisY", "type": "MmPerMin" },
+      { "code": "Z", "label": "axisZ", "type": "MmPerMin" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "U", "V", "W", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Software Endstops",
+    "code": "M211",
+    "link": "https://marlinfw.org/docs/gcode/M211.html",
+    "args": [
+      { "code": "S", "label": "enable", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Filament Swap Parameters",
+    "code": "M217",
+    "link": "https://marlinfw.org/docs/gcode/M217.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Set Hotend Offset",
+    "code": "M218",
+    "link": "https://marlinfw.org/docs/gcode/M218.html",
+    "args": [
+      { "code": "T", "label": "hotendIndex", "type": "Index" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["T", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Wait for Pin State",
+    "code": "M226",
+    "link": "https://marlinfw.org/docs/gcode/M226.html",
+    "args": [
+      { "code": "P", "label": "pin", "type": "Index" },
+      { "code": "S", "label": "state", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": ["P"]
+    }
+  },
+  {
+    "type": "Trigger Camera",
+    "code": "M240",
+    "link": "https://marlinfw.org/docs/gcode/M240.html",
+    "unimplemented": true
+  },
+  {
+    "type": "LCD Contrast",
+    "code": "M250",
+    "link": "https://marlinfw.org/docs/gcode/M250.html",
+    "args": [
+      { "code": "C", "label": "contrast", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["C"],
+      "required": []
+    }
+  },
+  {
+    "type": "LCD Sleep/Backlight Timeout",
+    "code": "M255",
+    "link": "https://marlinfw.org/docs/gcode/M255.html",
+    "args": [
+      { "code": "S", "label": "timeoutMinutes", "type": "Count" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "LCD Brightness",
+    "code": "M256",
+    "link": "https://marlinfw.org/docs/gcode/M256.html",
+    "args": [
+      { "code": "B", "label": "brightness", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["B"],
+      "required": []
+    }
+  },
+  {
+    "type": "I2C Send",
+    "code": "M260",
+    "link": "https://marlinfw.org/docs/gcode/M260.html",
+    "unimplemented": true
+  },
+  {
+    "type": "I2C Request",
+    "code": "M261",
+    "link": "https://marlinfw.org/docs/gcode/M261.html",
+    "args": [
+      { "code": "A", "label": "address", "type": "Index" },
+      { "code": "B", "label": "byteCount", "type": "Count" },
+      { "code": "S", "label": "outputStyle", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": ["A", "B"]
+    }
+  },
+  {
+    "type": "Scan I2C Bus",
+    "code": "M265",
+    "link": "https://marlinfw.org/docs/gcode/M265.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Servo Position",
+    "code": "M280",
+    "link": "https://marlinfw.org/docs/gcode/M280.html",
+    "args": [
+      { "code": "P", "label": "servoIndex", "type": "Index" },
+      { "code": "S", "label": "position", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": ["P"]
+    }
+  },
+  {
+    "type": "Edit Servo Angles",
+    "code": "M281",
+    "link": "https://marlinfw.org/docs/gcode/M281.html",
+    "args": [
+      { "code": "L", "label": "deployAngle", "type": "Degrees" },
+      { "code": "P", "label": "servoIndex", "type": "Index" },
+      { "code": "U", "label": "stowAngle", "type": "Degrees" }
+    ],
+    "signature": {
+      "optional": ["L", "U"],
+      "required": ["P"]
+    }
+  },
+  {
+    "type": "Detach Servo",
+    "code": "M282",
+    "link": "https://marlinfw.org/docs/gcode/M282.html",
+    "args": [
+      { "code": "P", "label": "servoIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["P"]
+    }
+  },
+  {
+    "type": "Babystep",
+    "code": "M290",
+    "link": "https://marlinfw.org/docs/gcode/M290.html",
+    "args": [
+      { "code": "P", "label": "affectProbeOffset", "type": "Flag" },
+      { "code": "S", "label": "axisZAlias", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["P", "S", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Play Tone",
+    "code": "M300",
+    "link": "https://marlinfw.org/docs/gcode/M300.html",
+    "args": [
+      { "code": "P", "label": "durationMs", "type": "Milliseconds" },
+      { "code": "S", "label": "frequencyHz", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["P", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Hotend PID",
+    "code": "M301",
+    "link": "https://marlinfw.org/docs/gcode/M301.html",
+    "args": [
+      { "code": "C", "label": "cTerm", "type": "Mm" },
+      { "code": "D", "label": "derivative", "type": "Mm" },
+      { "code": "E", "label": "extruderIndex", "type": "Index" },
+      { "code": "F", "label": "fTerm", "type": "Mm" },
+      { "code": "I", "label": "integral", "type": "Mm" },
+      { "code": "L", "label": "extrusionScalingLength", "type": "Mm" },
+      { "code": "P", "label": "proportional", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["C", "D", "E", "F", "I", "L", "P"],
+      "required": []
+    }
+  },
+  {
+    "type": "Cold Extrude",
+    "code": "M302",
+    "link": "https://marlinfw.org/docs/gcode/M302.html",
+    "args": [
+      { "code": "P", "label": "allowAnyTemp", "type": "Flag" },
+      { "code": "S", "label": "minTemp", "type": "Celsius" }
+    ],
+    "signature": {
+      "optional": ["P", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "PID Autotune",
+    "code": "M303",
+    "link": "https://marlinfw.org/docs/gcode/M303.html",
+    "args": [
+      { "code": "C", "label": "cycles", "type": "Count" },
+      { "code": "D", "label": "toggleDebug", "type": "Flag" },
+      { "code": "E", "label": "hotendIndex", "type": "Index" },
+      { "code": "S", "label": "targetTemp", "type": "Celsius" },
+      { "code": "U", "label": "useResult", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["C", "D", "E", "S", "U"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Bed PID",
+    "code": "M304",
+    "link": "https://marlinfw.org/docs/gcode/M304.html",
+    "args": [
+      { "code": "D", "label": "derivative", "type": "Mm" },
+      { "code": "I", "label": "integral", "type": "Mm" },
+      { "code": "P", "label": "proportional", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["D", "I", "P"],
+      "required": []
+    }
+  },
+  {
+    "type": "User Thermistor Parameters",
+    "code": "M305",
+    "link": "https://marlinfw.org/docs/gcode/M305.html",
+    "args": [
+      { "code": "B", "label": "beta", "type": "Count" },
+      { "code": "C", "label": "coefficientC", "type": "Mm" },
+      { "code": "P", "label": "tableIndex", "type": "Index" },
+      { "code": "R", "label": "pullupResistor", "type": "Count" },
+      { "code": "T", "label": "resistanceAt25C", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["B", "C", "P", "R", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Model Predictive Temp. Control",
+    "code": "M306",
+    "link": "https://marlinfw.org/docs/gcode/M306.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Set Chamber PID",
+    "code": "M309",
+    "link": "https://marlinfw.org/docs/gcode/M309.html",
+    "args": [
+      { "code": "D", "label": "derivative", "type": "Mm" },
+      { "code": "I", "label": "integral", "type": "Mm" },
+      { "code": "P", "label": "proportional", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["D", "I", "P"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Micro-stepping",
+    "code": "M350",
+    "link": "https://marlinfw.org/docs/gcode/M350.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Set Microstep Pins",
+    "code": "M351",
+    "link": "https://marlinfw.org/docs/gcode/M351.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Case Light Control",
+    "code": "M355",
+    "link": "https://marlinfw.org/docs/gcode/M355.html",
+    "args": [
+      { "code": "P", "label": "brightness", "type": "Index" },
+      { "code": "S", "label": "on", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["P", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "SCARA Theta A",
+    "code": "M360",
+    "link": "https://marlinfw.org/docs/gcode/M360.html"
+  },
+  {
+    "type": "SCARA Theta-B",
+    "code": "M361",
+    "link": "https://marlinfw.org/docs/gcode/M361.html"
+  },
+  {
+    "type": "SCARA Psi-A",
+    "code": "M362",
+    "link": "https://marlinfw.org/docs/gcode/M362.html"
+  },
+  {
+    "type": "SCARA Psi-B",
+    "code": "M363",
+    "link": "https://marlinfw.org/docs/gcode/M363.html"
+  },
+  {
+    "type": "SCARA Psi-C",
+    "code": "M364",
+    "link": "https://marlinfw.org/docs/gcode/M364.html"
+  },
+  {
+    "type": "Activate Solenoid",
+    "code": "M380",
+    "link": "https://marlinfw.org/docs/gcode/M380.html",
+    "args": [
+      { "code": "S", "label": "solenoidIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Deactivate Solenoids",
+    "code": "M381",
+    "link": "https://marlinfw.org/docs/gcode/M381.html",
+    "args": [
+      { "code": "S", "label": "solenoidIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "MMU2 Filament Type",
+    "code": "M403",
+    "link": "https://marlinfw.org/docs/gcode/M403.html",
+    "args": [
+      { "code": "E", "label": "slotIndex", "type": "Index" },
+      { "code": "F", "label": "filamentType", "type": "Index" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["E", "F"]
+    }
+  },
+  {
+    "type": "Filament Width Sensor Nominal Diameter",
+    "code": "M404",
+    "link": "https://marlinfw.org/docs/gcode/M404.html",
+    "args": [
+      { "code": "W", "label": "nominalWidth", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["W"],
+      "required": []
+    }
+  },
+  {
+    "type": "Filament Width Sensor On",
+    "code": "M405",
+    "link": "https://marlinfw.org/docs/gcode/M405.html",
+    "args": [
+      { "code": "D", "label": "distanceCm", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["D"],
+      "required": []
+    }
+  },
+  {
+    "type": "Filament Width Sensor Off",
+    "code": "M406",
+    "link": "https://marlinfw.org/docs/gcode/M406.html"
+  },
+  {
+    "type": "Read Filament Width",
+    "code": "M407",
+    "link": "https://marlinfw.org/docs/gcode/M407.html"
+  },
+  {
+    "type": "Filament Runout",
+    "code": "M412",
+    "link": "https://marlinfw.org/docs/gcode/M412.html",
+    "args": [
+      { "code": "D", "label": "runoutDistance", "type": "Mm" },
+      { "code": "H", "label": "hostHandling", "type": "Flag" },
+      { "code": "L", "label": "motionSensorLength", "type": "Mm" },
+      { "code": "R", "label": "resetSensor", "type": "Flag" },
+      { "code": "S", "label": "enable", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["D", "H", "L", "R", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Power-loss Recovery",
+    "code": "M413",
+    "link": "https://marlinfw.org/docs/gcode/M413.html",
+    "args": [
+      { "code": "S", "label": "enable", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "LCD Language",
+    "code": "M414",
+    "link": "https://marlinfw.org/docs/gcode/M414.html",
+    "args": [
+      { "code": "S", "label": "languageIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Bed Leveling State",
+    "code": "M420",
+    "link": "https://marlinfw.org/docs/gcode/M420.html",
+    "args": [
+      { "code": "C", "label": "centerMesh", "type": "Flag" },
+      { "code": "L", "label": "loadMeshIndex", "type": "Index" },
+      { "code": "S", "label": "enable", "type": "Flag" },
+      { "code": "T", "label": "format", "type": "Index" },
+      { "code": "V", "label": "verbose", "type": "Flag" },
+      { "code": "Z", "label": "fadeHeight", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["C", "L", "S", "T", "V", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Mesh Value",
+    "code": "M421",
+    "link": "https://marlinfw.org/docs/gcode/M421.html",
+    "args": [
+      { "code": "C", "label": "setClosest", "type": "Flag" },
+      { "code": "I", "label": "xIndex", "type": "Index" },
+      { "code": "J", "label": "yIndex", "type": "Index" },
+      { "code": "N", "label": "setUndefined", "type": "Flag" },
+      { "code": "Q", "label": "addToZ", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "zValue", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["C", "I", "J", "N", "Q", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Set Z Motor XY",
+    "code": "M422",
+    "link": "https://marlinfw.org/docs/gcode/M422.html",
+    "args": [
+      { "code": "R", "label": "reset", "type": "Flag" },
+      { "code": "S", "label": "stepperIndex", "type": "Index" },
+      { "code": "W", "label": "knownPositionIndex", "type": "Index" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["R", "S", "W", "X", "Y"],
+      "required": []
+    }
+  },
+  {
+    "type": "X Twist Compensation",
+    "code": "M423",
+    "link": "https://marlinfw.org/docs/gcode/M423.html",
+    "args": [
+      { "code": "A", "label": "startingX", "type": "Mm" },
+      { "code": "E", "label": "endingX", "type": "Mm" },
+      { "code": "I", "label": "xSpacing", "type": "Mm" },
+      { "code": "R", "label": "reset", "type": "Flag" },
+      { "code": "X", "label": "arrayIndex", "type": "Index" },
+      { "code": "Z", "label": "zOffset", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["A", "E", "I", "R", "X", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Backlash Compensation",
+    "code": "M425",
+    "link": "https://marlinfw.org/docs/gcode/M425.html",
+    "args": [
+      { "code": "F", "label": "correctionFactor", "type": "Mm" },
+      { "code": "S", "label": "smoothingDistance", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["F", "S", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Home Offsets Here",
+    "code": "M428",
+    "link": "https://marlinfw.org/docs/gcode/M428.html"
+  },
+  {
+    "type": "Power Monitor",
+    "code": "M430",
+    "link": "https://marlinfw.org/docs/gcode/M430.html",
+    "args": [
+      { "code": "I", "label": "displayCurrent", "type": "Flag" },
+      { "code": "V", "label": "displayVoltage", "type": "Flag" },
+      { "code": "W", "label": "displayPower", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["I", "V", "W"],
+      "required": []
+    }
+  },
+  {
+    "type": "Cancel Objects",
+    "code": "M486",
+    "link": "https://marlinfw.org/docs/gcode/M486.html",
+    "args": [
+      { "code": "C", "label": "cancelCurrent", "type": "Flag" },
+      { "code": "P", "label": "cancelIndex", "type": "Index" },
+      { "code": "S", "label": "currentObjectIndex", "type": "Index" },
+      { "code": "T", "label": "objectCount", "type": "Count" },
+      { "code": "U", "label": "uncancelIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["C", "P", "S", "T", "U"],
+      "required": []
+    }
+  },
+  {
+    "type": "Fixed-Time Motion",
+    "code": "M493",
+    "link": "https://marlinfw.org/docs/gcode/M493.html",
+    "unimplemented": true
+  },
+  {
+    "type": "FT Motion Trajectory Smoothing",
+    "code": "M494",
+    "link": "https://marlinfw.org/docs/gcode/M494.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Validate EEPROM Contents",
+    "code": "M504",
+    "link": "https://marlinfw.org/docs/gcode/M504.html"
+  },
+  {
+    "type": "Lock Machine",
+    "code": "M510",
+    "link": "https://marlinfw.org/docs/gcode/M510.html"
+  },
+  {
+    "type": "Unlock Machine",
+    "code": "M511",
+    "link": "https://marlinfw.org/docs/gcode/M511.html",
+    "args": [
+      { "code": "P", "label": "passcode", "type": "Count" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["P"]
+    }
+  },
+  {
+    "type": "Set Passcode",
+    "code": "M512",
+    "link": "https://marlinfw.org/docs/gcode/M512.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Abort SD Print",
+    "code": "M524",
+    "link": "https://marlinfw.org/docs/gcode/M524.html"
+  },
+  {
+    "type": "Endstops Abort SD",
+    "code": "M540",
+    "link": "https://marlinfw.org/docs/gcode/M540.html",
+    "args": [
+      { "code": "S", "label": "enable", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Machine Name",
+    "code": "M550",
+    "link": "https://marlinfw.org/docs/gcode/M550.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Ethernet IP Address, Network IF",
+    "code": "M552",
+    "link": "https://marlinfw.org/docs/gcode/M552.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Ethernet Subnet Mask",
+    "code": "M553",
+    "link": "https://marlinfw.org/docs/gcode/M553.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Ethernet Gateway IP Address",
+    "code": "M554",
+    "link": "https://marlinfw.org/docs/gcode/M554.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Set TMC Stepping Mode",
+    "code": "M569",
+    "link": "https://marlinfw.org/docs/gcode/M569.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Serial Baud Rate",
+    "code": "M575",
+    "link": "https://marlinfw.org/docs/gcode/M575.html",
+    "args": [
+      { "code": "B", "label": "baudRate", "type": "Count" },
+      { "code": "P", "label": "portIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["P"],
+      "required": ["B"]
+    }
+  },
+  {
+    "type": "Nonlinear Extrusion Control",
+    "code": "M592",
+    "link": "https://marlinfw.org/docs/gcode/M592.html",
+    "args": [
+      { "code": "A", "label": "quadraticCoeff", "type": "Mm" },
+      { "code": "B", "label": "linearCoeff", "type": "Mm" },
+      { "code": "C", "label": "constantCoeff", "type": "Mm" },
+      { "code": "S", "label": "enable", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["A", "B", "C", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "ZV Input Shaping",
+    "code": "M593",
+    "link": "https://marlinfw.org/docs/gcode/M593.html",
+    "args": [
+      { "code": "D", "label": "zeta", "type": "Mm" },
+      { "code": "F", "label": "frequencyHz", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Flag" },
+      { "code": "Y", "label": "axisY", "type": "Flag" },
+      { "code": "Z", "label": "axisZ", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["D", "F", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Filament Change",
+    "code": "M600",
+    "link": "https://marlinfw.org/docs/gcode/M600.html",
+    "args": [
+      { "code": "B", "label": "beeps", "type": "Count" },
+      { "code": "E", "label": "retractLength", "type": "Mm" },
+      { "code": "L", "label": "loadLength", "type": "Mm" },
+      { "code": "R", "label": "resumeTemp", "type": "Celsius" },
+      { "code": "T", "label": "targetExtruder", "type": "Index" },
+      { "code": "U", "label": "unloadLength", "type": "Mm" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "zLift", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["B", "E", "L", "R", "T", "U", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Configure Filament Change",
+    "code": "M603",
+    "link": "https://marlinfw.org/docs/gcode/M603.html",
+    "args": [
+      { "code": "L", "label": "loadLength", "type": "Mm" },
+      { "code": "T", "label": "targetExtruder", "type": "Index" },
+      { "code": "U", "label": "unloadLength", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["L", "T", "U"],
+      "required": []
+    }
+  },
+  {
+    "type": "Multi Nozzle Mode",
+    "code": "M605",
+    "link": "https://marlinfw.org/docs/gcode/M605.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Delta Configuration",
+    "code": "M665",
+    "link": "https://marlinfw.org/docs/gcode/M665.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Set Delta Endstop Adjustments",
+    "code": "M666",
+    "link": "https://marlinfw.org/docs/gcode/M666.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Duet Smart Effector Sensitivity",
+    "code": "M672",
+    "link": "https://marlinfw.org/docs/gcode/M672.html",
+    "args": [
+      { "code": "R", "label": "revertFactory", "type": "Flag" },
+      { "code": "S", "label": "sensitivity", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["R", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Load Filament",
+    "code": "M701",
+    "link": "https://marlinfw.org/docs/gcode/M701.html",
+    "args": [
+      { "code": "L", "label": "extrudeDistance", "type": "Mm" },
+      { "code": "T", "label": "extruderIndex", "type": "Index" },
+      { "code": "Z", "label": "zMove", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["T", "Z"],
+      "required": ["L"]
+    }
+  },
+  {
+    "type": "Unload Filament",
+    "code": "M702",
+    "link": "https://marlinfw.org/docs/gcode/M702.html",
+    "args": [
+      { "code": "T", "label": "extruderIndex", "type": "Index" },
+      { "code": "U", "label": "retractDistance", "type": "Mm" },
+      { "code": "Z", "label": "zMove", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["T", "Z"],
+      "required": ["U"]
+    }
+  },
+  {
+    "type": "Controller Fan Settings",
+    "code": "M710",
+    "link": "https://marlinfw.org/docs/gcode/M710.html",
+    "args": [
+      { "code": "A", "label": "autoSpeed", "type": "Flag" },
+      { "code": "D", "label": "extraDuration", "type": "Seconds" },
+      { "code": "I", "label": "idleSpeed", "type": "Index" },
+      { "code": "R", "label": "reset", "type": "Flag" },
+      { "code": "S", "label": "activeSpeed", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["A", "D", "I", "R", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "Repeat Marker",
+    "code": "M808",
+    "link": "https://marlinfw.org/docs/gcode/M808.html",
+    "args": [
+      { "code": "L", "label": "loopCount", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["L"],
+      "required": []
+    }
+  },
+  {
+    "type": "G-code Macros",
+    "code": "M810",
+    "link": "https://marlinfw.org/docs/gcode/M810-M819.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Report G-code Macros",
+    "code": "M820",
+    "link": "https://marlinfw.org/docs/gcode/M820.html"
+  },
+  {
+    "type": "XYZ Probe Offset",
+    "code": "M851",
+    "link": "https://marlinfw.org/docs/gcode/M851.html",
+    "args": [
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" },
+      { "code": "Z", "label": "axisZ", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Bed Skew Compensation",
+    "code": "M852",
+    "link": "https://marlinfw.org/docs/gcode/M852.html",
+    "args": [
+      { "code": "I", "label": "xySkew", "type": "Mm" },
+      { "code": "J", "label": "xzSkew", "type": "Mm" },
+      { "code": "K", "label": "yzSkew", "type": "Mm" },
+      { "code": "S", "label": "xySkewAlias", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["I", "J", "K", "S"],
+      "required": []
+    }
+  },
+  {
+    "type": "I2C Position Encoders",
+    "code": "M860",
+    "link": "https://marlinfw.org/docs/gcode/M860-M869.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Probe Temperature Config",
+    "code": "M871",
+    "link": "https://marlinfw.org/docs/gcode/M871.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Handle Prompt Response",
+    "code": "M876",
+    "link": "https://marlinfw.org/docs/gcode/M876.html",
+    "args": [
+      { "code": "S", "label": "response", "type": "Index" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["S"]
+    }
+  },
+  {
+    "type": "Linear Advance Factor",
+    "code": "M900",
+    "link": "https://marlinfw.org/docs/gcode/M900.html",
+    "args": [
+      { "code": "K", "label": "kFactor", "type": "Mm" },
+      { "code": "L", "label": "secondKFactor", "type": "Mm" },
+      { "code": "S", "label": "slot", "type": "Index" },
+      { "code": "T", "label": "extruderIndex", "type": "Index" }
+    ],
+    "signature": {
+      "optional": ["K", "L", "S", "T"],
+      "required": []
+    }
+  },
+  {
+    "type": "Stepper Motor Current",
+    "code": "M906",
+    "link": "https://marlinfw.org/docs/gcode/M906.html",
+    "args": [
+      { "code": "E", "label": "axisExtrusion", "type": "Count" },
+      { "code": "I", "label": "stepperIndex", "type": "Index" },
+      { "code": "T", "label": "extruderIndex", "type": "Index" },
+      { "code": "X", "label": "axisX", "type": "Count" },
+      { "code": "Y", "label": "axisY", "type": "Count" },
+      { "code": "Z", "label": "axisZ", "type": "Count" }
+    ],
+    "signature": {
+      "optional": ["E", "I", "T", "X", "Y", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "Trimpot Stepper Motor Current",
+    "code": "M907",
+    "link": "https://marlinfw.org/docs/gcode/M907.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Set Trimpot Pins",
+    "code": "M908",
+    "link": "https://marlinfw.org/docs/gcode/M908.html",
+    "args": [
+      { "code": "P", "label": "pin", "type": "Index" },
+      { "code": "S", "label": "current", "type": "Index" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["P", "S"]
+    }
+  },
+  {
+    "type": "Report DAC Stepper Current",
+    "code": "M909",
+    "link": "https://marlinfw.org/docs/gcode/M909.html"
+  },
+  {
+    "type": "Commit DAC to EEPROM",
+    "code": "M910",
+    "link": "https://marlinfw.org/docs/gcode/M910.html"
+  },
+  {
+    "type": "TMC OT Pre-Warn Condition",
+    "code": "M911",
+    "link": "https://marlinfw.org/docs/gcode/M911.html"
+  },
+  {
+    "type": "Clear TMC OT Pre-Warn",
+    "code": "M912",
+    "link": "https://marlinfw.org/docs/gcode/M912.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Set Hybrid Threshold Speed",
+    "code": "M913",
+    "link": "https://marlinfw.org/docs/gcode/M913.html",
+    "unimplemented": true
+  },
+  {
+    "type": "TMC Bump Sensitivity",
+    "code": "M914",
+    "link": "https://marlinfw.org/docs/gcode/M914.html",
+    "unimplemented": true
+  },
+  {
+    "type": "TMC Z Axis Calibration",
+    "code": "M915",
+    "link": "https://marlinfw.org/docs/gcode/M915.html",
+    "args": [
+      { "code": "S", "label": "current", "type": "Count" },
+      { "code": "Z", "label": "extraHeight", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["S", "Z"],
+      "required": []
+    }
+  },
+  {
+    "type": "L6474 Thermal Warning Test",
+    "code": "M916",
+    "link": "https://marlinfw.org/docs/gcode/M916.html",
+    "unimplemented": true
+  },
+  {
+    "type": "L6474 Overcurrent Warning Test",
+    "code": "M917",
+    "link": "https://marlinfw.org/docs/gcode/M917.html",
+    "unimplemented": true
+  },
+  {
+    "type": "L6474 Speed Warning Test",
+    "code": "M918",
+    "link": "https://marlinfw.org/docs/gcode/M918.html",
+    "unimplemented": true
+  },
+  {
+    "type": "TMC Chopper Timing",
+    "code": "M919",
+    "link": "https://marlinfw.org/docs/gcode/M919.html",
+    "unimplemented": true
+  },
+  {
+    "type": "TMC Homing Current",
+    "code": "M920",
+    "link": "https://marlinfw.org/docs/gcode/M920.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Start SD Logging",
+    "code": "M928",
+    "link": "https://marlinfw.org/docs/gcode/M928.html",
+    "unimplemented": true
+  },
+  {
+    "type": "Magnetic Parking Extruder",
+    "code": "M951",
+    "link": "https://marlinfw.org/docs/gcode/M951.html",
+    "args": [
+      { "code": "C", "label": "compensationFactor", "type": "Mm" },
+      { "code": "D", "label": "travelFeedrate", "type": "Mm" },
+      { "code": "H", "label": "fastFeedrate", "type": "MmPerMin" },
+      { "code": "I", "label": "grabDistance", "type": "Mm" },
+      { "code": "J", "label": "slowFeedrate", "type": "MmPerMin" },
+      { "code": "L", "label": "x0Position", "type": "Mm" },
+      { "code": "R", "label": "x1Position", "type": "Mm" }
+    ],
+    "signature": {
+      "optional": ["C", "D", "H", "I", "J", "L", "R"],
+      "required": []
+    }
+  },
+  {
+    "type": "Back Up Flash Settings to SD",
+    "code": "M993",
+    "link": "https://marlinfw.org/docs/gcode/M993.html"
+  },
+  {
+    "type": "Restore Flash from SD",
+    "code": "M994",
+    "link": "https://marlinfw.org/docs/gcode/M994.html"
+  },
+  {
+    "type": "Touch Screen Calibration",
+    "code": "M995",
+    "link": "https://marlinfw.org/docs/gcode/M995.html"
+  },
+  {
+    "type": "Firmware Update",
+    "code": "M997",
+    "link": "https://marlinfw.org/docs/gcode/M997.html"
+  },
+  {
+    "type": "MAX7219 Control",
+    "code": "M7219",
+    "link": "https://marlinfw.org/docs/gcode/M7219.html",
+    "unimplemented": true
   }
 ]

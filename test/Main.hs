@@ -651,7 +651,523 @@ tests =
                       report = Just (Flag True)
                     }
               )
-            @?= "G425 B1 T1 U0.1000 V1"
+            @?= "G425 B1 T1 U0.1000 V1",
+          testCase "Spindle CW / Laser On - maximum args"
+            $ toText
+              ( MG.Cmd_SpindleCW_LaserOn
+                  MG.def'
+                    { inlineMode = Just (Flag True),
+                      powerPWM = Just (Index 128),
+                      power = Just (Index 200)
+                    }
+              )
+            @?= "M3 I1 O128 S200",
+          testCase "Spindle CCW / Laser On - maximum args"
+            $ toText
+              ( MG.Cmd_SpindleCCW_LaserOn
+                  MG.def'
+                    { inlineMode = Just (Flag True),
+                      powerPWM = Just (Index 128),
+                      power = Just (Index 200)
+                    }
+              )
+            @?= "M4 I1 O128 S200",
+          testCase "Spindle / Laser Off - maximum args"
+            $ toText (MG.Cmd_Spindle_LaserOff (MG.Spindle_LaserOff {} :: MG.Spindle_LaserOff Required))
+            @?= "M5",
+          testCase "Enable Steppers - maximum args"
+            $ toText
+              ( MG.Cmd_EnableSteppers
+                  MG.def'
+                    { axisA = Just (Flag True),
+                      axisB = Just (Flag True),
+                      axisC = Just (Flag True),
+                      axisExtrusion = Just (Flag True),
+                      axisU = Just (Flag True),
+                      axisV = Just (Flag True),
+                      axisW = Just (Flag True),
+                      axisX = Just (Flag True),
+                      axisY = Just (Flag True),
+                      axisZ = Just (Flag True)
+                    }
+              )
+            @?= "M17 A1 B1 C1 E1 U1 V1 W1 X1 Y1 Z1",
+          testCase "Disable Steppers - maximum args"
+            $ toText
+              ( MG.Cmd_DisableSteppers
+                  MG.def'
+                    { axisA = Just (Flag True),
+                      axisB = Just (Flag True),
+                      axisC = Just (Flag True),
+                      axisExtrusion = Just (Flag True),
+                      timeoutSeconds = Just (Seconds 60),
+                      axisU = Just (Flag True),
+                      axisV = Just (Flag True),
+                      axisW = Just (Flag True),
+                      axisX = Just (Flag True),
+                      axisY = Just (Flag True),
+                      axisZ = Just (Flag True)
+                    }
+              )
+            @?= "M18 A1 B1 C1 E1 S60.0000 U1 V1 W1 X1 Y1 Z1",
+          testCase "List SD Card - maximum args"
+            $ toText
+              ( MG.Cmd_ListSDCard
+                  MG.def'
+                    { binFilesOnly = Just (Flag True),
+                      longFilenames = Just (Flag True),
+                      timestamp = Just (Flag True)
+                    }
+              )
+            @?= "M20 F1 L1 T1",
+          testCase "Init SD Card - maximum args"
+            $ toText (MG.Cmd_InitSDCard (MG.InitSDCard {} :: MG.InitSDCard Required))
+            @?= "M21",
+          testCase "Release SD Card - maximum args"
+            $ toText (MG.Cmd_ReleaseSDCard (MG.ReleaseSDCard {} :: MG.ReleaseSDCard Required))
+            @?= "M22",
+          testCase "Start or Resume SD Print - maximum args"
+            $ toText
+              ( MG.Cmd_StartorResumeSDPrint
+                  MG.def'
+                    { resumePosition = Just (Count 1000),
+                      elapsedTime = Just (Count 5000)
+                    }
+              )
+            @?= "M24 S1000 T5000",
+          testCase "Pause SD Print - maximum args"
+            $ toText (MG.Cmd_PauseSDPrint (MG.PauseSDPrint {} :: MG.PauseSDPrint Required))
+            @?= "M25",
+          testCase "Set SD Position - maximum args"
+            $ toText
+              ( MG.Cmd_SetSDPosition
+                  MG.def'
+                    { position = Just (Count 1000)
+                    }
+              )
+            @?= "M26 S1000",
+          testCase "Report SD Print Status - maximum args"
+            $ toText
+              ( MG.Cmd_ReportSDPrintStatus
+                  MG.def'
+                    { reportFilename = Just (Flag True),
+                      autoReportInterval = Just (Seconds 5)
+                    }
+              )
+            @?= "M27 C1 S5.0000",
+          testCase "Stop SD Write - maximum args"
+            $ toText (MG.Cmd_StopSDWrite (MG.StopSDWrite {} :: MG.StopSDWrite Required))
+            @?= "M29",
+          testCase "Report Print Time - maximum args"
+            $ toText (MG.Cmd_ReportPrintTime (MG.ReportPrintTime {} :: MG.ReportPrintTime Required))
+            @?= "M31",
+          testCase "SDCard Sorting - maximum args"
+            $ toText
+              ( MG.Cmd_SDCardSorting
+                  MG.def'
+                    { folderSorting = Just (Index 1),
+                      sortingOrder = Just (Index 1)
+                    }
+              )
+            @?= "M34 F1 S1",
+          testCase "Set Pin State - maximum args"
+            $ toText
+              ( MG.Cmd_SetPinState
+                  MG.def'
+                    { ignoreProtection = Just (Flag True),
+                      pin = Just (Index 33),
+                      state = pure (Index 1),
+                      pinMode = Just (Index 1)
+                    }
+              )
+            @?= "M42 I1 P33 S1 T1",
+          testCase "Pins Debugging - maximum args"
+            $ toText
+              ( MG.Cmd_PinsDebugging
+                  MG.def'
+                    { watchEndstops = Just (Flag True),
+                      ignoreProtection = Just (Flag True),
+                      pin = Just (Index 56),
+                      testProbe = Just (Flag True),
+                      togglePins = Just (Flag True),
+                      watchPins = Just (Flag True)
+                    }
+              )
+            @?= "M43 E1 I1 P56 S1 T1 W1",
+          testCase "Probe Repeatability Test - maximum args"
+            $ toText
+              ( MG.Cmd_ProbeRepeatabilityTest
+                  MG.def'
+                    { temperatureCompensation = Just (Flag True),
+                      engageEach = Just (Flag True),
+                      legs = Just (Count 7),
+                      probeCount = Just (Count 10),
+                      starPattern = Just (Index 1),
+                      verbosity = Just (Index 2),
+                      axisX = Just (Mm 100),
+                      axisY = Just (Mm 100)
+                    }
+              )
+            @?= "M48 C1 E1 L7 P10 S1 V2 X100.0000 Y100.0000",
+          testCase "Set Print Progress - maximum args"
+            $ toText
+              ( MG.Cmd_SetPrintProgress
+                  MG.def'
+                    { interactionCountdown = Just (Count 5),
+                      progressPercent = Just (Index 50),
+                      remainingTime = Just (Count 120)
+                    }
+              )
+            @?= "M73 C5 P50 R120",
+          testCase "Pause Print Job Timer - maximum args"
+            $ toText (MG.Cmd_PausePrintJobTimer (MG.PausePrintJobTimer {} :: MG.PausePrintJobTimer Required))
+            @?= "M76",
+          testCase "Stop Print Job Timer - maximum args"
+            $ toText (MG.Cmd_StopPrintJobTimer (MG.StopPrintJobTimer {} :: MG.StopPrintJobTimer Required))
+            @?= "M77",
+          testCase "Print Job Stats - maximum args"
+            $ toText (MG.Cmd_PrintJobStats (MG.PrintJobStats {} :: MG.PrintJobStats Required))
+            @?= "M78",
+          testCase "Power On - maximum args"
+            $ toText
+              ( MG.Cmd_PowerOn
+                  MG.def'
+                    { reportState = Just (Flag True)
+                    }
+              )
+            @?= "M80 S1",
+          testCase "Power Off - maximum args"
+            $ toText (MG.Cmd_PowerOff (MG.PowerOff {} :: MG.PowerOff Required))
+            @?= "M81",
+          testCase "E Absolute - maximum args"
+            $ toText (MG.Cmd_EAbsolute (MG.EAbsolute {} :: MG.EAbsolute Required))
+            @?= "M82",
+          testCase "E Relative - maximum args"
+            $ toText (MG.Cmd_ERelative (MG.ERelative {} :: MG.ERelative Required))
+            @?= "M83",
+          testCase "Inactivity Shutdown - maximum args"
+            $ toText
+              ( MG.Cmd_InactivityShutdown
+                  MG.def'
+                    { maxInactiveSeconds = pure (Seconds 600)
+                    }
+              )
+            @?= "M85 S600.0000",
+          testCase "Hotend Idle Timeout - maximum args"
+            $ toText
+              ( MG.Cmd_HotendIdleTimeout
+                  MG.def'
+                    { bedIdleTemp = Just (Celsius 30),
+                      extruderIdleTemp = Just (Celsius 40),
+                      timeoutSeconds = Just (Seconds 240),
+                      temperatureTrigger = Just (Celsius 100)
+                    }
+              )
+            @?= "M86 B30.0000 E40.0000 S240.0000 T100.0000",
+          testCase "Disable Hotend Idle Timeout - maximum args"
+            $ toText (MG.Cmd_DisableHotendIdleTimeout (MG.DisableHotendIdleTimeout {} :: MG.DisableHotendIdleTimeout Required))
+            @?= "M87",
+          testCase "Set Axis Steps-per-unit - maximum args"
+            $ toText
+              ( MG.Cmd_SetAxisSteps_per_unit
+                  MG.def'
+                    { axisA = Just (Mm 100),
+                      axisB = Just (Mm 100),
+                      axisC = Just (Mm 100),
+                      axisExtrusion = Just (Mm 100),
+                      targetExtruder = Just (Index 0),
+                      axisU = Just (Mm 100),
+                      axisV = Just (Mm 100),
+                      axisW = Just (Mm 100),
+                      axisX = Just (Mm 100),
+                      axisY = Just (Mm 100),
+                      axisZ = Just (Mm 100)
+                    }
+              )
+            @?= "M92 A100.0000 B100.0000 C100.0000 E100.0000 T0 U100.0000 V100.0000 W100.0000 X100.0000 Y100.0000 Z100.0000",
+          testCase "Set Hotend Temperature - maximum args"
+            $ toText
+              ( MG.Cmd_SetHotendTemperature
+                  MG.def'
+                    { maxAutoTemp = Just (Celsius 190),
+                      autotempFactor = Just (Mm 0.5),
+                      materialPreset = Just (Index 1),
+                      targetTemp = Just (Celsius 180),
+                      hotendIndex = Just (Index 0)
+                    }
+              )
+            @?= "M104 B190.0000 F0.5000 I1 S180.0000 T0",
+          testCase "Report Temperatures - maximum args"
+            $ toText
+              ( MG.Cmd_ReportTemperatures
+                  MG.def'
+                    { includeRedundant = Just (Flag True),
+                      hotendIndex = Just (Index 0)
+                    }
+              )
+            @?= "M105 R1 T0",
+          testCase "Set Fan Speed - maximum args"
+            $ toText
+              ( MG.Cmd_SetFanSpeed
+                  MG.def'
+                    { materialPreset = Just (Index 1),
+                      fanIndex = Just (Index 0),
+                      speed = Just (Index 200),
+                      secondarySpeed = Just (Index 128)
+                    }
+              )
+            @?= "M106 I1 P0 S200 T128",
+          testCase "Fan Off - maximum args"
+            $ toText
+              ( MG.Cmd_FanOff
+                  MG.def'
+                    { fanIndex = Just (Index 0)
+                    }
+              )
+            @?= "M107 P0",
+          testCase "Break and Continue - maximum args"
+            $ toText (MG.Cmd_BreakandContinue (MG.BreakandContinue {} :: MG.BreakandContinue Required))
+            @?= "M108",
+          testCase "Wait for Hotend Temperature - maximum args"
+            $ toText
+              ( MG.Cmd_WaitforHotendTemperature
+                  MG.def'
+                    { maxAutoTemp = Just (Celsius 190),
+                      autotempFactor = Just (Mm 0.5),
+                      materialPreset = Just (Index 1),
+                      targetTempWait = Just (Celsius 180),
+                      targetTemp = Just (Celsius 180),
+                      hotendIndex = Just (Index 0)
+                    }
+              )
+            @?= "M109 B190.0000 F0.5000 I1 R180.0000 S180.0000 T0",
+          testCase "Set / Get Line Number - maximum args"
+            $ toText
+              ( MG.Cmd_Set_GetLineNumber
+                  MG.def'
+                    { lineNumber = Just (Count 100)
+                    }
+              )
+            @?= "M110 N100",
+          testCase "Debug Level - maximum args"
+            $ toText
+              ( MG.Cmd_DebugLevel
+                  MG.def'
+                    { debugFlags = Just (Index 38)
+                    }
+              )
+            @?= "M111 S38",
+          testCase "Full Shutdown - maximum args"
+            $ toText (MG.Cmd_FullShutdown (MG.FullShutdown {} :: MG.FullShutdown Required))
+            @?= "M112",
+          testCase "Host Keepalive - maximum args"
+            $ toText
+              ( MG.Cmd_HostKeepalive
+                  MG.def'
+                    { keepaliveInterval = Just (Seconds 5)
+                    }
+              )
+            @?= "M113 S5.0000",
+          testCase "Get Current Position - maximum args"
+            $ toText
+              ( MG.Cmd_GetCurrentPosition
+                  MG.def'
+                    { detailedInfo = Just (Flag True),
+                      reportEStepper = Just (Flag True),
+                      realPosition = Just (Flag True)
+                    }
+              )
+            @?= "M114 D1 E1 R1",
+          testCase "Firmware Info - maximum args"
+            $ toText (MG.Cmd_FirmwareInfo (MG.FirmwareInfo {} :: MG.FirmwareInfo Required))
+            @?= "M115",
+          testCase "Endstop States - maximum args"
+            $ toText (MG.Cmd_EndstopStates (MG.EndstopStates {} :: MG.EndstopStates Required))
+            @?= "M119",
+          testCase "Enable Endstops - maximum args"
+            $ toText (MG.Cmd_EnableEndstops (MG.EnableEndstops {} :: MG.EnableEndstops Required))
+            @?= "M120",
+          testCase "Disable Endstops - maximum args"
+            $ toText (MG.Cmd_DisableEndstops (MG.DisableEndstops {} :: MG.DisableEndstops Required))
+            @?= "M121",
+          testCase "Set Bed Temperature - maximum args"
+            $ toText
+              ( MG.Cmd_SetBedTemperature
+                  MG.def'
+                    { materialPreset = Just (Index 1),
+                      targetTemp = Just (Celsius 80)
+                    }
+              )
+            @?= "M140 I1 S80.0000",
+          testCase "Set Chamber Temperature - maximum args"
+            $ toText
+              ( MG.Cmd_SetChamberTemperature
+                  MG.def'
+                    { targetTemp = Just (Celsius 40)
+                    }
+              )
+            @?= "M141 S40.0000",
+          testCase "Wait for Bed Temperature - maximum args"
+            $ toText
+              ( MG.Cmd_WaitforBedTemperature
+                  MG.def'
+                    { materialPreset = Just (Index 1),
+                      targetTempWait = Just (Celsius 80),
+                      targetTemp = Just (Celsius 80),
+                      coolingTime = Just (Seconds 600)
+                    }
+              )
+            @?= "M190 I1 R80.0000 S80.0000 T600.0000",
+          testCase "Volumetric Extrusion Diameter - maximum args"
+            $ toText
+              ( MG.Cmd_VolumetricExtrusionDiameter
+                  MG.def'
+                    { filamentDiameter = Just (Mm 1.75),
+                      extruderLimit = Just (Mm 10),
+                      volumetricOn = Just (Flag True),
+                      extruderIndex = Just (Index 0)
+                    }
+              )
+            @?= "M200 D1.7500 L10.0000 S1 T0",
+          testCase "Print / Travel Move Limits - maximum args"
+            $ toText
+              ( MG.Cmd_Print_TravelMoveLimits
+                  MG.def'
+                    { axisExtrusion = Just (Mm 1000),
+                      frequencyLimit = Just (Count 60),
+                      frequencyMinSpeed = Just (Mm 47),
+                      targetExtruder = Just (Index 0),
+                      axisX = Just (Mm 1000),
+                      axisY = Just (Mm 1000),
+                      axisZ = Just (Mm 100)
+                    }
+              )
+            @?= "M201 E1000.0000 F60 S47.0000 T0 X1000.0000 Y1000.0000 Z100.0000",
+          testCase "Set Max Feedrate - maximum args"
+            $ toText
+              ( MG.Cmd_SetMaxFeedrate
+                  MG.def'
+                    { axisExtrusion = Just (MmPerSec 50),
+                      targetExtruder = Just (Index 0),
+                      axisX = Just (MmPerSec 100),
+                      axisY = Just (MmPerSec 100),
+                      axisZ = Just (MmPerSec 5)
+                    }
+              )
+            @?= "M203 E50.0000 T0 X100.0000 Y100.0000 Z5.0000",
+          testCase "Set Starting Acceleration - maximum args"
+            $ toText
+              ( MG.Cmd_SetStartingAcceleration
+                  MG.def'
+                    { printingAccel = Just (Mm 2400),
+                      retractAccel = Just (Mm 2000),
+                      legacyAccel = Just (Mm 2000),
+                      travelAccel = Just (Mm 2000)
+                    }
+              )
+            @?= "M204 P2400.0000 R2000.0000 S2000.0000 T2000.0000",
+          testCase "Set Advanced Settings - maximum args"
+            $ toText
+              ( MG.Cmd_SetAdvancedSettings
+                  MG.def'
+                    { minSegmentTime = Just (Milliseconds 20000),
+                      axisExtrusion = Just (Mm 5),
+                      junctionDeviation = Just (Mm 0.013),
+                      minFeedratePrint = Just (MmPerSec 0),
+                      minFeedrateTravel = Just (MmPerSec 0),
+                      axisX = Just (Mm 8),
+                      axisY = Just (Mm 8),
+                      axisZ = Just (Mm 0.4)
+                    }
+              )
+            @?= "M205 B20000 E5.0000 J0.0130 S0.0000 T0.0000 X8.0000 Y8.0000 Z0.4000",
+          testCase "Set Home Offsets - maximum args"
+            $ toText
+              ( MG.Cmd_SetHomeOffsets
+                  MG.def'
+                    { axisA = Just (Mm 0),
+                      axisB = Just (Mm 0),
+                      axisC = Just (Mm 0),
+                      scaraPsi = Just (Mm 0),
+                      scaraTheta = Just (Mm 0),
+                      axisU = Just (Mm 0),
+                      axisV = Just (Mm 0),
+                      axisW = Just (Mm 0),
+                      axisX = Just (Mm 0),
+                      axisY = Just (Mm 0),
+                      axisZ = Just (Mm 0)
+                    }
+              )
+            @?= "M206 A0.0000 B0.0000 C0.0000 P0.0000 T0.0000 U0.0000 V0.0000 W0.0000 X0.0000 Y0.0000 Z0.0000",
+          testCase "Set Feedrate Percentage - maximum args"
+            $ toText
+              ( MG.Cmd_SetFeedratePercentage
+                  MG.def'
+                    { backupFactor = Just (Flag True),
+                      restoreFactor = Just (Flag True),
+                      feedratePercent = Just (Index 80)
+                    }
+              )
+            @?= "M220 B1 R1 S80",
+          testCase "Set Flow Percentage - maximum args"
+            $ toText
+              ( MG.Cmd_SetFlowPercentage
+                  MG.def'
+                    { flowPercent = pure (Index 100),
+                      targetExtruder = Just (Index 0)
+                    }
+              )
+            @?= "M221 S100 T0",
+          testCase "Finish Moves - maximum args"
+            $ toText (MG.Cmd_FinishMoves (MG.FinishMoves {} :: MG.FinishMoves Required))
+            @?= "M400",
+          testCase "Deploy Probe - maximum args"
+            $ toText
+              ( MG.Cmd_DeployProbe
+                  MG.def'
+                    { reportHSMode = Just (Flag True),
+                      remainInPlace = Just (Flag True),
+                      setHSMode = Just (Flag True)
+                    }
+              )
+            @?= "M401 H1 R1 S1",
+          testCase "Stow Probe - maximum args"
+            $ toText
+              ( MG.Cmd_StowProbe
+                  MG.def'
+                    { remainInPlace = Just (Flag True)
+                    }
+              )
+            @?= "M402 R1",
+          testCase "Quickstop - maximum args"
+            $ toText (MG.Cmd_Quickstop (MG.Quickstop {} :: MG.Quickstop Required))
+            @?= "M410",
+          testCase "Save Settings - maximum args"
+            $ toText (MG.Cmd_SaveSettings (MG.SaveSettings {} :: MG.SaveSettings Required))
+            @?= "M500",
+          testCase "Restore Settings - maximum args"
+            $ toText (MG.Cmd_RestoreSettings (MG.RestoreSettings {} :: MG.RestoreSettings Required))
+            @?= "M501",
+          testCase "Factory Reset - maximum args"
+            $ toText (MG.Cmd_FactoryReset (MG.FactoryReset {} :: MG.FactoryReset Required))
+            @?= "M502",
+          testCase "Report Settings - maximum args"
+            $ toText
+              ( MG.Cmd_ReportSettings
+                  MG.def'
+                    { saveConfig = Just (Flag True),
+                      detailedOutput = Just (Flag True)
+                    }
+              )
+            @?= "M503 C1 S1",
+          testCase "STOP Restart - maximum args"
+            $ toText
+              ( MG.Cmd_STOPRestart
+                  MG.def'
+                    { resumeWithoutFlush = Just (Flag True)
+                    }
+              )
+            @?= "M999 S1"
         ],
       testCase "multiple commands"
         $ toText
