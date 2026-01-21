@@ -54,7 +54,7 @@ tests =
                     },
                 MG.Cmd_LinearMove_Clockwise_Radius
                   MG.def'
-                    { radius = pure $ Degrees 10,
+                    { radius = pure $ Mm 10,
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20)
                     }

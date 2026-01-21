@@ -61,7 +61,7 @@
       { "code": "I", "label": "offsetX", "type": "Mm" },
       { "code": "J", "label": "offsetY", "type": "Mm" },
       { "code": "P", "label": "count", "type": "Count" },
-      { "code": "R", "label": "radius", "type": "Degrees" },
+      { "code": "R", "label": "radius", "type": "Mm" },
       { "code": "S", "label": "laser", "type": "LaserPower" },
       { "code": "U", "label": "axisU", "type": "Mm" },
       { "code": "V", "label": "axisV", "type": "Mm" },
@@ -89,7 +89,7 @@
     ]
   },
   {
-    "type": "LinearMove",
+    "type": "Linear Move",
     "subtype": "CounterClockwise",
     "code": "G3",
     "link": "https://marlinfw.org/docs/gcode/G002-G003.html",
@@ -102,7 +102,7 @@
       { "code": "I", "label": "offsetX", "type": "Mm" },
       { "code": "J", "label": "offsetY", "type": "Mm" },
       { "code": "P", "label": "count", "type": "Count" },
-      { "code": "R", "label": "radius", "type": "Degrees" },
+      { "code": "R", "label": "radius", "type": "Mm" },
       { "code": "S", "label": "laser", "type": "LaserPower" },
       { "code": "U", "label": "axisU", "type": "Mm" },
       { "code": "V", "label": "axisV", "type": "Mm" },
@@ -143,10 +143,32 @@
     }
   },
   {
-    "unimplemented": true,
     "type": "Bezier Cubic Spline Move",
     "code": "G5",
-    "link": "https://marlinfw.org/docs/gcode/G005.html"
+    "link": "https://marlinfw.org/docs/gcode/G005.html",
+    "args": [
+      { "code": "E", "label": "axisExtrusion", "type": "Mm" },
+      { "code": "F", "label": "feedrate", "type": "MmPerMin" },
+      { "code": "I", "label": "offsetX1", "type": "Mm" },
+      { "code": "J", "label": "offsetY1", "type": "Mm" },
+      { "code": "P", "label": "offsetX2", "type": "Mm" },
+      { "code": "Q", "label": "offsetY2", "type": "Mm" },
+      { "code": "S", "label": "laser", "type": "LaserPower" },
+      { "code": "X", "label": "axisX", "type": "Mm" },
+      { "code": "Y", "label": "axisY", "type": "Mm" }
+    ],
+    "signatures": [
+      {
+        "name": "Initial",
+        "optional": ["E", "F", "S"],
+        "required": ["X", "Y", "I", "J", "P", "Q"]
+      },
+      {
+        "name": "Subsequent",
+        "optional": ["E", "F", "I", "J", "S"],
+        "required": ["X", "Y", "P", "Q"]
+      }
+    ]
   },
   {
     "unimplemented": true,

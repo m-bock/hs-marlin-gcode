@@ -1,10 +1,10 @@
 module Marlin.GCode.Generated where
 
-import qualified Data.Text as T
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Count, Degrees, LaserPower, Milliseconds, Mm, MmPerMin, NotDefined, Required (..), Seconds)
+import Marlin.GCode.Types (ArgValue, Degrees, LaserPower, Mm, MmPerMin, NotDefined, Required(..), Count, Seconds, Milliseconds)
 import Relude
+import qualified Data.Text as T
 
 --------------------------------------------------------------------------------
 --- GCodeCmd
@@ -20,7 +20,8 @@ data GCodeCmd
   | Cmd_LinearMove_CounterClockwise_OffsetY (LinearMove_CounterClockwise_OffsetY Required)
   | Cmd_LinearMove_CounterClockwise_Radius (LinearMove_CounterClockwise_Radius Required)
   | Cmd_Dwell (Dwell Required)
-  | Cmd_BezierCubicSplineMove (BezierCubicSplineMove Required)
+  | Cmd_BezierCubicSplineMove_Initial (BezierCubicSplineMove_Initial Required)
+  | Cmd_BezierCubicSplineMove_Subsequent (BezierCubicSplineMove_Subsequent Required)
   | Cmd_DirectStepperMove (DirectStepperMove Required)
   | Cmd_Retract (Retract Required)
   | Cmd_Recover (Recover Required)
@@ -33,7 +34,7 @@ data GCodeCmd
   | Cmd_MeshValidationPattern (MeshValidationPattern Required)
   | Cmd_ParkToolehead (ParkToolehead Required)
   | Comment (Maybe GCodeCmd) Text
-  deriving (Generic)
+       deriving (Generic)
 
 instance ToText GCodeCmd where
   toText =
@@ -47,7 +48,8 @@ instance ToText GCodeCmd where
       Cmd_LinearMove_CounterClockwise_OffsetY r -> toText r
       Cmd_LinearMove_CounterClockwise_Radius r -> toText r
       Cmd_Dwell r -> toText r
-      Cmd_BezierCubicSplineMove r -> toText r
+      Cmd_BezierCubicSplineMove_Initial r -> toText r
+      Cmd_BezierCubicSplineMove_Subsequent r -> toText r
       Cmd_DirectStepperMove r -> toText r
       Cmd_Retract r -> toText r
       Cmd_Recover r -> toText r
@@ -103,22 +105,18 @@ instance Upcast (LinearMove_NoExtrusion Required) GCodeCmd where
   upcast = Cmd_LinearMove_NoExtrusion
 
 instance ToText (LinearMove_NoExtrusion Required) where
-  toText r =
-    mkCmd
-      "G0"
-      [ mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G0" [mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
 --- Linear Move (G1)
@@ -148,22 +146,18 @@ instance Upcast (LinearMove_WithExtrusion Required) GCodeCmd where
   upcast = Cmd_LinearMove_WithExtrusion
 
 instance ToText (LinearMove_WithExtrusion Required) where
-  toText r =
-    mkCmd
-      "G1"
-      [ mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G1" [mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
 --- Linear Move (G2)
@@ -195,24 +189,20 @@ instance Upcast (LinearMove_Clockwise_OffsetX Required) GCodeCmd where
   upcast = Cmd_LinearMove_Clockwise_OffsetX
 
 instance ToText (LinearMove_Clockwise_OffsetX Required) where
-  toText r =
-    mkCmd
-      "G2"
-      [ mkReqArg 'I' r.offsetX,
-        mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'P' r.count,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G2" [mkReqArg 'I' r.offsetX,
+          mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'P' r.count,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
 --- Linear Move (G2)
@@ -244,24 +234,20 @@ instance Upcast (LinearMove_Clockwise_OffsetY Required) GCodeCmd where
   upcast = Cmd_LinearMove_Clockwise_OffsetY
 
 instance ToText (LinearMove_Clockwise_OffsetY Required) where
-  toText r =
-    mkCmd
-      "G2"
-      [ mkReqArg 'J' r.offsetY,
-        mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'P' r.count,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G2" [mkReqArg 'J' r.offsetY,
+          mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'P' r.count,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
 --- Linear Move (G2)
@@ -276,7 +262,7 @@ data LinearMove_Clockwise_Radius (f :: Type -> Type)
     axisExtrusion :: Maybe Mm,
     feedrate :: Maybe MmPerMin,
     count :: Maybe Count,
-    radius :: f Degrees,
+    radius :: f Mm,
     laser :: Maybe LaserPower,
     axisU :: Maybe Mm,
     axisV :: Maybe Mm,
@@ -293,27 +279,23 @@ instance Upcast (LinearMove_Clockwise_Radius Required) GCodeCmd where
   upcast = Cmd_LinearMove_Clockwise_Radius
 
 instance ToText (LinearMove_Clockwise_Radius Required) where
-  toText r =
-    mkCmd
-      "G2"
-      [ mkReqArg 'R' r.radius,
-        mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'P' r.count,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G2" [mkReqArg 'R' r.radius,
+          mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'P' r.count,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
---- LinearMove (G3)
+--- Linear Move (G3)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
@@ -342,27 +324,23 @@ instance Upcast (LinearMove_CounterClockwise_OffsetX Required) GCodeCmd where
   upcast = Cmd_LinearMove_CounterClockwise_OffsetX
 
 instance ToText (LinearMove_CounterClockwise_OffsetX Required) where
-  toText r =
-    mkCmd
-      "G3"
-      [ mkReqArg 'I' r.offsetX,
-        mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'P' r.count,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G3" [mkReqArg 'I' r.offsetX,
+          mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'P' r.count,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
---- LinearMove (G3)
+--- Linear Move (G3)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
@@ -391,27 +369,23 @@ instance Upcast (LinearMove_CounterClockwise_OffsetY Required) GCodeCmd where
   upcast = Cmd_LinearMove_CounterClockwise_OffsetY
 
 instance ToText (LinearMove_CounterClockwise_OffsetY Required) where
-  toText r =
-    mkCmd
-      "G3"
-      [ mkReqArg 'J' r.offsetY,
-        mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'P' r.count,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G3" [mkReqArg 'J' r.offsetY,
+          mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'P' r.count,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
---- LinearMove (G3)
+--- Linear Move (G3)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
@@ -423,7 +397,7 @@ data LinearMove_CounterClockwise_Radius (f :: Type -> Type)
     axisExtrusion :: Maybe Mm,
     feedrate :: Maybe MmPerMin,
     count :: Maybe Count,
-    radius :: f Degrees,
+    radius :: f Mm,
     laser :: Maybe LaserPower,
     axisU :: Maybe Mm,
     axisV :: Maybe Mm,
@@ -440,24 +414,20 @@ instance Upcast (LinearMove_CounterClockwise_Radius Required) GCodeCmd where
   upcast = Cmd_LinearMove_CounterClockwise_Radius
 
 instance ToText (LinearMove_CounterClockwise_Radius Required) where
-  toText r =
-    mkCmd
-      "G3"
-      [ mkReqArg 'R' r.radius,
-        mkArg 'A' r.axisA,
-        mkArg 'B' r.axisB,
-        mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
-        mkArg 'F' r.feedrate,
-        mkArg 'P' r.count,
-        mkArg 'S' r.laser,
-        mkArg 'U' r.axisU,
-        mkArg 'V' r.axisV,
-        mkArg 'W' r.axisW,
-        mkArg 'X' r.axisX,
-        mkArg 'Y' r.axisY,
-        mkArg 'Z' r.axisZ
-      ]
+  toText r = mkCmd "G3" [mkReqArg 'R' r.radius,
+          mkArg 'A' r.axisA,
+          mkArg 'B' r.axisB,
+          mkArg 'C' r.axisC,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'P' r.count,
+          mkArg 'S' r.laser,
+          mkArg 'U' r.axisU,
+          mkArg 'V' r.axisV,
+          mkArg 'W' r.axisW,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY,
+          mkArg 'Z' r.axisZ]
 
 --------------------------------------------------------------------------------
 --- Dwell (G4)
@@ -477,31 +447,78 @@ instance Upcast (Dwell Required) GCodeCmd where
   upcast = Cmd_Dwell
 
 instance ToText (Dwell Required) where
-  toText r =
-    mkCmd
-      "G4"
-      [ mkArg 'S' r.timeSeconds,
-        mkArg 'P' r.timeMilliseconds
-      ]
+  toText r = mkCmd "G4" [mkArg 'S' r.timeSeconds,
+          mkArg 'P' r.timeMilliseconds]
 
 --------------------------------------------------------------------------------
 --- Bezier Cubic Spline Move (G5)
 --- Docs: https://marlinfw.org/docs/gcode/G005.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data BezierCubicSplineMove (f :: Type -> Type)
-  = BezierCubicSplineMove
-  {}
+data BezierCubicSplineMove_Initial (f :: Type -> Type)
+  = BezierCubicSplineMove_Initial
+  { axisExtrusion :: Maybe Mm,
+    feedrate :: Maybe MmPerMin,
+    offsetX1 :: f Mm,
+    offsetY1 :: f Mm,
+    offsetX2 :: f Mm,
+    offsetY2 :: f Mm,
+    laser :: Maybe LaserPower,
+    axisX :: f Mm,
+    axisY :: f Mm
+  }
   deriving (Generic)
 
-instance Default (BezierCubicSplineMove NotDefined)
+instance Default (BezierCubicSplineMove_Initial NotDefined)
 
-instance Upcast (BezierCubicSplineMove Required) GCodeCmd where
-  upcast = Cmd_BezierCubicSplineMove
+instance Upcast (BezierCubicSplineMove_Initial Required) GCodeCmd where
+  upcast = Cmd_BezierCubicSplineMove_Initial
 
-instance ToText (BezierCubicSplineMove Required) where
-  toText r = mkCmd "G5" []
+instance ToText (BezierCubicSplineMove_Initial Required) where
+  toText r = mkCmd "G5" [mkReqArg 'I' r.offsetX1,
+          mkReqArg 'J' r.offsetY1,
+          mkReqArg 'P' r.offsetX2,
+          mkReqArg 'Q' r.offsetY2,
+          mkReqArg 'X' r.axisX,
+          mkReqArg 'Y' r.axisY,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'S' r.laser]
+
+--------------------------------------------------------------------------------
+--- Bezier Cubic Spline Move (G5)
+--- Docs: https://marlinfw.org/docs/gcode/G005.html
+--------------------------------------------------------------------------------
+
+data BezierCubicSplineMove_Subsequent (f :: Type -> Type)
+  = BezierCubicSplineMove_Subsequent
+  { axisExtrusion :: Maybe Mm,
+    feedrate :: Maybe MmPerMin,
+    offsetX1 :: Maybe Mm,
+    offsetY1 :: Maybe Mm,
+    offsetX2 :: f Mm,
+    offsetY2 :: f Mm,
+    laser :: Maybe LaserPower,
+    axisX :: f Mm,
+    axisY :: f Mm
+  }
+  deriving (Generic)
+
+instance Default (BezierCubicSplineMove_Subsequent NotDefined)
+
+instance Upcast (BezierCubicSplineMove_Subsequent Required) GCodeCmd where
+  upcast = Cmd_BezierCubicSplineMove_Subsequent
+
+instance ToText (BezierCubicSplineMove_Subsequent Required) where
+  toText r = mkCmd "G5" [mkReqArg 'P' r.offsetX2,
+          mkReqArg 'Q' r.offsetY2,
+          mkReqArg 'X' r.axisX,
+          mkReqArg 'Y' r.axisY,
+          mkArg 'E' r.axisExtrusion,
+          mkArg 'F' r.feedrate,
+          mkArg 'I' r.offsetX1,
+          mkArg 'J' r.offsetY1,
+          mkArg 'S' r.laser]
 
 --------------------------------------------------------------------------------
 --- Direct Stepper Move (G6)
@@ -706,6 +723,7 @@ instance Upcast (ParkToolehead Required) GCodeCmd where
 
 instance ToText (ParkToolehead Required) where
   toText r = mkCmd "G27" []
+
 
 --------------------------------------------------------------------------------
 --- Utils
