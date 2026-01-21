@@ -39,6 +39,12 @@ data GCodeCmd
   | Cmd_BedLeveling_Linear (BedLeveling_Linear Required)
   | Cmd_BedLeveling_Manual (BedLeveling_Manual Required)
   | Cmd_BedLeveling_Unified (BedLeveling_Unified Required)
+  | Cmd_SingleZ_Probe (SingleZ_Probe Required)
+  | Cmd_DockSled (DockSled Required)
+  | Cmd_UndockSled (UndockSled Required)
+  | Cmd_DeltaAutoCalibration (DeltaAutoCalibration Required)
+  | Cmd_ZSteppersAuto_Alignment (ZSteppersAuto_Alignment Required)
+  | Cmd_MechanicalGantryCalibration (MechanicalGantryCalibration Required)
   | Comment (Maybe GCodeCmd) Text
        deriving (Generic)
 
@@ -73,6 +79,12 @@ instance ToText GCodeCmd where
       Cmd_BedLeveling_Linear r -> toText r
       Cmd_BedLeveling_Manual r -> toText r
       Cmd_BedLeveling_Unified r -> toText r
+      Cmd_SingleZ_Probe r -> toText r
+      Cmd_DockSled r -> toText r
+      Cmd_UndockSled r -> toText r
+      Cmd_DeltaAutoCalibration r -> toText r
+      Cmd_ZSteppersAuto_Alignment r -> toText r
+      Cmd_MechanicalGantryCalibration r -> toText r
       Comment Nothing c -> "; " <> c
       Comment (Just cmd) c -> toText cmd <> " ; " <> c
 
@@ -1063,6 +1075,162 @@ instance ToText (BedLeveling_Unified Required) where
           mkArg 'X' r.axisX,
           mkArg 'Y' r.axisY]
 
+--------------------------------------------------------------------------------
+--- Single Z-Probe (G30)
+--- Docs: https://marlinfw.org/docs/gcode/G030.html
+--------------------------------------------------------------------------------
+
+data SingleZ_Probe (f :: Type -> Type)
+  = SingleZ_Probe
+  { temperatureCompensation :: Maybe Flag,
+    engageEach :: Maybe Flag,
+    axisX :: Maybe Mm,
+    axisY :: Maybe Mm
+  }
+  deriving (Generic)
+
+instance Default (SingleZ_Probe NotDefined)
+
+instance Upcast (SingleZ_Probe Required) GCodeCmd where
+  upcast = Cmd_SingleZ_Probe
+
+instance ToText (SingleZ_Probe Required) where
+  toText r = mkCmd "G30" [mkArg 'C' r.temperatureCompensation,
+          mkArg 'E' r.engageEach,
+          mkArg 'X' r.axisX,
+          mkArg 'Y' r.axisY]
+
+--------------------------------------------------------------------------------
+--- Dock Sled (G31)
+--- Docs: https://marlinfw.org/docs/gcode/G031.html
+--------------------------------------------------------------------------------
+
+data DockSled (f :: Type -> Type)
+  = DockSled
+  {}
+  deriving (Generic)
+
+instance Default (DockSled NotDefined)
+
+instance Upcast (DockSled Required) GCodeCmd where
+  upcast = Cmd_DockSled
+
+instance ToText (DockSled Required) where
+  toText r = mkCmd "G31" []
+
+--------------------------------------------------------------------------------
+--- Undock Sled (G32)
+--- Docs: https://marlinfw.org/docs/gcode/G032.html
+--------------------------------------------------------------------------------
+
+data UndockSled (f :: Type -> Type)
+  = UndockSled
+  {}
+  deriving (Generic)
+
+instance Default (UndockSled NotDefined)
+
+instance Upcast (UndockSled Required) GCodeCmd where
+  upcast = Cmd_UndockSled
+
+instance ToText (UndockSled Required) where
+  toText r = mkCmd "G32" []
+
+--------------------------------------------------------------------------------
+--- Delta Auto Calibration (G33)
+--- Docs: https://marlinfw.org/docs/gcode/G033.html
+--------------------------------------------------------------------------------
+
+data DeltaAutoCalibration (f :: Type -> Type)
+  = DeltaAutoCalibration
+  { precision :: Maybe Mm,
+    engageEach :: Maybe Flag,
+    iterations :: Maybe Count,
+    probeOffsetRelative :: Maybe Flag,
+    probePoints :: Maybe Index,
+    reduceGrid :: Maybe Mm,
+    saveSensorless :: Maybe Flag,
+    disableTowerAngles :: Maybe Flag,
+    verbosity :: Maybe Index,
+    disableStallguardX :: Maybe Flag,
+    disableStallguardY :: Maybe Flag,
+    disableStallguardZ :: Maybe Flag
+  }
+  deriving (Generic)
+
+instance Default (DeltaAutoCalibration NotDefined)
+
+instance Upcast (DeltaAutoCalibration Required) GCodeCmd where
+  upcast = Cmd_DeltaAutoCalibration
+
+instance ToText (DeltaAutoCalibration Required) where
+  toText r = mkCmd "G33" [mkArg 'C' r.precision,
+          mkArg 'E' r.engageEach,
+          mkArg 'F' r.iterations,
+          mkArg 'O' r.probeOffsetRelative,
+          mkArg 'P' r.probePoints,
+          mkArg 'R' r.reduceGrid,
+          mkArg 'S' r.saveSensorless,
+          mkArg 'T' r.disableTowerAngles,
+          mkArg 'V' r.verbosity,
+          mkArg 'X' r.disableStallguardX,
+          mkArg 'Y' r.disableStallguardY,
+          mkArg 'Z' r.disableStallguardZ]
+
+--------------------------------------------------------------------------------
+--- Z Steppers Auto-Alignment (G34)
+--- Docs: https://marlinfw.org/docs/gcode/G034-zsaa.html
+--------------------------------------------------------------------------------
+
+data ZSteppersAuto_Alignment (f :: Type -> Type)
+  = ZSteppersAuto_Alignment
+  { amplification :: Maybe Mm,
+    stowEach :: Maybe Flag,
+    iterations :: Maybe Index,
+    unlockAll :: Maybe Flag,
+    recalculate :: Maybe Flag,
+    lockState :: Maybe Flag,
+    targetAccuracy :: Maybe Mm,
+    stepper :: Maybe Index
+  }
+  deriving (Generic)
+
+instance Default (ZSteppersAuto_Alignment NotDefined)
+
+instance Upcast (ZSteppersAuto_Alignment Required) GCodeCmd where
+  upcast = Cmd_ZSteppersAuto_Alignment
+
+instance ToText (ZSteppersAuto_Alignment Required) where
+  toText r = mkCmd "G34" [mkArg 'A' r.amplification,
+          mkArg 'E' r.stowEach,
+          mkArg 'I' r.iterations,
+          mkArg 'L' r.unlockAll,
+          mkArg 'R' r.recalculate,
+          mkArg 'S' r.lockState,
+          mkArg 'T' r.targetAccuracy,
+          mkArg 'Z' r.stepper]
+
+--------------------------------------------------------------------------------
+--- Mechanical Gantry Calibration (G34)
+--- Docs: https://marlinfw.org/docs/gcode/G034-mgc.html
+--------------------------------------------------------------------------------
+
+data MechanicalGantryCalibration (f :: Type -> Type)
+  = MechanicalGantryCalibration
+  { current :: Maybe Index,
+    extraHeight :: Maybe Mm
+  }
+  deriving (Generic)
+
+instance Default (MechanicalGantryCalibration NotDefined)
+
+instance Upcast (MechanicalGantryCalibration Required) GCodeCmd where
+  upcast = Cmd_MechanicalGantryCalibration
+
+instance ToText (MechanicalGantryCalibration Required) where
+  toText r = mkCmd "G34" [mkArg 'S' r.current,
+          mkArg 'Z' r.extraHeight]
+
 
 --------------------------------------------------------------------------------
 --- Utils
@@ -1075,4 +1243,4 @@ mkReqArg :: (Upcast a ArgValue) => Char -> Required a -> Maybe (Char, ArgValue)
 mkReqArg c (Required a) = Just (c, upcast a)
 
 mkCmd :: Text -> [Maybe (Char, ArgValue)] -> Text
-mkCmd c args = c <> " " <> T.unwords (map (\(c, a) -> T.singleton c <> toText a) (catMaybes args))
+mkCmd c args = if null args then c else c <> " " <> T.unwords (map (\(c, a) -> T.singleton c <> toText a) (catMaybes args))

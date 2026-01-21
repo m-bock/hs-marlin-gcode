@@ -4,7 +4,7 @@ const path = require("path");
 const sep = "_"
 
 const removeSpaces = (str) => {
-  return str.replace(/\s+/g, "");
+  return str.replace(/\s+/g, "").replace(/-/g, sep);
 };
 
 const mkTypeName = (item, signature) => {
@@ -173,7 +173,7 @@ mkReqArg :: (Upcast a ArgValue) => Char -> Required a -> Maybe (Char, ArgValue)
 mkReqArg c (Required a) = Just (c, upcast a)
 
 mkCmd :: Text -> [Maybe (Char, ArgValue)] -> Text
-mkCmd c args = c <> " " <> T.unwords (map (\\(c, a) -> T.singleton c <> toText a) (catMaybes args))
+mkCmd c args = if null args then c else c <> " " <> T.unwords (map (\\(c, a) -> T.singleton c <> toText a) (catMaybes args))
 
 `.trim();
 };

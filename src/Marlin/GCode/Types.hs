@@ -86,7 +86,7 @@ instance ToText ArgValue where
     ArgMmPerSec2 (MmPerSec2 d) -> T.pack (printf "%.4f" d)
     ArgPercent (Percent d) -> T.pack (printf "%.4f" d)
     ArgSeconds (Seconds d) -> T.pack (printf "%.4f" d)
-    ArgMilliseconds (Milliseconds d) -> T.pack (printf "%.4f" d)
+    ArgMilliseconds (Milliseconds d) -> T.pack (show d)
     ArgDegrees (Degrees d) -> T.pack (printf "%.4f" d)
     ArgIndex (Index d) -> T.pack (show d)
     ArgLaserPower (LaserPower d) -> T.pack (printf "%.4f" d)
