@@ -65,6 +65,9 @@ const genSignature = (item, signature) => {
   const extraLines = lines.length > 0 ? "\n" + lines.join("\n") : "";
   const displayTitle = item.type; // Use original type with spaces for display
   
+  // Use _ instead of r when there are no arguments to avoid unused pattern warnings
+  const patternVar = allArgs.length === 0 ? "_" : "r";
+  
   return `
 
 --------------------------------------------------------------------------------
@@ -84,7 +87,7 @@ instance Upcast (${typeName} Required) GCodeCmd where
   upcast = ${mkCmdName(item, signature)}
 
 instance ToText (${typeName} Required) where
-  toText r = toText (RawCmd "${item.code}" [${allArgs}])
+  toText ${patternVar} = toText (RawCmd "${item.code}" [${allArgs}])
   `.trim();
 };
 

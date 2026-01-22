@@ -144,5 +144,5 @@ G1 E3.0000 X100.0000 Y135.0000 Z2.0000 ; Extrude to point 1
 
 ## Coverage
 
-Every command including its all of its required and optional arguments are covered.
-Except for: `G53`, `M43 T`, `M75`, `M100`, `M217`, `M240`, `M260`, `M265`, `M306`, `M350`, `M351`, `M493`, `M494`, `M512`, `M552`, `M553`, `M554`, `M569`, `M605`, `M665`, `M666`, `M810`, `M860`, `M871`, `M907`, `M912`, `M913`, `M914`, `M916`, `M917`, `M918`, `M919`, `M920`, `M7219`
+234 commands (including its all of its required and optional arguments) are covered.
+Not covered: `G53`, `M43`, `M217`, `M240`, `M260`, `M306`, `M350`, `M351`, `M493`, `M494`, `M552`, `M553`, `M554`, `M569`, `M605`, `M665`, `M666`, `M810`, `M860`, `M871`, `M907`, `M912`, `M913`, `M914`, `M916`, `M917`, `M918`, `M919`, `M920`, `M7219`

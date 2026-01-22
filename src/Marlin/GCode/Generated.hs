@@ -114,9 +114,9 @@ data GCodeCmd
   | Cmd_GetLongPath (GetLongPath Required)
   | Cmd_SDCardSorting (SDCardSorting Required)
   | Cmd_SetPinState (SetPinState Required)
-  | Cmd_PinsDebugging (PinsDebugging Required)
   | Cmd_ProbeRepeatabilityTest (ProbeRepeatabilityTest Required)
   | Cmd_SetPrintProgress (SetPrintProgress Required)
+  | Cmd_StartPrintJobTimer (StartPrintJobTimer Required)
   | Cmd_PausePrintJobTimer (PausePrintJobTimer Required)
   | Cmd_StopPrintJobTimer (StopPrintJobTimer Required)
   | Cmd_PrintJobStats (PrintJobStats Required)
@@ -165,6 +165,7 @@ data GCodeCmd
   | Cmd_FactoryReset (FactoryReset Required)
   | Cmd_ReportSettings (ReportSettings Required)
   | Cmd_STOPRestart (STOPRestart Required)
+  | Cmd_FreeMemory (FreeMemory Required)
   | Cmd_ConfigureBedDistanceSensor (ConfigureBedDistanceSensor Required)
   | Cmd_TMCDebugging (TMCDebugging Required)
   | Cmd_FanTachometers (FanTachometers Required)
@@ -197,6 +198,7 @@ data GCodeCmd
   | Cmd_LCDSleepBacklightTimeout (LCDSleepBacklightTimeout Required)
   | Cmd_LCDBrightness (LCDBrightness Required)
   | Cmd_I2CRequest (I2CRequest Required)
+  | Cmd_ScanI2CBus (ScanI2CBus Required)
   | Cmd_ServoPosition (ServoPosition Required)
   | Cmd_EditServoAngles (EditServoAngles Required)
   | Cmd_DetachServo (DetachServo Required)
@@ -235,6 +237,7 @@ data GCodeCmd
   | Cmd_ValidateEEPROMContents (ValidateEEPROMContents Required)
   | Cmd_LockMachine (LockMachine Required)
   | Cmd_UnlockMachine (UnlockMachine Required)
+  | Cmd_SetPasscode (SetPasscode Required)
   | Cmd_AbortSDPrint (AbortSDPrint Required)
   | Cmd_EndstopsAbortSD (EndstopsAbortSD Required)
   | Cmd_MachineName (MachineName Required)
@@ -356,9 +359,9 @@ instance ToText GCodeCmd where
       Cmd_GetLongPath r -> toText r
       Cmd_SDCardSorting r -> toText r
       Cmd_SetPinState r -> toText r
-      Cmd_PinsDebugging r -> toText r
       Cmd_ProbeRepeatabilityTest r -> toText r
       Cmd_SetPrintProgress r -> toText r
+      Cmd_StartPrintJobTimer r -> toText r
       Cmd_PausePrintJobTimer r -> toText r
       Cmd_StopPrintJobTimer r -> toText r
       Cmd_PrintJobStats r -> toText r
@@ -407,6 +410,7 @@ instance ToText GCodeCmd where
       Cmd_FactoryReset r -> toText r
       Cmd_ReportSettings r -> toText r
       Cmd_STOPRestart r -> toText r
+      Cmd_FreeMemory r -> toText r
       Cmd_ConfigureBedDistanceSensor r -> toText r
       Cmd_TMCDebugging r -> toText r
       Cmd_FanTachometers r -> toText r
@@ -439,6 +443,7 @@ instance ToText GCodeCmd where
       Cmd_LCDSleepBacklightTimeout r -> toText r
       Cmd_LCDBrightness r -> toText r
       Cmd_I2CRequest r -> toText r
+      Cmd_ScanI2CBus r -> toText r
       Cmd_ServoPosition r -> toText r
       Cmd_EditServoAngles r -> toText r
       Cmd_DetachServo r -> toText r
@@ -477,6 +482,7 @@ instance ToText GCodeCmd where
       Cmd_ValidateEEPROMContents r -> toText r
       Cmd_LockMachine r -> toText r
       Cmd_UnlockMachine r -> toText r
+      Cmd_SetPasscode r -> toText r
       Cmd_AbortSDPrint r -> toText r
       Cmd_EndstopsAbortSD r -> toText r
       Cmd_MachineName r -> toText r
@@ -1112,7 +1118,7 @@ instance Upcast (Recover Required) GCodeCmd where
   upcast = Cmd_Recover
 
 instance ToText (Recover Required) where
-  toText r = toText (RawCmd "G11" [])
+  toText _ = toText (RawCmd "G11" [])
 
 --------------------------------------------------------------------------------
 --- Clean Nozzle (G12)
@@ -1171,7 +1177,7 @@ instance Upcast (CNCWorkspacePlanes_XY Required) GCodeCmd where
   upcast = Cmd_CNCWorkspacePlanes_XY
 
 instance ToText (CNCWorkspacePlanes_XY Required) where
-  toText r = toText (RawCmd "G17" [])
+  toText _ = toText (RawCmd "G17" [])
 
 --------------------------------------------------------------------------------
 --- CNC Workspace Planes (G18)
@@ -1191,7 +1197,7 @@ instance Upcast (CNCWorkspacePlanes_ZX Required) GCodeCmd where
   upcast = Cmd_CNCWorkspacePlanes_ZX
 
 instance ToText (CNCWorkspacePlanes_ZX Required) where
-  toText r = toText (RawCmd "G18" [])
+  toText _ = toText (RawCmd "G18" [])
 
 --------------------------------------------------------------------------------
 --- CNC Workspace Planes (G19)
@@ -1211,7 +1217,7 @@ instance Upcast (CNCWorkspacePlanes_YZ Required) GCodeCmd where
   upcast = Cmd_CNCWorkspacePlanes_YZ
 
 instance ToText (CNCWorkspacePlanes_YZ Required) where
-  toText r = toText (RawCmd "G19" [])
+  toText _ = toText (RawCmd "G19" [])
 
 --------------------------------------------------------------------------------
 --- Inch Units (G20)
@@ -1231,7 +1237,7 @@ instance Upcast (InchUnits Required) GCodeCmd where
   upcast = Cmd_InchUnits
 
 instance ToText (InchUnits Required) where
-  toText r = toText (RawCmd "G20" [])
+  toText _ = toText (RawCmd "G20" [])
 
 --------------------------------------------------------------------------------
 --- Millimeter Units (G21)
@@ -1251,7 +1257,7 @@ instance Upcast (MillimeterUnits Required) GCodeCmd where
   upcast = Cmd_MillimeterUnits
 
 instance ToText (MillimeterUnits Required) where
-  toText r = toText (RawCmd "G21" [])
+  toText _ = toText (RawCmd "G21" [])
 
 --------------------------------------------------------------------------------
 --- Mesh Validation Pattern (G26)
@@ -1702,7 +1708,7 @@ instance Upcast (DockSled Required) GCodeCmd where
   upcast = Cmd_DockSled
 
 instance ToText (DockSled Required) where
-  toText r = toText (RawCmd "G31" [])
+  toText _ = toText (RawCmd "G31" [])
 
 --------------------------------------------------------------------------------
 --- Undock Sled (G32)
@@ -1722,7 +1728,7 @@ instance Upcast (UndockSled Required) GCodeCmd where
   upcast = Cmd_UndockSled
 
 instance ToText (UndockSled Required) where
-  toText r = toText (RawCmd "G32" [])
+  toText _ = toText (RawCmd "G32" [])
 
 --------------------------------------------------------------------------------
 --- Delta Auto Calibration (G33)
@@ -2047,7 +2053,7 @@ instance Upcast (SelectWorkspace_1 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_1
 
 instance ToText (SelectWorkspace_1 Required) where
-  toText r = toText (RawCmd "G54" [])
+  toText _ = toText (RawCmd "G54" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G55)
@@ -2067,7 +2073,7 @@ instance Upcast (SelectWorkspace_2 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_2
 
 instance ToText (SelectWorkspace_2 Required) where
-  toText r = toText (RawCmd "G55" [])
+  toText _ = toText (RawCmd "G55" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G56)
@@ -2087,7 +2093,7 @@ instance Upcast (SelectWorkspace_3 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_3
 
 instance ToText (SelectWorkspace_3 Required) where
-  toText r = toText (RawCmd "G56" [])
+  toText _ = toText (RawCmd "G56" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G57)
@@ -2107,7 +2113,7 @@ instance Upcast (SelectWorkspace_4 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_4
 
 instance ToText (SelectWorkspace_4 Required) where
-  toText r = toText (RawCmd "G57" [])
+  toText _ = toText (RawCmd "G57" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G58)
@@ -2127,7 +2133,7 @@ instance Upcast (SelectWorkspace_5 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_5
 
 instance ToText (SelectWorkspace_5 Required) where
-  toText r = toText (RawCmd "G58" [])
+  toText _ = toText (RawCmd "G58" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G59)
@@ -2147,7 +2153,7 @@ instance Upcast (SelectWorkspace_6 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_6
 
 instance ToText (SelectWorkspace_6 Required) where
-  toText r = toText (RawCmd "G59" [])
+  toText _ = toText (RawCmd "G59" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G59.1)
@@ -2167,7 +2173,7 @@ instance Upcast (SelectWorkspace_7 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_7
 
 instance ToText (SelectWorkspace_7 Required) where
-  toText r = toText (RawCmd "G59.1" [])
+  toText _ = toText (RawCmd "G59.1" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G59.2)
@@ -2187,7 +2193,7 @@ instance Upcast (SelectWorkspace_8 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_8
 
 instance ToText (SelectWorkspace_8 Required) where
-  toText r = toText (RawCmd "G59.2" [])
+  toText _ = toText (RawCmd "G59.2" [])
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G59.3)
@@ -2207,7 +2213,7 @@ instance Upcast (SelectWorkspace_9 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_9
 
 instance ToText (SelectWorkspace_9 Required) where
-  toText r = toText (RawCmd "G59.3" [])
+  toText _ = toText (RawCmd "G59.3" [])
 
 --------------------------------------------------------------------------------
 --- Stored Positions (G60)
@@ -2334,7 +2340,7 @@ instance Upcast (CancelCurrentMotionMode Required) GCodeCmd where
   upcast = Cmd_CancelCurrentMotionMode
 
 instance ToText (CancelCurrentMotionMode Required) where
-  toText r = toText (RawCmd "G80" [])
+  toText _ = toText (RawCmd "G80" [])
 
 --------------------------------------------------------------------------------
 --- Absolute Positioning (G90)
@@ -2354,7 +2360,7 @@ instance Upcast (AbsolutePositioning Required) GCodeCmd where
   upcast = Cmd_AbsolutePositioning
 
 instance ToText (AbsolutePositioning Required) where
-  toText r = toText (RawCmd "G90" [])
+  toText _ = toText (RawCmd "G90" [])
 
 --------------------------------------------------------------------------------
 --- Relative Positioning (G91)
@@ -2374,7 +2380,7 @@ instance Upcast (RelativePositioning Required) GCodeCmd where
   upcast = Cmd_RelativePositioning
 
 instance ToText (RelativePositioning Required) where
-  toText r = toText (RawCmd "G91" [])
+  toText _ = toText (RawCmd "G91" [])
 
 --------------------------------------------------------------------------------
 --- Set Position (G92)
@@ -2565,7 +2571,7 @@ instance Upcast (SpindleLaserOff Required) GCodeCmd where
   upcast = Cmd_SpindleLaserOff
 
 instance ToText (SpindleLaserOff Required) where
-  toText r = toText (RawCmd "M5" [])
+  toText _ = toText (RawCmd "M5" [])
 
 --------------------------------------------------------------------------------
 --- Coolant Controls (M7)
@@ -2585,7 +2591,7 @@ instance Upcast (CoolantControls_Mist Required) GCodeCmd where
   upcast = Cmd_CoolantControls_Mist
 
 instance ToText (CoolantControls_Mist Required) where
-  toText r = toText (RawCmd "M7" [])
+  toText _ = toText (RawCmd "M7" [])
 
 --------------------------------------------------------------------------------
 --- Coolant Controls (M8)
@@ -2605,7 +2611,7 @@ instance Upcast (CoolantControls_Flood Required) GCodeCmd where
   upcast = Cmd_CoolantControls_Flood
 
 instance ToText (CoolantControls_Flood Required) where
-  toText r = toText (RawCmd "M8" [])
+  toText _ = toText (RawCmd "M8" [])
 
 --------------------------------------------------------------------------------
 --- Coolant Controls (M9)
@@ -2625,7 +2631,7 @@ instance Upcast (CoolantControls_Off Required) GCodeCmd where
   upcast = Cmd_CoolantControls_Off
 
 instance ToText (CoolantControls_Off Required) where
-  toText r = toText (RawCmd "M9" [])
+  toText _ = toText (RawCmd "M9" [])
 
 --------------------------------------------------------------------------------
 --- Vacuum / Blower Control (M10)
@@ -2645,7 +2651,7 @@ instance Upcast (VacuumBlowerControl_On Required) GCodeCmd where
   upcast = Cmd_VacuumBlowerControl_On
 
 instance ToText (VacuumBlowerControl_On Required) where
-  toText r = toText (RawCmd "M10" [])
+  toText _ = toText (RawCmd "M10" [])
 
 --------------------------------------------------------------------------------
 --- Vacuum / Blower Control (M11)
@@ -2665,7 +2671,7 @@ instance Upcast (VacuumBlowerControl_Off Required) GCodeCmd where
   upcast = Cmd_VacuumBlowerControl_Off
 
 instance ToText (VacuumBlowerControl_Off Required) where
-  toText r = toText (RawCmd "M11" [])
+  toText _ = toText (RawCmd "M11" [])
 
 --------------------------------------------------------------------------------
 --- Expected Printer Check (M16)
@@ -2827,7 +2833,7 @@ instance Upcast (InitSDCard Required) GCodeCmd where
   upcast = Cmd_InitSDCard
 
 instance ToText (InitSDCard Required) where
-  toText r = toText (RawCmd "M21" [])
+  toText _ = toText (RawCmd "M21" [])
 
 --------------------------------------------------------------------------------
 --- Release SD Card (M22)
@@ -2847,7 +2853,7 @@ instance Upcast (ReleaseSDCard Required) GCodeCmd where
   upcast = Cmd_ReleaseSDCard
 
 instance ToText (ReleaseSDCard Required) where
-  toText r = toText (RawCmd "M22" [])
+  toText _ = toText (RawCmd "M22" [])
 
 --------------------------------------------------------------------------------
 --- Select SD File (M23)
@@ -2915,7 +2921,7 @@ instance Upcast (PauseSDPrint Required) GCodeCmd where
   upcast = Cmd_PauseSDPrint
 
 instance ToText (PauseSDPrint Required) where
-  toText r = toText (RawCmd "M25" [])
+  toText _ = toText (RawCmd "M25" [])
 
 --------------------------------------------------------------------------------
 --- Set SD Position (M26)
@@ -3012,7 +3018,7 @@ instance Upcast (StopSDWrite Required) GCodeCmd where
   upcast = Cmd_StopSDWrite
 
 instance ToText (StopSDWrite Required) where
-  toText r = toText (RawCmd "M29" [])
+  toText _ = toText (RawCmd "M29" [])
 
 --------------------------------------------------------------------------------
 --- Delete SD File (M30)
@@ -3051,7 +3057,7 @@ instance Upcast (ReportPrintTime Required) GCodeCmd where
   upcast = Cmd_ReportPrintTime
 
 instance ToText (ReportPrintTime Required) where
-  toText r = toText (RawCmd "M31" [])
+  toText _ = toText (RawCmd "M31" [])
 
 --------------------------------------------------------------------------------
 --- Select and Start (M32)
@@ -3162,43 +3168,6 @@ instance ToText (SetPinState Required) where
       )
 
 --------------------------------------------------------------------------------
---- Pins Debugging (M43)
---- Docs: https://marlinfw.org/docs/gcode/M043.html
---------------------------------------------------------------------------------
-
-data PinsDebugging (f :: Type -> Type)
-  = PinsDebugging
-  { watchEndstops :: Maybe Flag,
-    ignoreProtection :: Maybe Flag,
-    pin :: Maybe Index,
-    testProbe :: Maybe Flag,
-    togglePins :: Maybe Flag,
-    watchPins :: Maybe Flag
-  }
-  deriving (Generic)
-
-instance Default (PinsDebugging NotDefined)
-
-instance Default (PinsDebugging Required)
-
-instance Upcast (PinsDebugging Required) GCodeCmd where
-  upcast = Cmd_PinsDebugging
-
-instance ToText (PinsDebugging Required) where
-  toText r =
-    toText
-      ( RawCmd
-          "M43"
-          [ mkArg 'E' r.watchEndstops,
-            mkArg 'I' r.ignoreProtection,
-            mkArg 'P' r.pin,
-            mkArg 'S' r.testProbe,
-            mkArg 'T' r.togglePins,
-            mkArg 'W' r.watchPins
-          ]
-      )
-
---------------------------------------------------------------------------------
 --- Probe Repeatability Test (M48)
 --- Docs: https://marlinfw.org/docs/gcode/M048.html
 --------------------------------------------------------------------------------
@@ -3271,6 +3240,26 @@ instance ToText (SetPrintProgress Required) where
       )
 
 --------------------------------------------------------------------------------
+--- Start Print Job Timer (M75)
+--- Docs: https://marlinfw.org/docs/gcode/M075.html
+--------------------------------------------------------------------------------
+
+data StartPrintJobTimer (f :: Type -> Type)
+  = StartPrintJobTimer
+  {}
+  deriving (Generic)
+
+instance Default (StartPrintJobTimer NotDefined)
+
+instance Default (StartPrintJobTimer Required)
+
+instance Upcast (StartPrintJobTimer Required) GCodeCmd where
+  upcast = Cmd_StartPrintJobTimer
+
+instance ToText (StartPrintJobTimer Required) where
+  toText _ = toText (RawCmd "M75" [])
+
+--------------------------------------------------------------------------------
 --- Pause Print Job Timer (M76)
 --- Docs: https://marlinfw.org/docs/gcode/M076.html
 --------------------------------------------------------------------------------
@@ -3288,7 +3277,7 @@ instance Upcast (PausePrintJobTimer Required) GCodeCmd where
   upcast = Cmd_PausePrintJobTimer
 
 instance ToText (PausePrintJobTimer Required) where
-  toText r = toText (RawCmd "M76" [])
+  toText _ = toText (RawCmd "M76" [])
 
 --------------------------------------------------------------------------------
 --- Stop Print Job Timer (M77)
@@ -3308,7 +3297,7 @@ instance Upcast (StopPrintJobTimer Required) GCodeCmd where
   upcast = Cmd_StopPrintJobTimer
 
 instance ToText (StopPrintJobTimer Required) where
-  toText r = toText (RawCmd "M77" [])
+  toText _ = toText (RawCmd "M77" [])
 
 --------------------------------------------------------------------------------
 --- Print Job Stats (M78)
@@ -3328,7 +3317,7 @@ instance Upcast (PrintJobStats Required) GCodeCmd where
   upcast = Cmd_PrintJobStats
 
 instance ToText (PrintJobStats Required) where
-  toText r = toText (RawCmd "M78" [])
+  toText _ = toText (RawCmd "M78" [])
 
 --------------------------------------------------------------------------------
 --- Power On (M80)
@@ -3369,7 +3358,7 @@ instance Upcast (PowerOff Required) GCodeCmd where
   upcast = Cmd_PowerOff
 
 instance ToText (PowerOff Required) where
-  toText r = toText (RawCmd "M81" [])
+  toText _ = toText (RawCmd "M81" [])
 
 --------------------------------------------------------------------------------
 --- E Absolute (M82)
@@ -3389,7 +3378,7 @@ instance Upcast (EAbsolute Required) GCodeCmd where
   upcast = Cmd_EAbsolute
 
 instance ToText (EAbsolute Required) where
-  toText r = toText (RawCmd "M82" [])
+  toText _ = toText (RawCmd "M82" [])
 
 --------------------------------------------------------------------------------
 --- E Relative (M83)
@@ -3409,7 +3398,7 @@ instance Upcast (ERelative Required) GCodeCmd where
   upcast = Cmd_ERelative
 
 instance ToText (ERelative Required) where
-  toText r = toText (RawCmd "M83" [])
+  toText _ = toText (RawCmd "M83" [])
 
 --------------------------------------------------------------------------------
 --- Inactivity Shutdown (M85)
@@ -3481,7 +3470,7 @@ instance Upcast (DisableHotendIdleTimeout Required) GCodeCmd where
   upcast = Cmd_DisableHotendIdleTimeout
 
 instance ToText (DisableHotendIdleTimeout Required) where
-  toText r = toText (RawCmd "M87" [])
+  toText _ = toText (RawCmd "M87" [])
 
 --------------------------------------------------------------------------------
 --- Set Axis Steps-per-unit (M92)
@@ -3666,7 +3655,7 @@ instance Upcast (BreakandContinue Required) GCodeCmd where
   upcast = Cmd_BreakandContinue
 
 instance ToText (BreakandContinue Required) where
-  toText r = toText (RawCmd "M108" [])
+  toText _ = toText (RawCmd "M108" [])
 
 --------------------------------------------------------------------------------
 --- Wait for Hotend Temperature (M109)
@@ -3765,7 +3754,7 @@ instance Upcast (FullShutdown Required) GCodeCmd where
   upcast = Cmd_FullShutdown
 
 instance ToText (FullShutdown Required) where
-  toText r = toText (RawCmd "M112" [])
+  toText _ = toText (RawCmd "M112" [])
 
 --------------------------------------------------------------------------------
 --- Host Keepalive (M113)
@@ -3837,7 +3826,7 @@ instance Upcast (FirmwareInfo Required) GCodeCmd where
   upcast = Cmd_FirmwareInfo
 
 instance ToText (FirmwareInfo Required) where
-  toText r = toText (RawCmd "M115" [])
+  toText _ = toText (RawCmd "M115" [])
 
 --------------------------------------------------------------------------------
 --- Set LCD Message (M117)
@@ -3911,7 +3900,7 @@ instance Upcast (EndstopStates Required) GCodeCmd where
   upcast = Cmd_EndstopStates
 
 instance ToText (EndstopStates Required) where
-  toText r = toText (RawCmd "M119" [])
+  toText _ = toText (RawCmd "M119" [])
 
 --------------------------------------------------------------------------------
 --- Enable Endstops (M120)
@@ -3931,7 +3920,7 @@ instance Upcast (EnableEndstops Required) GCodeCmd where
   upcast = Cmd_EnableEndstops
 
 instance ToText (EnableEndstops Required) where
-  toText r = toText (RawCmd "M120" [])
+  toText _ = toText (RawCmd "M120" [])
 
 --------------------------------------------------------------------------------
 --- Disable Endstops (M121)
@@ -3951,7 +3940,7 @@ instance Upcast (DisableEndstops Required) GCodeCmd where
   upcast = Cmd_DisableEndstops
 
 instance ToText (DisableEndstops Required) where
-  toText r = toText (RawCmd "M121" [])
+  toText _ = toText (RawCmd "M121" [])
 
 --------------------------------------------------------------------------------
 --- Set Bed Temperature (M140)
@@ -4340,7 +4329,7 @@ instance Upcast (FinishMoves Required) GCodeCmd where
   upcast = Cmd_FinishMoves
 
 instance ToText (FinishMoves Required) where
-  toText r = toText (RawCmd "M400" [])
+  toText _ = toText (RawCmd "M400" [])
 
 --------------------------------------------------------------------------------
 --- Deploy Probe (M401)
@@ -4412,7 +4401,7 @@ instance Upcast (Quickstop Required) GCodeCmd where
   upcast = Cmd_Quickstop
 
 instance ToText (Quickstop Required) where
-  toText r = toText (RawCmd "M410" [])
+  toText _ = toText (RawCmd "M410" [])
 
 --------------------------------------------------------------------------------
 --- Save Settings (M500)
@@ -4432,7 +4421,7 @@ instance Upcast (SaveSettings Required) GCodeCmd where
   upcast = Cmd_SaveSettings
 
 instance ToText (SaveSettings Required) where
-  toText r = toText (RawCmd "M500" [])
+  toText _ = toText (RawCmd "M500" [])
 
 --------------------------------------------------------------------------------
 --- Restore Settings (M501)
@@ -4452,7 +4441,7 @@ instance Upcast (RestoreSettings Required) GCodeCmd where
   upcast = Cmd_RestoreSettings
 
 instance ToText (RestoreSettings Required) where
-  toText r = toText (RawCmd "M501" [])
+  toText _ = toText (RawCmd "M501" [])
 
 --------------------------------------------------------------------------------
 --- Factory Reset (M502)
@@ -4472,7 +4461,7 @@ instance Upcast (FactoryReset Required) GCodeCmd where
   upcast = Cmd_FactoryReset
 
 instance ToText (FactoryReset Required) where
-  toText r = toText (RawCmd "M502" [])
+  toText _ = toText (RawCmd "M502" [])
 
 --------------------------------------------------------------------------------
 --- Report Settings (M503)
@@ -4523,6 +4512,39 @@ instance Upcast (STOPRestart Required) GCodeCmd where
 
 instance ToText (STOPRestart Required) where
   toText r = toText (RawCmd "M999" [mkArg 'S' r.resumeWithoutFlush])
+
+--------------------------------------------------------------------------------
+--- Free Memory (M100)
+--- Docs: https://marlinfw.org/docs/gcode/M100.html
+--------------------------------------------------------------------------------
+
+data FreeMemory (f :: Type -> Type)
+  = FreeMemory
+  { corruptLocations :: Maybe Count,
+    dumpMemory :: Maybe Flag,
+    reportFreeBytes :: Maybe Flag,
+    initializePool :: Maybe Flag
+  }
+  deriving (Generic)
+
+instance Default (FreeMemory NotDefined)
+
+instance Default (FreeMemory Required)
+
+instance Upcast (FreeMemory Required) GCodeCmd where
+  upcast = Cmd_FreeMemory
+
+instance ToText (FreeMemory Required) where
+  toText r =
+    toText
+      ( RawCmd
+          "M100"
+          [ mkArg 'C' r.corruptLocations,
+            mkArg 'D' r.dumpMemory,
+            mkArg 'F' r.reportFreeBytes,
+            mkArg 'I' r.initializePool
+          ]
+      )
 
 --------------------------------------------------------------------------------
 --- Configure Bed Distance Sensor (M102)
@@ -4679,7 +4701,7 @@ instance Upcast (Baricuda1Close Required) GCodeCmd where
   upcast = Cmd_Baricuda1Close
 
 instance ToText (Baricuda1Close Required) where
-  toText r = toText (RawCmd "M127" [])
+  toText _ = toText (RawCmd "M127" [])
 
 --------------------------------------------------------------------------------
 --- Baricuda 2 Open (M128)
@@ -4720,7 +4742,7 @@ instance Upcast (Baricuda2Close Required) GCodeCmd where
   upcast = Cmd_Baricuda2Close
 
 instance ToText (Baricuda2Close Required) where
-  toText r = toText (RawCmd "M129" [])
+  toText _ = toText (RawCmd "M129" [])
 
 --------------------------------------------------------------------------------
 --- Set Laser Cooler Temperature (M143)
@@ -5389,6 +5411,26 @@ instance ToText (I2CRequest Required) where
       )
 
 --------------------------------------------------------------------------------
+--- Scan I2C Bus (M265)
+--- Docs: https://marlinfw.org/docs/gcode/M265.html
+--------------------------------------------------------------------------------
+
+data ScanI2CBus (f :: Type -> Type)
+  = ScanI2CBus
+  {}
+  deriving (Generic)
+
+instance Default (ScanI2CBus NotDefined)
+
+instance Default (ScanI2CBus Required)
+
+instance Upcast (ScanI2CBus Required) GCodeCmd where
+  upcast = Cmd_ScanI2CBus
+
+instance ToText (ScanI2CBus Required) where
+  toText _ = toText (RawCmd "M265" [])
+
+--------------------------------------------------------------------------------
 --- Servo Position (M280)
 --- Docs: https://marlinfw.org/docs/gcode/M280.html
 --------------------------------------------------------------------------------
@@ -5774,7 +5816,7 @@ instance Upcast (SCARAThetaA Required) GCodeCmd where
   upcast = Cmd_SCARAThetaA
 
 instance ToText (SCARAThetaA Required) where
-  toText r = toText (RawCmd "M360" [])
+  toText _ = toText (RawCmd "M360" [])
 
 --------------------------------------------------------------------------------
 --- SCARA Theta-B (M361)
@@ -5794,7 +5836,7 @@ instance Upcast (SCARAThetaB Required) GCodeCmd where
   upcast = Cmd_SCARAThetaB
 
 instance ToText (SCARAThetaB Required) where
-  toText r = toText (RawCmd "M361" [])
+  toText _ = toText (RawCmd "M361" [])
 
 --------------------------------------------------------------------------------
 --- SCARA Psi-A (M362)
@@ -5814,7 +5856,7 @@ instance Upcast (SCARAPsiA Required) GCodeCmd where
   upcast = Cmd_SCARAPsiA
 
 instance ToText (SCARAPsiA Required) where
-  toText r = toText (RawCmd "M362" [])
+  toText _ = toText (RawCmd "M362" [])
 
 --------------------------------------------------------------------------------
 --- SCARA Psi-B (M363)
@@ -5834,7 +5876,7 @@ instance Upcast (SCARAPsiB Required) GCodeCmd where
   upcast = Cmd_SCARAPsiB
 
 instance ToText (SCARAPsiB Required) where
-  toText r = toText (RawCmd "M363" [])
+  toText _ = toText (RawCmd "M363" [])
 
 --------------------------------------------------------------------------------
 --- SCARA Psi-C (M364)
@@ -5854,7 +5896,7 @@ instance Upcast (SCARAPsiC Required) GCodeCmd where
   upcast = Cmd_SCARAPsiC
 
 instance ToText (SCARAPsiC Required) where
-  toText r = toText (RawCmd "M364" [])
+  toText _ = toText (RawCmd "M364" [])
 
 --------------------------------------------------------------------------------
 --- Activate Solenoid (M380)
@@ -5985,7 +6027,7 @@ instance Upcast (FilamentWidthSensorOff Required) GCodeCmd where
   upcast = Cmd_FilamentWidthSensorOff
 
 instance ToText (FilamentWidthSensorOff Required) where
-  toText r = toText (RawCmd "M406" [])
+  toText _ = toText (RawCmd "M406" [])
 
 --------------------------------------------------------------------------------
 --- Read Filament Width (M407)
@@ -6005,7 +6047,7 @@ instance Upcast (ReadFilamentWidth Required) GCodeCmd where
   upcast = Cmd_ReadFilamentWidth
 
 instance ToText (ReadFilamentWidth Required) where
-  toText r = toText (RawCmd "M407" [])
+  toText _ = toText (RawCmd "M407" [])
 
 --------------------------------------------------------------------------------
 --- Filament Runout (M412)
@@ -6287,7 +6329,7 @@ instance Upcast (HomeOffsetsHere Required) GCodeCmd where
   upcast = Cmd_HomeOffsetsHere
 
 instance ToText (HomeOffsetsHere Required) where
-  toText r = toText (RawCmd "M428" [])
+  toText _ = toText (RawCmd "M428" [])
 
 --------------------------------------------------------------------------------
 --- Power Monitor (M430)
@@ -6373,7 +6415,7 @@ instance Upcast (ValidateEEPROMContents Required) GCodeCmd where
   upcast = Cmd_ValidateEEPROMContents
 
 instance ToText (ValidateEEPROMContents Required) where
-  toText r = toText (RawCmd "M504" [])
+  toText _ = toText (RawCmd "M504" [])
 
 --------------------------------------------------------------------------------
 --- Lock Machine (M510)
@@ -6393,7 +6435,7 @@ instance Upcast (LockMachine Required) GCodeCmd where
   upcast = Cmd_LockMachine
 
 instance ToText (LockMachine Required) where
-  toText r = toText (RawCmd "M510" [])
+  toText _ = toText (RawCmd "M510" [])
 
 --------------------------------------------------------------------------------
 --- Unlock Machine (M511)
@@ -6415,6 +6457,25 @@ instance ToText (UnlockMachine Required) where
   toText r = toText (RawCmd "M511" [mkReqArg 'P' r.passcode])
 
 --------------------------------------------------------------------------------
+--- Set Passcode (M512)
+--- Docs: https://marlinfw.org/docs/gcode/M512.html
+--------------------------------------------------------------------------------
+
+data SetPasscode (f :: Type -> Type)
+  = SetPasscode
+  { passcode :: f TextValue
+  }
+  deriving (Generic)
+
+instance Default (SetPasscode NotDefined)
+
+instance Upcast (SetPasscode Required) GCodeCmd where
+  upcast = Cmd_SetPasscode
+
+instance ToText (SetPasscode Required) where
+  toText r = toText (RawCmd "M512" [mkReqArg '_' r.passcode])
+
+--------------------------------------------------------------------------------
 --- Abort SD Print (M524)
 --- Docs: https://marlinfw.org/docs/gcode/M524.html
 --------------------------------------------------------------------------------
@@ -6432,7 +6493,7 @@ instance Upcast (AbortSDPrint Required) GCodeCmd where
   upcast = Cmd_AbortSDPrint
 
 instance ToText (AbortSDPrint Required) where
-  toText r = toText (RawCmd "M524" [])
+  toText _ = toText (RawCmd "M524" [])
 
 --------------------------------------------------------------------------------
 --- Endstops Abort SD (M540)
@@ -6804,7 +6865,7 @@ instance Upcast (ReportGcodeMacros Required) GCodeCmd where
   upcast = Cmd_ReportGcodeMacros
 
 instance ToText (ReportGcodeMacros Required) where
-  toText r = toText (RawCmd "M820" [])
+  toText _ = toText (RawCmd "M820" [])
 
 --------------------------------------------------------------------------------
 --- XYZ Probe Offset (M851)
@@ -7004,7 +7065,7 @@ instance Upcast (ReportDACStepperCurrent Required) GCodeCmd where
   upcast = Cmd_ReportDACStepperCurrent
 
 instance ToText (ReportDACStepperCurrent Required) where
-  toText r = toText (RawCmd "M909" [])
+  toText _ = toText (RawCmd "M909" [])
 
 --------------------------------------------------------------------------------
 --- Commit DAC to EEPROM (M910)
@@ -7024,7 +7085,7 @@ instance Upcast (CommitDACtoEEPROM Required) GCodeCmd where
   upcast = Cmd_CommitDACtoEEPROM
 
 instance ToText (CommitDACtoEEPROM Required) where
-  toText r = toText (RawCmd "M910" [])
+  toText _ = toText (RawCmd "M910" [])
 
 --------------------------------------------------------------------------------
 --- TMC OT Pre-Warn Condition (M911)
@@ -7044,7 +7105,7 @@ instance Upcast (TMCOTPreWarnCondition Required) GCodeCmd where
   upcast = Cmd_TMCOTPreWarnCondition
 
 instance ToText (TMCOTPreWarnCondition Required) where
-  toText r = toText (RawCmd "M911" [])
+  toText _ = toText (RawCmd "M911" [])
 
 --------------------------------------------------------------------------------
 --- TMC Z Axis Calibration (M915)
@@ -7151,7 +7212,7 @@ instance Upcast (BackUpFlashSettingstoSD Required) GCodeCmd where
   upcast = Cmd_BackUpFlashSettingstoSD
 
 instance ToText (BackUpFlashSettingstoSD Required) where
-  toText r = toText (RawCmd "M993" [])
+  toText _ = toText (RawCmd "M993" [])
 
 --------------------------------------------------------------------------------
 --- Restore Flash from SD (M994)
@@ -7171,7 +7232,7 @@ instance Upcast (RestoreFlashfromSD Required) GCodeCmd where
   upcast = Cmd_RestoreFlashfromSD
 
 instance ToText (RestoreFlashfromSD Required) where
-  toText r = toText (RawCmd "M994" [])
+  toText _ = toText (RawCmd "M994" [])
 
 --------------------------------------------------------------------------------
 --- Touch Screen Calibration (M995)
@@ -7191,7 +7252,7 @@ instance Upcast (TouchScreenCalibration Required) GCodeCmd where
   upcast = Cmd_TouchScreenCalibration
 
 instance ToText (TouchScreenCalibration Required) where
-  toText r = toText (RawCmd "M995" [])
+  toText _ = toText (RawCmd "M995" [])
 
 --------------------------------------------------------------------------------
 --- Firmware Update (M997)
@@ -7211,7 +7272,7 @@ instance Upcast (FirmwareUpdate Required) GCodeCmd where
   upcast = Cmd_FirmwareUpdate
 
 instance ToText (FirmwareUpdate Required) where
-  toText r = toText (RawCmd "M997" [])
+  toText _ = toText (RawCmd "M997" [])
 
 --------------------------------------------------------------------------------
 --- Utils

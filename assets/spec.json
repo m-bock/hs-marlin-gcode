@@ -1082,24 +1082,7 @@
     "type": "Pins Debugging",
     "code": "M43",
     "link": "https://marlinfw.org/docs/gcode/M043.html",
-    "args": [
-      { "code": "E", "label": "watchEndstops", "type": "Flag" },
-      { "code": "I", "label": "ignoreProtection", "type": "Flag" },
-      { "code": "P", "label": "pin", "type": "Index" },
-      { "code": "S", "label": "testProbe", "type": "Flag" },
-      { "code": "T", "label": "togglePins", "type": "Flag" },
-      { "code": "W", "label": "watchPins", "type": "Flag" }
-    ],
-    "signature": {
-      "optional": ["E", "I", "P", "S", "T", "W"],
-      "required": []
-    }
-  },
-  {
-    "type": "Toggle Pins",
-    "code": "M43 T",
-    "link": "https://marlinfw.org/docs/gcode/M043-T.html",
-    "unimplemented": "Subcommand variant with space in code, requires special parsing",
+    "unimplemented": "Pins debugging with complex pin configuration and state management",
     "complexity": 6
   },
   {
@@ -1138,9 +1121,7 @@
   {
     "type": "Start Print Job Timer",
     "code": "M75",
-    "link": "https://marlinfw.org/docs/gcode/M075.html",
-    "unimplemented": "Print job timer state management, requires tracking print state",
-    "complexity": 5
+    "link": "https://marlinfw.org/docs/gcode/M075.html"
   },
   {
     "type": "Pause Print Job Timer",
@@ -1670,8 +1651,16 @@
     "type": "Free Memory",
     "code": "M100",
     "link": "https://marlinfw.org/docs/gcode/M100.html",
-    "unimplemented": "Free memory debugging command, outputs diagnostic information rather than G-code",
-    "complexity": 3
+    "args": [
+      { "code": "C", "label": "corruptLocations", "type": "Count" },
+      { "code": "D", "label": "dumpMemory", "type": "Flag" },
+      { "code": "F", "label": "reportFreeBytes", "type": "Flag" },
+      { "code": "I", "label": "initializePool", "type": "Flag" }
+    ],
+    "signature": {
+      "optional": ["C", "D", "F", "I"],
+      "required": []
+    }
   },
   {
     "type": "Configure Bed Distance Sensor",
@@ -2123,9 +2112,7 @@
   {
     "type": "Scan I2C Bus",
     "code": "M265",
-    "link": "https://marlinfw.org/docs/gcode/M265.html",
-    "unimplemented": "I2C bus scanner, outputs diagnostic information rather than G-code",
-    "complexity": 4
+    "link": "https://marlinfw.org/docs/gcode/M265.html"
   },
   {
     "type": "Servo Position",
@@ -2616,8 +2603,13 @@
     "type": "Set Passcode",
     "code": "M512",
     "link": "https://marlinfw.org/docs/gcode/M512.html",
-    "unimplemented": "Set passcode with security-sensitive password handling",
-    "complexity": 5
+    "args": [
+      { "code": "_", "label": "passcode", "type": "TextValue" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["_"]
+    }
   },
   {
     "type": "Abort SD Print",
