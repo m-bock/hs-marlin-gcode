@@ -2763,19 +2763,17 @@ instance ToText (VacuumBlowerControl_Off Required) where
 
 data ExpectedPrinterCheck (f :: Type -> Type)
   = ExpectedPrinterCheck
-  { text :: Maybe TextValue
+  { text :: f TextValue
   }
   deriving (Generic)
 
 instance Default (ExpectedPrinterCheck NotDefined)
 
-instance Default (ExpectedPrinterCheck Required)
-
 instance Upcast (ExpectedPrinterCheck Required) GCodeCmd where
   upcast = Cmd_ExpectedPrinterCheck
 
 instance ToText (ExpectedPrinterCheck Required) where
-  toText r = toText (RawCmd "M16" [mkArg '_' r.text])
+  toText r = toText (RawCmd "M16" [mkReqArg '_' r.text])
 
 --------------------------------------------------------------------------------
 --- Enable Steppers (M17)
@@ -2943,23 +2941,21 @@ instance ToText (ReleaseSDCard Required) where
 --------------------------------------------------------------------------------
 --- Select SD File (M23)
 --- Docs: https://marlinfw.org/docs/gcode/M023.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data SelectSDFile (f :: Type -> Type)
   = SelectSDFile
-  {}
+  { filename :: f Filename
+  }
   deriving (Generic)
 
 instance Default (SelectSDFile NotDefined)
-
-instance Default (SelectSDFile Required)
 
 instance Upcast (SelectSDFile Required) GCodeCmd where
   upcast = Cmd_SelectSDFile
 
 instance ToText (SelectSDFile Required) where
-  toText r = toText (RawCmd "M23" [])
+  toText r = toText (RawCmd "M23" [mkReqArg '_' r.filename])
 
 --------------------------------------------------------------------------------
 --- Start or Resume SD Print (M24)
@@ -3063,23 +3059,29 @@ instance ToText (ReportSDPrintStatus Required) where
 --------------------------------------------------------------------------------
 --- Start SD Write (M28)
 --- Docs: https://marlinfw.org/docs/gcode/M028.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data StartSDWrite (f :: Type -> Type)
   = StartSDWrite
-  {}
+  { binaryMode :: Maybe Flag,
+    filename :: f Filename
+  }
   deriving (Generic)
 
 instance Default (StartSDWrite NotDefined)
-
-instance Default (StartSDWrite Required)
 
 instance Upcast (StartSDWrite Required) GCodeCmd where
   upcast = Cmd_StartSDWrite
 
 instance ToText (StartSDWrite Required) where
-  toText r = toText (RawCmd "M28" [])
+  toText r =
+    toText
+      ( RawCmd
+          "M28"
+          [ mkArg 'B' r.binaryMode,
+            mkReqArg '_' r.filename
+          ]
+      )
 
 --------------------------------------------------------------------------------
 --- Stop SD Write (M29)
@@ -3104,23 +3106,21 @@ instance ToText (StopSDWrite Required) where
 --------------------------------------------------------------------------------
 --- Delete SD File (M30)
 --- Docs: https://marlinfw.org/docs/gcode/M030.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data DeleteSDFile (f :: Type -> Type)
   = DeleteSDFile
-  {}
+  { filename :: f Filename
+  }
   deriving (Generic)
 
 instance Default (DeleteSDFile NotDefined)
-
-instance Default (DeleteSDFile Required)
 
 instance Upcast (DeleteSDFile Required) GCodeCmd where
   upcast = Cmd_DeleteSDFile
 
 instance ToText (DeleteSDFile Required) where
-  toText r = toText (RawCmd "M30" [])
+  toText r = toText (RawCmd "M30" [mkReqArg '_' r.filename])
 
 --------------------------------------------------------------------------------
 --- Report Print Time (M31)
@@ -3145,44 +3145,50 @@ instance ToText (ReportPrintTime Required) where
 --------------------------------------------------------------------------------
 --- Select and Start (M32)
 --- Docs: https://marlinfw.org/docs/gcode/M032.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data SelectandStart (f :: Type -> Type)
   = SelectandStart
-  {}
+  { subProgramType :: Maybe Index,
+    startingOffset :: Maybe Count,
+    filename :: f Filename
+  }
   deriving (Generic)
 
 instance Default (SelectandStart NotDefined)
-
-instance Default (SelectandStart Required)
 
 instance Upcast (SelectandStart Required) GCodeCmd where
   upcast = Cmd_SelectandStart
 
 instance ToText (SelectandStart Required) where
-  toText r = toText (RawCmd "M32" [])
+  toText r =
+    toText
+      ( RawCmd
+          "M32"
+          [ mkArg 'P' r.subProgramType,
+            mkArg 'S' r.startingOffset,
+            mkReqArg '_' r.filename
+          ]
+      )
 
 --------------------------------------------------------------------------------
 --- Get Long Path (M33)
 --- Docs: https://marlinfw.org/docs/gcode/M033.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data GetLongPath (f :: Type -> Type)
   = GetLongPath
-  {}
+  { path :: f Filename
+  }
   deriving (Generic)
 
 instance Default (GetLongPath NotDefined)
-
-instance Default (GetLongPath Required)
 
 instance Upcast (GetLongPath Required) GCodeCmd where
   upcast = Cmd_GetLongPath
 
 instance ToText (GetLongPath Required) where
-  toText r = toText (RawCmd "M33" [])
+  toText r = toText (RawCmd "M33" [mkReqArg '_' r.path])
 
 --------------------------------------------------------------------------------
 --- SDCard Sorting (M34)
@@ -3967,12 +3973,12 @@ instance ToText (FirmwareInfo Required) where
 --------------------------------------------------------------------------------
 --- Set LCD Message (M117)
 --- Docs: https://marlinfw.org/docs/gcode/M117.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data SetLCDMessage (f :: Type -> Type)
   = SetLCDMessage
-  {}
+  { message :: Maybe TextValue
+  }
   deriving (Generic)
 
 instance Default (SetLCDMessage NotDefined)
@@ -3983,17 +3989,20 @@ instance Upcast (SetLCDMessage Required) GCodeCmd where
   upcast = Cmd_SetLCDMessage
 
 instance ToText (SetLCDMessage Required) where
-  toText r = toText (RawCmd "M117" [])
+  toText r = toText (RawCmd "M117" [mkArg '_' r.message])
 
 --------------------------------------------------------------------------------
 --- Serial Print (M118)
 --- Docs: https://marlinfw.org/docs/gcode/M118.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data SerialPrint (f :: Type -> Type)
   = SerialPrint
-  {}
+  { actionCommand :: Maybe Flag,
+    echoPrefix :: Maybe Flag,
+    portIndex :: Maybe Index,
+    message :: Maybe TextValue
+  }
   deriving (Generic)
 
 instance Default (SerialPrint NotDefined)
@@ -4004,7 +4013,16 @@ instance Upcast (SerialPrint Required) GCodeCmd where
   upcast = Cmd_SerialPrint
 
 instance ToText (SerialPrint Required) where
-  toText r = toText (RawCmd "M118" [])
+  toText r =
+    toText
+      ( RawCmd
+          "M118"
+          [ mkArg 'A' r.actionCommand,
+            mkArg 'E' r.echoPrefix,
+            mkArg 'P' r.portIndex,
+            mkArg '_' r.message
+          ]
+      )
 
 --------------------------------------------------------------------------------
 --- Endstop States (M119)
@@ -6800,12 +6818,12 @@ instance ToText (EndstopsAbortSD Required) where
 --------------------------------------------------------------------------------
 --- Machine Name (M550)
 --- Docs: https://marlinfw.org/docs/gcode/M550.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data MachineName (f :: Type -> Type)
   = MachineName
-  {}
+  { machineName :: Maybe TextValue
+  }
   deriving (Generic)
 
 instance Default (MachineName NotDefined)
@@ -6816,7 +6834,7 @@ instance Upcast (MachineName Required) GCodeCmd where
   upcast = Cmd_MachineName
 
 instance ToText (MachineName Required) where
-  toText r = toText (RawCmd "M550" [])
+  toText r = toText (RawCmd "M550" [mkArg '_' r.machineName])
 
 --------------------------------------------------------------------------------
 --- Ethernet IP Address, Network IF (M552)
@@ -7821,23 +7839,21 @@ instance ToText (TMCHomingCurrent Required) where
 --------------------------------------------------------------------------------
 --- Start SD Logging (M928)
 --- Docs: https://marlinfw.org/docs/gcode/M928.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data StartSDLogging (f :: Type -> Type)
   = StartSDLogging
-  {}
+  { filename :: f Filename
+  }
   deriving (Generic)
 
 instance Default (StartSDLogging NotDefined)
-
-instance Default (StartSDLogging Required)
 
 instance Upcast (StartSDLogging Required) GCodeCmd where
   upcast = Cmd_StartSDLogging
 
 instance ToText (StartSDLogging Required) where
-  toText r = toText (RawCmd "M928" [])
+  toText r = toText (RawCmd "M928" [mkReqArg '_' r.filename])
 
 --------------------------------------------------------------------------------
 --- Magnetic Parking Extruder (M951)

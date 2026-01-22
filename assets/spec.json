@@ -1027,13 +1027,27 @@
     "type": "Select and Start",
     "code": "M32",
     "link": "https://marlinfw.org/docs/gcode/M032.html",
-    "unimplemented": true
+    "args": [
+      { "code": "P", "label": "subProgramType", "type": "Index" },
+      { "code": "S", "label": "startingOffset", "type": "Count" },
+      { "code": "_", "label": "filename", "type": "Filename" }
+    ],
+    "signature": {
+      "optional": ["P", "S"],
+      "required": ["_"]
+    }
   },
   {
     "type": "Get Long Path",
     "code": "M33",
     "link": "https://marlinfw.org/docs/gcode/M033.html",
-    "unimplemented": true
+    "args": [
+      { "code": "_", "label": "path", "type": "Filename" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["_"]
+    }
   },
   {
     "type": "SDCard Sorting",
@@ -1363,13 +1377,28 @@
     "type": "Set LCD Message",
     "code": "M117",
     "link": "https://marlinfw.org/docs/gcode/M117.html",
-    "unimplemented": true
+    "args": [
+      { "code": "_", "label": "message", "type": "TextValue" }
+    ],
+    "signature": {
+      "optional": ["_"],
+      "required": []
+    }
   },
   {
     "type": "Serial Print",
     "code": "M118",
     "link": "https://marlinfw.org/docs/gcode/M118.html",
-    "unimplemented": true
+    "args": [
+      { "code": "A", "label": "actionCommand", "type": "Flag" },
+      { "code": "E", "label": "echoPrefix", "type": "Flag" },
+      { "code": "P", "label": "portIndex", "type": "Index" },
+      { "code": "_", "label": "message", "type": "TextValue" }
+    ],
+    "signature": {
+      "optional": ["A", "E", "P", "_"],
+      "required": []
+    }
   },
   {
     "type": "Endstop States",
@@ -2597,7 +2626,13 @@
     "type": "Machine Name",
     "code": "M550",
     "link": "https://marlinfw.org/docs/gcode/M550.html",
-    "unimplemented": true
+    "args": [
+      { "code": "_", "label": "machineName", "type": "TextValue" }
+    ],
+    "signature": {
+      "optional": ["_"],
+      "required": []
+    }
   },
   {
     "type": "Ethernet IP Address, Network IF",
@@ -2983,7 +3018,13 @@
     "type": "Start SD Logging",
     "code": "M928",
     "link": "https://marlinfw.org/docs/gcode/M928.html",
-    "unimplemented": true
+    "args": [
+      { "code": "_", "label": "filename", "type": "Filename" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["_"]
+    }
   },
   {
     "type": "Magnetic Parking Extruder",
