@@ -13,4 +13,7 @@ unimplemented-codes:
 
 update-readme:
     node scripts/update-readme.js
+
+docs:
+    OUTPUT_PATH=API.md SPEC_PATH=assets/spec.json node scripts/gen-docs.js
     
