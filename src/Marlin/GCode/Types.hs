@@ -7,43 +7,43 @@ import Relude
 import Text.Printf (printf)
 
 newtype Mm = Mm Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype MmPerMin = MmPerMin Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype Celsius = Celsius Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype MmPerSec = MmPerSec Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype MmPerSec2 = MmPerSec2 Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype Percent = Percent Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype Seconds = Seconds Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype Milliseconds = Milliseconds Int
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype Degrees = Degrees Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype Index = Index Int
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype LaserPower = LaserPower Double
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 newtype Flag = Flag Bool
   deriving (Eq, Ord, Show, Read)
 
 newtype Count = Count Int
-  deriving (Eq, Ord, Show, Read)
+  deriving (Eq, Ord, Show, Read, Num)
 
 ---
 

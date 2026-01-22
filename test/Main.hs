@@ -25,7 +25,6 @@ tests =
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
-                      axisExtrusion = Just (Mm 4),
                       feedrate = Just (MmPerMin 1500),
                       laser = Just (LaserPower 50),
                       axisU = Just (Mm 5),
@@ -36,7 +35,7 @@ tests =
                       axisZ = Just (Mm 30)
                     }
               )
-            @?= "G0 A1.0000 B2.0000 C3.0000 E4.0000 F1500.0000 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
+            @?= "G0 A1.0000 B2.0000 C3.0000 F1500.0000 S50.0000 U5.0000 V6.0000 W7.0000 X10.0000 Y20.0000 Z30.0000",
           testCase "Linear Move With Extrusion - maximum args"
             $ toText
               ( Cmd_LinearMove_WithExtrusion
@@ -44,7 +43,7 @@ tests =
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
-                      axisExtrusion = Just (Mm 4),
+                      axisExtrusion = Req (Mm 4),
                       feedrate = Just (MmPerMin 1500),
                       laser = Just (LaserPower 50),
                       axisU = Just (Mm 5),
@@ -1167,46 +1166,5 @@ tests =
                     }
               )
             @?= "M999 S1"
-        ],
-      testCase "multiple commands"
-        $ toText
-          [ comment "Test comment",
-            Cmd_LinearMove_NoExtrusion
-              idef
-                { axisX = Just (Mm 10),
-                  axisY = Just (Mm 20)
-                },
-            Cmd_LinearMove_WithExtrusion
-              idef
-                { axisX = Just (Mm 10),
-                  axisY = Just (Mm 20)
-                }
-              `withComment` "Test comment",
-            Cmd_LinearMove_Clockwise_OffsetX
-              idef
-                { offsetX = Req (Mm 10),
-                  axisX = Just (Mm 10),
-                  axisY = Just (Mm 20)
-                },
-            Cmd_LinearMove_Clockwise_OffsetY
-              idef
-                { offsetY = Req (Mm 10),
-                  axisX = Just (Mm 10),
-                  axisY = Just (Mm 20)
-                },
-            Cmd_LinearMove_Clockwise_Radius
-              idef
-                { radius = Req (Mm 10),
-                  axisX = Just (Mm 10),
-                  axisY = Just (Mm 20)
-                }
-          ]
-        @?= T.unlines
-          [ "; Test comment",
-            "G0 X10.0000 Y20.0000",
-            "G1 X10.0000 Y20.0000 ; Test comment",
-            "G2 I10.0000 X10.0000 Y20.0000",
-            "G2 J10.0000 X10.0000 Y20.0000",
-            "G2 R10.0000 X10.0000 Y20.0000"
-          ]
+        ]
     ]

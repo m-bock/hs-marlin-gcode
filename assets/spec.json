@@ -19,7 +19,7 @@
       { "code": "Z", "label": "axisZ", "type": "Mm" }
     ],
     "signature": {
-      "optional": ["A", "B", "C", "E", "F", "S", "U", "V", "W", "X", "Y", "Z"],
+      "optional": ["A", "B", "C", "F", "S", "U", "V", "W", "X", "Y", "Z"],
       "required": []
     }
   },
@@ -43,8 +43,8 @@
       { "code": "Z", "label": "axisZ", "type": "Mm" }
     ],
     "signature": {
-      "optional": ["A", "B", "C", "E", "F", "S", "U", "V", "W", "X", "Y", "Z"],
-      "required": []
+      "optional": ["A", "B", "C", "F", "S", "U", "V", "W", "X", "Y", "Z"],
+      "required": ["E"]
     }
   },
   {

@@ -130,9 +130,9 @@ const getSignatures = (item) => {
   }
 };
 
-const genModule = (data) => {
+const genModule = (data, moduleName) => {
   return `
-module Marlin.GCode.Generated where
+module ${moduleName} where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
@@ -172,19 +172,38 @@ mkArg :: (Upcast a ArgValue) => Char -> Maybe a -> Maybe (Char, ArgValue)
 mkArg c = fmap (\\a -> (c, upcast a))
 
 mkReqArg :: (Upcast a ArgValue) => Char -> Required a -> Maybe (Char, ArgValue)
-mkReqArg c (Required a) = Just (c, upcast a)
+mkReqArg c (Req a) = Just (c, upcast a)
 
 mkCmd :: Text -> [Maybe (Char, ArgValue)] -> Text
-mkCmd c args = if null args then c else c <> " " <> T.unwords (map (\\(c, a) -> T.singleton c <> toText a) (catMaybes args))
+mkCmd c args =
+  if null args
+    then c
+    else c <> " " <> T.unwords (map (\\(c, a) -> T.singleton c <> toText a) (catMaybes args))
 
 `.trim();
 };
 
 const main = async () => {
-  const specPath = path.join(__dirname, "..", "spec.json");
+  if (!process.env.SPEC_PATH) {
+    console.error("ERROR: SPEC_PATH environment variable is required");
+    process.exit(1);
+  }
+  if (!process.env.MODULE_NAME) {
+    console.error("ERROR: MODULE_NAME environment variable is required");
+    process.exit(1);
+  }
+  if (!process.env.MODULE_PATH) {
+    console.error("ERROR: MODULE_PATH environment variable is required");
+    process.exit(1);
+  }
+  
+  const specPath = process.env.SPEC_PATH;
+  const moduleName = process.env.MODULE_NAME;
+  const modulePath = process.env.MODULE_PATH;
+  
   const data = JSON.parse(await fs.readFile(specPath, "utf-8"));
-  const module = genModule(data);
-  await fs.writeFile(path.join(__dirname, "..", "src", "Marlin", "GCode", "Generated.hs"), module);
+  const module = genModule(data, moduleName);
+  await fs.writeFile(modulePath, module);
 };
 
 main();

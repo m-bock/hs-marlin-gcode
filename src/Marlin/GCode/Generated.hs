@@ -583,7 +583,6 @@ data LinearMove_NoExtrusion (f :: Type -> Type)
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
-    axisExtrusion :: Maybe Mm,
     feedrate :: Maybe MmPerMin,
     laser :: Maybe LaserPower,
     axisU :: Maybe Mm,
@@ -607,7 +606,6 @@ instance ToText (LinearMove_NoExtrusion Required) where
       [ mkArg 'A' r.axisA,
         mkArg 'B' r.axisB,
         mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
         mkArg 'F' r.feedrate,
         mkArg 'S' r.laser,
         mkArg 'U' r.axisU,
@@ -628,7 +626,7 @@ data LinearMove_WithExtrusion (f :: Type -> Type)
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
-    axisExtrusion :: Maybe Mm,
+    axisExtrusion :: f Mm,
     feedrate :: Maybe MmPerMin,
     laser :: Maybe LaserPower,
     axisU :: Maybe Mm,
@@ -652,7 +650,7 @@ instance ToText (LinearMove_WithExtrusion Required) where
       [ mkArg 'A' r.axisA,
         mkArg 'B' r.axisB,
         mkArg 'C' r.axisC,
-        mkArg 'E' r.axisExtrusion,
+        mkReqArg 'E' r.axisExtrusion,
         mkArg 'F' r.feedrate,
         mkArg 'S' r.laser,
         mkArg 'U' r.axisU,
@@ -7262,4 +7260,7 @@ mkReqArg :: (Upcast a ArgValue) => Char -> Required a -> Maybe (Char, ArgValue)
 mkReqArg c (Req a) = Just (c, upcast a)
 
 mkCmd :: Text -> [Maybe (Char, ArgValue)] -> Text
-mkCmd c args = if null args then c else c <> " " <> T.unwords (map (\(c, a) -> T.singleton c <> toText a) (catMaybes args))
+mkCmd c args =
+  if null args
+    then c
+    else c <> " " <> T.unwords (map (\(c, a) -> T.singleton c <> toText a) (catMaybes args))
