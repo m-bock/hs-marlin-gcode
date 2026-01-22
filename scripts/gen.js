@@ -61,8 +61,7 @@ const genSignature = (item, signature) => {
     : `{}`;
   
   const linkLine = item.link ? `--- Docs: ${item.link}` : "";
-  const unimplementedLine = item.unimplemented ? `--- Status: UNIMPLEMENTED` : "";
-  const lines = [linkLine, unimplementedLine].filter(Boolean);
+  const lines = [linkLine].filter(Boolean);
   const extraLines = lines.length > 0 ? "\n" + lines.join("\n") : "";
   const displayTitle = item.type; // Use original type with spaces for display
   
@@ -90,13 +89,19 @@ instance ToText (${typeName} Required) where
 };
 
 const genItem = (item) => {
+  // Skip unimplemented commands
+  if (item.unimplemented) {
+    return "";
+  }
   return getSignatures(item).map(sig => genSignature(item, sig)).join("\n\n");
 };
 
 const genCmd = (data) => {
+  // Filter out unimplemented commands
+  const implemented = data.filter(item => !item.unimplemented);
   return `
 data GCodeCmd
-  = ${data.flatMap(item => 
+  = ${implemented.flatMap(item => 
        getSignatures(item).map(sig => `${mkCmdName(item, sig)} (${mkTypeName(item, sig)} Required)`)).join("\n  | ")}
   | Comment (Maybe GCodeCmd) Text
        deriving (Generic)
@@ -104,7 +109,9 @@ data GCodeCmd
 };
 
 const genToTextInstance = (data) => {
-  const cases = data.flatMap(item =>
+  // Filter out unimplemented commands
+  const implemented = data.filter(item => !item.unimplemented);
+  const cases = implemented.flatMap(item =>
     getSignatures(item).map(sig => {
       return `${mkCmdName(item, sig)} r -> toText r`;
     })
@@ -181,7 +188,7 @@ comment c = Comment Nothing c
 --- Commands
 --------------------------------------------------------------------------------
 
-${data.map(genItem).join("\n\n")}
+${data.map(genItem).filter(item => item !== "").join("\n\n")}
 
 
 --------------------------------------------------------------------------------

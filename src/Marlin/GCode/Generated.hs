@@ -69,7 +69,6 @@ data GCodeCmd
   | Cmd_ProbeTarget_AwayErrorOnFail (ProbeTarget_AwayErrorOnFail Required)
   | Cmd_ProbeTarget_AwayNoErrorOnFail (ProbeTarget_AwayNoErrorOnFail Required)
   | Cmd_MovetoMeshCoordinate (MovetoMeshCoordinate Required)
-  | Cmd_MoveinMachineCoordinates (MoveinMachineCoordinates Required)
   | Cmd_SelectWorkspace_1 (SelectWorkspace_1 Required)
   | Cmd_SelectWorkspace_2 (SelectWorkspace_2 Required)
   | Cmd_SelectWorkspace_3 (SelectWorkspace_3 Required)
@@ -116,10 +115,8 @@ data GCodeCmd
   | Cmd_SDCardSorting (SDCardSorting Required)
   | Cmd_SetPinState (SetPinState Required)
   | Cmd_PinsDebugging (PinsDebugging Required)
-  | Cmd_TogglePins (TogglePins Required)
   | Cmd_ProbeRepeatabilityTest (ProbeRepeatabilityTest Required)
   | Cmd_SetPrintProgress (SetPrintProgress Required)
-  | Cmd_StartPrintJobTimer (StartPrintJobTimer Required)
   | Cmd_PausePrintJobTimer (PausePrintJobTimer Required)
   | Cmd_StopPrintJobTimer (StopPrintJobTimer Required)
   | Cmd_PrintJobStats (PrintJobStats Required)
@@ -168,7 +165,6 @@ data GCodeCmd
   | Cmd_FactoryReset (FactoryReset Required)
   | Cmd_ReportSettings (ReportSettings Required)
   | Cmd_STOPRestart (STOPRestart Required)
-  | Cmd_FreeMemory (FreeMemory Required)
   | Cmd_ConfigureBedDistanceSensor (ConfigureBedDistanceSensor Required)
   | Cmd_TMCDebugging (TMCDebugging Required)
   | Cmd_FanTachometers (FanTachometers Required)
@@ -195,16 +191,12 @@ data GCodeCmd
   | Cmd_SetAutoRetract (SetAutoRetract Required)
   | Cmd_HomingFeedrate (HomingFeedrate Required)
   | Cmd_SoftwareEndstops (SoftwareEndstops Required)
-  | Cmd_FilamentSwapParameters (FilamentSwapParameters Required)
   | Cmd_SetHotendOffset (SetHotendOffset Required)
   | Cmd_WaitforPinState (WaitforPinState Required)
-  | Cmd_TriggerCamera (TriggerCamera Required)
   | Cmd_LCDContrast (LCDContrast Required)
   | Cmd_LCDSleepBacklightTimeout (LCDSleepBacklightTimeout Required)
   | Cmd_LCDBrightness (LCDBrightness Required)
-  | Cmd_I2CSend (I2CSend Required)
   | Cmd_I2CRequest (I2CRequest Required)
-  | Cmd_ScanI2CBus (ScanI2CBus Required)
   | Cmd_ServoPosition (ServoPosition Required)
   | Cmd_EditServoAngles (EditServoAngles Required)
   | Cmd_DetachServo (DetachServo Required)
@@ -215,10 +207,7 @@ data GCodeCmd
   | Cmd_PIDAutotune (PIDAutotune Required)
   | Cmd_SetBedPID (SetBedPID Required)
   | Cmd_UserThermistorParameters (UserThermistorParameters Required)
-  | Cmd_ModelPredictiveTempControl (ModelPredictiveTempControl Required)
   | Cmd_SetChamberPID (SetChamberPID Required)
-  | Cmd_SetMicrostepping (SetMicrostepping Required)
-  | Cmd_SetMicrostepPins (SetMicrostepPins Required)
   | Cmd_CaseLightControl (CaseLightControl Required)
   | Cmd_SCARAThetaA (SCARAThetaA Required)
   | Cmd_SCARAThetaB (SCARAThetaB Required)
@@ -243,62 +232,39 @@ data GCodeCmd
   | Cmd_HomeOffsetsHere (HomeOffsetsHere Required)
   | Cmd_PowerMonitor (PowerMonitor Required)
   | Cmd_CancelObjects (CancelObjects Required)
-  | Cmd_FixedTimeMotion (FixedTimeMotion Required)
-  | Cmd_FTMotionTrajectorySmoothing (FTMotionTrajectorySmoothing Required)
   | Cmd_ValidateEEPROMContents (ValidateEEPROMContents Required)
   | Cmd_LockMachine (LockMachine Required)
   | Cmd_UnlockMachine (UnlockMachine Required)
-  | Cmd_SetPasscode (SetPasscode Required)
   | Cmd_AbortSDPrint (AbortSDPrint Required)
   | Cmd_EndstopsAbortSD (EndstopsAbortSD Required)
   | Cmd_MachineName (MachineName Required)
-  | Cmd_EthernetIPAddressNetworkIF (EthernetIPAddressNetworkIF Required)
-  | Cmd_EthernetSubnetMask (EthernetSubnetMask Required)
-  | Cmd_EthernetGatewayIPAddress (EthernetGatewayIPAddress Required)
-  | Cmd_SetTMCSteppingMode (SetTMCSteppingMode Required)
   | Cmd_SerialBaudRate (SerialBaudRate Required)
   | Cmd_NonlinearExtrusionControl (NonlinearExtrusionControl Required)
   | Cmd_ZVInputShaping (ZVInputShaping Required)
   | Cmd_FilamentChange (FilamentChange Required)
   | Cmd_ConfigureFilamentChange (ConfigureFilamentChange Required)
-  | Cmd_MultiNozzleMode (MultiNozzleMode Required)
-  | Cmd_DeltaConfiguration (DeltaConfiguration Required)
-  | Cmd_SetDeltaEndstopAdjustments (SetDeltaEndstopAdjustments Required)
   | Cmd_DuetSmartEffectorSensitivity (DuetSmartEffectorSensitivity Required)
   | Cmd_LoadFilament (LoadFilament Required)
   | Cmd_UnloadFilament (UnloadFilament Required)
   | Cmd_ControllerFanSettings (ControllerFanSettings Required)
   | Cmd_RepeatMarker (RepeatMarker Required)
-  | Cmd_GcodeMacros (GcodeMacros Required)
   | Cmd_ReportGcodeMacros (ReportGcodeMacros Required)
   | Cmd_XYZProbeOffset (XYZProbeOffset Required)
   | Cmd_BedSkewCompensation (BedSkewCompensation Required)
-  | Cmd_I2CPositionEncoders (I2CPositionEncoders Required)
-  | Cmd_ProbeTemperatureConfig (ProbeTemperatureConfig Required)
   | Cmd_HandlePromptResponse (HandlePromptResponse Required)
   | Cmd_LinearAdvanceFactor (LinearAdvanceFactor Required)
   | Cmd_StepperMotorCurrent (StepperMotorCurrent Required)
-  | Cmd_TrimpotStepperMotorCurrent (TrimpotStepperMotorCurrent Required)
   | Cmd_SetTrimpotPins (SetTrimpotPins Required)
   | Cmd_ReportDACStepperCurrent (ReportDACStepperCurrent Required)
   | Cmd_CommitDACtoEEPROM (CommitDACtoEEPROM Required)
   | Cmd_TMCOTPreWarnCondition (TMCOTPreWarnCondition Required)
-  | Cmd_ClearTMCOTPreWarn (ClearTMCOTPreWarn Required)
-  | Cmd_SetHybridThresholdSpeed (SetHybridThresholdSpeed Required)
-  | Cmd_TMCBumpSensitivity (TMCBumpSensitivity Required)
   | Cmd_TMCZAxisCalibration (TMCZAxisCalibration Required)
-  | Cmd_L6474ThermalWarningTest (L6474ThermalWarningTest Required)
-  | Cmd_L6474OvercurrentWarningTest (L6474OvercurrentWarningTest Required)
-  | Cmd_L6474SpeedWarningTest (L6474SpeedWarningTest Required)
-  | Cmd_TMCChopperTiming (TMCChopperTiming Required)
-  | Cmd_TMCHomingCurrent (TMCHomingCurrent Required)
   | Cmd_StartSDLogging (StartSDLogging Required)
   | Cmd_MagneticParkingExtruder (MagneticParkingExtruder Required)
   | Cmd_BackUpFlashSettingstoSD (BackUpFlashSettingstoSD Required)
   | Cmd_RestoreFlashfromSD (RestoreFlashfromSD Required)
   | Cmd_TouchScreenCalibration (TouchScreenCalibration Required)
   | Cmd_FirmwareUpdate (FirmwareUpdate Required)
-  | Cmd_MAX7219Control (MAX7219Control Required)
   | Comment (Maybe GCodeCmd) Text
   deriving (Generic)
 
@@ -345,7 +311,6 @@ instance ToText GCodeCmd where
       Cmd_ProbeTarget_AwayErrorOnFail r -> toText r
       Cmd_ProbeTarget_AwayNoErrorOnFail r -> toText r
       Cmd_MovetoMeshCoordinate r -> toText r
-      Cmd_MoveinMachineCoordinates r -> toText r
       Cmd_SelectWorkspace_1 r -> toText r
       Cmd_SelectWorkspace_2 r -> toText r
       Cmd_SelectWorkspace_3 r -> toText r
@@ -392,10 +357,8 @@ instance ToText GCodeCmd where
       Cmd_SDCardSorting r -> toText r
       Cmd_SetPinState r -> toText r
       Cmd_PinsDebugging r -> toText r
-      Cmd_TogglePins r -> toText r
       Cmd_ProbeRepeatabilityTest r -> toText r
       Cmd_SetPrintProgress r -> toText r
-      Cmd_StartPrintJobTimer r -> toText r
       Cmd_PausePrintJobTimer r -> toText r
       Cmd_StopPrintJobTimer r -> toText r
       Cmd_PrintJobStats r -> toText r
@@ -444,7 +407,6 @@ instance ToText GCodeCmd where
       Cmd_FactoryReset r -> toText r
       Cmd_ReportSettings r -> toText r
       Cmd_STOPRestart r -> toText r
-      Cmd_FreeMemory r -> toText r
       Cmd_ConfigureBedDistanceSensor r -> toText r
       Cmd_TMCDebugging r -> toText r
       Cmd_FanTachometers r -> toText r
@@ -471,16 +433,12 @@ instance ToText GCodeCmd where
       Cmd_SetAutoRetract r -> toText r
       Cmd_HomingFeedrate r -> toText r
       Cmd_SoftwareEndstops r -> toText r
-      Cmd_FilamentSwapParameters r -> toText r
       Cmd_SetHotendOffset r -> toText r
       Cmd_WaitforPinState r -> toText r
-      Cmd_TriggerCamera r -> toText r
       Cmd_LCDContrast r -> toText r
       Cmd_LCDSleepBacklightTimeout r -> toText r
       Cmd_LCDBrightness r -> toText r
-      Cmd_I2CSend r -> toText r
       Cmd_I2CRequest r -> toText r
-      Cmd_ScanI2CBus r -> toText r
       Cmd_ServoPosition r -> toText r
       Cmd_EditServoAngles r -> toText r
       Cmd_DetachServo r -> toText r
@@ -491,10 +449,7 @@ instance ToText GCodeCmd where
       Cmd_PIDAutotune r -> toText r
       Cmd_SetBedPID r -> toText r
       Cmd_UserThermistorParameters r -> toText r
-      Cmd_ModelPredictiveTempControl r -> toText r
       Cmd_SetChamberPID r -> toText r
-      Cmd_SetMicrostepping r -> toText r
-      Cmd_SetMicrostepPins r -> toText r
       Cmd_CaseLightControl r -> toText r
       Cmd_SCARAThetaA r -> toText r
       Cmd_SCARAThetaB r -> toText r
@@ -519,62 +474,39 @@ instance ToText GCodeCmd where
       Cmd_HomeOffsetsHere r -> toText r
       Cmd_PowerMonitor r -> toText r
       Cmd_CancelObjects r -> toText r
-      Cmd_FixedTimeMotion r -> toText r
-      Cmd_FTMotionTrajectorySmoothing r -> toText r
       Cmd_ValidateEEPROMContents r -> toText r
       Cmd_LockMachine r -> toText r
       Cmd_UnlockMachine r -> toText r
-      Cmd_SetPasscode r -> toText r
       Cmd_AbortSDPrint r -> toText r
       Cmd_EndstopsAbortSD r -> toText r
       Cmd_MachineName r -> toText r
-      Cmd_EthernetIPAddressNetworkIF r -> toText r
-      Cmd_EthernetSubnetMask r -> toText r
-      Cmd_EthernetGatewayIPAddress r -> toText r
-      Cmd_SetTMCSteppingMode r -> toText r
       Cmd_SerialBaudRate r -> toText r
       Cmd_NonlinearExtrusionControl r -> toText r
       Cmd_ZVInputShaping r -> toText r
       Cmd_FilamentChange r -> toText r
       Cmd_ConfigureFilamentChange r -> toText r
-      Cmd_MultiNozzleMode r -> toText r
-      Cmd_DeltaConfiguration r -> toText r
-      Cmd_SetDeltaEndstopAdjustments r -> toText r
       Cmd_DuetSmartEffectorSensitivity r -> toText r
       Cmd_LoadFilament r -> toText r
       Cmd_UnloadFilament r -> toText r
       Cmd_ControllerFanSettings r -> toText r
       Cmd_RepeatMarker r -> toText r
-      Cmd_GcodeMacros r -> toText r
       Cmd_ReportGcodeMacros r -> toText r
       Cmd_XYZProbeOffset r -> toText r
       Cmd_BedSkewCompensation r -> toText r
-      Cmd_I2CPositionEncoders r -> toText r
-      Cmd_ProbeTemperatureConfig r -> toText r
       Cmd_HandlePromptResponse r -> toText r
       Cmd_LinearAdvanceFactor r -> toText r
       Cmd_StepperMotorCurrent r -> toText r
-      Cmd_TrimpotStepperMotorCurrent r -> toText r
       Cmd_SetTrimpotPins r -> toText r
       Cmd_ReportDACStepperCurrent r -> toText r
       Cmd_CommitDACtoEEPROM r -> toText r
       Cmd_TMCOTPreWarnCondition r -> toText r
-      Cmd_ClearTMCOTPreWarn r -> toText r
-      Cmd_SetHybridThresholdSpeed r -> toText r
-      Cmd_TMCBumpSensitivity r -> toText r
       Cmd_TMCZAxisCalibration r -> toText r
-      Cmd_L6474ThermalWarningTest r -> toText r
-      Cmd_L6474OvercurrentWarningTest r -> toText r
-      Cmd_L6474SpeedWarningTest r -> toText r
-      Cmd_TMCChopperTiming r -> toText r
-      Cmd_TMCHomingCurrent r -> toText r
       Cmd_StartSDLogging r -> toText r
       Cmd_MagneticParkingExtruder r -> toText r
       Cmd_BackUpFlashSettingstoSD r -> toText r
       Cmd_RestoreFlashfromSD r -> toText r
       Cmd_TouchScreenCalibration r -> toText r
       Cmd_FirmwareUpdate r -> toText r
-      Cmd_MAX7219Control r -> toText r
       Comment Nothing c -> "; " <> c
       Comment (Just cmd) c -> toText cmd <> " ; " <> c
 
@@ -2098,27 +2030,6 @@ instance ToText (MovetoMeshCoordinate Required) where
       )
 
 --------------------------------------------------------------------------------
---- Move in Machine Coordinates (G53)
---- Docs: https://marlinfw.org/docs/gcode/G053.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data MoveinMachineCoordinates (f :: Type -> Type)
-  = MoveinMachineCoordinates
-  {}
-  deriving (Generic)
-
-instance Default (MoveinMachineCoordinates NotDefined)
-
-instance Default (MoveinMachineCoordinates Required)
-
-instance Upcast (MoveinMachineCoordinates Required) GCodeCmd where
-  upcast = Cmd_MoveinMachineCoordinates
-
-instance ToText (MoveinMachineCoordinates Required) where
-  toText r = toText (RawCmd "G53" [])
-
---------------------------------------------------------------------------------
 --- Select Workspace (G54)
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
 --------------------------------------------------------------------------------
@@ -3288,27 +3199,6 @@ instance ToText (PinsDebugging Required) where
       )
 
 --------------------------------------------------------------------------------
---- Toggle Pins (M43 T)
---- Docs: https://marlinfw.org/docs/gcode/M043-T.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data TogglePins (f :: Type -> Type)
-  = TogglePins
-  {}
-  deriving (Generic)
-
-instance Default (TogglePins NotDefined)
-
-instance Default (TogglePins Required)
-
-instance Upcast (TogglePins Required) GCodeCmd where
-  upcast = Cmd_TogglePins
-
-instance ToText (TogglePins Required) where
-  toText r = toText (RawCmd "M43 T" [])
-
---------------------------------------------------------------------------------
 --- Probe Repeatability Test (M48)
 --- Docs: https://marlinfw.org/docs/gcode/M048.html
 --------------------------------------------------------------------------------
@@ -3379,27 +3269,6 @@ instance ToText (SetPrintProgress Required) where
             mkArg 'R' r.remainingTime
           ]
       )
-
---------------------------------------------------------------------------------
---- Start Print Job Timer (M75)
---- Docs: https://marlinfw.org/docs/gcode/M075.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data StartPrintJobTimer (f :: Type -> Type)
-  = StartPrintJobTimer
-  {}
-  deriving (Generic)
-
-instance Default (StartPrintJobTimer NotDefined)
-
-instance Default (StartPrintJobTimer Required)
-
-instance Upcast (StartPrintJobTimer Required) GCodeCmd where
-  upcast = Cmd_StartPrintJobTimer
-
-instance ToText (StartPrintJobTimer Required) where
-  toText r = toText (RawCmd "M75" [])
 
 --------------------------------------------------------------------------------
 --- Pause Print Job Timer (M76)
@@ -4656,27 +4525,6 @@ instance ToText (STOPRestart Required) where
   toText r = toText (RawCmd "M999" [mkArg 'S' r.resumeWithoutFlush])
 
 --------------------------------------------------------------------------------
---- Free Memory (M100)
---- Docs: https://marlinfw.org/docs/gcode/M100.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data FreeMemory (f :: Type -> Type)
-  = FreeMemory
-  {}
-  deriving (Generic)
-
-instance Default (FreeMemory NotDefined)
-
-instance Default (FreeMemory Required)
-
-instance Upcast (FreeMemory Required) GCodeCmd where
-  upcast = Cmd_FreeMemory
-
-instance ToText (FreeMemory Required) where
-  toText r = toText (RawCmd "M100" [])
-
---------------------------------------------------------------------------------
 --- Configure Bed Distance Sensor (M102)
 --- Docs: https://marlinfw.org/docs/gcode/M102.html
 --------------------------------------------------------------------------------
@@ -5391,27 +5239,6 @@ instance ToText (SoftwareEndstops Required) where
   toText r = toText (RawCmd "M211" [mkArg 'S' r.enable])
 
 --------------------------------------------------------------------------------
---- Filament Swap Parameters (M217)
---- Docs: https://marlinfw.org/docs/gcode/M217.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data FilamentSwapParameters (f :: Type -> Type)
-  = FilamentSwapParameters
-  {}
-  deriving (Generic)
-
-instance Default (FilamentSwapParameters NotDefined)
-
-instance Default (FilamentSwapParameters Required)
-
-instance Upcast (FilamentSwapParameters Required) GCodeCmd where
-  upcast = Cmd_FilamentSwapParameters
-
-instance ToText (FilamentSwapParameters Required) where
-  toText r = toText (RawCmd "M217" [])
-
---------------------------------------------------------------------------------
 --- Set Hotend Offset (M218)
 --- Docs: https://marlinfw.org/docs/gcode/M218.html
 --------------------------------------------------------------------------------
@@ -5470,27 +5297,6 @@ instance ToText (WaitforPinState Required) where
             mkArg 'S' r.state
           ]
       )
-
---------------------------------------------------------------------------------
---- Trigger Camera (M240)
---- Docs: https://marlinfw.org/docs/gcode/M240.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data TriggerCamera (f :: Type -> Type)
-  = TriggerCamera
-  {}
-  deriving (Generic)
-
-instance Default (TriggerCamera NotDefined)
-
-instance Default (TriggerCamera Required)
-
-instance Upcast (TriggerCamera Required) GCodeCmd where
-  upcast = Cmd_TriggerCamera
-
-instance ToText (TriggerCamera Required) where
-  toText r = toText (RawCmd "M240" [])
 
 --------------------------------------------------------------------------------
 --- LCD Contrast (M250)
@@ -5554,27 +5360,6 @@ instance ToText (LCDBrightness Required) where
   toText r = toText (RawCmd "M256" [mkArg 'B' r.brightness])
 
 --------------------------------------------------------------------------------
---- I2C Send (M260)
---- Docs: https://marlinfw.org/docs/gcode/M260.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data I2CSend (f :: Type -> Type)
-  = I2CSend
-  {}
-  deriving (Generic)
-
-instance Default (I2CSend NotDefined)
-
-instance Default (I2CSend Required)
-
-instance Upcast (I2CSend Required) GCodeCmd where
-  upcast = Cmd_I2CSend
-
-instance ToText (I2CSend Required) where
-  toText r = toText (RawCmd "M260" [])
-
---------------------------------------------------------------------------------
 --- I2C Request (M261)
 --- Docs: https://marlinfw.org/docs/gcode/M261.html
 --------------------------------------------------------------------------------
@@ -5602,27 +5387,6 @@ instance ToText (I2CRequest Required) where
             mkArg 'S' r.outputStyle
           ]
       )
-
---------------------------------------------------------------------------------
---- Scan I2C Bus (M265)
---- Docs: https://marlinfw.org/docs/gcode/M265.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data ScanI2CBus (f :: Type -> Type)
-  = ScanI2CBus
-  {}
-  deriving (Generic)
-
-instance Default (ScanI2CBus NotDefined)
-
-instance Default (ScanI2CBus Required)
-
-instance Upcast (ScanI2CBus Required) GCodeCmd where
-  upcast = Cmd_ScanI2CBus
-
-instance ToText (ScanI2CBus Required) where
-  toText r = toText (RawCmd "M265" [])
 
 --------------------------------------------------------------------------------
 --- Servo Position (M280)
@@ -5933,27 +5697,6 @@ instance ToText (UserThermistorParameters Required) where
       )
 
 --------------------------------------------------------------------------------
---- Model Predictive Temp. Control (M306)
---- Docs: https://marlinfw.org/docs/gcode/M306.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data ModelPredictiveTempControl (f :: Type -> Type)
-  = ModelPredictiveTempControl
-  {}
-  deriving (Generic)
-
-instance Default (ModelPredictiveTempControl NotDefined)
-
-instance Default (ModelPredictiveTempControl Required)
-
-instance Upcast (ModelPredictiveTempControl Required) GCodeCmd where
-  upcast = Cmd_ModelPredictiveTempControl
-
-instance ToText (ModelPredictiveTempControl Required) where
-  toText r = toText (RawCmd "M306" [])
-
---------------------------------------------------------------------------------
 --- Set Chamber PID (M309)
 --- Docs: https://marlinfw.org/docs/gcode/M309.html
 --------------------------------------------------------------------------------
@@ -5983,48 +5726,6 @@ instance ToText (SetChamberPID Required) where
             mkArg 'P' r.proportional
           ]
       )
-
---------------------------------------------------------------------------------
---- Set Micro-stepping (M350)
---- Docs: https://marlinfw.org/docs/gcode/M350.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data SetMicrostepping (f :: Type -> Type)
-  = SetMicrostepping
-  {}
-  deriving (Generic)
-
-instance Default (SetMicrostepping NotDefined)
-
-instance Default (SetMicrostepping Required)
-
-instance Upcast (SetMicrostepping Required) GCodeCmd where
-  upcast = Cmd_SetMicrostepping
-
-instance ToText (SetMicrostepping Required) where
-  toText r = toText (RawCmd "M350" [])
-
---------------------------------------------------------------------------------
---- Set Microstep Pins (M351)
---- Docs: https://marlinfw.org/docs/gcode/M351.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data SetMicrostepPins (f :: Type -> Type)
-  = SetMicrostepPins
-  {}
-  deriving (Generic)
-
-instance Default (SetMicrostepPins NotDefined)
-
-instance Default (SetMicrostepPins Required)
-
-instance Upcast (SetMicrostepPins Required) GCodeCmd where
-  upcast = Cmd_SetMicrostepPins
-
-instance ToText (SetMicrostepPins Required) where
-  toText r = toText (RawCmd "M351" [])
 
 --------------------------------------------------------------------------------
 --- Case Light Control (M355)
@@ -6655,48 +6356,6 @@ instance ToText (CancelObjects Required) where
       )
 
 --------------------------------------------------------------------------------
---- Fixed-Time Motion (M493)
---- Docs: https://marlinfw.org/docs/gcode/M493.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data FixedTimeMotion (f :: Type -> Type)
-  = FixedTimeMotion
-  {}
-  deriving (Generic)
-
-instance Default (FixedTimeMotion NotDefined)
-
-instance Default (FixedTimeMotion Required)
-
-instance Upcast (FixedTimeMotion Required) GCodeCmd where
-  upcast = Cmd_FixedTimeMotion
-
-instance ToText (FixedTimeMotion Required) where
-  toText r = toText (RawCmd "M493" [])
-
---------------------------------------------------------------------------------
---- FT Motion Trajectory Smoothing (M494)
---- Docs: https://marlinfw.org/docs/gcode/M494.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data FTMotionTrajectorySmoothing (f :: Type -> Type)
-  = FTMotionTrajectorySmoothing
-  {}
-  deriving (Generic)
-
-instance Default (FTMotionTrajectorySmoothing NotDefined)
-
-instance Default (FTMotionTrajectorySmoothing Required)
-
-instance Upcast (FTMotionTrajectorySmoothing Required) GCodeCmd where
-  upcast = Cmd_FTMotionTrajectorySmoothing
-
-instance ToText (FTMotionTrajectorySmoothing Required) where
-  toText r = toText (RawCmd "M494" [])
-
---------------------------------------------------------------------------------
 --- Validate EEPROM Contents (M504)
 --- Docs: https://marlinfw.org/docs/gcode/M504.html
 --------------------------------------------------------------------------------
@@ -6754,27 +6413,6 @@ instance Upcast (UnlockMachine Required) GCodeCmd where
 
 instance ToText (UnlockMachine Required) where
   toText r = toText (RawCmd "M511" [mkReqArg 'P' r.passcode])
-
---------------------------------------------------------------------------------
---- Set Passcode (M512)
---- Docs: https://marlinfw.org/docs/gcode/M512.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data SetPasscode (f :: Type -> Type)
-  = SetPasscode
-  {}
-  deriving (Generic)
-
-instance Default (SetPasscode NotDefined)
-
-instance Default (SetPasscode Required)
-
-instance Upcast (SetPasscode Required) GCodeCmd where
-  upcast = Cmd_SetPasscode
-
-instance ToText (SetPasscode Required) where
-  toText r = toText (RawCmd "M512" [])
 
 --------------------------------------------------------------------------------
 --- Abort SD Print (M524)
@@ -6835,90 +6473,6 @@ instance Upcast (MachineName Required) GCodeCmd where
 
 instance ToText (MachineName Required) where
   toText r = toText (RawCmd "M550" [mkArg '_' r.machineName])
-
---------------------------------------------------------------------------------
---- Ethernet IP Address, Network IF (M552)
---- Docs: https://marlinfw.org/docs/gcode/M552.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data EthernetIPAddressNetworkIF (f :: Type -> Type)
-  = EthernetIPAddressNetworkIF
-  {}
-  deriving (Generic)
-
-instance Default (EthernetIPAddressNetworkIF NotDefined)
-
-instance Default (EthernetIPAddressNetworkIF Required)
-
-instance Upcast (EthernetIPAddressNetworkIF Required) GCodeCmd where
-  upcast = Cmd_EthernetIPAddressNetworkIF
-
-instance ToText (EthernetIPAddressNetworkIF Required) where
-  toText r = toText (RawCmd "M552" [])
-
---------------------------------------------------------------------------------
---- Ethernet Subnet Mask (M553)
---- Docs: https://marlinfw.org/docs/gcode/M553.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data EthernetSubnetMask (f :: Type -> Type)
-  = EthernetSubnetMask
-  {}
-  deriving (Generic)
-
-instance Default (EthernetSubnetMask NotDefined)
-
-instance Default (EthernetSubnetMask Required)
-
-instance Upcast (EthernetSubnetMask Required) GCodeCmd where
-  upcast = Cmd_EthernetSubnetMask
-
-instance ToText (EthernetSubnetMask Required) where
-  toText r = toText (RawCmd "M553" [])
-
---------------------------------------------------------------------------------
---- Ethernet Gateway IP Address (M554)
---- Docs: https://marlinfw.org/docs/gcode/M554.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data EthernetGatewayIPAddress (f :: Type -> Type)
-  = EthernetGatewayIPAddress
-  {}
-  deriving (Generic)
-
-instance Default (EthernetGatewayIPAddress NotDefined)
-
-instance Default (EthernetGatewayIPAddress Required)
-
-instance Upcast (EthernetGatewayIPAddress Required) GCodeCmd where
-  upcast = Cmd_EthernetGatewayIPAddress
-
-instance ToText (EthernetGatewayIPAddress Required) where
-  toText r = toText (RawCmd "M554" [])
-
---------------------------------------------------------------------------------
---- Set TMC Stepping Mode (M569)
---- Docs: https://marlinfw.org/docs/gcode/M569.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data SetTMCSteppingMode (f :: Type -> Type)
-  = SetTMCSteppingMode
-  {}
-  deriving (Generic)
-
-instance Default (SetTMCSteppingMode NotDefined)
-
-instance Default (SetTMCSteppingMode Required)
-
-instance Upcast (SetTMCSteppingMode Required) GCodeCmd where
-  upcast = Cmd_SetTMCSteppingMode
-
-instance ToText (SetTMCSteppingMode Required) where
-  toText r = toText (RawCmd "M569" [])
 
 --------------------------------------------------------------------------------
 --- Serial Baud Rate (M575)
@@ -7090,69 +6644,6 @@ instance ToText (ConfigureFilamentChange Required) where
       )
 
 --------------------------------------------------------------------------------
---- Multi Nozzle Mode (M605)
---- Docs: https://marlinfw.org/docs/gcode/M605.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data MultiNozzleMode (f :: Type -> Type)
-  = MultiNozzleMode
-  {}
-  deriving (Generic)
-
-instance Default (MultiNozzleMode NotDefined)
-
-instance Default (MultiNozzleMode Required)
-
-instance Upcast (MultiNozzleMode Required) GCodeCmd where
-  upcast = Cmd_MultiNozzleMode
-
-instance ToText (MultiNozzleMode Required) where
-  toText r = toText (RawCmd "M605" [])
-
---------------------------------------------------------------------------------
---- Delta Configuration (M665)
---- Docs: https://marlinfw.org/docs/gcode/M665.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data DeltaConfiguration (f :: Type -> Type)
-  = DeltaConfiguration
-  {}
-  deriving (Generic)
-
-instance Default (DeltaConfiguration NotDefined)
-
-instance Default (DeltaConfiguration Required)
-
-instance Upcast (DeltaConfiguration Required) GCodeCmd where
-  upcast = Cmd_DeltaConfiguration
-
-instance ToText (DeltaConfiguration Required) where
-  toText r = toText (RawCmd "M665" [])
-
---------------------------------------------------------------------------------
---- Set Delta Endstop Adjustments (M666)
---- Docs: https://marlinfw.org/docs/gcode/M666.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data SetDeltaEndstopAdjustments (f :: Type -> Type)
-  = SetDeltaEndstopAdjustments
-  {}
-  deriving (Generic)
-
-instance Default (SetDeltaEndstopAdjustments NotDefined)
-
-instance Default (SetDeltaEndstopAdjustments Required)
-
-instance Upcast (SetDeltaEndstopAdjustments Required) GCodeCmd where
-  upcast = Cmd_SetDeltaEndstopAdjustments
-
-instance ToText (SetDeltaEndstopAdjustments Required) where
-  toText r = toText (RawCmd "M666" [])
-
---------------------------------------------------------------------------------
 --- Duet Smart Effector Sensitivity (M672)
 --- Docs: https://marlinfw.org/docs/gcode/M672.html
 --------------------------------------------------------------------------------
@@ -7296,27 +6787,6 @@ instance ToText (RepeatMarker Required) where
   toText r = toText (RawCmd "M808" [mkArg 'L' r.loopCount])
 
 --------------------------------------------------------------------------------
---- G-code Macros (M810)
---- Docs: https://marlinfw.org/docs/gcode/M810-M819.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data GcodeMacros (f :: Type -> Type)
-  = GcodeMacros
-  {}
-  deriving (Generic)
-
-instance Default (GcodeMacros NotDefined)
-
-instance Default (GcodeMacros Required)
-
-instance Upcast (GcodeMacros Required) GCodeCmd where
-  upcast = Cmd_GcodeMacros
-
-instance ToText (GcodeMacros Required) where
-  toText r = toText (RawCmd "M810" [])
-
---------------------------------------------------------------------------------
 --- Report G-code Macros (M820)
 --- Docs: https://marlinfw.org/docs/gcode/M820.html
 --------------------------------------------------------------------------------
@@ -7399,48 +6869,6 @@ instance ToText (BedSkewCompensation Required) where
             mkArg 'S' r.xySkewAlias
           ]
       )
-
---------------------------------------------------------------------------------
---- I2C Position Encoders (M860)
---- Docs: https://marlinfw.org/docs/gcode/M860-M869.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data I2CPositionEncoders (f :: Type -> Type)
-  = I2CPositionEncoders
-  {}
-  deriving (Generic)
-
-instance Default (I2CPositionEncoders NotDefined)
-
-instance Default (I2CPositionEncoders Required)
-
-instance Upcast (I2CPositionEncoders Required) GCodeCmd where
-  upcast = Cmd_I2CPositionEncoders
-
-instance ToText (I2CPositionEncoders Required) where
-  toText r = toText (RawCmd "M860" [])
-
---------------------------------------------------------------------------------
---- Probe Temperature Config (M871)
---- Docs: https://marlinfw.org/docs/gcode/M871.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data ProbeTemperatureConfig (f :: Type -> Type)
-  = ProbeTemperatureConfig
-  {}
-  deriving (Generic)
-
-instance Default (ProbeTemperatureConfig NotDefined)
-
-instance Default (ProbeTemperatureConfig Required)
-
-instance Upcast (ProbeTemperatureConfig Required) GCodeCmd where
-  upcast = Cmd_ProbeTemperatureConfig
-
-instance ToText (ProbeTemperatureConfig Required) where
-  toText r = toText (RawCmd "M871" [])
 
 --------------------------------------------------------------------------------
 --- Handle Prompt Response (M876)
@@ -7532,27 +6960,6 @@ instance ToText (StepperMotorCurrent Required) where
       )
 
 --------------------------------------------------------------------------------
---- Trimpot Stepper Motor Current (M907)
---- Docs: https://marlinfw.org/docs/gcode/M907.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data TrimpotStepperMotorCurrent (f :: Type -> Type)
-  = TrimpotStepperMotorCurrent
-  {}
-  deriving (Generic)
-
-instance Default (TrimpotStepperMotorCurrent NotDefined)
-
-instance Default (TrimpotStepperMotorCurrent Required)
-
-instance Upcast (TrimpotStepperMotorCurrent Required) GCodeCmd where
-  upcast = Cmd_TrimpotStepperMotorCurrent
-
-instance ToText (TrimpotStepperMotorCurrent Required) where
-  toText r = toText (RawCmd "M907" [])
-
---------------------------------------------------------------------------------
 --- Set Trimpot Pins (M908)
 --- Docs: https://marlinfw.org/docs/gcode/M908.html
 --------------------------------------------------------------------------------
@@ -7640,69 +7047,6 @@ instance ToText (TMCOTPreWarnCondition Required) where
   toText r = toText (RawCmd "M911" [])
 
 --------------------------------------------------------------------------------
---- Clear TMC OT Pre-Warn (M912)
---- Docs: https://marlinfw.org/docs/gcode/M912.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data ClearTMCOTPreWarn (f :: Type -> Type)
-  = ClearTMCOTPreWarn
-  {}
-  deriving (Generic)
-
-instance Default (ClearTMCOTPreWarn NotDefined)
-
-instance Default (ClearTMCOTPreWarn Required)
-
-instance Upcast (ClearTMCOTPreWarn Required) GCodeCmd where
-  upcast = Cmd_ClearTMCOTPreWarn
-
-instance ToText (ClearTMCOTPreWarn Required) where
-  toText r = toText (RawCmd "M912" [])
-
---------------------------------------------------------------------------------
---- Set Hybrid Threshold Speed (M913)
---- Docs: https://marlinfw.org/docs/gcode/M913.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data SetHybridThresholdSpeed (f :: Type -> Type)
-  = SetHybridThresholdSpeed
-  {}
-  deriving (Generic)
-
-instance Default (SetHybridThresholdSpeed NotDefined)
-
-instance Default (SetHybridThresholdSpeed Required)
-
-instance Upcast (SetHybridThresholdSpeed Required) GCodeCmd where
-  upcast = Cmd_SetHybridThresholdSpeed
-
-instance ToText (SetHybridThresholdSpeed Required) where
-  toText r = toText (RawCmd "M913" [])
-
---------------------------------------------------------------------------------
---- TMC Bump Sensitivity (M914)
---- Docs: https://marlinfw.org/docs/gcode/M914.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data TMCBumpSensitivity (f :: Type -> Type)
-  = TMCBumpSensitivity
-  {}
-  deriving (Generic)
-
-instance Default (TMCBumpSensitivity NotDefined)
-
-instance Default (TMCBumpSensitivity Required)
-
-instance Upcast (TMCBumpSensitivity Required) GCodeCmd where
-  upcast = Cmd_TMCBumpSensitivity
-
-instance ToText (TMCBumpSensitivity Required) where
-  toText r = toText (RawCmd "M914" [])
-
---------------------------------------------------------------------------------
 --- TMC Z Axis Calibration (M915)
 --- Docs: https://marlinfw.org/docs/gcode/M915.html
 --------------------------------------------------------------------------------
@@ -7730,111 +7074,6 @@ instance ToText (TMCZAxisCalibration Required) where
             mkArg 'Z' r.extraHeight
           ]
       )
-
---------------------------------------------------------------------------------
---- L6474 Thermal Warning Test (M916)
---- Docs: https://marlinfw.org/docs/gcode/M916.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data L6474ThermalWarningTest (f :: Type -> Type)
-  = L6474ThermalWarningTest
-  {}
-  deriving (Generic)
-
-instance Default (L6474ThermalWarningTest NotDefined)
-
-instance Default (L6474ThermalWarningTest Required)
-
-instance Upcast (L6474ThermalWarningTest Required) GCodeCmd where
-  upcast = Cmd_L6474ThermalWarningTest
-
-instance ToText (L6474ThermalWarningTest Required) where
-  toText r = toText (RawCmd "M916" [])
-
---------------------------------------------------------------------------------
---- L6474 Overcurrent Warning Test (M917)
---- Docs: https://marlinfw.org/docs/gcode/M917.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data L6474OvercurrentWarningTest (f :: Type -> Type)
-  = L6474OvercurrentWarningTest
-  {}
-  deriving (Generic)
-
-instance Default (L6474OvercurrentWarningTest NotDefined)
-
-instance Default (L6474OvercurrentWarningTest Required)
-
-instance Upcast (L6474OvercurrentWarningTest Required) GCodeCmd where
-  upcast = Cmd_L6474OvercurrentWarningTest
-
-instance ToText (L6474OvercurrentWarningTest Required) where
-  toText r = toText (RawCmd "M917" [])
-
---------------------------------------------------------------------------------
---- L6474 Speed Warning Test (M918)
---- Docs: https://marlinfw.org/docs/gcode/M918.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data L6474SpeedWarningTest (f :: Type -> Type)
-  = L6474SpeedWarningTest
-  {}
-  deriving (Generic)
-
-instance Default (L6474SpeedWarningTest NotDefined)
-
-instance Default (L6474SpeedWarningTest Required)
-
-instance Upcast (L6474SpeedWarningTest Required) GCodeCmd where
-  upcast = Cmd_L6474SpeedWarningTest
-
-instance ToText (L6474SpeedWarningTest Required) where
-  toText r = toText (RawCmd "M918" [])
-
---------------------------------------------------------------------------------
---- TMC Chopper Timing (M919)
---- Docs: https://marlinfw.org/docs/gcode/M919.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data TMCChopperTiming (f :: Type -> Type)
-  = TMCChopperTiming
-  {}
-  deriving (Generic)
-
-instance Default (TMCChopperTiming NotDefined)
-
-instance Default (TMCChopperTiming Required)
-
-instance Upcast (TMCChopperTiming Required) GCodeCmd where
-  upcast = Cmd_TMCChopperTiming
-
-instance ToText (TMCChopperTiming Required) where
-  toText r = toText (RawCmd "M919" [])
-
---------------------------------------------------------------------------------
---- TMC Homing Current (M920)
---- Docs: https://marlinfw.org/docs/gcode/M920.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data TMCHomingCurrent (f :: Type -> Type)
-  = TMCHomingCurrent
-  {}
-  deriving (Generic)
-
-instance Default (TMCHomingCurrent NotDefined)
-
-instance Default (TMCHomingCurrent Required)
-
-instance Upcast (TMCHomingCurrent Required) GCodeCmd where
-  upcast = Cmd_TMCHomingCurrent
-
-instance ToText (TMCHomingCurrent Required) where
-  toText r = toText (RawCmd "M920" [])
 
 --------------------------------------------------------------------------------
 --- Start SD Logging (M928)
@@ -7973,27 +7212,6 @@ instance Upcast (FirmwareUpdate Required) GCodeCmd where
 
 instance ToText (FirmwareUpdate Required) where
   toText r = toText (RawCmd "M997" [])
-
---------------------------------------------------------------------------------
---- MAX7219 Control (M7219)
---- Docs: https://marlinfw.org/docs/gcode/M7219.html
---- Status: UNIMPLEMENTED
---------------------------------------------------------------------------------
-
-data MAX7219Control (f :: Type -> Type)
-  = MAX7219Control
-  {}
-  deriving (Generic)
-
-instance Default (MAX7219Control NotDefined)
-
-instance Default (MAX7219Control Required)
-
-instance Upcast (MAX7219Control Required) GCodeCmd where
-  upcast = Cmd_MAX7219Control
-
-instance ToText (MAX7219Control Required) where
-  toText r = toText (RawCmd "M7219" [])
 
 --------------------------------------------------------------------------------
 --- Utils
