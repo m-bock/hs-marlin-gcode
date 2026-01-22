@@ -125,7 +125,7 @@ otherCommands.sort(sortByCode);
 
 // Generate markdown
 const mdLines = [
-  '# Marlin G-Code API Reference',
+  '# Commands',
   '',
   `Generated from \`${specPath}\` on ${new Date().toISOString().split('T')[0]}`,
   '',

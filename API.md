@@ -1,8 +1,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+# marlin-gcode API Reference
 
-- [Marlin G-Code API Reference](#marlin-g-code-api-reference)
+- [Commands](#commands)
   - [`LinearMove_NoExtrusion` (G0)](#linearmove_noextrusion-g0)
   - [`LinearMove_WithExtrusion` (G1)](#linearmove_withextrusion-g1)
   - [`ArcCircleMove_Clockwise` (G2)](#arccirclemove_clockwise-g2)
@@ -270,7 +270,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Marlin G-Code API Reference
+# Commands
 
 Generated from `assets/spec.json` on 2026-01-22
 

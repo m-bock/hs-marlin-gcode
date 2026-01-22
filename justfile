@@ -16,5 +16,5 @@ update-readme:
 
 docs:
     OUTPUT_PATH=API.md SPEC_PATH=assets/spec.json node scripts/gen-docs.js
-    npx doctoc --maxlevel 2 API.md
+    npx doctoc --title "# marlin-gcode API Reference" --maxlevel 2 API.md
     
