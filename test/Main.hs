@@ -247,7 +247,7 @@ tests =
             @?= "G11",
           testCase "Clean The Nozzle - maximum args"
             $ toText
-              ( Cmd_CleanTheNozzle
+              ( Cmd_CleanNozzle
                   idef
                     { pattern = Just (Index 1),
                       radius = Just (Mm 5),
@@ -435,7 +435,7 @@ tests =
             @?= "G29 A1 B0.1000 C0.0000 D0 E1 F10.0000 H0.0000 I0 J1 K0 L0 P0 Q0 R1 S0 T0 U0 V1 W0 X100.0000 Y100.0000",
           testCase "Single Z-Probe - maximum args"
             $ toText
-              ( Cmd_SingleZ_Probe
+              ( Cmd_SingleZProbe
                   idef
                     { temperatureCompensation = Just (Flag True),
                       engageEach = Just (Flag True),
@@ -471,7 +471,7 @@ tests =
             @?= "G33 C0.0100 E1 F3 O0 P7 R0.0000 S0 T0 V1 X0 Y0 Z0",
           testCase "Z Steppers Auto-Alignment - maximum args"
             $ toText
-              ( Cmd_ZSteppersAuto_Alignment
+              ( Cmd_ZSteppersAutoAlignment
                   idef
                     { amplification = Just (Mm 0.5),
                       stowEach = Just (Flag True),
@@ -557,22 +557,22 @@ tests =
               )
             @?= "G42 F100.0000 I4 J4 P1",
           testCase "Select Workspace Workspace 1 - maximum args"
-            $ toText (Cmd_SelectWorkspace_Workspace1 (SelectWorkspace_Workspace1 {} :: SelectWorkspace_Workspace1 Required))
+            $ toText (Cmd_SelectWorkspace_1 (SelectWorkspace_1 {} :: SelectWorkspace_1 Required))
             @?= "G54",
           testCase "Select Workspace Workspace 2 - maximum args"
-            $ toText (Cmd_SelectWorkspace_Workspace2 (SelectWorkspace_Workspace2 {} :: SelectWorkspace_Workspace2 Required))
+            $ toText (Cmd_SelectWorkspace_2 (SelectWorkspace_2 {} :: SelectWorkspace_2 Required))
             @?= "G55",
           testCase "Select Workspace Workspace 3 - maximum args"
-            $ toText (Cmd_SelectWorkspace_Workspace3 (SelectWorkspace_Workspace3 {} :: SelectWorkspace_Workspace3 Required))
+            $ toText (Cmd_SelectWorkspace_3 (SelectWorkspace_3 {} :: SelectWorkspace_3 Required))
             @?= "G56",
           testCase "Select Workspace Workspace 4 - maximum args"
-            $ toText (Cmd_SelectWorkspace_Workspace4 (SelectWorkspace_Workspace4 {} :: SelectWorkspace_Workspace4 Required))
+            $ toText (Cmd_SelectWorkspace_4 (SelectWorkspace_4 {} :: SelectWorkspace_4 Required))
             @?= "G57",
           testCase "Select Workspace Workspace 5 - maximum args"
-            $ toText (Cmd_SelectWorkspace_Workspace5 (SelectWorkspace_Workspace5 {} :: SelectWorkspace_Workspace5 Required))
+            $ toText (Cmd_SelectWorkspace_5 (SelectWorkspace_5 {} :: SelectWorkspace_5 Required))
             @?= "G58",
           testCase "Select Workspace Workspace 6 - maximum args"
-            $ toText (Cmd_SelectWorkspace_Workspace6 (SelectWorkspace_Workspace6 {} :: SelectWorkspace_Workspace6 Required))
+            $ toText (Cmd_SelectWorkspace_6 (SelectWorkspace_6 {} :: SelectWorkspace_6 Required))
             @?= "G59",
           testCase "Stored Positions - maximum args"
             $ toText
@@ -650,7 +650,7 @@ tests =
             @?= "G425 B1 T1 U0.1000 V1",
           testCase "Spindle CW / Laser On - maximum args"
             $ toText
-              ( Cmd_SpindleCW_LaserOn
+              ( Cmd_SpindleCWLaserOn
                   idef
                     { inlineMode = Just (Flag True),
                       powerPWM = Just (Index 128),
@@ -660,7 +660,7 @@ tests =
             @?= "M3 I1 O128 S200",
           testCase "Spindle CCW / Laser On - maximum args"
             $ toText
-              ( Cmd_SpindleCCW_LaserOn
+              ( Cmd_SpindleCCWLaserOn
                   idef
                     { inlineMode = Just (Flag True),
                       powerPWM = Just (Index 128),
@@ -669,7 +669,7 @@ tests =
               )
             @?= "M4 I1 O128 S200",
           testCase "Spindle / Laser Off - maximum args"
-            $ toText (Cmd_Spindle_LaserOff (Spindle_LaserOff {} :: Spindle_LaserOff Required))
+            $ toText (Cmd_SpindleLaserOff (SpindleLaserOff {} :: SpindleLaserOff Required))
             @?= "M5",
           testCase "Enable Steppers - maximum args"
             $ toText
@@ -865,7 +865,7 @@ tests =
             @?= "M87",
           testCase "Set Axis Steps-per-unit - maximum args"
             $ toText
-              ( Cmd_SetAxisSteps_per_unit
+              ( Cmd_SetAxisStepsperunit
                   idef
                     { axisA = Just (Mm 100),
                       axisB = Just (Mm 100),
@@ -939,7 +939,7 @@ tests =
             @?= "M109 B190.0000 F0.5000 I1 R180.0000 S180.0000 T0",
           testCase "Set / Get Line Number - maximum args"
             $ toText
-              ( Cmd_Set_GetLineNumber
+              ( Cmd_SetGetLineNumber
                   idef
                     { lineNumber = Just (Count 100)
                     }
@@ -1027,7 +1027,7 @@ tests =
             @?= "M200 D1.7500 L10.0000 S1 T0",
           testCase "Print / Travel Move Limits - maximum args"
             $ toText
-              ( Cmd_Print_TravelMoveLimits
+              ( Cmd_PrintTravelMoveLimits
                   idef
                     { axisExtrusion = Just (Mm 1000),
                       frequencyLimit = Just (Count 60),

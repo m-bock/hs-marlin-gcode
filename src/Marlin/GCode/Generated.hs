@@ -3,7 +3,7 @@ module Marlin.GCode.Generated where
 import qualified Data.Text as T
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Celsius, Count, Degrees, Flag, Index, LaserPower, Milliseconds, Mm, MmPerMin, MmPerSec, NotDefined, Required (..), Seconds)
+import Marlin.GCode.Types (ArgValue, Celsius, Count, Degrees, Flag, Index, LaserPower, Milliseconds, Mm, MmPerMin, MmPerSec, NotDefined, Required (..), Seconds, TextValue)
 import Relude
 
 --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ data GCodeCmd
   | Cmd_DirectStepperMove (DirectStepperMove Required)
   | Cmd_Retract (Retract Required)
   | Cmd_Recover (Recover Required)
-  | Cmd_CleanTheNozzle (CleanTheNozzle Required)
+  | Cmd_CleanNozzle (CleanNozzle Required)
   | Cmd_CNCWorkspacePlanes_XY (CNCWorkspacePlanes_XY Required)
   | Cmd_CNCWorkspacePlanes_ZX (CNCWorkspacePlanes_ZX Required)
   | Cmd_CNCWorkspacePlanes_YZ (CNCWorkspacePlanes_YZ Required)
@@ -39,11 +39,11 @@ data GCodeCmd
   | Cmd_BedLeveling_Linear (BedLeveling_Linear Required)
   | Cmd_BedLeveling_Manual (BedLeveling_Manual Required)
   | Cmd_BedLeveling_Unified (BedLeveling_Unified Required)
-  | Cmd_SingleZ_Probe (SingleZ_Probe Required)
+  | Cmd_SingleZProbe (SingleZProbe Required)
   | Cmd_DockSled (DockSled Required)
   | Cmd_UndockSled (UndockSled Required)
   | Cmd_DeltaAutoCalibration (DeltaAutoCalibration Required)
-  | Cmd_ZSteppersAuto_Alignment (ZSteppersAuto_Alignment Required)
+  | Cmd_ZSteppersAutoAlignment (ZSteppersAutoAlignment Required)
   | Cmd_MechanicalGantryCalibration (MechanicalGantryCalibration Required)
   | Cmd_TrammingAssistant (TrammingAssistant Required)
   | Cmd_ProbeTarget_ErrorOnFail (ProbeTarget_ErrorOnFail Required)
@@ -52,15 +52,15 @@ data GCodeCmd
   | Cmd_ProbeTarget_AwayNoErrorOnFail (ProbeTarget_AwayNoErrorOnFail Required)
   | Cmd_MovetoMeshCoordinate (MovetoMeshCoordinate Required)
   | Cmd_MoveinMachineCoordinates (MoveinMachineCoordinates Required)
-  | Cmd_SelectWorkspace_Workspace1 (SelectWorkspace_Workspace1 Required)
-  | Cmd_SelectWorkspace_Workspace2 (SelectWorkspace_Workspace2 Required)
-  | Cmd_SelectWorkspace_Workspace3 (SelectWorkspace_Workspace3 Required)
-  | Cmd_SelectWorkspace_Workspace4 (SelectWorkspace_Workspace4 Required)
-  | Cmd_SelectWorkspace_Workspace5 (SelectWorkspace_Workspace5 Required)
-  | Cmd_SelectWorkspace_Workspace6 (SelectWorkspace_Workspace6 Required)
-  | Cmd_SelectWorkspace_Workspace7 (SelectWorkspace_Workspace7 Required)
-  | Cmd_SelectWorkspace_Workspace8 (SelectWorkspace_Workspace8 Required)
-  | Cmd_SelectWorkspace_Workspace9 (SelectWorkspace_Workspace9 Required)
+  | Cmd_SelectWorkspace_1 (SelectWorkspace_1 Required)
+  | Cmd_SelectWorkspace_2 (SelectWorkspace_2 Required)
+  | Cmd_SelectWorkspace_3 (SelectWorkspace_3 Required)
+  | Cmd_SelectWorkspace_4 (SelectWorkspace_4 Required)
+  | Cmd_SelectWorkspace_5 (SelectWorkspace_5 Required)
+  | Cmd_SelectWorkspace_6 (SelectWorkspace_6 Required)
+  | Cmd_SelectWorkspace_7 (SelectWorkspace_7 Required)
+  | Cmd_SelectWorkspace_8 (SelectWorkspace_8 Required)
+  | Cmd_SelectWorkspace_9 (SelectWorkspace_9 Required)
   | Cmd_StoredPositions (StoredPositions Required)
   | Cmd_ReturntoSavedPosition (ReturntoSavedPosition Required)
   | Cmd_ProbeTemperatureCalibration (ProbeTemperatureCalibration Required)
@@ -70,14 +70,14 @@ data GCodeCmd
   | Cmd_SetPosition (SetPosition Required)
   | Cmd_BacklashCalibration (BacklashCalibration Required)
   | Cmd_UnconditionalStop (UnconditionalStop Required)
-  | Cmd_SpindleCW_LaserOn (SpindleCW_LaserOn Required)
-  | Cmd_SpindleCCW_LaserOn (SpindleCCW_LaserOn Required)
-  | Cmd_Spindle_LaserOff (Spindle_LaserOff Required)
+  | Cmd_SpindleCWLaserOn (SpindleCWLaserOn Required)
+  | Cmd_SpindleCCWLaserOn (SpindleCCWLaserOn Required)
+  | Cmd_SpindleLaserOff (SpindleLaserOff Required)
   | Cmd_CoolantControls_Mist (CoolantControls_Mist Required)
   | Cmd_CoolantControls_Flood (CoolantControls_Flood Required)
   | Cmd_CoolantControls_Off (CoolantControls_Off Required)
-  | Cmd_Vacuum_BlowerControl_On (Vacuum_BlowerControl_On Required)
-  | Cmd_Vacuum_BlowerControl_Off (Vacuum_BlowerControl_Off Required)
+  | Cmd_VacuumBlowerControl_On (VacuumBlowerControl_On Required)
+  | Cmd_VacuumBlowerControl_Off (VacuumBlowerControl_Off Required)
   | Cmd_ExpectedPrinterCheck (ExpectedPrinterCheck Required)
   | Cmd_EnableSteppers (EnableSteppers Required)
   | Cmd_DisableSteppers (DisableSteppers Required)
@@ -112,14 +112,14 @@ data GCodeCmd
   | Cmd_InactivityShutdown (InactivityShutdown Required)
   | Cmd_HotendIdleTimeout (HotendIdleTimeout Required)
   | Cmd_DisableHotendIdleTimeout (DisableHotendIdleTimeout Required)
-  | Cmd_SetAxisSteps_per_unit (SetAxisSteps_per_unit Required)
+  | Cmd_SetAxisStepsperunit (SetAxisStepsperunit Required)
   | Cmd_SetHotendTemperature (SetHotendTemperature Required)
   | Cmd_ReportTemperatures (ReportTemperatures Required)
   | Cmd_SetFanSpeed (SetFanSpeed Required)
   | Cmd_FanOff (FanOff Required)
   | Cmd_BreakandContinue (BreakandContinue Required)
   | Cmd_WaitforHotendTemperature (WaitforHotendTemperature Required)
-  | Cmd_Set_GetLineNumber (Set_GetLineNumber Required)
+  | Cmd_SetGetLineNumber (SetGetLineNumber Required)
   | Cmd_DebugLevel (DebugLevel Required)
   | Cmd_FullShutdown (FullShutdown Required)
   | Cmd_HostKeepalive (HostKeepalive Required)
@@ -134,7 +134,7 @@ data GCodeCmd
   | Cmd_SetChamberTemperature (SetChamberTemperature Required)
   | Cmd_WaitforBedTemperature (WaitforBedTemperature Required)
   | Cmd_VolumetricExtrusionDiameter (VolumetricExtrusionDiameter Required)
-  | Cmd_Print_TravelMoveLimits (Print_TravelMoveLimits Required)
+  | Cmd_PrintTravelMoveLimits (PrintTravelMoveLimits Required)
   | Cmd_SetMaxFeedrate (SetMaxFeedrate Required)
   | Cmd_SetStartingAcceleration (SetStartingAcceleration Required)
   | Cmd_SetAdvancedSettings (SetAdvancedSettings Required)
@@ -163,8 +163,8 @@ data GCodeCmd
   | Cmd_SetMaterialPreset (SetMaterialPreset Required)
   | Cmd_SetTemperatureUnits (SetTemperatureUnits Required)
   | Cmd_SetRGBWColor (SetRGBWColor Required)
-  | Cmd_PositionAuto_Report (PositionAuto_Report Required)
-  | Cmd_TemperatureAuto_Report (TemperatureAuto_Report Required)
+  | Cmd_PositionAutoReport (PositionAutoReport Required)
+  | Cmd_TemperatureAutoReport (TemperatureAutoReport Required)
   | Cmd_SetMixFactor (SetMixFactor Required)
   | Cmd_SaveMix (SaveMix Required)
   | Cmd_SetMix (SetMix Required)
@@ -182,7 +182,7 @@ data GCodeCmd
   | Cmd_WaitforPinState (WaitforPinState Required)
   | Cmd_TriggerCamera (TriggerCamera Required)
   | Cmd_LCDContrast (LCDContrast Required)
-  | Cmd_LCDSleep_BacklightTimeout (LCDSleep_BacklightTimeout Required)
+  | Cmd_LCDSleepBacklightTimeout (LCDSleepBacklightTimeout Required)
   | Cmd_LCDBrightness (LCDBrightness Required)
   | Cmd_I2CSend (I2CSend Required)
   | Cmd_I2CRequest (I2CRequest Required)
@@ -199,14 +199,14 @@ data GCodeCmd
   | Cmd_UserThermistorParameters (UserThermistorParameters Required)
   | Cmd_ModelPredictiveTempControl (ModelPredictiveTempControl Required)
   | Cmd_SetChamberPID (SetChamberPID Required)
-  | Cmd_SetMicro_stepping (SetMicro_stepping Required)
+  | Cmd_SetMicrostepping (SetMicrostepping Required)
   | Cmd_SetMicrostepPins (SetMicrostepPins Required)
   | Cmd_CaseLightControl (CaseLightControl Required)
   | Cmd_SCARAThetaA (SCARAThetaA Required)
-  | Cmd_SCARATheta_B (SCARATheta_B Required)
-  | Cmd_SCARAPsi_A (SCARAPsi_A Required)
-  | Cmd_SCARAPsi_B (SCARAPsi_B Required)
-  | Cmd_SCARAPsi_C (SCARAPsi_C Required)
+  | Cmd_SCARAThetaB (SCARAThetaB Required)
+  | Cmd_SCARAPsiA (SCARAPsiA Required)
+  | Cmd_SCARAPsiB (SCARAPsiB Required)
+  | Cmd_SCARAPsiC (SCARAPsiC Required)
   | Cmd_ActivateSolenoid (ActivateSolenoid Required)
   | Cmd_DeactivateSolenoids (DeactivateSolenoids Required)
   | Cmd_MMU2FilamentType (MMU2FilamentType Required)
@@ -215,7 +215,7 @@ data GCodeCmd
   | Cmd_FilamentWidthSensorOff (FilamentWidthSensorOff Required)
   | Cmd_ReadFilamentWidth (ReadFilamentWidth Required)
   | Cmd_FilamentRunout (FilamentRunout Required)
-  | Cmd_Power_lossRecovery (Power_lossRecovery Required)
+  | Cmd_PowerlossRecovery (PowerlossRecovery Required)
   | Cmd_LCDLanguage (LCDLanguage Required)
   | Cmd_BedLevelingState (BedLevelingState Required)
   | Cmd_SetMeshValue (SetMeshValue Required)
@@ -225,7 +225,7 @@ data GCodeCmd
   | Cmd_HomeOffsetsHere (HomeOffsetsHere Required)
   | Cmd_PowerMonitor (PowerMonitor Required)
   | Cmd_CancelObjects (CancelObjects Required)
-  | Cmd_Fixed_TimeMotion (Fixed_TimeMotion Required)
+  | Cmd_FixedTimeMotion (FixedTimeMotion Required)
   | Cmd_FTMotionTrajectorySmoothing (FTMotionTrajectorySmoothing Required)
   | Cmd_ValidateEEPROMContents (ValidateEEPROMContents Required)
   | Cmd_LockMachine (LockMachine Required)
@@ -234,7 +234,7 @@ data GCodeCmd
   | Cmd_AbortSDPrint (AbortSDPrint Required)
   | Cmd_EndstopsAbortSD (EndstopsAbortSD Required)
   | Cmd_MachineName (MachineName Required)
-  | Cmd_EthernetIPAddress_NetworkIF (EthernetIPAddress_NetworkIF Required)
+  | Cmd_EthernetIPAddressNetworkIF (EthernetIPAddressNetworkIF Required)
   | Cmd_EthernetSubnetMask (EthernetSubnetMask Required)
   | Cmd_EthernetGatewayIPAddress (EthernetGatewayIPAddress Required)
   | Cmd_SetTMCSteppingMode (SetTMCSteppingMode Required)
@@ -251,8 +251,8 @@ data GCodeCmd
   | Cmd_UnloadFilament (UnloadFilament Required)
   | Cmd_ControllerFanSettings (ControllerFanSettings Required)
   | Cmd_RepeatMarker (RepeatMarker Required)
-  | Cmd_G_codeMacros (G_codeMacros Required)
-  | Cmd_ReportG_codeMacros (ReportG_codeMacros Required)
+  | Cmd_GcodeMacros (GcodeMacros Required)
+  | Cmd_ReportGcodeMacros (ReportGcodeMacros Required)
   | Cmd_XYZProbeOffset (XYZProbeOffset Required)
   | Cmd_BedSkewCompensation (BedSkewCompensation Required)
   | Cmd_I2CPositionEncoders (I2CPositionEncoders Required)
@@ -264,8 +264,8 @@ data GCodeCmd
   | Cmd_SetTrimpotPins (SetTrimpotPins Required)
   | Cmd_ReportDACStepperCurrent (ReportDACStepperCurrent Required)
   | Cmd_CommitDACtoEEPROM (CommitDACtoEEPROM Required)
-  | Cmd_TMCOTPre_WarnCondition (TMCOTPre_WarnCondition Required)
-  | Cmd_ClearTMCOTPre_Warn (ClearTMCOTPre_Warn Required)
+  | Cmd_TMCOTPreWarnCondition (TMCOTPreWarnCondition Required)
+  | Cmd_ClearTMCOTPreWarn (ClearTMCOTPreWarn Required)
   | Cmd_SetHybridThresholdSpeed (SetHybridThresholdSpeed Required)
   | Cmd_TMCBumpSensitivity (TMCBumpSensitivity Required)
   | Cmd_TMCZAxisCalibration (TMCZAxisCalibration Required)
@@ -301,7 +301,7 @@ instance ToText GCodeCmd where
       Cmd_DirectStepperMove r -> toText r
       Cmd_Retract r -> toText r
       Cmd_Recover r -> toText r
-      Cmd_CleanTheNozzle r -> toText r
+      Cmd_CleanNozzle r -> toText r
       Cmd_CNCWorkspacePlanes_XY r -> toText r
       Cmd_CNCWorkspacePlanes_ZX r -> toText r
       Cmd_CNCWorkspacePlanes_YZ r -> toText r
@@ -315,11 +315,11 @@ instance ToText GCodeCmd where
       Cmd_BedLeveling_Linear r -> toText r
       Cmd_BedLeveling_Manual r -> toText r
       Cmd_BedLeveling_Unified r -> toText r
-      Cmd_SingleZ_Probe r -> toText r
+      Cmd_SingleZProbe r -> toText r
       Cmd_DockSled r -> toText r
       Cmd_UndockSled r -> toText r
       Cmd_DeltaAutoCalibration r -> toText r
-      Cmd_ZSteppersAuto_Alignment r -> toText r
+      Cmd_ZSteppersAutoAlignment r -> toText r
       Cmd_MechanicalGantryCalibration r -> toText r
       Cmd_TrammingAssistant r -> toText r
       Cmd_ProbeTarget_ErrorOnFail r -> toText r
@@ -328,15 +328,15 @@ instance ToText GCodeCmd where
       Cmd_ProbeTarget_AwayNoErrorOnFail r -> toText r
       Cmd_MovetoMeshCoordinate r -> toText r
       Cmd_MoveinMachineCoordinates r -> toText r
-      Cmd_SelectWorkspace_Workspace1 r -> toText r
-      Cmd_SelectWorkspace_Workspace2 r -> toText r
-      Cmd_SelectWorkspace_Workspace3 r -> toText r
-      Cmd_SelectWorkspace_Workspace4 r -> toText r
-      Cmd_SelectWorkspace_Workspace5 r -> toText r
-      Cmd_SelectWorkspace_Workspace6 r -> toText r
-      Cmd_SelectWorkspace_Workspace7 r -> toText r
-      Cmd_SelectWorkspace_Workspace8 r -> toText r
-      Cmd_SelectWorkspace_Workspace9 r -> toText r
+      Cmd_SelectWorkspace_1 r -> toText r
+      Cmd_SelectWorkspace_2 r -> toText r
+      Cmd_SelectWorkspace_3 r -> toText r
+      Cmd_SelectWorkspace_4 r -> toText r
+      Cmd_SelectWorkspace_5 r -> toText r
+      Cmd_SelectWorkspace_6 r -> toText r
+      Cmd_SelectWorkspace_7 r -> toText r
+      Cmd_SelectWorkspace_8 r -> toText r
+      Cmd_SelectWorkspace_9 r -> toText r
       Cmd_StoredPositions r -> toText r
       Cmd_ReturntoSavedPosition r -> toText r
       Cmd_ProbeTemperatureCalibration r -> toText r
@@ -346,14 +346,14 @@ instance ToText GCodeCmd where
       Cmd_SetPosition r -> toText r
       Cmd_BacklashCalibration r -> toText r
       Cmd_UnconditionalStop r -> toText r
-      Cmd_SpindleCW_LaserOn r -> toText r
-      Cmd_SpindleCCW_LaserOn r -> toText r
-      Cmd_Spindle_LaserOff r -> toText r
+      Cmd_SpindleCWLaserOn r -> toText r
+      Cmd_SpindleCCWLaserOn r -> toText r
+      Cmd_SpindleLaserOff r -> toText r
       Cmd_CoolantControls_Mist r -> toText r
       Cmd_CoolantControls_Flood r -> toText r
       Cmd_CoolantControls_Off r -> toText r
-      Cmd_Vacuum_BlowerControl_On r -> toText r
-      Cmd_Vacuum_BlowerControl_Off r -> toText r
+      Cmd_VacuumBlowerControl_On r -> toText r
+      Cmd_VacuumBlowerControl_Off r -> toText r
       Cmd_ExpectedPrinterCheck r -> toText r
       Cmd_EnableSteppers r -> toText r
       Cmd_DisableSteppers r -> toText r
@@ -388,14 +388,14 @@ instance ToText GCodeCmd where
       Cmd_InactivityShutdown r -> toText r
       Cmd_HotendIdleTimeout r -> toText r
       Cmd_DisableHotendIdleTimeout r -> toText r
-      Cmd_SetAxisSteps_per_unit r -> toText r
+      Cmd_SetAxisStepsperunit r -> toText r
       Cmd_SetHotendTemperature r -> toText r
       Cmd_ReportTemperatures r -> toText r
       Cmd_SetFanSpeed r -> toText r
       Cmd_FanOff r -> toText r
       Cmd_BreakandContinue r -> toText r
       Cmd_WaitforHotendTemperature r -> toText r
-      Cmd_Set_GetLineNumber r -> toText r
+      Cmd_SetGetLineNumber r -> toText r
       Cmd_DebugLevel r -> toText r
       Cmd_FullShutdown r -> toText r
       Cmd_HostKeepalive r -> toText r
@@ -410,7 +410,7 @@ instance ToText GCodeCmd where
       Cmd_SetChamberTemperature r -> toText r
       Cmd_WaitforBedTemperature r -> toText r
       Cmd_VolumetricExtrusionDiameter r -> toText r
-      Cmd_Print_TravelMoveLimits r -> toText r
+      Cmd_PrintTravelMoveLimits r -> toText r
       Cmd_SetMaxFeedrate r -> toText r
       Cmd_SetStartingAcceleration r -> toText r
       Cmd_SetAdvancedSettings r -> toText r
@@ -439,8 +439,8 @@ instance ToText GCodeCmd where
       Cmd_SetMaterialPreset r -> toText r
       Cmd_SetTemperatureUnits r -> toText r
       Cmd_SetRGBWColor r -> toText r
-      Cmd_PositionAuto_Report r -> toText r
-      Cmd_TemperatureAuto_Report r -> toText r
+      Cmd_PositionAutoReport r -> toText r
+      Cmd_TemperatureAutoReport r -> toText r
       Cmd_SetMixFactor r -> toText r
       Cmd_SaveMix r -> toText r
       Cmd_SetMix r -> toText r
@@ -458,7 +458,7 @@ instance ToText GCodeCmd where
       Cmd_WaitforPinState r -> toText r
       Cmd_TriggerCamera r -> toText r
       Cmd_LCDContrast r -> toText r
-      Cmd_LCDSleep_BacklightTimeout r -> toText r
+      Cmd_LCDSleepBacklightTimeout r -> toText r
       Cmd_LCDBrightness r -> toText r
       Cmd_I2CSend r -> toText r
       Cmd_I2CRequest r -> toText r
@@ -475,14 +475,14 @@ instance ToText GCodeCmd where
       Cmd_UserThermistorParameters r -> toText r
       Cmd_ModelPredictiveTempControl r -> toText r
       Cmd_SetChamberPID r -> toText r
-      Cmd_SetMicro_stepping r -> toText r
+      Cmd_SetMicrostepping r -> toText r
       Cmd_SetMicrostepPins r -> toText r
       Cmd_CaseLightControl r -> toText r
       Cmd_SCARAThetaA r -> toText r
-      Cmd_SCARATheta_B r -> toText r
-      Cmd_SCARAPsi_A r -> toText r
-      Cmd_SCARAPsi_B r -> toText r
-      Cmd_SCARAPsi_C r -> toText r
+      Cmd_SCARAThetaB r -> toText r
+      Cmd_SCARAPsiA r -> toText r
+      Cmd_SCARAPsiB r -> toText r
+      Cmd_SCARAPsiC r -> toText r
       Cmd_ActivateSolenoid r -> toText r
       Cmd_DeactivateSolenoids r -> toText r
       Cmd_MMU2FilamentType r -> toText r
@@ -491,7 +491,7 @@ instance ToText GCodeCmd where
       Cmd_FilamentWidthSensorOff r -> toText r
       Cmd_ReadFilamentWidth r -> toText r
       Cmd_FilamentRunout r -> toText r
-      Cmd_Power_lossRecovery r -> toText r
+      Cmd_PowerlossRecovery r -> toText r
       Cmd_LCDLanguage r -> toText r
       Cmd_BedLevelingState r -> toText r
       Cmd_SetMeshValue r -> toText r
@@ -501,7 +501,7 @@ instance ToText GCodeCmd where
       Cmd_HomeOffsetsHere r -> toText r
       Cmd_PowerMonitor r -> toText r
       Cmd_CancelObjects r -> toText r
-      Cmd_Fixed_TimeMotion r -> toText r
+      Cmd_FixedTimeMotion r -> toText r
       Cmd_FTMotionTrajectorySmoothing r -> toText r
       Cmd_ValidateEEPROMContents r -> toText r
       Cmd_LockMachine r -> toText r
@@ -510,7 +510,7 @@ instance ToText GCodeCmd where
       Cmd_AbortSDPrint r -> toText r
       Cmd_EndstopsAbortSD r -> toText r
       Cmd_MachineName r -> toText r
-      Cmd_EthernetIPAddress_NetworkIF r -> toText r
+      Cmd_EthernetIPAddressNetworkIF r -> toText r
       Cmd_EthernetSubnetMask r -> toText r
       Cmd_EthernetGatewayIPAddress r -> toText r
       Cmd_SetTMCSteppingMode r -> toText r
@@ -527,8 +527,8 @@ instance ToText GCodeCmd where
       Cmd_UnloadFilament r -> toText r
       Cmd_ControllerFanSettings r -> toText r
       Cmd_RepeatMarker r -> toText r
-      Cmd_G_codeMacros r -> toText r
-      Cmd_ReportG_codeMacros r -> toText r
+      Cmd_GcodeMacros r -> toText r
+      Cmd_ReportGcodeMacros r -> toText r
       Cmd_XYZProbeOffset r -> toText r
       Cmd_BedSkewCompensation r -> toText r
       Cmd_I2CPositionEncoders r -> toText r
@@ -540,8 +540,8 @@ instance ToText GCodeCmd where
       Cmd_SetTrimpotPins r -> toText r
       Cmd_ReportDACStepperCurrent r -> toText r
       Cmd_CommitDACtoEEPROM r -> toText r
-      Cmd_TMCOTPre_WarnCondition r -> toText r
-      Cmd_ClearTMCOTPre_Warn r -> toText r
+      Cmd_TMCOTPreWarnCondition r -> toText r
+      Cmd_ClearTMCOTPreWarn r -> toText r
       Cmd_SetHybridThresholdSpeed r -> toText r
       Cmd_TMCBumpSensitivity r -> toText r
       Cmd_TMCZAxisCalibration r -> toText r
@@ -1131,12 +1131,12 @@ instance ToText (Recover Required) where
   toText r = mkCmd "G11" []
 
 --------------------------------------------------------------------------------
---- Clean The Nozzle (G12)
+--- Clean Nozzle (G12)
 --- Docs: https://marlinfw.org/docs/gcode/G012.html
 --------------------------------------------------------------------------------
 
-data CleanTheNozzle (f :: Type -> Type)
-  = CleanTheNozzle
+data CleanNozzle (f :: Type -> Type)
+  = CleanNozzle
   { pattern :: Maybe Index,
     radius :: Maybe Mm,
     repetitions :: Maybe Count,
@@ -1147,12 +1147,12 @@ data CleanTheNozzle (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (CleanTheNozzle NotDefined)
+instance Default (CleanNozzle NotDefined)
 
-instance Upcast (CleanTheNozzle Required) GCodeCmd where
-  upcast = Cmd_CleanTheNozzle
+instance Upcast (CleanNozzle Required) GCodeCmd where
+  upcast = Cmd_CleanNozzle
 
-instance ToText (CleanTheNozzle Required) where
+instance ToText (CleanNozzle Required) where
   toText r =
     mkCmd
       "G12"
@@ -1630,8 +1630,8 @@ instance ToText (BedLeveling_Unified Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G030.html
 --------------------------------------------------------------------------------
 
-data SingleZ_Probe (f :: Type -> Type)
-  = SingleZ_Probe
+data SingleZProbe (f :: Type -> Type)
+  = SingleZProbe
   { temperatureCompensation :: Maybe Flag,
     engageEach :: Maybe Flag,
     axisX :: Maybe Mm,
@@ -1639,12 +1639,12 @@ data SingleZ_Probe (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (SingleZ_Probe NotDefined)
+instance Default (SingleZProbe NotDefined)
 
-instance Upcast (SingleZ_Probe Required) GCodeCmd where
-  upcast = Cmd_SingleZ_Probe
+instance Upcast (SingleZProbe Required) GCodeCmd where
+  upcast = Cmd_SingleZProbe
 
-instance ToText (SingleZ_Probe Required) where
+instance ToText (SingleZProbe Required) where
   toText r =
     mkCmd
       "G30"
@@ -1740,8 +1740,8 @@ instance ToText (DeltaAutoCalibration Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G034-zsaa.html
 --------------------------------------------------------------------------------
 
-data ZSteppersAuto_Alignment (f :: Type -> Type)
-  = ZSteppersAuto_Alignment
+data ZSteppersAutoAlignment (f :: Type -> Type)
+  = ZSteppersAutoAlignment
   { amplification :: Maybe Mm,
     stowEach :: Maybe Flag,
     iterations :: Maybe Index,
@@ -1753,12 +1753,12 @@ data ZSteppersAuto_Alignment (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (ZSteppersAuto_Alignment NotDefined)
+instance Default (ZSteppersAutoAlignment NotDefined)
 
-instance Upcast (ZSteppersAuto_Alignment Required) GCodeCmd where
-  upcast = Cmd_ZSteppersAuto_Alignment
+instance Upcast (ZSteppersAutoAlignment Required) GCodeCmd where
+  upcast = Cmd_ZSteppersAutoAlignment
 
-instance ToText (ZSteppersAuto_Alignment Required) where
+instance ToText (ZSteppersAutoAlignment Required) where
   toText r =
     mkCmd
       "G34"
@@ -1985,17 +1985,17 @@ instance ToText (MoveinMachineCoordinates Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace1 (f :: Type -> Type)
-  = SelectWorkspace_Workspace1
+data SelectWorkspace_1 (f :: Type -> Type)
+  = SelectWorkspace_1
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace1 NotDefined)
+instance Default (SelectWorkspace_1 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace1 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace1
+instance Upcast (SelectWorkspace_1 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_1
 
-instance ToText (SelectWorkspace_Workspace1 Required) where
+instance ToText (SelectWorkspace_1 Required) where
   toText r = mkCmd "G54" []
 
 --------------------------------------------------------------------------------
@@ -2003,17 +2003,17 @@ instance ToText (SelectWorkspace_Workspace1 Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace2 (f :: Type -> Type)
-  = SelectWorkspace_Workspace2
+data SelectWorkspace_2 (f :: Type -> Type)
+  = SelectWorkspace_2
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace2 NotDefined)
+instance Default (SelectWorkspace_2 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace2 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace2
+instance Upcast (SelectWorkspace_2 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_2
 
-instance ToText (SelectWorkspace_Workspace2 Required) where
+instance ToText (SelectWorkspace_2 Required) where
   toText r = mkCmd "G55" []
 
 --------------------------------------------------------------------------------
@@ -2021,17 +2021,17 @@ instance ToText (SelectWorkspace_Workspace2 Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace3 (f :: Type -> Type)
-  = SelectWorkspace_Workspace3
+data SelectWorkspace_3 (f :: Type -> Type)
+  = SelectWorkspace_3
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace3 NotDefined)
+instance Default (SelectWorkspace_3 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace3 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace3
+instance Upcast (SelectWorkspace_3 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_3
 
-instance ToText (SelectWorkspace_Workspace3 Required) where
+instance ToText (SelectWorkspace_3 Required) where
   toText r = mkCmd "G56" []
 
 --------------------------------------------------------------------------------
@@ -2039,17 +2039,17 @@ instance ToText (SelectWorkspace_Workspace3 Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace4 (f :: Type -> Type)
-  = SelectWorkspace_Workspace4
+data SelectWorkspace_4 (f :: Type -> Type)
+  = SelectWorkspace_4
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace4 NotDefined)
+instance Default (SelectWorkspace_4 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace4 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace4
+instance Upcast (SelectWorkspace_4 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_4
 
-instance ToText (SelectWorkspace_Workspace4 Required) where
+instance ToText (SelectWorkspace_4 Required) where
   toText r = mkCmd "G57" []
 
 --------------------------------------------------------------------------------
@@ -2057,17 +2057,17 @@ instance ToText (SelectWorkspace_Workspace4 Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace5 (f :: Type -> Type)
-  = SelectWorkspace_Workspace5
+data SelectWorkspace_5 (f :: Type -> Type)
+  = SelectWorkspace_5
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace5 NotDefined)
+instance Default (SelectWorkspace_5 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace5 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace5
+instance Upcast (SelectWorkspace_5 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_5
 
-instance ToText (SelectWorkspace_Workspace5 Required) where
+instance ToText (SelectWorkspace_5 Required) where
   toText r = mkCmd "G58" []
 
 --------------------------------------------------------------------------------
@@ -2075,74 +2075,71 @@ instance ToText (SelectWorkspace_Workspace5 Required) where
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace6 (f :: Type -> Type)
-  = SelectWorkspace_Workspace6
+data SelectWorkspace_6 (f :: Type -> Type)
+  = SelectWorkspace_6
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace6 NotDefined)
+instance Default (SelectWorkspace_6 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace6 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace6
+instance Upcast (SelectWorkspace_6 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_6
 
-instance ToText (SelectWorkspace_Workspace6 Required) where
+instance ToText (SelectWorkspace_6 Required) where
   toText r = mkCmd "G59" []
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G59.1)
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace7 (f :: Type -> Type)
-  = SelectWorkspace_Workspace7
+data SelectWorkspace_7 (f :: Type -> Type)
+  = SelectWorkspace_7
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace7 NotDefined)
+instance Default (SelectWorkspace_7 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace7 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace7
+instance Upcast (SelectWorkspace_7 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_7
 
-instance ToText (SelectWorkspace_Workspace7 Required) where
+instance ToText (SelectWorkspace_7 Required) where
   toText r = mkCmd "G59.1" []
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G59.2)
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace8 (f :: Type -> Type)
-  = SelectWorkspace_Workspace8
+data SelectWorkspace_8 (f :: Type -> Type)
+  = SelectWorkspace_8
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace8 NotDefined)
+instance Default (SelectWorkspace_8 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace8 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace8
+instance Upcast (SelectWorkspace_8 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_8
 
-instance ToText (SelectWorkspace_Workspace8 Required) where
+instance ToText (SelectWorkspace_8 Required) where
   toText r = mkCmd "G59.2" []
 
 --------------------------------------------------------------------------------
 --- Select Workspace (G59.3)
 --- Docs: https://marlinfw.org/docs/gcode/G054-G059.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data SelectWorkspace_Workspace9 (f :: Type -> Type)
-  = SelectWorkspace_Workspace9
+data SelectWorkspace_9 (f :: Type -> Type)
+  = SelectWorkspace_9
   {}
   deriving (Generic)
 
-instance Default (SelectWorkspace_Workspace9 NotDefined)
+instance Default (SelectWorkspace_9 NotDefined)
 
-instance Upcast (SelectWorkspace_Workspace9 Required) GCodeCmd where
-  upcast = Cmd_SelectWorkspace_Workspace9
+instance Upcast (SelectWorkspace_9 Required) GCodeCmd where
+  upcast = Cmd_SelectWorkspace_9
 
-instance ToText (SelectWorkspace_Workspace9 Required) where
+instance ToText (SelectWorkspace_9 Required) where
   toText r = mkCmd "G59.3" []
 
 --------------------------------------------------------------------------------
@@ -2373,7 +2370,8 @@ instance ToText (BacklashCalibration Required) where
 data UnconditionalStop (f :: Type -> Type)
   = UnconditionalStop
   { expireMilliseconds :: Maybe Milliseconds,
-    expireSeconds :: Maybe Seconds
+    expireSeconds :: Maybe Seconds,
+    text :: Maybe TextValue
   }
   deriving (Generic)
 
@@ -2387,7 +2385,8 @@ instance ToText (UnconditionalStop Required) where
     mkCmd
       "M0"
       [ mkArg 'P' r.expireMilliseconds,
-        mkArg 'S' r.expireSeconds
+        mkArg 'S' r.expireSeconds,
+        mkArg '_' r.text
       ]
 
 --------------------------------------------------------------------------------
@@ -2395,20 +2394,20 @@ instance ToText (UnconditionalStop Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M003.html
 --------------------------------------------------------------------------------
 
-data SpindleCW_LaserOn (f :: Type -> Type)
-  = SpindleCW_LaserOn
+data SpindleCWLaserOn (f :: Type -> Type)
+  = SpindleCWLaserOn
   { inlineMode :: Maybe Flag,
     powerPWM :: Maybe Index,
     power :: Maybe Index
   }
   deriving (Generic)
 
-instance Default (SpindleCW_LaserOn NotDefined)
+instance Default (SpindleCWLaserOn NotDefined)
 
-instance Upcast (SpindleCW_LaserOn Required) GCodeCmd where
-  upcast = Cmd_SpindleCW_LaserOn
+instance Upcast (SpindleCWLaserOn Required) GCodeCmd where
+  upcast = Cmd_SpindleCWLaserOn
 
-instance ToText (SpindleCW_LaserOn Required) where
+instance ToText (SpindleCWLaserOn Required) where
   toText r =
     mkCmd
       "M3"
@@ -2422,20 +2421,20 @@ instance ToText (SpindleCW_LaserOn Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M004.html
 --------------------------------------------------------------------------------
 
-data SpindleCCW_LaserOn (f :: Type -> Type)
-  = SpindleCCW_LaserOn
+data SpindleCCWLaserOn (f :: Type -> Type)
+  = SpindleCCWLaserOn
   { inlineMode :: Maybe Flag,
     powerPWM :: Maybe Index,
     power :: Maybe Index
   }
   deriving (Generic)
 
-instance Default (SpindleCCW_LaserOn NotDefined)
+instance Default (SpindleCCWLaserOn NotDefined)
 
-instance Upcast (SpindleCCW_LaserOn Required) GCodeCmd where
-  upcast = Cmd_SpindleCCW_LaserOn
+instance Upcast (SpindleCCWLaserOn Required) GCodeCmd where
+  upcast = Cmd_SpindleCCWLaserOn
 
-instance ToText (SpindleCCW_LaserOn Required) where
+instance ToText (SpindleCCWLaserOn Required) where
   toText r =
     mkCmd
       "M4"
@@ -2449,17 +2448,17 @@ instance ToText (SpindleCCW_LaserOn Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M005.html
 --------------------------------------------------------------------------------
 
-data Spindle_LaserOff (f :: Type -> Type)
-  = Spindle_LaserOff
+data SpindleLaserOff (f :: Type -> Type)
+  = SpindleLaserOff
   {}
   deriving (Generic)
 
-instance Default (Spindle_LaserOff NotDefined)
+instance Default (SpindleLaserOff NotDefined)
 
-instance Upcast (Spindle_LaserOff Required) GCodeCmd where
-  upcast = Cmd_Spindle_LaserOff
+instance Upcast (SpindleLaserOff Required) GCodeCmd where
+  upcast = Cmd_SpindleLaserOff
 
-instance ToText (Spindle_LaserOff Required) where
+instance ToText (SpindleLaserOff Required) where
   toText r = mkCmd "M5" []
 
 --------------------------------------------------------------------------------
@@ -2521,17 +2520,17 @@ instance ToText (CoolantControls_Off Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M010-M011.html
 --------------------------------------------------------------------------------
 
-data Vacuum_BlowerControl_On (f :: Type -> Type)
-  = Vacuum_BlowerControl_On
+data VacuumBlowerControl_On (f :: Type -> Type)
+  = VacuumBlowerControl_On
   {}
   deriving (Generic)
 
-instance Default (Vacuum_BlowerControl_On NotDefined)
+instance Default (VacuumBlowerControl_On NotDefined)
 
-instance Upcast (Vacuum_BlowerControl_On Required) GCodeCmd where
-  upcast = Cmd_Vacuum_BlowerControl_On
+instance Upcast (VacuumBlowerControl_On Required) GCodeCmd where
+  upcast = Cmd_VacuumBlowerControl_On
 
-instance ToText (Vacuum_BlowerControl_On Required) where
+instance ToText (VacuumBlowerControl_On Required) where
   toText r = mkCmd "M10" []
 
 --------------------------------------------------------------------------------
@@ -2539,17 +2538,17 @@ instance ToText (Vacuum_BlowerControl_On Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M010-M011.html
 --------------------------------------------------------------------------------
 
-data Vacuum_BlowerControl_Off (f :: Type -> Type)
-  = Vacuum_BlowerControl_Off
+data VacuumBlowerControl_Off (f :: Type -> Type)
+  = VacuumBlowerControl_Off
   {}
   deriving (Generic)
 
-instance Default (Vacuum_BlowerControl_Off NotDefined)
+instance Default (VacuumBlowerControl_Off NotDefined)
 
-instance Upcast (Vacuum_BlowerControl_Off Required) GCodeCmd where
-  upcast = Cmd_Vacuum_BlowerControl_Off
+instance Upcast (VacuumBlowerControl_Off Required) GCodeCmd where
+  upcast = Cmd_VacuumBlowerControl_Off
 
-instance ToText (Vacuum_BlowerControl_Off Required) where
+instance ToText (VacuumBlowerControl_Off Required) where
   toText r = mkCmd "M11" []
 
 --------------------------------------------------------------------------------
@@ -3323,8 +3322,8 @@ instance ToText (DisableHotendIdleTimeout Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M092.html
 --------------------------------------------------------------------------------
 
-data SetAxisSteps_per_unit (f :: Type -> Type)
-  = SetAxisSteps_per_unit
+data SetAxisStepsperunit (f :: Type -> Type)
+  = SetAxisStepsperunit
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
@@ -3339,12 +3338,12 @@ data SetAxisSteps_per_unit (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (SetAxisSteps_per_unit NotDefined)
+instance Default (SetAxisStepsperunit NotDefined)
 
-instance Upcast (SetAxisSteps_per_unit Required) GCodeCmd where
-  upcast = Cmd_SetAxisSteps_per_unit
+instance Upcast (SetAxisStepsperunit Required) GCodeCmd where
+  upcast = Cmd_SetAxisStepsperunit
 
-instance ToText (SetAxisSteps_per_unit Required) where
+instance ToText (SetAxisStepsperunit Required) where
   toText r =
     mkCmd
       "M92"
@@ -3521,18 +3520,18 @@ instance ToText (WaitforHotendTemperature Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M110.html
 --------------------------------------------------------------------------------
 
-data Set_GetLineNumber (f :: Type -> Type)
-  = Set_GetLineNumber
+data SetGetLineNumber (f :: Type -> Type)
+  = SetGetLineNumber
   { lineNumber :: Maybe Count
   }
   deriving (Generic)
 
-instance Default (Set_GetLineNumber NotDefined)
+instance Default (SetGetLineNumber NotDefined)
 
-instance Upcast (Set_GetLineNumber Required) GCodeCmd where
-  upcast = Cmd_Set_GetLineNumber
+instance Upcast (SetGetLineNumber Required) GCodeCmd where
+  upcast = Cmd_SetGetLineNumber
 
-instance ToText (Set_GetLineNumber Required) where
+instance ToText (SetGetLineNumber Required) where
   toText r = mkCmd "M110" [mkArg 'N' r.lineNumber]
 
 --------------------------------------------------------------------------------
@@ -3835,8 +3834,8 @@ instance ToText (VolumetricExtrusionDiameter Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M201.html
 --------------------------------------------------------------------------------
 
-data Print_TravelMoveLimits (f :: Type -> Type)
-  = Print_TravelMoveLimits
+data PrintTravelMoveLimits (f :: Type -> Type)
+  = PrintTravelMoveLimits
   { axisExtrusion :: Maybe Mm,
     frequencyLimit :: Maybe Count,
     frequencyMinSpeed :: Maybe Mm,
@@ -3847,12 +3846,12 @@ data Print_TravelMoveLimits (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (Print_TravelMoveLimits NotDefined)
+instance Default (PrintTravelMoveLimits NotDefined)
 
-instance Upcast (Print_TravelMoveLimits Required) GCodeCmd where
-  upcast = Cmd_Print_TravelMoveLimits
+instance Upcast (PrintTravelMoveLimits Required) GCodeCmd where
+  upcast = Cmd_PrintTravelMoveLimits
 
-instance ToText (Print_TravelMoveLimits Required) where
+instance ToText (PrintTravelMoveLimits Required) where
   toText r =
     mkCmd
       "M201"
@@ -4553,18 +4552,18 @@ instance ToText (SetRGBWColor Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M154.html
 --------------------------------------------------------------------------------
 
-data PositionAuto_Report (f :: Type -> Type)
-  = PositionAuto_Report
+data PositionAutoReport (f :: Type -> Type)
+  = PositionAutoReport
   { intervalSeconds :: Maybe Seconds
   }
   deriving (Generic)
 
-instance Default (PositionAuto_Report NotDefined)
+instance Default (PositionAutoReport NotDefined)
 
-instance Upcast (PositionAuto_Report Required) GCodeCmd where
-  upcast = Cmd_PositionAuto_Report
+instance Upcast (PositionAutoReport Required) GCodeCmd where
+  upcast = Cmd_PositionAutoReport
 
-instance ToText (PositionAuto_Report Required) where
+instance ToText (PositionAutoReport Required) where
   toText r = mkCmd "M154" [mkArg 'S' r.intervalSeconds]
 
 --------------------------------------------------------------------------------
@@ -4572,18 +4571,18 @@ instance ToText (PositionAuto_Report Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M155.html
 --------------------------------------------------------------------------------
 
-data TemperatureAuto_Report (f :: Type -> Type)
-  = TemperatureAuto_Report
+data TemperatureAutoReport (f :: Type -> Type)
+  = TemperatureAutoReport
   { intervalSeconds :: Maybe Seconds
   }
   deriving (Generic)
 
-instance Default (TemperatureAuto_Report NotDefined)
+instance Default (TemperatureAutoReport NotDefined)
 
-instance Upcast (TemperatureAuto_Report Required) GCodeCmd where
-  upcast = Cmd_TemperatureAuto_Report
+instance Upcast (TemperatureAutoReport Required) GCodeCmd where
+  upcast = Cmd_TemperatureAutoReport
 
-instance ToText (TemperatureAuto_Report Required) where
+instance ToText (TemperatureAutoReport Required) where
   toText r = mkCmd "M155" [mkArg 'S' r.intervalSeconds]
 
 --------------------------------------------------------------------------------
@@ -5016,18 +5015,18 @@ instance ToText (LCDContrast Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M255.html
 --------------------------------------------------------------------------------
 
-data LCDSleep_BacklightTimeout (f :: Type -> Type)
-  = LCDSleep_BacklightTimeout
+data LCDSleepBacklightTimeout (f :: Type -> Type)
+  = LCDSleepBacklightTimeout
   { timeoutMinutes :: f Count
   }
   deriving (Generic)
 
-instance Default (LCDSleep_BacklightTimeout NotDefined)
+instance Default (LCDSleepBacklightTimeout NotDefined)
 
-instance Upcast (LCDSleep_BacklightTimeout Required) GCodeCmd where
-  upcast = Cmd_LCDSleep_BacklightTimeout
+instance Upcast (LCDSleepBacklightTimeout Required) GCodeCmd where
+  upcast = Cmd_LCDSleepBacklightTimeout
 
-instance ToText (LCDSleep_BacklightTimeout Required) where
+instance ToText (LCDSleepBacklightTimeout Required) where
   toText r = mkCmd "M255" [mkReqArg 'S' r.timeoutMinutes]
 
 --------------------------------------------------------------------------------
@@ -5442,17 +5441,17 @@ instance ToText (SetChamberPID Required) where
 --- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data SetMicro_stepping (f :: Type -> Type)
-  = SetMicro_stepping
+data SetMicrostepping (f :: Type -> Type)
+  = SetMicrostepping
   {}
   deriving (Generic)
 
-instance Default (SetMicro_stepping NotDefined)
+instance Default (SetMicrostepping NotDefined)
 
-instance Upcast (SetMicro_stepping Required) GCodeCmd where
-  upcast = Cmd_SetMicro_stepping
+instance Upcast (SetMicrostepping Required) GCodeCmd where
+  upcast = Cmd_SetMicrostepping
 
-instance ToText (SetMicro_stepping Required) where
+instance ToText (SetMicrostepping Required) where
   toText r = mkCmd "M350" []
 
 --------------------------------------------------------------------------------
@@ -5522,17 +5521,17 @@ instance ToText (SCARAThetaA Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M361.html
 --------------------------------------------------------------------------------
 
-data SCARATheta_B (f :: Type -> Type)
-  = SCARATheta_B
+data SCARAThetaB (f :: Type -> Type)
+  = SCARAThetaB
   {}
   deriving (Generic)
 
-instance Default (SCARATheta_B NotDefined)
+instance Default (SCARAThetaB NotDefined)
 
-instance Upcast (SCARATheta_B Required) GCodeCmd where
-  upcast = Cmd_SCARATheta_B
+instance Upcast (SCARAThetaB Required) GCodeCmd where
+  upcast = Cmd_SCARAThetaB
 
-instance ToText (SCARATheta_B Required) where
+instance ToText (SCARAThetaB Required) where
   toText r = mkCmd "M361" []
 
 --------------------------------------------------------------------------------
@@ -5540,17 +5539,17 @@ instance ToText (SCARATheta_B Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M362.html
 --------------------------------------------------------------------------------
 
-data SCARAPsi_A (f :: Type -> Type)
-  = SCARAPsi_A
+data SCARAPsiA (f :: Type -> Type)
+  = SCARAPsiA
   {}
   deriving (Generic)
 
-instance Default (SCARAPsi_A NotDefined)
+instance Default (SCARAPsiA NotDefined)
 
-instance Upcast (SCARAPsi_A Required) GCodeCmd where
-  upcast = Cmd_SCARAPsi_A
+instance Upcast (SCARAPsiA Required) GCodeCmd where
+  upcast = Cmd_SCARAPsiA
 
-instance ToText (SCARAPsi_A Required) where
+instance ToText (SCARAPsiA Required) where
   toText r = mkCmd "M362" []
 
 --------------------------------------------------------------------------------
@@ -5558,17 +5557,17 @@ instance ToText (SCARAPsi_A Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M363.html
 --------------------------------------------------------------------------------
 
-data SCARAPsi_B (f :: Type -> Type)
-  = SCARAPsi_B
+data SCARAPsiB (f :: Type -> Type)
+  = SCARAPsiB
   {}
   deriving (Generic)
 
-instance Default (SCARAPsi_B NotDefined)
+instance Default (SCARAPsiB NotDefined)
 
-instance Upcast (SCARAPsi_B Required) GCodeCmd where
-  upcast = Cmd_SCARAPsi_B
+instance Upcast (SCARAPsiB Required) GCodeCmd where
+  upcast = Cmd_SCARAPsiB
 
-instance ToText (SCARAPsi_B Required) where
+instance ToText (SCARAPsiB Required) where
   toText r = mkCmd "M363" []
 
 --------------------------------------------------------------------------------
@@ -5576,17 +5575,17 @@ instance ToText (SCARAPsi_B Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M364.html
 --------------------------------------------------------------------------------
 
-data SCARAPsi_C (f :: Type -> Type)
-  = SCARAPsi_C
+data SCARAPsiC (f :: Type -> Type)
+  = SCARAPsiC
   {}
   deriving (Generic)
 
-instance Default (SCARAPsi_C NotDefined)
+instance Default (SCARAPsiC NotDefined)
 
-instance Upcast (SCARAPsi_C Required) GCodeCmd where
-  upcast = Cmd_SCARAPsi_C
+instance Upcast (SCARAPsiC Required) GCodeCmd where
+  upcast = Cmd_SCARAPsiC
 
-instance ToText (SCARAPsi_C Required) where
+instance ToText (SCARAPsiC Required) where
   toText r = mkCmd "M364" []
 
 --------------------------------------------------------------------------------
@@ -5762,18 +5761,18 @@ instance ToText (FilamentRunout Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M413.html
 --------------------------------------------------------------------------------
 
-data Power_lossRecovery (f :: Type -> Type)
-  = Power_lossRecovery
+data PowerlossRecovery (f :: Type -> Type)
+  = PowerlossRecovery
   { enable :: Maybe Flag
   }
   deriving (Generic)
 
-instance Default (Power_lossRecovery NotDefined)
+instance Default (PowerlossRecovery NotDefined)
 
-instance Upcast (Power_lossRecovery Required) GCodeCmd where
-  upcast = Cmd_Power_lossRecovery
+instance Upcast (PowerlossRecovery Required) GCodeCmd where
+  upcast = Cmd_PowerlossRecovery
 
-instance ToText (Power_lossRecovery Required) where
+instance ToText (PowerlossRecovery Required) where
   toText r = mkCmd "M413" [mkArg 'S' r.enable]
 
 --------------------------------------------------------------------------------
@@ -6042,17 +6041,17 @@ instance ToText (CancelObjects Required) where
 --- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data Fixed_TimeMotion (f :: Type -> Type)
-  = Fixed_TimeMotion
+data FixedTimeMotion (f :: Type -> Type)
+  = FixedTimeMotion
   {}
   deriving (Generic)
 
-instance Default (Fixed_TimeMotion NotDefined)
+instance Default (FixedTimeMotion NotDefined)
 
-instance Upcast (Fixed_TimeMotion Required) GCodeCmd where
-  upcast = Cmd_Fixed_TimeMotion
+instance Upcast (FixedTimeMotion Required) GCodeCmd where
+  upcast = Cmd_FixedTimeMotion
 
-instance ToText (Fixed_TimeMotion Required) where
+instance ToText (FixedTimeMotion Required) where
   toText r = mkCmd "M493" []
 
 --------------------------------------------------------------------------------
@@ -6210,17 +6209,17 @@ instance ToText (MachineName Required) where
 --- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data EthernetIPAddress_NetworkIF (f :: Type -> Type)
-  = EthernetIPAddress_NetworkIF
+data EthernetIPAddressNetworkIF (f :: Type -> Type)
+  = EthernetIPAddressNetworkIF
   {}
   deriving (Generic)
 
-instance Default (EthernetIPAddress_NetworkIF NotDefined)
+instance Default (EthernetIPAddressNetworkIF NotDefined)
 
-instance Upcast (EthernetIPAddress_NetworkIF Required) GCodeCmd where
-  upcast = Cmd_EthernetIPAddress_NetworkIF
+instance Upcast (EthernetIPAddressNetworkIF Required) GCodeCmd where
+  upcast = Cmd_EthernetIPAddressNetworkIF
 
-instance ToText (EthernetIPAddress_NetworkIF Required) where
+instance ToText (EthernetIPAddressNetworkIF Required) where
   toText r = mkCmd "M552" []
 
 --------------------------------------------------------------------------------
@@ -6623,17 +6622,17 @@ instance ToText (RepeatMarker Required) where
 --- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data G_codeMacros (f :: Type -> Type)
-  = G_codeMacros
+data GcodeMacros (f :: Type -> Type)
+  = GcodeMacros
   {}
   deriving (Generic)
 
-instance Default (G_codeMacros NotDefined)
+instance Default (GcodeMacros NotDefined)
 
-instance Upcast (G_codeMacros Required) GCodeCmd where
-  upcast = Cmd_G_codeMacros
+instance Upcast (GcodeMacros Required) GCodeCmd where
+  upcast = Cmd_GcodeMacros
 
-instance ToText (G_codeMacros Required) where
+instance ToText (GcodeMacros Required) where
   toText r = mkCmd "M810" []
 
 --------------------------------------------------------------------------------
@@ -6641,17 +6640,17 @@ instance ToText (G_codeMacros Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M820.html
 --------------------------------------------------------------------------------
 
-data ReportG_codeMacros (f :: Type -> Type)
-  = ReportG_codeMacros
+data ReportGcodeMacros (f :: Type -> Type)
+  = ReportGcodeMacros
   {}
   deriving (Generic)
 
-instance Default (ReportG_codeMacros NotDefined)
+instance Default (ReportGcodeMacros NotDefined)
 
-instance Upcast (ReportG_codeMacros Required) GCodeCmd where
-  upcast = Cmd_ReportG_codeMacros
+instance Upcast (ReportGcodeMacros Required) GCodeCmd where
+  upcast = Cmd_ReportGcodeMacros
 
-instance ToText (ReportG_codeMacros Required) where
+instance ToText (ReportGcodeMacros Required) where
   toText r = mkCmd "M820" []
 
 --------------------------------------------------------------------------------
@@ -6914,17 +6913,17 @@ instance ToText (CommitDACtoEEPROM Required) where
 --- Docs: https://marlinfw.org/docs/gcode/M911.html
 --------------------------------------------------------------------------------
 
-data TMCOTPre_WarnCondition (f :: Type -> Type)
-  = TMCOTPre_WarnCondition
+data TMCOTPreWarnCondition (f :: Type -> Type)
+  = TMCOTPreWarnCondition
   {}
   deriving (Generic)
 
-instance Default (TMCOTPre_WarnCondition NotDefined)
+instance Default (TMCOTPreWarnCondition NotDefined)
 
-instance Upcast (TMCOTPre_WarnCondition Required) GCodeCmd where
-  upcast = Cmd_TMCOTPre_WarnCondition
+instance Upcast (TMCOTPreWarnCondition Required) GCodeCmd where
+  upcast = Cmd_TMCOTPreWarnCondition
 
-instance ToText (TMCOTPre_WarnCondition Required) where
+instance ToText (TMCOTPreWarnCondition Required) where
   toText r = mkCmd "M911" []
 
 --------------------------------------------------------------------------------
@@ -6933,17 +6932,17 @@ instance ToText (TMCOTPre_WarnCondition Required) where
 --- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
-data ClearTMCOTPre_Warn (f :: Type -> Type)
-  = ClearTMCOTPre_Warn
+data ClearTMCOTPreWarn (f :: Type -> Type)
+  = ClearTMCOTPreWarn
   {}
   deriving (Generic)
 
-instance Default (ClearTMCOTPre_Warn NotDefined)
+instance Default (ClearTMCOTPreWarn NotDefined)
 
-instance Upcast (ClearTMCOTPre_Warn Required) GCodeCmd where
-  upcast = Cmd_ClearTMCOTPre_Warn
+instance Upcast (ClearTMCOTPreWarn Required) GCodeCmd where
+  upcast = Cmd_ClearTMCOTPreWarn
 
-instance ToText (ClearTMCOTPre_Warn Required) where
+instance ToText (ClearTMCOTPreWarn Required) where
   toText r = mkCmd "M912" []
 
 --------------------------------------------------------------------------------
@@ -7263,4 +7262,4 @@ mkCmd :: Text -> [Maybe (Char, ArgValue)] -> Text
 mkCmd c args =
   if null args
     then c
-    else c <> " " <> T.unwords (map (\(c, a) -> T.singleton c <> toText a) (catMaybes args))
+    else c <> " " <> T.unwords (map toText (catMaybes args))

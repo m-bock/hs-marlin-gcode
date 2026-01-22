@@ -206,7 +206,7 @@
     "link": "https://marlinfw.org/docs/gcode/G011.html"
   },
   {
-    "type": "Clean The Nozzle",
+    "type": "Clean Nozzle",
     "code": "G12",
     "link": "https://marlinfw.org/docs/gcode/G012.html",
     "args": [
@@ -626,60 +626,57 @@
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 1",
+    "subtype": "1",
     "code": "G54",
     "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 2",
+    "subtype": "2",
     "code": "G55",
     "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 3",
+    "subtype": "3",
     "code": "G56",
     "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 4",
+    "subtype": "4",
     "code": "G57",
     "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 5",
+    "subtype": "5",
     "code": "G58",
     "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 6",
+    "subtype": "6",
     "code": "G59",
     "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 7",
+    "subtype": "7",
     "code": "G59.1",
-    "link": "https://marlinfw.org/docs/gcode/G054-G059.html",
-    "unimplemented": true
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 8",
+    "subtype": "8",
     "code": "G59.2",
-    "link": "https://marlinfw.org/docs/gcode/G054-G059.html",
-    "unimplemented": true
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Select Workspace",
-    "subtype": "Workspace 9",
+    "subtype": "9",
     "code": "G59.3",
-    "link": "https://marlinfw.org/docs/gcode/G054-G059.html",
-    "unimplemented": true
+    "link": "https://marlinfw.org/docs/gcode/G054-G059.html"
   },
   {
     "type": "Stored Positions",
@@ -787,10 +784,11 @@
     "link": "https://marlinfw.org/docs/gcode/M000-M001.html",
     "args": [
       { "code": "P", "label": "expireMilliseconds", "type": "Milliseconds" },
-      { "code": "S", "label": "expireSeconds", "type": "Seconds" }
+      { "code": "S", "label": "expireSeconds", "type": "Seconds" },
+      { "code": "_", "label": "text", "type": "TextValue" }
     ],
     "signature": {
-      "optional": ["P", "S"],
+      "optional": ["P", "S", "_"],
       "required": []
     },
     "unimplemented": true

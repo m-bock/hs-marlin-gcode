@@ -4,7 +4,7 @@ const path = require("path");
 const sep = "_"
 
 const removeSpaces = (str) => {
-  return str.replace(/\s+/g, "").replace(/-/g, sep).replace(/\//g, sep).replace(/,/g, sep).replace(/[().]/g, "");
+  return str.replace(/\s+/g, "").replace(/-/g, "").replace(/\//g, "").replace(/,/g, "").replace(/[().]/g, "");
 };
 
 const mkTypeName = (item, signature) => {
@@ -136,7 +136,7 @@ module ${moduleName} where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Celsius, Count, Degrees, Flag, Index, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
+import Marlin.GCode.Types (ArgValue, Celsius, Count, Degrees, Flag, Index, TextValue, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
 import Relude
 import qualified Data.Text as T
 
@@ -178,7 +178,7 @@ mkCmd :: Text -> [Maybe (Char, ArgValue)] -> Text
 mkCmd c args =
   if null args
     then c
-    else c <> " " <> T.unwords (map (\\(c, a) -> T.singleton c <> toText a) (catMaybes args))
+    else c <> " " <> T.unwords (map toText (catMaybes args))
 
 `.trim();
 };
