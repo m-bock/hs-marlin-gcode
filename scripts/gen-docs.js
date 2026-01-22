@@ -120,13 +120,9 @@ const mdLines = [
   '',
   '---',
   '',
-  '## G Commands',
-  '',
   ...gCommands.map(formatCommand),
   '',
   '---',
-  '',
-  '## M Commands',
   '',
   ...mCommands.map(formatCommand),
 ];

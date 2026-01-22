@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "doctoc": "^2.2.1",
     "prettier": "^3.8.0"
   }
 }
