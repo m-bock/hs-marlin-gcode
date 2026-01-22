@@ -85,7 +85,7 @@ instance Upcast (${typeName} Required) GCodeCmd where
   upcast = ${mkCmdName(item, signature)}
 
 instance ToText (${typeName} Required) where
-  toText r = mkCmd "${item.code}" [${allArgs}]
+  toText r = toText (RawCmd "${item.code}" [${allArgs}])
   `.trim();
 };
 
@@ -138,7 +138,7 @@ module ${moduleName} where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Celsius, Count, Degrees, Flag, Index, TextValue, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
+import Marlin.GCode.Types (RawCmd(..), ArgValue, Celsius, Count, Degrees, Flag, Index, TextValue, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
 import Relude
 import qualified Data.Text as T
 
@@ -175,12 +175,6 @@ mkArg c = fmap (\\a -> (c, upcast a))
 
 mkReqArg :: (Upcast a ArgValue) => Char -> Required a -> Maybe (Char, ArgValue)
 mkReqArg c (Req a) = Just (c, upcast a)
-
-mkCmd :: Text -> [Maybe (Char, ArgValue)] -> Text
-mkCmd c args =
-  if null args
-    then c
-    else c <> " " <> T.unwords (map toText (catMaybes args))
 
 `.trim();
 };

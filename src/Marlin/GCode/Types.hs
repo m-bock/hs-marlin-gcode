@@ -78,6 +78,17 @@ data ArgValue
   | ArgTextValue TextValue
   deriving (Show, Eq)
 
+data RawCmd = RawCmd
+  { cmd :: Text,
+    args :: [Maybe (Char, ArgValue)]
+  }
+
+instance ToText RawCmd where
+  toText (RawCmd t args) =
+    if null args
+      then t
+      else t <> " " <> T.unwords (map toText (catMaybes args))
+
 instance ToText (Char, ArgValue) where
   toText (c, a) = case a of
     ArgMm (Mm d) ->
