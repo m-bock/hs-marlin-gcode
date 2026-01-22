@@ -4,13 +4,28 @@ const path = require('path');
 const specPath = process.env.SPEC_PATH || 'assets/spec.json';
 const outputPath = process.env.OUTPUT_PATH || 'API.md';
 
+const sep = "_";
+
+const removeSpaces = (str) => {
+  return str.replace(/\s+/g, "").replace(/-/g, "").replace(/\//g, "").replace(/,/g, "").replace(/[().]/g, "");
+};
+
+const mkTypeName = (item, signature) => {
+  const typeWithoutSpaces = removeSpaces(item.type);
+  const subtype = item.subtype ? `${sep}${removeSpaces(item.subtype)}` : "";
+  const signatureName = signature.name ? `${sep}${removeSpaces(signature.name)}` : "";
+  return `${typeWithoutSpaces}${subtype}${signatureName}`;
+};
+
 const data = JSON.parse(fs.readFileSync(specPath, 'utf-8'));
 
 const formatCommand = (item) => {
   const lines = [];
   
-  // Header with type and code
-  const header = `## ${item.type} (${item.code})`;
+  // Header with type, subtype, and code using mkTypeName
+  // Use empty signature since we just want the type name
+  const typeName = mkTypeName(item, {});
+  const header = `## \`${typeName}\` (${item.code})`;
   lines.push(header);
   lines.push('');
   
@@ -54,7 +69,7 @@ const formatCommand = (item) => {
         requiredArgs.forEach(arg => {
           const fieldName = arg.label || 'unnamed';
           const argCode = arg.code === '_' ? '_' : arg.code;
-          lines.push(`- ${fieldName} **${arg.type}** (${argCode})`);
+          lines.push(`- \`${fieldName}\` :: **${arg.type}** (${argCode})`);
         });
         lines.push('');
       }
@@ -65,7 +80,7 @@ const formatCommand = (item) => {
         optionalArgs.forEach(arg => {
           const fieldName = arg.label || 'unnamed';
           const argCode = arg.code === '_' ? '_' : arg.code;
-          lines.push(`- ${fieldName} :: **${arg.type}** (${argCode})`);
+          lines.push(`- \`${fieldName}\` :: **${arg.type}** (${argCode})`);
         });
         lines.push('');
       }

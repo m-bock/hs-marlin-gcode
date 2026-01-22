@@ -31,12 +31,12 @@ import Relude
 data GCodeCmd
   = Cmd_LinearMove_NoExtrusion (LinearMove_NoExtrusion Required)
   | Cmd_LinearMove_WithExtrusion (LinearMove_WithExtrusion Required)
-  | Cmd_LinearMove_Clockwise_OffsetX (LinearMove_Clockwise_OffsetX Required)
-  | Cmd_LinearMove_Clockwise_OffsetY (LinearMove_Clockwise_OffsetY Required)
-  | Cmd_LinearMove_Clockwise_Radius (LinearMove_Clockwise_Radius Required)
-  | Cmd_LinearMove_CounterClockwise_OffsetX (LinearMove_CounterClockwise_OffsetX Required)
-  | Cmd_LinearMove_CounterClockwise_OffsetY (LinearMove_CounterClockwise_OffsetY Required)
-  | Cmd_LinearMove_CounterClockwise_Radius (LinearMove_CounterClockwise_Radius Required)
+  | Cmd_ArcCircleMove_Clockwise_OffsetX (ArcCircleMove_Clockwise_OffsetX Required)
+  | Cmd_ArcCircleMove_Clockwise_OffsetY (ArcCircleMove_Clockwise_OffsetY Required)
+  | Cmd_ArcCircleMove_Clockwise_Radius (ArcCircleMove_Clockwise_Radius Required)
+  | Cmd_ArcCircleMove_CounterClockwise_OffsetX (ArcCircleMove_CounterClockwise_OffsetX Required)
+  | Cmd_ArcCircleMove_CounterClockwise_OffsetY (ArcCircleMove_CounterClockwise_OffsetY Required)
+  | Cmd_ArcCircleMove_CounterClockwise_Radius (ArcCircleMove_CounterClockwise_Radius Required)
   | Cmd_Dwell (Dwell Required)
   | Cmd_BezierCubicSplineMove_Initial (BezierCubicSplineMove_Initial Required)
   | Cmd_BezierCubicSplineMove_Subsequent (BezierCubicSplineMove_Subsequent Required)
@@ -276,12 +276,12 @@ instance ToText GCodeCmd where
     \case
       Cmd_LinearMove_NoExtrusion r -> toText r
       Cmd_LinearMove_WithExtrusion r -> toText r
-      Cmd_LinearMove_Clockwise_OffsetX r -> toText r
-      Cmd_LinearMove_Clockwise_OffsetY r -> toText r
-      Cmd_LinearMove_Clockwise_Radius r -> toText r
-      Cmd_LinearMove_CounterClockwise_OffsetX r -> toText r
-      Cmd_LinearMove_CounterClockwise_OffsetY r -> toText r
-      Cmd_LinearMove_CounterClockwise_Radius r -> toText r
+      Cmd_ArcCircleMove_Clockwise_OffsetX r -> toText r
+      Cmd_ArcCircleMove_Clockwise_OffsetY r -> toText r
+      Cmd_ArcCircleMove_Clockwise_Radius r -> toText r
+      Cmd_ArcCircleMove_CounterClockwise_OffsetX r -> toText r
+      Cmd_ArcCircleMove_CounterClockwise_OffsetY r -> toText r
+      Cmd_ArcCircleMove_CounterClockwise_Radius r -> toText r
       Cmd_Dwell r -> toText r
       Cmd_BezierCubicSplineMove_Initial r -> toText r
       Cmd_BezierCubicSplineMove_Subsequent r -> toText r
@@ -624,12 +624,12 @@ instance ToText (LinearMove_WithExtrusion Required) where
       )
 
 --------------------------------------------------------------------------------
---- Linear Move (G2)
+--- Arc/Circle Move (G2)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
-data LinearMove_Clockwise_OffsetX (f :: Type -> Type)
-  = LinearMove_Clockwise_OffsetX
+data ArcCircleMove_Clockwise_OffsetX (f :: Type -> Type)
+  = ArcCircleMove_Clockwise_OffsetX
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
@@ -647,12 +647,12 @@ data LinearMove_Clockwise_OffsetX (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (LinearMove_Clockwise_OffsetX NotDefined)
+instance Default (ArcCircleMove_Clockwise_OffsetX NotDefined)
 
-instance Upcast (LinearMove_Clockwise_OffsetX Required) GCodeCmd where
-  upcast = Cmd_LinearMove_Clockwise_OffsetX
+instance Upcast (ArcCircleMove_Clockwise_OffsetX Required) GCodeCmd where
+  upcast = Cmd_ArcCircleMove_Clockwise_OffsetX
 
-instance ToText (LinearMove_Clockwise_OffsetX Required) where
+instance ToText (ArcCircleMove_Clockwise_OffsetX Required) where
   toText r =
     toText
       ( RawCmd
@@ -675,12 +675,12 @@ instance ToText (LinearMove_Clockwise_OffsetX Required) where
       )
 
 --------------------------------------------------------------------------------
---- Linear Move (G2)
+--- Arc/Circle Move (G2)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
-data LinearMove_Clockwise_OffsetY (f :: Type -> Type)
-  = LinearMove_Clockwise_OffsetY
+data ArcCircleMove_Clockwise_OffsetY (f :: Type -> Type)
+  = ArcCircleMove_Clockwise_OffsetY
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
@@ -698,12 +698,12 @@ data LinearMove_Clockwise_OffsetY (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (LinearMove_Clockwise_OffsetY NotDefined)
+instance Default (ArcCircleMove_Clockwise_OffsetY NotDefined)
 
-instance Upcast (LinearMove_Clockwise_OffsetY Required) GCodeCmd where
-  upcast = Cmd_LinearMove_Clockwise_OffsetY
+instance Upcast (ArcCircleMove_Clockwise_OffsetY Required) GCodeCmd where
+  upcast = Cmd_ArcCircleMove_Clockwise_OffsetY
 
-instance ToText (LinearMove_Clockwise_OffsetY Required) where
+instance ToText (ArcCircleMove_Clockwise_OffsetY Required) where
   toText r =
     toText
       ( RawCmd
@@ -726,12 +726,12 @@ instance ToText (LinearMove_Clockwise_OffsetY Required) where
       )
 
 --------------------------------------------------------------------------------
---- Linear Move (G2)
+--- Arc/Circle Move (G2)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
-data LinearMove_Clockwise_Radius (f :: Type -> Type)
-  = LinearMove_Clockwise_Radius
+data ArcCircleMove_Clockwise_Radius (f :: Type -> Type)
+  = ArcCircleMove_Clockwise_Radius
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
@@ -749,12 +749,12 @@ data LinearMove_Clockwise_Radius (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (LinearMove_Clockwise_Radius NotDefined)
+instance Default (ArcCircleMove_Clockwise_Radius NotDefined)
 
-instance Upcast (LinearMove_Clockwise_Radius Required) GCodeCmd where
-  upcast = Cmd_LinearMove_Clockwise_Radius
+instance Upcast (ArcCircleMove_Clockwise_Radius Required) GCodeCmd where
+  upcast = Cmd_ArcCircleMove_Clockwise_Radius
 
-instance ToText (LinearMove_Clockwise_Radius Required) where
+instance ToText (ArcCircleMove_Clockwise_Radius Required) where
   toText r =
     toText
       ( RawCmd
@@ -777,12 +777,12 @@ instance ToText (LinearMove_Clockwise_Radius Required) where
       )
 
 --------------------------------------------------------------------------------
---- Linear Move (G3)
+--- Arc/Circle Move (G3)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
-data LinearMove_CounterClockwise_OffsetX (f :: Type -> Type)
-  = LinearMove_CounterClockwise_OffsetX
+data ArcCircleMove_CounterClockwise_OffsetX (f :: Type -> Type)
+  = ArcCircleMove_CounterClockwise_OffsetX
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
@@ -800,12 +800,12 @@ data LinearMove_CounterClockwise_OffsetX (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (LinearMove_CounterClockwise_OffsetX NotDefined)
+instance Default (ArcCircleMove_CounterClockwise_OffsetX NotDefined)
 
-instance Upcast (LinearMove_CounterClockwise_OffsetX Required) GCodeCmd where
-  upcast = Cmd_LinearMove_CounterClockwise_OffsetX
+instance Upcast (ArcCircleMove_CounterClockwise_OffsetX Required) GCodeCmd where
+  upcast = Cmd_ArcCircleMove_CounterClockwise_OffsetX
 
-instance ToText (LinearMove_CounterClockwise_OffsetX Required) where
+instance ToText (ArcCircleMove_CounterClockwise_OffsetX Required) where
   toText r =
     toText
       ( RawCmd
@@ -828,12 +828,12 @@ instance ToText (LinearMove_CounterClockwise_OffsetX Required) where
       )
 
 --------------------------------------------------------------------------------
---- Linear Move (G3)
+--- Arc/Circle Move (G3)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
-data LinearMove_CounterClockwise_OffsetY (f :: Type -> Type)
-  = LinearMove_CounterClockwise_OffsetY
+data ArcCircleMove_CounterClockwise_OffsetY (f :: Type -> Type)
+  = ArcCircleMove_CounterClockwise_OffsetY
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
@@ -851,12 +851,12 @@ data LinearMove_CounterClockwise_OffsetY (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (LinearMove_CounterClockwise_OffsetY NotDefined)
+instance Default (ArcCircleMove_CounterClockwise_OffsetY NotDefined)
 
-instance Upcast (LinearMove_CounterClockwise_OffsetY Required) GCodeCmd where
-  upcast = Cmd_LinearMove_CounterClockwise_OffsetY
+instance Upcast (ArcCircleMove_CounterClockwise_OffsetY Required) GCodeCmd where
+  upcast = Cmd_ArcCircleMove_CounterClockwise_OffsetY
 
-instance ToText (LinearMove_CounterClockwise_OffsetY Required) where
+instance ToText (ArcCircleMove_CounterClockwise_OffsetY Required) where
   toText r =
     toText
       ( RawCmd
@@ -879,12 +879,12 @@ instance ToText (LinearMove_CounterClockwise_OffsetY Required) where
       )
 
 --------------------------------------------------------------------------------
---- Linear Move (G3)
+--- Arc/Circle Move (G3)
 --- Docs: https://marlinfw.org/docs/gcode/G002-G003.html
 --------------------------------------------------------------------------------
 
-data LinearMove_CounterClockwise_Radius (f :: Type -> Type)
-  = LinearMove_CounterClockwise_Radius
+data ArcCircleMove_CounterClockwise_Radius (f :: Type -> Type)
+  = ArcCircleMove_CounterClockwise_Radius
   { axisA :: Maybe Mm,
     axisB :: Maybe Mm,
     axisC :: Maybe Mm,
@@ -902,12 +902,12 @@ data LinearMove_CounterClockwise_Radius (f :: Type -> Type)
   }
   deriving (Generic)
 
-instance Default (LinearMove_CounterClockwise_Radius NotDefined)
+instance Default (ArcCircleMove_CounterClockwise_Radius NotDefined)
 
-instance Upcast (LinearMove_CounterClockwise_Radius Required) GCodeCmd where
-  upcast = Cmd_LinearMove_CounterClockwise_Radius
+instance Upcast (ArcCircleMove_CounterClockwise_Radius Required) GCodeCmd where
+  upcast = Cmd_ArcCircleMove_CounterClockwise_Radius
 
-instance ToText (LinearMove_CounterClockwise_Radius Required) where
+instance ToText (ArcCircleMove_CounterClockwise_Radius Required) where
   toText r =
     toText
       ( RawCmd

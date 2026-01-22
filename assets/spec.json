@@ -48,7 +48,7 @@
     }
   },
   {
-    "type": "Linear Move",
+    "type": "Arc/Circle Move",
     "subtype": "Clockwise",
     "code": "G2",
     "link": "https://marlinfw.org/docs/gcode/G002-G003.html",
@@ -89,7 +89,7 @@
     ]
   },
   {
-    "type": "Linear Move",
+    "type": "Arc/Circle Move",
     "subtype": "CounterClockwise",
     "code": "G3",
     "link": "https://marlinfw.org/docs/gcode/G002-G003.html",
