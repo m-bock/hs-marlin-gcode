@@ -790,8 +790,7 @@
     "signature": {
       "optional": ["P", "S", "_"],
       "required": []
-    },
-    "unimplemented": true
+    }
   },
   {
     "type": "Spindle CW / Laser On",
@@ -860,7 +859,13 @@
     "type": "Expected Printer Check",
     "code": "M16",
     "link": "https://marlinfw.org/docs/gcode/M016.html",
-    "unimplemented": true
+    "args": [
+      { "code": "_", "label": "text", "type": "TextValue" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["_"]
+    }
   },
   {
     "type": "Enable Steppers",
@@ -933,7 +938,13 @@
     "type": "Select SD File",
     "code": "M23",
     "link": "https://marlinfw.org/docs/gcode/M023.html",
-    "unimplemented": true
+    "args": [
+      { "code": "_", "label": "filename", "type": "Filename" }
+    ],
+    "signature": {
+      "optional": [],
+      "required": ["_"]
+    }
   },
   {
     "type": "Start or Resume SD Print",
@@ -982,7 +993,14 @@
     "type": "Start SD Write",
     "code": "M28",
     "link": "https://marlinfw.org/docs/gcode/M028.html",
-    "unimplemented": true
+    "args": [
+      { "code": "B", "label": "binaryMode", "type": "Flag" },
+      { "code": "_", "label": "filename", "type": "Filename" }
+    ],
+    "signature": {
+      "optional": ["B"],
+      "required": ["_"]
+    }
   },
   {
     "type": "Stop SD Write",
@@ -993,7 +1011,12 @@
     "type": "Delete SD File",
     "code": "M30",
     "link": "https://marlinfw.org/docs/gcode/M030.html",
-    "unimplemented": true
+    "args": [
+      { "code": "_", "label": "filename", "type": "Filename" }
+    ],
+    "signature": {
+      "required": ["_"]
+    }
   },
   {
     "type": "Report Print Time",

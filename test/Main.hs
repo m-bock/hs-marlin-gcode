@@ -31,8 +31,9 @@ tests =
                 Just ('K', ArgLaserPower (LaserPower 11)),
                 Just ('L', ArgFlag (Flag True)),
                 Just ('M', ArgCount (Count 12)),
-                Just ('N', ArgTextValue (TextValue "test"))
+                Just ('_', ArgFilename (Filename "test.gcode")),
+                Just ('_', ArgTextValue (TextValue "test"))
               ]
           )
-        @?= "TEST A1.0000 B2.0000 C3.0000 D4.0000 E5.0000 F6.0000 G7.0000 H8 I9.0000 J10 K11.0000 L1 M12 \"test\""
+        @?= "TEST A1.0000 B2.0000 C3.0000 D4.0000 E5.0000 F6.0000 G7.0000 H8 I9.0000 J10 K11.0000 L1 M12 \"test.gcode\" \"test\""
     ]

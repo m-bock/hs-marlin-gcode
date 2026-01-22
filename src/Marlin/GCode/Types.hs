@@ -48,6 +48,9 @@ newtype Count = Count Int
 newtype TextValue = TextValue Text
   deriving (Eq, Ord, Show, Read)
 
+newtype Filename = Filename Text
+  deriving (Eq, Ord, Show, Read)
+
 ---
 
 data NotDefined a = NotDefined
@@ -76,6 +79,7 @@ data ArgValue
   | ArgFlag Flag
   | ArgCount Count
   | ArgTextValue TextValue
+  | ArgFilename Filename
   deriving (Show, Eq)
 
 data RawCmd = RawCmd
@@ -119,6 +123,8 @@ instance ToText (Char, ArgValue) where
       T.singleton c <> T.pack (show d)
     ArgTextValue (TextValue t) ->
       "\"" <> t <> "\""
+    ArgFilename (Filename t) ->
+      "\"" <> t <> "\""
 
 instance Upcast Mm ArgValue where
   upcast = ArgMm
@@ -161,3 +167,6 @@ instance Upcast Count ArgValue where
 
 instance Upcast TextValue ArgValue where
   upcast = ArgTextValue
+
+instance Upcast Filename ArgValue where
+  upcast = ArgFilename

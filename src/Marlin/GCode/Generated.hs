@@ -3,7 +3,25 @@ module Marlin.GCode.Generated where
 import qualified Data.Text as T
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (ArgValue, Celsius, Count, Degrees, Flag, Index, LaserPower, Milliseconds, Mm, MmPerMin, MmPerSec, NotDefined, RawCmd (..), Required (..), Seconds, TextValue)
+import Marlin.GCode.Types
+  ( ArgValue,
+    Celsius,
+    Count,
+    Degrees,
+    Filename,
+    Flag,
+    Index,
+    LaserPower,
+    Milliseconds,
+    Mm,
+    MmPerMin,
+    MmPerSec,
+    NotDefined,
+    RawCmd (..),
+    Required (..),
+    Seconds,
+    TextValue,
+  )
 import Relude
 
 --------------------------------------------------------------------------------
@@ -2528,7 +2546,6 @@ instance ToText (BacklashCalibration Required) where
 --------------------------------------------------------------------------------
 --- Unconditional Stop (M0)
 --- Docs: https://marlinfw.org/docs/gcode/M000-M001.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data UnconditionalStop (f :: Type -> Type)
@@ -2742,12 +2759,12 @@ instance ToText (VacuumBlowerControl_Off Required) where
 --------------------------------------------------------------------------------
 --- Expected Printer Check (M16)
 --- Docs: https://marlinfw.org/docs/gcode/M016.html
---- Status: UNIMPLEMENTED
 --------------------------------------------------------------------------------
 
 data ExpectedPrinterCheck (f :: Type -> Type)
   = ExpectedPrinterCheck
-  {}
+  { text :: Maybe TextValue
+  }
   deriving (Generic)
 
 instance Default (ExpectedPrinterCheck NotDefined)
@@ -2758,7 +2775,7 @@ instance Upcast (ExpectedPrinterCheck Required) GCodeCmd where
   upcast = Cmd_ExpectedPrinterCheck
 
 instance ToText (ExpectedPrinterCheck Required) where
-  toText r = toText (RawCmd "M16" [])
+  toText r = toText (RawCmd "M16" [mkArg '_' r.text])
 
 --------------------------------------------------------------------------------
 --- Enable Steppers (M17)

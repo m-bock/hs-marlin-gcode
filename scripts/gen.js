@@ -138,7 +138,25 @@ module ${moduleName} where
 
 import Marlin.GCode.Class.Default (Default)
 import Marlin.GCode.Class.Upcast (Upcast (..))
-import Marlin.GCode.Types (RawCmd(..), ArgValue, Celsius, Count, Degrees, Flag, Index, TextValue, LaserPower, Mm, MmPerMin, MmPerSec, Milliseconds, NotDefined, Required(..), Seconds)
+import Marlin.GCode.Types (
+  RawCmd(..),
+  ArgValue,
+  Celsius,
+  Count,
+  Degrees,
+  Flag,
+  Index,
+  TextValue,
+  Filename,
+  LaserPower,
+  Mm,
+  MmPerMin,
+  MmPerSec,
+  Milliseconds,
+  NotDefined,
+  Required(..),
+  Seconds
+ )
 import Relude
 import qualified Data.Text as T
 
