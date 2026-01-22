@@ -2,7 +2,7 @@ module Marlin.GCode
   ( module Marlin.GCode.Generated,
     module Marlin.GCode.Types,
     module Marlin.GCode.Class.Default,
-    def',
+    idef,
   )
 where
 
@@ -10,5 +10,6 @@ import Marlin.GCode.Class.Default (Default (..))
 import Marlin.GCode.Generated
 import Marlin.GCode.Types
 
-def' :: (Default (f NotDefined)) => f NotDefined
-def' = def
+-- Incomplete default (some fields are not defined)
+idef :: (Default (f NotDefined)) => f NotDefined
+idef = def

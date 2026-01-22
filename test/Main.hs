@@ -21,7 +21,7 @@ tests =
         [ testCase "Linear Move No Extrusion - maximum args"
             $ toText
               ( Cmd_LinearMove_NoExtrusion
-                  def'
+                  idef
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -40,7 +40,7 @@ tests =
           testCase "Linear Move With Extrusion - maximum args"
             $ toText
               ( Cmd_LinearMove_WithExtrusion
-                  def'
+                  idef
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -59,8 +59,8 @@ tests =
           testCase "Linear Move Clockwise OffsetX - maximum args"
             $ toText
               ( Cmd_LinearMove_Clockwise_OffsetX
-                  def'
-                    { offsetX = pure $ Mm 10,
+                  idef
+                    { offsetX = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -80,8 +80,8 @@ tests =
           testCase "Linear Move Clockwise OffsetY - maximum args"
             $ toText
               ( Cmd_LinearMove_Clockwise_OffsetY
-                  def'
-                    { offsetY = pure $ Mm 10,
+                  idef
+                    { offsetY = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -101,8 +101,8 @@ tests =
           testCase "Linear Move Clockwise Radius - maximum args"
             $ toText
               ( Cmd_LinearMove_Clockwise_Radius
-                  def'
-                    { radius = pure $ Mm 10,
+                  idef
+                    { radius = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -122,8 +122,8 @@ tests =
           testCase "Linear Move CounterClockwise OffsetX - maximum args"
             $ toText
               ( Cmd_LinearMove_CounterClockwise_OffsetX
-                  def'
-                    { offsetX = pure $ Mm 10,
+                  idef
+                    { offsetX = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -143,8 +143,8 @@ tests =
           testCase "Linear Move CounterClockwise OffsetY - maximum args"
             $ toText
               ( Cmd_LinearMove_CounterClockwise_OffsetY
-                  def'
-                    { offsetY = pure $ Mm 10,
+                  idef
+                    { offsetY = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -164,8 +164,8 @@ tests =
           testCase "Linear Move CounterClockwise Radius - maximum args"
             $ toText
               ( Cmd_LinearMove_CounterClockwise_Radius
-                  def'
-                    { radius = pure $ Mm 10,
+                  idef
+                    { radius = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -185,7 +185,7 @@ tests =
           testCase "Dwell - maximum args"
             $ toText
               ( Cmd_Dwell
-                  def'
+                  idef
                     { timeSeconds = Just (Seconds 5.5),
                       timeMilliseconds = Just (Milliseconds 1000)
                     }
@@ -194,13 +194,13 @@ tests =
           testCase "Bezier Cubic Spline Move Initial - maximum args"
             $ toText
               ( Cmd_BezierCubicSplineMove_Initial
-                  def'
-                    { offsetX1 = pure $ Mm 1,
-                      offsetY1 = pure $ Mm 2,
-                      offsetX2 = pure $ Mm 3,
-                      offsetY2 = pure $ Mm 4,
-                      axisX = pure $ Mm 10,
-                      axisY = pure $ Mm 20,
+                  idef
+                    { offsetX1 = Req (Mm 1),
+                      offsetY1 = Req (Mm 2),
+                      offsetX2 = Req (Mm 3),
+                      offsetY2 = Req (Mm 4),
+                      axisX = Req (Mm 10),
+                      axisY = Req (Mm 20),
                       axisExtrusion = Just (Mm 5),
                       feedrate = Just (MmPerMin 1500),
                       laser = Just (LaserPower 50)
@@ -210,11 +210,11 @@ tests =
           testCase "Bezier Cubic Spline Move Subsequent - maximum args"
             $ toText
               ( Cmd_BezierCubicSplineMove_Subsequent
-                  def'
-                    { offsetX2 = pure $ Mm 3,
-                      offsetY2 = pure $ Mm 4,
-                      axisX = pure $ Mm 10,
-                      axisY = pure $ Mm 20,
+                  idef
+                    { offsetX2 = Req (Mm 3),
+                      offsetY2 = Req (Mm 4),
+                      axisX = Req (Mm 10),
+                      axisY = Req (Mm 20),
                       axisExtrusion = Just (Mm 5),
                       feedrate = Just (MmPerMin 1500),
                       offsetX1 = Just (Mm 1),
@@ -226,7 +226,7 @@ tests =
           testCase "Direct Stepper Move - maximum args"
             $ toText
               ( Cmd_DirectStepperMove
-                  def'
+                  idef
                     { directionE = Just (Flag True),
                       pageIndex = Just (Index 1),
                       stepRate = Just (MmPerSec 10.5),
@@ -240,7 +240,7 @@ tests =
           testCase "Retract - maximum args"
             $ toText
               ( Cmd_Retract
-                  def'
+                  idef
                     { swapRetract = Just (Flag True)
                     }
               )
@@ -251,7 +251,7 @@ tests =
           testCase "Clean The Nozzle - maximum args"
             $ toText
               ( Cmd_CleanTheNozzle
-                  def'
+                  idef
                     { pattern = Just (Index 1),
                       radius = Just (Mm 5),
                       repetitions = Just (Count 3),
@@ -280,7 +280,7 @@ tests =
           testCase "Mesh Validation Pattern - maximum args"
             $ toText
               ( Cmd_MeshValidationPattern
-                  def'
+                  idef
                     { bedTemp = Just (Celsius 60),
                       continueClosest = Just (Flag True),
                       disableLeveling = Just (Flag False),
@@ -303,7 +303,7 @@ tests =
           testCase "Park Toolehead - maximum args"
             $ toText
               ( Cmd_ParkToolehead
-                  def'
+                  idef
                     { parkingBehavior = Just (Index 0)
                     }
               )
@@ -311,7 +311,7 @@ tests =
           testCase "Auto Home - maximum args"
             $ toText
               ( Cmd_AutoHome
-                  def'
+                  idef
                     { homeA = Just (Flag True),
                       homeB = Just (Flag True),
                       homeC = Just (Flag True),
@@ -331,7 +331,7 @@ tests =
           testCase "Bed Leveling 3 Point - maximum args"
             $ toText
               ( Cmd_BedLeveling_3Point
-                  def'
+                  idef
                     { abort = Just (Flag False),
                       createFake = Just (Flag False),
                       dryRun = Just (Flag True),
@@ -346,7 +346,7 @@ tests =
           testCase "Bed Leveling Bilinear - maximum args"
             $ toText
               ( Cmd_BedLeveling_Bilinear
-                  def'
+                  idef
                     { abort = Just (Flag False),
                       backLimit = Just (Mm 200),
                       createFake = Just (Flag False),
@@ -373,7 +373,7 @@ tests =
           testCase "Bed Leveling Linear - maximum args"
             $ toText
               ( Cmd_BedLeveling_Linear
-                  def'
+                  idef
                     { abort = Just (Flag False),
                       backLimit = Just (Mm 200),
                       createFake = Just (Flag False),
@@ -398,8 +398,8 @@ tests =
           testCase "Bed Leveling Manual - maximum args"
             $ toText
               ( Cmd_BedLeveling_Manual
-                  def'
-                    { state = pure $ Index 1,
+                  idef
+                    { state = Req (Index 1),
                       meshX = Just (Index 2),
                       meshY = Just (Index 3),
                       meshXOld = Just (Count 1),
@@ -411,7 +411,7 @@ tests =
           testCase "Bed Leveling Unified - maximum args"
             $ toText
               ( Cmd_BedLeveling_Unified
-                  def'
+                  idef
                     { activate = Just (Flag True),
                       businessCard = Just (Mm 0.1),
                       constant = Just (Mm 0),
@@ -439,7 +439,7 @@ tests =
           testCase "Single Z-Probe - maximum args"
             $ toText
               ( Cmd_SingleZ_Probe
-                  def'
+                  idef
                     { temperatureCompensation = Just (Flag True),
                       engageEach = Just (Flag True),
                       axisX = Just (Mm 100),
@@ -456,7 +456,7 @@ tests =
           testCase "Delta Auto Calibration - maximum args"
             $ toText
               ( Cmd_DeltaAutoCalibration
-                  def'
+                  idef
                     { precision = Just (Mm 0.01),
                       engageEach = Just (Flag True),
                       iterations = Just (Count 3),
@@ -475,7 +475,7 @@ tests =
           testCase "Z Steppers Auto-Alignment - maximum args"
             $ toText
               ( Cmd_ZSteppersAuto_Alignment
-                  def'
+                  idef
                     { amplification = Just (Mm 0.5),
                       stowEach = Just (Flag True),
                       iterations = Just (Index 3),
@@ -490,7 +490,7 @@ tests =
           testCase "Mechanical Gantry Calibration - maximum args"
             $ toText
               ( Cmd_MechanicalGantryCalibration
-                  def'
+                  idef
                     { current = Just (Index 1),
                       extraHeight = Just (Mm 5)
                     }
@@ -499,7 +499,7 @@ tests =
           testCase "Tramming Assistant - maximum args"
             $ toText
               ( Cmd_TrammingAssistant
-                  def'
+                  idef
                     { screwThreadType = Just (Index 40)
                     }
               )
@@ -507,7 +507,7 @@ tests =
           testCase "Probe Target Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_ErrorOnFail
-                  def'
+                  idef
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -518,7 +518,7 @@ tests =
           testCase "Probe Target No Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_NoErrorOnFail
-                  def'
+                  idef
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -529,7 +529,7 @@ tests =
           testCase "Probe Target Away Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_AwayErrorOnFail
-                  def'
+                  idef
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -540,7 +540,7 @@ tests =
           testCase "Probe Target Away No Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_AwayNoErrorOnFail
-                  def'
+                  idef
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -551,7 +551,7 @@ tests =
           testCase "Move to Mesh Coordinate - maximum args"
             $ toText
               ( Cmd_MovetoMeshCoordinate
-                  def'
+                  idef
                     { feedrate = Just (MmPerMin 100),
                       meshColumn = Just (Index 4),
                       meshRow = Just (Index 4),
@@ -580,7 +580,7 @@ tests =
           testCase "Stored Positions - maximum args"
             $ toText
               ( Cmd_StoredPositions
-                  def'
+                  idef
                     { deleteSlot = Just (Index 1),
                       restoreE = Just (Mm 10),
                       feedrate = Just (MmPerMin 100),
@@ -595,7 +595,7 @@ tests =
           testCase "Return to Saved Position - maximum args"
             $ toText
               ( Cmd_ReturntoSavedPosition
-                  def'
+                  idef
                     { restoreE = Just (Mm 10),
                       feedrate = Just (MmPerMin 100),
                       slot = Just (Index 1),
@@ -608,7 +608,7 @@ tests =
           testCase "Probe Temperature Calibration - maximum args"
             $ toText
               ( Cmd_ProbeTemperatureCalibration
-                  def'
+                  idef
                     { calibrateBed = Just (Flag True),
                       calibrateProbe = Just (Flag True)
                     }
@@ -626,7 +626,7 @@ tests =
           testCase "Set Position - maximum args"
             $ toText
               ( Cmd_SetPosition
-                  def'
+                  idef
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -643,7 +643,7 @@ tests =
           testCase "Backlash Calibration - maximum args"
             $ toText
               ( Cmd_BacklashCalibration
-                  def'
+                  idef
                     { backlashOnly = Just (Flag True),
                       toolheadIndex = Just (Index 1),
                       uncertainty = Just (Mm 0.1),
@@ -654,7 +654,7 @@ tests =
           testCase "Spindle CW / Laser On - maximum args"
             $ toText
               ( Cmd_SpindleCW_LaserOn
-                  def'
+                  idef
                     { inlineMode = Just (Flag True),
                       powerPWM = Just (Index 128),
                       power = Just (Index 200)
@@ -664,7 +664,7 @@ tests =
           testCase "Spindle CCW / Laser On - maximum args"
             $ toText
               ( Cmd_SpindleCCW_LaserOn
-                  def'
+                  idef
                     { inlineMode = Just (Flag True),
                       powerPWM = Just (Index 128),
                       power = Just (Index 200)
@@ -677,7 +677,7 @@ tests =
           testCase "Enable Steppers - maximum args"
             $ toText
               ( Cmd_EnableSteppers
-                  def'
+                  idef
                     { axisA = Just (Flag True),
                       axisB = Just (Flag True),
                       axisC = Just (Flag True),
@@ -694,7 +694,7 @@ tests =
           testCase "Disable Steppers - maximum args"
             $ toText
               ( Cmd_DisableSteppers
-                  def'
+                  idef
                     { axisA = Just (Flag True),
                       axisB = Just (Flag True),
                       axisC = Just (Flag True),
@@ -712,7 +712,7 @@ tests =
           testCase "List SD Card - maximum args"
             $ toText
               ( Cmd_ListSDCard
-                  def'
+                  idef
                     { binFilesOnly = Just (Flag True),
                       longFilenames = Just (Flag True),
                       timestamp = Just (Flag True)
@@ -728,7 +728,7 @@ tests =
           testCase "Start or Resume SD Print - maximum args"
             $ toText
               ( Cmd_StartorResumeSDPrint
-                  def'
+                  idef
                     { resumePosition = Just (Count 1000),
                       elapsedTime = Just (Count 5000)
                     }
@@ -740,7 +740,7 @@ tests =
           testCase "Set SD Position - maximum args"
             $ toText
               ( Cmd_SetSDPosition
-                  def'
+                  idef
                     { position = Just (Count 1000)
                     }
               )
@@ -748,7 +748,7 @@ tests =
           testCase "Report SD Print Status - maximum args"
             $ toText
               ( Cmd_ReportSDPrintStatus
-                  def'
+                  idef
                     { reportFilename = Just (Flag True),
                       autoReportInterval = Just (Seconds 5)
                     }
@@ -763,7 +763,7 @@ tests =
           testCase "SDCard Sorting - maximum args"
             $ toText
               ( Cmd_SDCardSorting
-                  def'
+                  idef
                     { folderSorting = Just (Index 1),
                       sortingOrder = Just (Index 1)
                     }
@@ -772,10 +772,10 @@ tests =
           testCase "Set Pin State - maximum args"
             $ toText
               ( Cmd_SetPinState
-                  def'
+                  idef
                     { ignoreProtection = Just (Flag True),
                       pin = Just (Index 33),
-                      state = pure (Index 1),
+                      state = Req (Index 1),
                       pinMode = Just (Index 1)
                     }
               )
@@ -783,7 +783,7 @@ tests =
           testCase "Pins Debugging - maximum args"
             $ toText
               ( Cmd_PinsDebugging
-                  def'
+                  idef
                     { watchEndstops = Just (Flag True),
                       ignoreProtection = Just (Flag True),
                       pin = Just (Index 56),
@@ -796,7 +796,7 @@ tests =
           testCase "Probe Repeatability Test - maximum args"
             $ toText
               ( Cmd_ProbeRepeatabilityTest
-                  def'
+                  idef
                     { temperatureCompensation = Just (Flag True),
                       engageEach = Just (Flag True),
                       legs = Just (Count 7),
@@ -811,7 +811,7 @@ tests =
           testCase "Set Print Progress - maximum args"
             $ toText
               ( Cmd_SetPrintProgress
-                  def'
+                  idef
                     { interactionCountdown = Just (Count 5),
                       progressPercent = Just (Index 50),
                       remainingTime = Just (Count 120)
@@ -830,7 +830,7 @@ tests =
           testCase "Power On - maximum args"
             $ toText
               ( Cmd_PowerOn
-                  def'
+                  idef
                     { reportState = Just (Flag True)
                     }
               )
@@ -847,15 +847,15 @@ tests =
           testCase "Inactivity Shutdown - maximum args"
             $ toText
               ( Cmd_InactivityShutdown
-                  def'
-                    { maxInactiveSeconds = pure (Seconds 600)
+                  idef
+                    { maxInactiveSeconds = Req (Seconds 600)
                     }
               )
             @?= "M85 S600.0000",
           testCase "Hotend Idle Timeout - maximum args"
             $ toText
               ( Cmd_HotendIdleTimeout
-                  def'
+                  idef
                     { bedIdleTemp = Just (Celsius 30),
                       extruderIdleTemp = Just (Celsius 40),
                       timeoutSeconds = Just (Seconds 240),
@@ -869,7 +869,7 @@ tests =
           testCase "Set Axis Steps-per-unit - maximum args"
             $ toText
               ( Cmd_SetAxisSteps_per_unit
-                  def'
+                  idef
                     { axisA = Just (Mm 100),
                       axisB = Just (Mm 100),
                       axisC = Just (Mm 100),
@@ -887,7 +887,7 @@ tests =
           testCase "Set Hotend Temperature - maximum args"
             $ toText
               ( Cmd_SetHotendTemperature
-                  def'
+                  idef
                     { maxAutoTemp = Just (Celsius 190),
                       autotempFactor = Just (Mm 0.5),
                       materialPreset = Just (Index 1),
@@ -899,7 +899,7 @@ tests =
           testCase "Report Temperatures - maximum args"
             $ toText
               ( Cmd_ReportTemperatures
-                  def'
+                  idef
                     { includeRedundant = Just (Flag True),
                       hotendIndex = Just (Index 0)
                     }
@@ -908,7 +908,7 @@ tests =
           testCase "Set Fan Speed - maximum args"
             $ toText
               ( Cmd_SetFanSpeed
-                  def'
+                  idef
                     { materialPreset = Just (Index 1),
                       fanIndex = Just (Index 0),
                       speed = Just (Index 200),
@@ -919,7 +919,7 @@ tests =
           testCase "Fan Off - maximum args"
             $ toText
               ( Cmd_FanOff
-                  def'
+                  idef
                     { fanIndex = Just (Index 0)
                     }
               )
@@ -930,7 +930,7 @@ tests =
           testCase "Wait for Hotend Temperature - maximum args"
             $ toText
               ( Cmd_WaitforHotendTemperature
-                  def'
+                  idef
                     { maxAutoTemp = Just (Celsius 190),
                       autotempFactor = Just (Mm 0.5),
                       materialPreset = Just (Index 1),
@@ -943,7 +943,7 @@ tests =
           testCase "Set / Get Line Number - maximum args"
             $ toText
               ( Cmd_Set_GetLineNumber
-                  def'
+                  idef
                     { lineNumber = Just (Count 100)
                     }
               )
@@ -951,7 +951,7 @@ tests =
           testCase "Debug Level - maximum args"
             $ toText
               ( Cmd_DebugLevel
-                  def'
+                  idef
                     { debugFlags = Just (Index 38)
                     }
               )
@@ -962,7 +962,7 @@ tests =
           testCase "Host Keepalive - maximum args"
             $ toText
               ( Cmd_HostKeepalive
-                  def'
+                  idef
                     { keepaliveInterval = Just (Seconds 5)
                     }
               )
@@ -970,7 +970,7 @@ tests =
           testCase "Get Current Position - maximum args"
             $ toText
               ( Cmd_GetCurrentPosition
-                  def'
+                  idef
                     { detailedInfo = Just (Flag True),
                       reportEStepper = Just (Flag True),
                       realPosition = Just (Flag True)
@@ -992,7 +992,7 @@ tests =
           testCase "Set Bed Temperature - maximum args"
             $ toText
               ( Cmd_SetBedTemperature
-                  def'
+                  idef
                     { materialPreset = Just (Index 1),
                       targetTemp = Just (Celsius 80)
                     }
@@ -1001,7 +1001,7 @@ tests =
           testCase "Set Chamber Temperature - maximum args"
             $ toText
               ( Cmd_SetChamberTemperature
-                  def'
+                  idef
                     { targetTemp = Just (Celsius 40)
                     }
               )
@@ -1009,7 +1009,7 @@ tests =
           testCase "Wait for Bed Temperature - maximum args"
             $ toText
               ( Cmd_WaitforBedTemperature
-                  def'
+                  idef
                     { materialPreset = Just (Index 1),
                       targetTempWait = Just (Celsius 80),
                       targetTemp = Just (Celsius 80),
@@ -1020,7 +1020,7 @@ tests =
           testCase "Volumetric Extrusion Diameter - maximum args"
             $ toText
               ( Cmd_VolumetricExtrusionDiameter
-                  def'
+                  idef
                     { filamentDiameter = Just (Mm 1.75),
                       extruderLimit = Just (Mm 10),
                       volumetricOn = Just (Flag True),
@@ -1031,7 +1031,7 @@ tests =
           testCase "Print / Travel Move Limits - maximum args"
             $ toText
               ( Cmd_Print_TravelMoveLimits
-                  def'
+                  idef
                     { axisExtrusion = Just (Mm 1000),
                       frequencyLimit = Just (Count 60),
                       frequencyMinSpeed = Just (Mm 47),
@@ -1045,7 +1045,7 @@ tests =
           testCase "Set Max Feedrate - maximum args"
             $ toText
               ( Cmd_SetMaxFeedrate
-                  def'
+                  idef
                     { axisExtrusion = Just (MmPerSec 50),
                       targetExtruder = Just (Index 0),
                       axisX = Just (MmPerSec 100),
@@ -1057,7 +1057,7 @@ tests =
           testCase "Set Starting Acceleration - maximum args"
             $ toText
               ( Cmd_SetStartingAcceleration
-                  def'
+                  idef
                     { printingAccel = Just (Mm 2400),
                       retractAccel = Just (Mm 2000),
                       legacyAccel = Just (Mm 2000),
@@ -1068,7 +1068,7 @@ tests =
           testCase "Set Advanced Settings - maximum args"
             $ toText
               ( Cmd_SetAdvancedSettings
-                  def'
+                  idef
                     { minSegmentTime = Just (Milliseconds 20000),
                       axisExtrusion = Just (Mm 5),
                       junctionDeviation = Just (Mm 0.013),
@@ -1083,7 +1083,7 @@ tests =
           testCase "Set Home Offsets - maximum args"
             $ toText
               ( Cmd_SetHomeOffsets
-                  def'
+                  idef
                     { axisA = Just (Mm 0),
                       axisB = Just (Mm 0),
                       axisC = Just (Mm 0),
@@ -1101,7 +1101,7 @@ tests =
           testCase "Set Feedrate Percentage - maximum args"
             $ toText
               ( Cmd_SetFeedratePercentage
-                  def'
+                  idef
                     { backupFactor = Just (Flag True),
                       restoreFactor = Just (Flag True),
                       feedratePercent = Just (Index 80)
@@ -1111,8 +1111,8 @@ tests =
           testCase "Set Flow Percentage - maximum args"
             $ toText
               ( Cmd_SetFlowPercentage
-                  def'
-                    { flowPercent = pure (Index 100),
+                  idef
+                    { flowPercent = Req (Index 100),
                       targetExtruder = Just (Index 0)
                     }
               )
@@ -1123,7 +1123,7 @@ tests =
           testCase "Deploy Probe - maximum args"
             $ toText
               ( Cmd_DeployProbe
-                  def'
+                  idef
                     { reportHSMode = Just (Flag True),
                       remainInPlace = Just (Flag True),
                       setHSMode = Just (Flag True)
@@ -1133,7 +1133,7 @@ tests =
           testCase "Stow Probe - maximum args"
             $ toText
               ( Cmd_StowProbe
-                  def'
+                  idef
                     { remainInPlace = Just (Flag True)
                     }
               )
@@ -1153,7 +1153,7 @@ tests =
           testCase "Report Settings - maximum args"
             $ toText
               ( Cmd_ReportSettings
-                  def'
+                  idef
                     { saveConfig = Just (Flag True),
                       detailedOutput = Just (Flag True)
                     }
@@ -1162,7 +1162,7 @@ tests =
           testCase "STOP Restart - maximum args"
             $ toText
               ( Cmd_STOPRestart
-                  def'
+                  idef
                     { resumeWithoutFlush = Just (Flag True)
                     }
               )
@@ -1172,31 +1172,31 @@ tests =
         $ toText
           [ comment "Test comment",
             Cmd_LinearMove_NoExtrusion
-              def'
+              idef
                 { axisX = Just (Mm 10),
                   axisY = Just (Mm 20)
                 },
             Cmd_LinearMove_WithExtrusion
-              def'
+              idef
                 { axisX = Just (Mm 10),
                   axisY = Just (Mm 20)
                 }
               `withComment` "Test comment",
             Cmd_LinearMove_Clockwise_OffsetX
-              def'
-                { offsetX = pure $ Mm 10,
+              idef
+                { offsetX = Req (Mm 10),
                   axisX = Just (Mm 10),
                   axisY = Just (Mm 20)
                 },
             Cmd_LinearMove_Clockwise_OffsetY
-              def'
-                { offsetY = pure $ Mm 10,
+              idef
+                { offsetY = Req (Mm 10),
                   axisX = Just (Mm 10),
                   axisY = Just (Mm 20)
                 },
             Cmd_LinearMove_Clockwise_Radius
-              def'
-                { radius = pure $ Mm 10,
+              idef
+                { radius = Req (Mm 10),
                   axisX = Just (Mm 10),
                   axisY = Just (Mm 20)
                 }

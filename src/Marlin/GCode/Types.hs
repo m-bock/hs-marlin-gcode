@@ -50,11 +50,8 @@ newtype Count = Count Int
 data NotDefined a = NotDefined
   deriving (Show, Eq)
 
-newtype Required a = Required a
+newtype Required a = Req a
   deriving (Show, Eq, Functor)
-  deriving
-    (Applicative)
-    via Identity
 
 instance Default (NotDefined a) where
   def = NotDefined
