@@ -2,7 +2,7 @@ module Main where
 
 import qualified Data.Text as T
 import GHC.Records
-import Marlin.GCode
+import Marlin.GCode hiding (idef)
 import Relude
 import Test.Tasty
 import Test.Tasty.HUnit
@@ -328,7 +328,7 @@ tests =
           testCase "Bed Leveling 3 Point - maximum args"
             $ toText
               ( Cmd_BedLeveling_3Point
-                  idef
+                  BedLeveling_3Point
                     { abort = Just (Flag False),
                       createFake = Just (Flag False),
                       dryRun = Just (Flag True),
@@ -343,7 +343,7 @@ tests =
           testCase "Bed Leveling Bilinear - maximum args"
             $ toText
               ( Cmd_BedLeveling_Bilinear
-                  idef
+                  BedLeveling_Bilinear
                     { abort = Just (Flag False),
                       backLimit = Just (Mm 200),
                       createFake = Just (Flag False),
@@ -370,7 +370,7 @@ tests =
           testCase "Bed Leveling Linear - maximum args"
             $ toText
               ( Cmd_BedLeveling_Linear
-                  idef
+                  BedLeveling_Linear
                     { abort = Just (Flag False),
                       backLimit = Just (Mm 200),
                       createFake = Just (Flag False),
@@ -395,7 +395,7 @@ tests =
           testCase "Bed Leveling Manual - maximum args"
             $ toText
               ( Cmd_BedLeveling_Manual
-                  idef
+                  BedLeveling_Manual
                     { state = Req (Index 1),
                       meshX = Just (Index 2),
                       meshY = Just (Index 3),
@@ -408,7 +408,7 @@ tests =
           testCase "Bed Leveling Unified - maximum args"
             $ toText
               ( Cmd_BedLeveling_Unified
-                  idef
+                  BedLeveling_Unified
                     { activate = Just (Flag True),
                       businessCard = Just (Mm 0.1),
                       constant = Just (Mm 0),
@@ -436,7 +436,7 @@ tests =
           testCase "Single Z-Probe - maximum args"
             $ toText
               ( Cmd_SingleZProbe
-                  idef
+                  SingleZProbe
                     { temperatureCompensation = Just (Flag True),
                       engageEach = Just (Flag True),
                       axisX = Just (Mm 100),
@@ -453,7 +453,7 @@ tests =
           testCase "Delta Auto Calibration - maximum args"
             $ toText
               ( Cmd_DeltaAutoCalibration
-                  idef
+                  DeltaAutoCalibration
                     { precision = Just (Mm 0.01),
                       engageEach = Just (Flag True),
                       iterations = Just (Count 3),
@@ -472,7 +472,7 @@ tests =
           testCase "Z Steppers Auto-Alignment - maximum args"
             $ toText
               ( Cmd_ZSteppersAutoAlignment
-                  idef
+                  ZSteppersAutoAlignment
                     { amplification = Just (Mm 0.5),
                       stowEach = Just (Flag True),
                       iterations = Just (Index 3),
@@ -487,7 +487,7 @@ tests =
           testCase "Mechanical Gantry Calibration - maximum args"
             $ toText
               ( Cmd_MechanicalGantryCalibration
-                  idef
+                  MechanicalGantryCalibration
                     { current = Just (Index 1),
                       extraHeight = Just (Mm 5)
                     }
@@ -496,7 +496,7 @@ tests =
           testCase "Tramming Assistant - maximum args"
             $ toText
               ( Cmd_TrammingAssistant
-                  idef
+                  TrammingAssistant
                     { screwThreadType = Just (Index 40)
                     }
               )
@@ -504,7 +504,7 @@ tests =
           testCase "Probe Target Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_ErrorOnFail
-                  idef
+                  ProbeTarget_ErrorOnFail
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -515,7 +515,7 @@ tests =
           testCase "Probe Target No Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_NoErrorOnFail
-                  idef
+                  ProbeTarget_NoErrorOnFail
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -526,7 +526,7 @@ tests =
           testCase "Probe Target Away Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_AwayErrorOnFail
-                  idef
+                  ProbeTarget_AwayErrorOnFail
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -537,7 +537,7 @@ tests =
           testCase "Probe Target Away No Error On Fail - maximum args"
             $ toText
               ( Cmd_ProbeTarget_AwayNoErrorOnFail
-                  idef
+                  ProbeTarget_AwayNoErrorOnFail
                     { feedrate = Just (MmPerMin 100),
                       axisX = Just (Mm 10),
                       axisY = Just (Mm 20),
@@ -548,7 +548,7 @@ tests =
           testCase "Move to Mesh Coordinate - maximum args"
             $ toText
               ( Cmd_MovetoMeshCoordinate
-                  idef
+                  MovetoMeshCoordinate
                     { feedrate = Just (MmPerMin 100),
                       meshColumn = Just (Index 4),
                       meshRow = Just (Index 4),
@@ -577,7 +577,7 @@ tests =
           testCase "Stored Positions - maximum args"
             $ toText
               ( Cmd_StoredPositions
-                  idef
+                  StoredPositions
                     { deleteSlot = Just (Index 1),
                       restoreE = Just (Mm 10),
                       feedrate = Just (MmPerMin 100),
@@ -592,7 +592,7 @@ tests =
           testCase "Return to Saved Position - maximum args"
             $ toText
               ( Cmd_ReturntoSavedPosition
-                  idef
+                  ReturntoSavedPosition
                     { restoreE = Just (Mm 10),
                       feedrate = Just (MmPerMin 100),
                       slot = Just (Index 1),
@@ -605,7 +605,7 @@ tests =
           testCase "Probe Temperature Calibration - maximum args"
             $ toText
               ( Cmd_ProbeTemperatureCalibration
-                  idef
+                  ProbeTemperatureCalibration
                     { calibrateBed = Just (Flag True),
                       calibrateProbe = Just (Flag True)
                     }
@@ -623,7 +623,7 @@ tests =
           testCase "Set Position - maximum args"
             $ toText
               ( Cmd_SetPosition
-                  idef
+                  SetPosition
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -640,7 +640,7 @@ tests =
           testCase "Backlash Calibration - maximum args"
             $ toText
               ( Cmd_BacklashCalibration
-                  idef
+                  BacklashCalibration
                     { backlashOnly = Just (Flag True),
                       toolheadIndex = Just (Index 1),
                       uncertainty = Just (Mm 0.1),
@@ -651,7 +651,7 @@ tests =
           testCase "Spindle CW / Laser On - maximum args"
             $ toText
               ( Cmd_SpindleCWLaserOn
-                  idef
+                  SpindleCWLaserOn
                     { inlineMode = Just (Flag True),
                       powerPWM = Just (Index 128),
                       power = Just (Index 200)
@@ -661,7 +661,7 @@ tests =
           testCase "Spindle CCW / Laser On - maximum args"
             $ toText
               ( Cmd_SpindleCCWLaserOn
-                  idef
+                  SpindleCCWLaserOn
                     { inlineMode = Just (Flag True),
                       powerPWM = Just (Index 128),
                       power = Just (Index 200)
@@ -674,7 +674,7 @@ tests =
           testCase "Enable Steppers - maximum args"
             $ toText
               ( Cmd_EnableSteppers
-                  idef
+                  EnableSteppers
                     { axisA = Just (Flag True),
                       axisB = Just (Flag True),
                       axisC = Just (Flag True),
@@ -691,7 +691,7 @@ tests =
           testCase "Disable Steppers - maximum args"
             $ toText
               ( Cmd_DisableSteppers
-                  idef
+                  DisableSteppers
                     { axisA = Just (Flag True),
                       axisB = Just (Flag True),
                       axisC = Just (Flag True),
@@ -709,7 +709,7 @@ tests =
           testCase "List SD Card - maximum args"
             $ toText
               ( Cmd_ListSDCard
-                  idef
+                  ListSDCard
                     { binFilesOnly = Just (Flag True),
                       longFilenames = Just (Flag True),
                       timestamp = Just (Flag True)
@@ -725,7 +725,7 @@ tests =
           testCase "Start or Resume SD Print - maximum args"
             $ toText
               ( Cmd_StartorResumeSDPrint
-                  idef
+                  StartorResumeSDPrint
                     { resumePosition = Just (Count 1000),
                       elapsedTime = Just (Count 5000)
                     }
@@ -737,7 +737,7 @@ tests =
           testCase "Set SD Position - maximum args"
             $ toText
               ( Cmd_SetSDPosition
-                  idef
+                  SetSDPosition
                     { position = Just (Count 1000)
                     }
               )
@@ -745,7 +745,7 @@ tests =
           testCase "Report SD Print Status - maximum args"
             $ toText
               ( Cmd_ReportSDPrintStatus
-                  idef
+                  ReportSDPrintStatus
                     { reportFilename = Just (Flag True),
                       autoReportInterval = Just (Seconds 5)
                     }
@@ -760,7 +760,7 @@ tests =
           testCase "SDCard Sorting - maximum args"
             $ toText
               ( Cmd_SDCardSorting
-                  idef
+                  SDCardSorting
                     { folderSorting = Just (Index 1),
                       sortingOrder = Just (Index 1)
                     }
@@ -769,7 +769,7 @@ tests =
           testCase "Set Pin State - maximum args"
             $ toText
               ( Cmd_SetPinState
-                  idef
+                  SetPinState
                     { ignoreProtection = Just (Flag True),
                       pin = Just (Index 33),
                       state = Req (Index 1),
@@ -780,7 +780,7 @@ tests =
           testCase "Pins Debugging - maximum args"
             $ toText
               ( Cmd_PinsDebugging
-                  idef
+                  PinsDebugging
                     { watchEndstops = Just (Flag True),
                       ignoreProtection = Just (Flag True),
                       pin = Just (Index 56),
@@ -793,7 +793,7 @@ tests =
           testCase "Probe Repeatability Test - maximum args"
             $ toText
               ( Cmd_ProbeRepeatabilityTest
-                  idef
+                  ProbeRepeatabilityTest
                     { temperatureCompensation = Just (Flag True),
                       engageEach = Just (Flag True),
                       legs = Just (Count 7),
@@ -808,7 +808,7 @@ tests =
           testCase "Set Print Progress - maximum args"
             $ toText
               ( Cmd_SetPrintProgress
-                  idef
+                  SetPrintProgress
                     { interactionCountdown = Just (Count 5),
                       progressPercent = Just (Index 50),
                       remainingTime = Just (Count 120)
@@ -827,7 +827,7 @@ tests =
           testCase "Power On - maximum args"
             $ toText
               ( Cmd_PowerOn
-                  idef
+                  PowerOn
                     { reportState = Just (Flag True)
                     }
               )
@@ -844,7 +844,7 @@ tests =
           testCase "Inactivity Shutdown - maximum args"
             $ toText
               ( Cmd_InactivityShutdown
-                  idef
+                  InactivityShutdown
                     { maxInactiveSeconds = Req (Seconds 600)
                     }
               )
@@ -852,7 +852,7 @@ tests =
           testCase "Hotend Idle Timeout - maximum args"
             $ toText
               ( Cmd_HotendIdleTimeout
-                  idef
+                  HotendIdleTimeout
                     { bedIdleTemp = Just (Celsius 30),
                       extruderIdleTemp = Just (Celsius 40),
                       timeoutSeconds = Just (Seconds 240),
@@ -866,7 +866,7 @@ tests =
           testCase "Set Axis Steps-per-unit - maximum args"
             $ toText
               ( Cmd_SetAxisStepsperunit
-                  idef
+                  SetAxisStepsperunit
                     { axisA = Just (Mm 100),
                       axisB = Just (Mm 100),
                       axisC = Just (Mm 100),
@@ -884,7 +884,7 @@ tests =
           testCase "Set Hotend Temperature - maximum args"
             $ toText
               ( Cmd_SetHotendTemperature
-                  idef
+                  SetHotendTemperature
                     { maxAutoTemp = Just (Celsius 190),
                       autotempFactor = Just (Mm 0.5),
                       materialPreset = Just (Index 1),
@@ -896,7 +896,7 @@ tests =
           testCase "Report Temperatures - maximum args"
             $ toText
               ( Cmd_ReportTemperatures
-                  idef
+                  ReportTemperatures
                     { includeRedundant = Just (Flag True),
                       hotendIndex = Just (Index 0)
                     }
@@ -905,7 +905,7 @@ tests =
           testCase "Set Fan Speed - maximum args"
             $ toText
               ( Cmd_SetFanSpeed
-                  idef
+                  SetFanSpeed
                     { materialPreset = Just (Index 1),
                       fanIndex = Just (Index 0),
                       speed = Just (Index 200),
@@ -916,7 +916,7 @@ tests =
           testCase "Fan Off - maximum args"
             $ toText
               ( Cmd_FanOff
-                  idef
+                  FanOff
                     { fanIndex = Just (Index 0)
                     }
               )
@@ -927,7 +927,7 @@ tests =
           testCase "Wait for Hotend Temperature - maximum args"
             $ toText
               ( Cmd_WaitforHotendTemperature
-                  idef
+                  WaitforHotendTemperature
                     { maxAutoTemp = Just (Celsius 190),
                       autotempFactor = Just (Mm 0.5),
                       materialPreset = Just (Index 1),
@@ -940,7 +940,7 @@ tests =
           testCase "Set / Get Line Number - maximum args"
             $ toText
               ( Cmd_SetGetLineNumber
-                  idef
+                  SetGetLineNumber
                     { lineNumber = Just (Count 100)
                     }
               )
@@ -948,7 +948,7 @@ tests =
           testCase "Debug Level - maximum args"
             $ toText
               ( Cmd_DebugLevel
-                  idef
+                  DebugLevel
                     { debugFlags = Just (Index 38)
                     }
               )
@@ -959,7 +959,7 @@ tests =
           testCase "Host Keepalive - maximum args"
             $ toText
               ( Cmd_HostKeepalive
-                  idef
+                  HostKeepalive
                     { keepaliveInterval = Just (Seconds 5)
                     }
               )
@@ -967,7 +967,7 @@ tests =
           testCase "Get Current Position - maximum args"
             $ toText
               ( Cmd_GetCurrentPosition
-                  idef
+                  GetCurrentPosition
                     { detailedInfo = Just (Flag True),
                       reportEStepper = Just (Flag True),
                       realPosition = Just (Flag True)
@@ -989,7 +989,7 @@ tests =
           testCase "Set Bed Temperature - maximum args"
             $ toText
               ( Cmd_SetBedTemperature
-                  idef
+                  SetBedTemperature
                     { materialPreset = Just (Index 1),
                       targetTemp = Just (Celsius 80)
                     }
@@ -998,7 +998,7 @@ tests =
           testCase "Set Chamber Temperature - maximum args"
             $ toText
               ( Cmd_SetChamberTemperature
-                  idef
+                  SetChamberTemperature
                     { targetTemp = Just (Celsius 40)
                     }
               )
@@ -1006,7 +1006,7 @@ tests =
           testCase "Wait for Bed Temperature - maximum args"
             $ toText
               ( Cmd_WaitforBedTemperature
-                  idef
+                  WaitforBedTemperature
                     { materialPreset = Just (Index 1),
                       targetTempWait = Just (Celsius 80),
                       targetTemp = Just (Celsius 80),
@@ -1017,7 +1017,7 @@ tests =
           testCase "Volumetric Extrusion Diameter - maximum args"
             $ toText
               ( Cmd_VolumetricExtrusionDiameter
-                  idef
+                  VolumetricExtrusionDiameter
                     { filamentDiameter = Just (Mm 1.75),
                       extruderLimit = Just (Mm 10),
                       volumetricOn = Just (Flag True),
@@ -1028,7 +1028,7 @@ tests =
           testCase "Print / Travel Move Limits - maximum args"
             $ toText
               ( Cmd_PrintTravelMoveLimits
-                  idef
+                  PrintTravelMoveLimits
                     { axisExtrusion = Just (Mm 1000),
                       frequencyLimit = Just (Count 60),
                       frequencyMinSpeed = Just (Mm 47),
@@ -1042,7 +1042,7 @@ tests =
           testCase "Set Max Feedrate - maximum args"
             $ toText
               ( Cmd_SetMaxFeedrate
-                  idef
+                  SetMaxFeedrate
                     { axisExtrusion = Just (MmPerSec 50),
                       targetExtruder = Just (Index 0),
                       axisX = Just (MmPerSec 100),
@@ -1054,7 +1054,7 @@ tests =
           testCase "Set Starting Acceleration - maximum args"
             $ toText
               ( Cmd_SetStartingAcceleration
-                  idef
+                  SetStartingAcceleration
                     { printingAccel = Just (Mm 2400),
                       retractAccel = Just (Mm 2000),
                       legacyAccel = Just (Mm 2000),
@@ -1065,7 +1065,7 @@ tests =
           testCase "Set Advanced Settings - maximum args"
             $ toText
               ( Cmd_SetAdvancedSettings
-                  idef
+                  SetAdvancedSettings
                     { minSegmentTime = Just (Milliseconds 20000),
                       axisExtrusion = Just (Mm 5),
                       junctionDeviation = Just (Mm 0.013),
@@ -1080,7 +1080,7 @@ tests =
           testCase "Set Home Offsets - maximum args"
             $ toText
               ( Cmd_SetHomeOffsets
-                  idef
+                  SetHomeOffsets
                     { axisA = Just (Mm 0),
                       axisB = Just (Mm 0),
                       axisC = Just (Mm 0),
@@ -1098,7 +1098,7 @@ tests =
           testCase "Set Feedrate Percentage - maximum args"
             $ toText
               ( Cmd_SetFeedratePercentage
-                  idef
+                  SetFeedratePercentage
                     { backupFactor = Just (Flag True),
                       restoreFactor = Just (Flag True),
                       feedratePercent = Just (Index 80)
@@ -1108,7 +1108,7 @@ tests =
           testCase "Set Flow Percentage - maximum args"
             $ toText
               ( Cmd_SetFlowPercentage
-                  idef
+                  SetFlowPercentage
                     { flowPercent = Req (Index 100),
                       targetExtruder = Just (Index 0)
                     }
@@ -1120,7 +1120,7 @@ tests =
           testCase "Deploy Probe - maximum args"
             $ toText
               ( Cmd_DeployProbe
-                  idef
+                  DeployProbe
                     { reportHSMode = Just (Flag True),
                       remainInPlace = Just (Flag True),
                       setHSMode = Just (Flag True)
@@ -1130,7 +1130,7 @@ tests =
           testCase "Stow Probe - maximum args"
             $ toText
               ( Cmd_StowProbe
-                  idef
+                  StowProbe
                     { remainInPlace = Just (Flag True)
                     }
               )
@@ -1150,7 +1150,7 @@ tests =
           testCase "Report Settings - maximum args"
             $ toText
               ( Cmd_ReportSettings
-                  idef
+                  ReportSettings
                     { saveConfig = Just (Flag True),
                       detailedOutput = Just (Flag True)
                     }
@@ -1159,7 +1159,7 @@ tests =
           testCase "STOP Restart - maximum args"
             $ toText
               ( Cmd_STOPRestart
-                  idef
+                  STOPRestart
                     { resumeWithoutFlush = Just (Flag True)
                     }
               )
