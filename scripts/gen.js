@@ -79,6 +79,8 @@ data ${typeName} (f :: Type -> Type)
 
 instance Default (${typeName} NotDefined)
 
+${signature.required.length === 0 ? `instance Default (${typeName} Required)` : ""}
+
 instance Upcast (${typeName} Required) GCodeCmd where
   upcast = ${mkCmdName(item, signature)}
 

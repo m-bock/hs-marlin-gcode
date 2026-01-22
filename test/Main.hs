@@ -19,7 +19,7 @@ tests =
         [ testCase "Linear Move No Extrusion - maximum args"
             $ toText
               ( Cmd_LinearMove_NoExtrusion
-                  idef
+                  LinearMove_NoExtrusion
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -37,7 +37,7 @@ tests =
           testCase "Linear Move With Extrusion - maximum args"
             $ toText
               ( Cmd_LinearMove_WithExtrusion
-                  idef
+                  LinearMove_WithExtrusion
                     { axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
                       axisC = Just (Mm 3),
@@ -56,7 +56,7 @@ tests =
           testCase "Linear Move Clockwise OffsetX - maximum args"
             $ toText
               ( Cmd_LinearMove_Clockwise_OffsetX
-                  idef
+                  LinearMove_Clockwise_OffsetX
                     { offsetX = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
@@ -77,7 +77,7 @@ tests =
           testCase "Linear Move Clockwise OffsetY - maximum args"
             $ toText
               ( Cmd_LinearMove_Clockwise_OffsetY
-                  idef
+                  LinearMove_Clockwise_OffsetY
                     { offsetY = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
@@ -98,7 +98,7 @@ tests =
           testCase "Linear Move Clockwise Radius - maximum args"
             $ toText
               ( Cmd_LinearMove_Clockwise_Radius
-                  idef
+                  LinearMove_Clockwise_Radius
                     { radius = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
@@ -119,7 +119,7 @@ tests =
           testCase "Linear Move CounterClockwise OffsetX - maximum args"
             $ toText
               ( Cmd_LinearMove_CounterClockwise_OffsetX
-                  idef
+                  LinearMove_CounterClockwise_OffsetX
                     { offsetX = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
@@ -140,7 +140,7 @@ tests =
           testCase "Linear Move CounterClockwise OffsetY - maximum args"
             $ toText
               ( Cmd_LinearMove_CounterClockwise_OffsetY
-                  idef
+                  LinearMove_CounterClockwise_OffsetY
                     { offsetY = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
@@ -161,7 +161,7 @@ tests =
           testCase "Linear Move CounterClockwise Radius - maximum args"
             $ toText
               ( Cmd_LinearMove_CounterClockwise_Radius
-                  idef
+                  LinearMove_CounterClockwise_Radius
                     { radius = Req (Mm 10),
                       axisA = Just (Mm 1),
                       axisB = Just (Mm 2),
@@ -182,7 +182,7 @@ tests =
           testCase "Dwell - maximum args"
             $ toText
               ( Cmd_Dwell
-                  idef
+                  Dwell
                     { timeSeconds = Just (Seconds 5.5),
                       timeMilliseconds = Just (Milliseconds 1000)
                     }
@@ -191,7 +191,7 @@ tests =
           testCase "Bezier Cubic Spline Move Initial - maximum args"
             $ toText
               ( Cmd_BezierCubicSplineMove_Initial
-                  idef
+                  BezierCubicSplineMove_Initial
                     { offsetX1 = Req (Mm 1),
                       offsetY1 = Req (Mm 2),
                       offsetX2 = Req (Mm 3),
@@ -207,7 +207,7 @@ tests =
           testCase "Bezier Cubic Spline Move Subsequent - maximum args"
             $ toText
               ( Cmd_BezierCubicSplineMove_Subsequent
-                  idef
+                  BezierCubicSplineMove_Subsequent
                     { offsetX2 = Req (Mm 3),
                       offsetY2 = Req (Mm 4),
                       axisX = Req (Mm 10),
@@ -223,7 +223,7 @@ tests =
           testCase "Direct Stepper Move - maximum args"
             $ toText
               ( Cmd_DirectStepperMove
-                  idef
+                  DirectStepperMove
                     { directionE = Just (Flag True),
                       pageIndex = Just (Index 1),
                       stepRate = Just (MmPerSec 10.5),
@@ -237,18 +237,18 @@ tests =
           testCase "Retract - maximum args"
             $ toText
               ( Cmd_Retract
-                  idef
+                  Retract
                     { swapRetract = Just (Flag True)
                     }
               )
             @?= "G10 S1",
           testCase "Recover - maximum args"
-            $ toText (Cmd_Recover (Recover {} :: Recover Required))
+            $ toText (Cmd_Recover (Recover {}))
             @?= "G11",
           testCase "Clean The Nozzle - maximum args"
             $ toText
               ( Cmd_CleanNozzle
-                  idef
+                  CleanNozzle
                     { pattern = Just (Index 1),
                       radius = Just (Mm 5),
                       repetitions = Just (Count 3),
@@ -260,24 +260,24 @@ tests =
               )
             @?= "G12 P1 R5.0000 S3 T4 X1 Y1 Z1",
           testCase "CNC Workspace Planes XY - maximum args"
-            $ toText (Cmd_CNCWorkspacePlanes_XY (CNCWorkspacePlanes_XY {} :: CNCWorkspacePlanes_XY Required))
+            $ toText (Cmd_CNCWorkspacePlanes_XY (CNCWorkspacePlanes_XY {}))
             @?= "G17",
           testCase "CNC Workspace Planes ZX - maximum args"
-            $ toText (Cmd_CNCWorkspacePlanes_ZX (CNCWorkspacePlanes_ZX {} :: CNCWorkspacePlanes_ZX Required))
+            $ toText (Cmd_CNCWorkspacePlanes_ZX (CNCWorkspacePlanes_ZX {}))
             @?= "G18",
           testCase "CNC Workspace Planes YZ - maximum args"
-            $ toText (Cmd_CNCWorkspacePlanes_YZ (CNCWorkspacePlanes_YZ {} :: CNCWorkspacePlanes_YZ Required))
+            $ toText (Cmd_CNCWorkspacePlanes_YZ (CNCWorkspacePlanes_YZ {}))
             @?= "G19",
           testCase "Inch Units - maximum args"
-            $ toText (Cmd_InchUnits (InchUnits {} :: InchUnits Required))
+            $ toText (Cmd_InchUnits (InchUnits {}))
             @?= "G20",
           testCase "Millimeter Units - maximum args"
-            $ toText (Cmd_MillimeterUnits (MillimeterUnits {} :: MillimeterUnits Required))
+            $ toText (Cmd_MillimeterUnits (MillimeterUnits {}))
             @?= "G21",
           testCase "Mesh Validation Pattern - maximum args"
             $ toText
               ( Cmd_MeshValidationPattern
-                  idef
+                  MeshValidationPattern
                     { bedTemp = Just (Celsius 60),
                       continueClosest = Just (Flag True),
                       disableLeveling = Just (Flag False),
@@ -300,7 +300,7 @@ tests =
           testCase "Park Toolehead - maximum args"
             $ toText
               ( Cmd_ParkToolehead
-                  idef
+                  ParkToolehead
                     { parkingBehavior = Just (Index 0)
                     }
               )
@@ -308,7 +308,7 @@ tests =
           testCase "Auto Home - maximum args"
             $ toText
               ( Cmd_AutoHome
-                  idef
+                  AutoHome
                     { homeA = Just (Flag True),
                       homeB = Just (Flag True),
                       homeC = Just (Flag True),
@@ -445,10 +445,10 @@ tests =
               )
             @?= "G30 C1 E1 X100.0000 Y100.0000",
           testCase "Dock Sled - maximum args"
-            $ toText (Cmd_DockSled (DockSled {} :: DockSled Required))
+            $ toText (Cmd_DockSled (DockSled {}))
             @?= "G31",
           testCase "Undock Sled - maximum args"
-            $ toText (Cmd_UndockSled (UndockSled {} :: UndockSled Required))
+            $ toText (Cmd_UndockSled (UndockSled {}))
             @?= "G32",
           testCase "Delta Auto Calibration - maximum args"
             $ toText
@@ -557,22 +557,22 @@ tests =
               )
             @?= "G42 F100.0000 I4 J4 P1",
           testCase "Select Workspace Workspace 1 - maximum args"
-            $ toText (Cmd_SelectWorkspace_1 (SelectWorkspace_1 {} :: SelectWorkspace_1 Required))
+            $ toText (Cmd_SelectWorkspace_1 (SelectWorkspace_1 {}))
             @?= "G54",
           testCase "Select Workspace Workspace 2 - maximum args"
-            $ toText (Cmd_SelectWorkspace_2 (SelectWorkspace_2 {} :: SelectWorkspace_2 Required))
+            $ toText (Cmd_SelectWorkspace_2 (SelectWorkspace_2 {}))
             @?= "G55",
           testCase "Select Workspace Workspace 3 - maximum args"
-            $ toText (Cmd_SelectWorkspace_3 (SelectWorkspace_3 {} :: SelectWorkspace_3 Required))
+            $ toText (Cmd_SelectWorkspace_3 (SelectWorkspace_3 {}))
             @?= "G56",
           testCase "Select Workspace Workspace 4 - maximum args"
-            $ toText (Cmd_SelectWorkspace_4 (SelectWorkspace_4 {} :: SelectWorkspace_4 Required))
+            $ toText (Cmd_SelectWorkspace_4 (SelectWorkspace_4 {}))
             @?= "G57",
           testCase "Select Workspace Workspace 5 - maximum args"
-            $ toText (Cmd_SelectWorkspace_5 (SelectWorkspace_5 {} :: SelectWorkspace_5 Required))
+            $ toText (Cmd_SelectWorkspace_5 (SelectWorkspace_5 {}))
             @?= "G58",
           testCase "Select Workspace Workspace 6 - maximum args"
-            $ toText (Cmd_SelectWorkspace_6 (SelectWorkspace_6 {} :: SelectWorkspace_6 Required))
+            $ toText (Cmd_SelectWorkspace_6 (SelectWorkspace_6 {}))
             @?= "G59",
           testCase "Stored Positions - maximum args"
             $ toText
@@ -612,13 +612,13 @@ tests =
               )
             @?= "G76 B1 P1",
           testCase "Cancel Current Motion Mode - maximum args"
-            $ toText (Cmd_CancelCurrentMotionMode (CancelCurrentMotionMode {} :: CancelCurrentMotionMode Required))
+            $ toText (Cmd_CancelCurrentMotionMode (CancelCurrentMotionMode {}))
             @?= "G80",
           testCase "Absolute Positioning - maximum args"
-            $ toText (Cmd_AbsolutePositioning (AbsolutePositioning {} :: AbsolutePositioning Required))
+            $ toText (Cmd_AbsolutePositioning (AbsolutePositioning {}))
             @?= "G90",
           testCase "Relative Positioning - maximum args"
-            $ toText (Cmd_RelativePositioning (RelativePositioning {} :: RelativePositioning Required))
+            $ toText (Cmd_RelativePositioning (RelativePositioning {}))
             @?= "G91",
           testCase "Set Position - maximum args"
             $ toText
@@ -669,7 +669,7 @@ tests =
               )
             @?= "M4 I1 O128 S200",
           testCase "Spindle / Laser Off - maximum args"
-            $ toText (Cmd_SpindleLaserOff (SpindleLaserOff {} :: SpindleLaserOff Required))
+            $ toText (Cmd_SpindleLaserOff (SpindleLaserOff {}))
             @?= "M5",
           testCase "Enable Steppers - maximum args"
             $ toText
@@ -717,10 +717,10 @@ tests =
               )
             @?= "M20 F1 L1 T1",
           testCase "Init SD Card - maximum args"
-            $ toText (Cmd_InitSDCard (InitSDCard {} :: InitSDCard Required))
+            $ toText (Cmd_InitSDCard (InitSDCard {}))
             @?= "M21",
           testCase "Release SD Card - maximum args"
-            $ toText (Cmd_ReleaseSDCard (ReleaseSDCard {} :: ReleaseSDCard Required))
+            $ toText (Cmd_ReleaseSDCard (ReleaseSDCard {}))
             @?= "M22",
           testCase "Start or Resume SD Print - maximum args"
             $ toText
@@ -732,7 +732,7 @@ tests =
               )
             @?= "M24 S1000 T5000",
           testCase "Pause SD Print - maximum args"
-            $ toText (Cmd_PauseSDPrint (PauseSDPrint {} :: PauseSDPrint Required))
+            $ toText (Cmd_PauseSDPrint (PauseSDPrint {}))
             @?= "M25",
           testCase "Set SD Position - maximum args"
             $ toText
@@ -752,10 +752,10 @@ tests =
               )
             @?= "M27 C1 S5.0000",
           testCase "Stop SD Write - maximum args"
-            $ toText (Cmd_StopSDWrite (StopSDWrite {} :: StopSDWrite Required))
+            $ toText (Cmd_StopSDWrite (StopSDWrite {}))
             @?= "M29",
           testCase "Report Print Time - maximum args"
-            $ toText (Cmd_ReportPrintTime (ReportPrintTime {} :: ReportPrintTime Required))
+            $ toText (Cmd_ReportPrintTime (ReportPrintTime {}))
             @?= "M31",
           testCase "SDCard Sorting - maximum args"
             $ toText
@@ -816,13 +816,13 @@ tests =
               )
             @?= "M73 C5 P50 R120",
           testCase "Pause Print Job Timer - maximum args"
-            $ toText (Cmd_PausePrintJobTimer (PausePrintJobTimer {} :: PausePrintJobTimer Required))
+            $ toText (Cmd_PausePrintJobTimer (PausePrintJobTimer {}))
             @?= "M76",
           testCase "Stop Print Job Timer - maximum args"
-            $ toText (Cmd_StopPrintJobTimer (StopPrintJobTimer {} :: StopPrintJobTimer Required))
+            $ toText (Cmd_StopPrintJobTimer (StopPrintJobTimer {}))
             @?= "M77",
           testCase "Print Job Stats - maximum args"
-            $ toText (Cmd_PrintJobStats (PrintJobStats {} :: PrintJobStats Required))
+            $ toText (Cmd_PrintJobStats (PrintJobStats {}))
             @?= "M78",
           testCase "Power On - maximum args"
             $ toText
@@ -833,13 +833,13 @@ tests =
               )
             @?= "M80 S1",
           testCase "Power Off - maximum args"
-            $ toText (Cmd_PowerOff (PowerOff {} :: PowerOff Required))
+            $ toText (Cmd_PowerOff (PowerOff {}))
             @?= "M81",
           testCase "E Absolute - maximum args"
-            $ toText (Cmd_EAbsolute (EAbsolute {} :: EAbsolute Required))
+            $ toText (Cmd_EAbsolute (EAbsolute {}))
             @?= "M82",
           testCase "E Relative - maximum args"
-            $ toText (Cmd_ERelative (ERelative {} :: ERelative Required))
+            $ toText (Cmd_ERelative (ERelative {}))
             @?= "M83",
           testCase "Inactivity Shutdown - maximum args"
             $ toText
@@ -861,7 +861,7 @@ tests =
               )
             @?= "M86 B30.0000 E40.0000 S240.0000 T100.0000",
           testCase "Disable Hotend Idle Timeout - maximum args"
-            $ toText (Cmd_DisableHotendIdleTimeout (DisableHotendIdleTimeout {} :: DisableHotendIdleTimeout Required))
+            $ toText (Cmd_DisableHotendIdleTimeout (DisableHotendIdleTimeout {}))
             @?= "M87",
           testCase "Set Axis Steps-per-unit - maximum args"
             $ toText
@@ -922,7 +922,7 @@ tests =
               )
             @?= "M107 P0",
           testCase "Break and Continue - maximum args"
-            $ toText (Cmd_BreakandContinue (BreakandContinue {} :: BreakandContinue Required))
+            $ toText (Cmd_BreakandContinue (BreakandContinue {}))
             @?= "M108",
           testCase "Wait for Hotend Temperature - maximum args"
             $ toText
@@ -954,7 +954,7 @@ tests =
               )
             @?= "M111 S38",
           testCase "Full Shutdown - maximum args"
-            $ toText (Cmd_FullShutdown (FullShutdown {} :: FullShutdown Required))
+            $ toText (Cmd_FullShutdown (FullShutdown {}))
             @?= "M112",
           testCase "Host Keepalive - maximum args"
             $ toText
@@ -975,16 +975,16 @@ tests =
               )
             @?= "M114 D1 E1 R1",
           testCase "Firmware Info - maximum args"
-            $ toText (Cmd_FirmwareInfo (FirmwareInfo {} :: FirmwareInfo Required))
+            $ toText (Cmd_FirmwareInfo (FirmwareInfo {}))
             @?= "M115",
           testCase "Endstop States - maximum args"
-            $ toText (Cmd_EndstopStates (EndstopStates {} :: EndstopStates Required))
+            $ toText (Cmd_EndstopStates (EndstopStates {}))
             @?= "M119",
           testCase "Enable Endstops - maximum args"
-            $ toText (Cmd_EnableEndstops (EnableEndstops {} :: EnableEndstops Required))
+            $ toText (Cmd_EnableEndstops (EnableEndstops {}))
             @?= "M120",
           testCase "Disable Endstops - maximum args"
-            $ toText (Cmd_DisableEndstops (DisableEndstops {} :: DisableEndstops Required))
+            $ toText (Cmd_DisableEndstops (DisableEndstops {}))
             @?= "M121",
           testCase "Set Bed Temperature - maximum args"
             $ toText
@@ -1115,7 +1115,7 @@ tests =
               )
             @?= "M221 S100 T0",
           testCase "Finish Moves - maximum args"
-            $ toText (Cmd_FinishMoves (FinishMoves {} :: FinishMoves Required))
+            $ toText (Cmd_FinishMoves (FinishMoves {}))
             @?= "M400",
           testCase "Deploy Probe - maximum args"
             $ toText
@@ -1136,16 +1136,16 @@ tests =
               )
             @?= "M402 R1",
           testCase "Quickstop - maximum args"
-            $ toText (Cmd_Quickstop (Quickstop {} :: Quickstop Required))
+            $ toText (Cmd_Quickstop (Quickstop {}))
             @?= "M410",
           testCase "Save Settings - maximum args"
-            $ toText (Cmd_SaveSettings (SaveSettings {} :: SaveSettings Required))
+            $ toText (Cmd_SaveSettings (SaveSettings {}))
             @?= "M500",
           testCase "Restore Settings - maximum args"
-            $ toText (Cmd_RestoreSettings (RestoreSettings {} :: RestoreSettings Required))
+            $ toText (Cmd_RestoreSettings (RestoreSettings {}))
             @?= "M501",
           testCase "Factory Reset - maximum args"
-            $ toText (Cmd_FactoryReset (FactoryReset {} :: FactoryReset Required))
+            $ toText (Cmd_FactoryReset (FactoryReset {}))
             @?= "M502",
           testCase "Report Settings - maximum args"
             $ toText

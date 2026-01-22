@@ -596,6 +596,8 @@ data LinearMove_NoExtrusion (f :: Type -> Type)
 
 instance Default (LinearMove_NoExtrusion NotDefined)
 
+instance Default (LinearMove_NoExtrusion Required)
+
 instance Upcast (LinearMove_NoExtrusion Required) GCodeCmd where
   upcast = Cmd_LinearMove_NoExtrusion
 
@@ -969,6 +971,8 @@ data Dwell (f :: Type -> Type)
 
 instance Default (Dwell NotDefined)
 
+instance Default (Dwell Required)
+
 instance Upcast (Dwell Required) GCodeCmd where
   upcast = Cmd_Dwell
 
@@ -1077,6 +1081,8 @@ data DirectStepperMove (f :: Type -> Type)
 
 instance Default (DirectStepperMove NotDefined)
 
+instance Default (DirectStepperMove Required)
+
 instance Upcast (DirectStepperMove Required) GCodeCmd where
   upcast = Cmd_DirectStepperMove
 
@@ -1106,6 +1112,8 @@ data Retract (f :: Type -> Type)
 
 instance Default (Retract NotDefined)
 
+instance Default (Retract Required)
+
 instance Upcast (Retract Required) GCodeCmd where
   upcast = Cmd_Retract
 
@@ -1123,6 +1131,8 @@ data Recover (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (Recover NotDefined)
+
+instance Default (Recover Required)
 
 instance Upcast (Recover Required) GCodeCmd where
   upcast = Cmd_Recover
@@ -1148,6 +1158,8 @@ data CleanNozzle (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (CleanNozzle NotDefined)
+
+instance Default (CleanNozzle Required)
 
 instance Upcast (CleanNozzle Required) GCodeCmd where
   upcast = Cmd_CleanNozzle
@@ -1177,6 +1189,8 @@ data CNCWorkspacePlanes_XY (f :: Type -> Type)
 
 instance Default (CNCWorkspacePlanes_XY NotDefined)
 
+instance Default (CNCWorkspacePlanes_XY Required)
+
 instance Upcast (CNCWorkspacePlanes_XY Required) GCodeCmd where
   upcast = Cmd_CNCWorkspacePlanes_XY
 
@@ -1194,6 +1208,8 @@ data CNCWorkspacePlanes_ZX (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (CNCWorkspacePlanes_ZX NotDefined)
+
+instance Default (CNCWorkspacePlanes_ZX Required)
 
 instance Upcast (CNCWorkspacePlanes_ZX Required) GCodeCmd where
   upcast = Cmd_CNCWorkspacePlanes_ZX
@@ -1213,6 +1229,8 @@ data CNCWorkspacePlanes_YZ (f :: Type -> Type)
 
 instance Default (CNCWorkspacePlanes_YZ NotDefined)
 
+instance Default (CNCWorkspacePlanes_YZ Required)
+
 instance Upcast (CNCWorkspacePlanes_YZ Required) GCodeCmd where
   upcast = Cmd_CNCWorkspacePlanes_YZ
 
@@ -1231,6 +1249,8 @@ data InchUnits (f :: Type -> Type)
 
 instance Default (InchUnits NotDefined)
 
+instance Default (InchUnits Required)
+
 instance Upcast (InchUnits Required) GCodeCmd where
   upcast = Cmd_InchUnits
 
@@ -1248,6 +1268,8 @@ data MillimeterUnits (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (MillimeterUnits NotDefined)
+
+instance Default (MillimeterUnits Required)
 
 instance Upcast (MillimeterUnits Required) GCodeCmd where
   upcast = Cmd_MillimeterUnits
@@ -1282,6 +1304,8 @@ data MeshValidationPattern (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (MeshValidationPattern NotDefined)
+
+instance Default (MeshValidationPattern Required)
 
 instance Upcast (MeshValidationPattern Required) GCodeCmd where
   upcast = Cmd_MeshValidationPattern
@@ -1321,6 +1345,8 @@ data ParkToolehead (f :: Type -> Type)
 
 instance Default (ParkToolehead NotDefined)
 
+instance Default (ParkToolehead Required)
+
 instance Upcast (ParkToolehead Required) GCodeCmd where
   upcast = Cmd_ParkToolehead
 
@@ -1351,6 +1377,8 @@ data AutoHome (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (AutoHome NotDefined)
+
+instance Default (AutoHome Required)
 
 instance Upcast (AutoHome Required) GCodeCmd where
   upcast = Cmd_AutoHome
@@ -1393,6 +1421,8 @@ data BedLeveling_3Point (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (BedLeveling_3Point NotDefined)
+
+instance Default (BedLeveling_3Point Required)
 
 instance Upcast (BedLeveling_3Point Required) GCodeCmd where
   upcast = Cmd_BedLeveling_3Point
@@ -1442,6 +1472,8 @@ data BedLeveling_Bilinear (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (BedLeveling_Bilinear NotDefined)
+
+instance Default (BedLeveling_Bilinear Required)
 
 instance Upcast (BedLeveling_Bilinear Required) GCodeCmd where
   upcast = Cmd_BedLeveling_Bilinear
@@ -1501,6 +1533,8 @@ data BedLeveling_Linear (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (BedLeveling_Linear NotDefined)
+
+instance Default (BedLeveling_Linear Required)
 
 instance Upcast (BedLeveling_Linear Required) GCodeCmd where
   upcast = Cmd_BedLeveling_Linear
@@ -1595,6 +1629,8 @@ data BedLeveling_Unified (f :: Type -> Type)
 
 instance Default (BedLeveling_Unified NotDefined)
 
+instance Default (BedLeveling_Unified Required)
+
 instance Upcast (BedLeveling_Unified Required) GCodeCmd where
   upcast = Cmd_BedLeveling_Unified
 
@@ -1641,6 +1677,8 @@ data SingleZProbe (f :: Type -> Type)
 
 instance Default (SingleZProbe NotDefined)
 
+instance Default (SingleZProbe Required)
+
 instance Upcast (SingleZProbe Required) GCodeCmd where
   upcast = Cmd_SingleZProbe
 
@@ -1666,6 +1704,8 @@ data DockSled (f :: Type -> Type)
 
 instance Default (DockSled NotDefined)
 
+instance Default (DockSled Required)
+
 instance Upcast (DockSled Required) GCodeCmd where
   upcast = Cmd_DockSled
 
@@ -1683,6 +1723,8 @@ data UndockSled (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (UndockSled NotDefined)
+
+instance Default (UndockSled Required)
 
 instance Upcast (UndockSled Required) GCodeCmd where
   upcast = Cmd_UndockSled
@@ -1713,6 +1755,8 @@ data DeltaAutoCalibration (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (DeltaAutoCalibration NotDefined)
+
+instance Default (DeltaAutoCalibration Required)
 
 instance Upcast (DeltaAutoCalibration Required) GCodeCmd where
   upcast = Cmd_DeltaAutoCalibration
@@ -1755,6 +1799,8 @@ data ZSteppersAutoAlignment (f :: Type -> Type)
 
 instance Default (ZSteppersAutoAlignment NotDefined)
 
+instance Default (ZSteppersAutoAlignment Required)
+
 instance Upcast (ZSteppersAutoAlignment Required) GCodeCmd where
   upcast = Cmd_ZSteppersAutoAlignment
 
@@ -1786,6 +1832,8 @@ data MechanicalGantryCalibration (f :: Type -> Type)
 
 instance Default (MechanicalGantryCalibration NotDefined)
 
+instance Default (MechanicalGantryCalibration Required)
+
 instance Upcast (MechanicalGantryCalibration Required) GCodeCmd where
   upcast = Cmd_MechanicalGantryCalibration
 
@@ -1810,6 +1858,8 @@ data TrammingAssistant (f :: Type -> Type)
 
 instance Default (TrammingAssistant NotDefined)
 
+instance Default (TrammingAssistant Required)
+
 instance Upcast (TrammingAssistant Required) GCodeCmd where
   upcast = Cmd_TrammingAssistant
 
@@ -1831,6 +1881,8 @@ data ProbeTarget_ErrorOnFail (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ProbeTarget_ErrorOnFail NotDefined)
+
+instance Default (ProbeTarget_ErrorOnFail Required)
 
 instance Upcast (ProbeTarget_ErrorOnFail Required) GCodeCmd where
   upcast = Cmd_ProbeTarget_ErrorOnFail
@@ -1861,6 +1913,8 @@ data ProbeTarget_NoErrorOnFail (f :: Type -> Type)
 
 instance Default (ProbeTarget_NoErrorOnFail NotDefined)
 
+instance Default (ProbeTarget_NoErrorOnFail Required)
+
 instance Upcast (ProbeTarget_NoErrorOnFail Required) GCodeCmd where
   upcast = Cmd_ProbeTarget_NoErrorOnFail
 
@@ -1889,6 +1943,8 @@ data ProbeTarget_AwayErrorOnFail (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ProbeTarget_AwayErrorOnFail NotDefined)
+
+instance Default (ProbeTarget_AwayErrorOnFail Required)
 
 instance Upcast (ProbeTarget_AwayErrorOnFail Required) GCodeCmd where
   upcast = Cmd_ProbeTarget_AwayErrorOnFail
@@ -1919,6 +1975,8 @@ data ProbeTarget_AwayNoErrorOnFail (f :: Type -> Type)
 
 instance Default (ProbeTarget_AwayNoErrorOnFail NotDefined)
 
+instance Default (ProbeTarget_AwayNoErrorOnFail Required)
+
 instance Upcast (ProbeTarget_AwayNoErrorOnFail Required) GCodeCmd where
   upcast = Cmd_ProbeTarget_AwayNoErrorOnFail
 
@@ -1948,6 +2006,8 @@ data MovetoMeshCoordinate (f :: Type -> Type)
 
 instance Default (MovetoMeshCoordinate NotDefined)
 
+instance Default (MovetoMeshCoordinate Required)
+
 instance Upcast (MovetoMeshCoordinate Required) GCodeCmd where
   upcast = Cmd_MovetoMeshCoordinate
 
@@ -1974,6 +2034,8 @@ data MoveinMachineCoordinates (f :: Type -> Type)
 
 instance Default (MoveinMachineCoordinates NotDefined)
 
+instance Default (MoveinMachineCoordinates Required)
+
 instance Upcast (MoveinMachineCoordinates Required) GCodeCmd where
   upcast = Cmd_MoveinMachineCoordinates
 
@@ -1991,6 +2053,8 @@ data SelectWorkspace_1 (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SelectWorkspace_1 NotDefined)
+
+instance Default (SelectWorkspace_1 Required)
 
 instance Upcast (SelectWorkspace_1 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_1
@@ -2010,6 +2074,8 @@ data SelectWorkspace_2 (f :: Type -> Type)
 
 instance Default (SelectWorkspace_2 NotDefined)
 
+instance Default (SelectWorkspace_2 Required)
+
 instance Upcast (SelectWorkspace_2 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_2
 
@@ -2027,6 +2093,8 @@ data SelectWorkspace_3 (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SelectWorkspace_3 NotDefined)
+
+instance Default (SelectWorkspace_3 Required)
 
 instance Upcast (SelectWorkspace_3 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_3
@@ -2046,6 +2114,8 @@ data SelectWorkspace_4 (f :: Type -> Type)
 
 instance Default (SelectWorkspace_4 NotDefined)
 
+instance Default (SelectWorkspace_4 Required)
+
 instance Upcast (SelectWorkspace_4 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_4
 
@@ -2063,6 +2133,8 @@ data SelectWorkspace_5 (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SelectWorkspace_5 NotDefined)
+
+instance Default (SelectWorkspace_5 Required)
 
 instance Upcast (SelectWorkspace_5 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_5
@@ -2082,6 +2154,8 @@ data SelectWorkspace_6 (f :: Type -> Type)
 
 instance Default (SelectWorkspace_6 NotDefined)
 
+instance Default (SelectWorkspace_6 Required)
+
 instance Upcast (SelectWorkspace_6 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_6
 
@@ -2099,6 +2173,8 @@ data SelectWorkspace_7 (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SelectWorkspace_7 NotDefined)
+
+instance Default (SelectWorkspace_7 Required)
 
 instance Upcast (SelectWorkspace_7 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_7
@@ -2118,6 +2194,8 @@ data SelectWorkspace_8 (f :: Type -> Type)
 
 instance Default (SelectWorkspace_8 NotDefined)
 
+instance Default (SelectWorkspace_8 Required)
+
 instance Upcast (SelectWorkspace_8 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_8
 
@@ -2135,6 +2213,8 @@ data SelectWorkspace_9 (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SelectWorkspace_9 NotDefined)
+
+instance Default (SelectWorkspace_9 Required)
 
 instance Upcast (SelectWorkspace_9 Required) GCodeCmd where
   upcast = Cmd_SelectWorkspace_9
@@ -2161,6 +2241,8 @@ data StoredPositions (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (StoredPositions NotDefined)
+
+instance Default (StoredPositions Required)
 
 instance Upcast (StoredPositions Required) GCodeCmd where
   upcast = Cmd_StoredPositions
@@ -2197,6 +2279,8 @@ data ReturntoSavedPosition (f :: Type -> Type)
 
 instance Default (ReturntoSavedPosition NotDefined)
 
+instance Default (ReturntoSavedPosition Required)
+
 instance Upcast (ReturntoSavedPosition Required) GCodeCmd where
   upcast = Cmd_ReturntoSavedPosition
 
@@ -2226,6 +2310,8 @@ data ProbeTemperatureCalibration (f :: Type -> Type)
 
 instance Default (ProbeTemperatureCalibration NotDefined)
 
+instance Default (ProbeTemperatureCalibration Required)
+
 instance Upcast (ProbeTemperatureCalibration Required) GCodeCmd where
   upcast = Cmd_ProbeTemperatureCalibration
 
@@ -2249,6 +2335,8 @@ data CancelCurrentMotionMode (f :: Type -> Type)
 
 instance Default (CancelCurrentMotionMode NotDefined)
 
+instance Default (CancelCurrentMotionMode Required)
+
 instance Upcast (CancelCurrentMotionMode Required) GCodeCmd where
   upcast = Cmd_CancelCurrentMotionMode
 
@@ -2267,6 +2355,8 @@ data AbsolutePositioning (f :: Type -> Type)
 
 instance Default (AbsolutePositioning NotDefined)
 
+instance Default (AbsolutePositioning Required)
+
 instance Upcast (AbsolutePositioning Required) GCodeCmd where
   upcast = Cmd_AbsolutePositioning
 
@@ -2284,6 +2374,8 @@ data RelativePositioning (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (RelativePositioning NotDefined)
+
+instance Default (RelativePositioning Required)
 
 instance Upcast (RelativePositioning Required) GCodeCmd where
   upcast = Cmd_RelativePositioning
@@ -2312,6 +2404,8 @@ data SetPosition (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetPosition NotDefined)
+
+instance Default (SetPosition Required)
 
 instance Upcast (SetPosition Required) GCodeCmd where
   upcast = Cmd_SetPosition
@@ -2348,6 +2442,8 @@ data BacklashCalibration (f :: Type -> Type)
 
 instance Default (BacklashCalibration NotDefined)
 
+instance Default (BacklashCalibration Required)
+
 instance Upcast (BacklashCalibration Required) GCodeCmd where
   upcast = Cmd_BacklashCalibration
 
@@ -2377,6 +2473,8 @@ data UnconditionalStop (f :: Type -> Type)
 
 instance Default (UnconditionalStop NotDefined)
 
+instance Default (UnconditionalStop Required)
+
 instance Upcast (UnconditionalStop Required) GCodeCmd where
   upcast = Cmd_UnconditionalStop
 
@@ -2403,6 +2501,8 @@ data SpindleCWLaserOn (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SpindleCWLaserOn NotDefined)
+
+instance Default (SpindleCWLaserOn Required)
 
 instance Upcast (SpindleCWLaserOn Required) GCodeCmd where
   upcast = Cmd_SpindleCWLaserOn
@@ -2431,6 +2531,8 @@ data SpindleCCWLaserOn (f :: Type -> Type)
 
 instance Default (SpindleCCWLaserOn NotDefined)
 
+instance Default (SpindleCCWLaserOn Required)
+
 instance Upcast (SpindleCCWLaserOn Required) GCodeCmd where
   upcast = Cmd_SpindleCCWLaserOn
 
@@ -2455,6 +2557,8 @@ data SpindleLaserOff (f :: Type -> Type)
 
 instance Default (SpindleLaserOff NotDefined)
 
+instance Default (SpindleLaserOff Required)
+
 instance Upcast (SpindleLaserOff Required) GCodeCmd where
   upcast = Cmd_SpindleLaserOff
 
@@ -2472,6 +2576,8 @@ data CoolantControls_Mist (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (CoolantControls_Mist NotDefined)
+
+instance Default (CoolantControls_Mist Required)
 
 instance Upcast (CoolantControls_Mist Required) GCodeCmd where
   upcast = Cmd_CoolantControls_Mist
@@ -2491,6 +2597,8 @@ data CoolantControls_Flood (f :: Type -> Type)
 
 instance Default (CoolantControls_Flood NotDefined)
 
+instance Default (CoolantControls_Flood Required)
+
 instance Upcast (CoolantControls_Flood Required) GCodeCmd where
   upcast = Cmd_CoolantControls_Flood
 
@@ -2508,6 +2616,8 @@ data CoolantControls_Off (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (CoolantControls_Off NotDefined)
+
+instance Default (CoolantControls_Off Required)
 
 instance Upcast (CoolantControls_Off Required) GCodeCmd where
   upcast = Cmd_CoolantControls_Off
@@ -2527,6 +2637,8 @@ data VacuumBlowerControl_On (f :: Type -> Type)
 
 instance Default (VacuumBlowerControl_On NotDefined)
 
+instance Default (VacuumBlowerControl_On Required)
+
 instance Upcast (VacuumBlowerControl_On Required) GCodeCmd where
   upcast = Cmd_VacuumBlowerControl_On
 
@@ -2544,6 +2656,8 @@ data VacuumBlowerControl_Off (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (VacuumBlowerControl_Off NotDefined)
+
+instance Default (VacuumBlowerControl_Off Required)
 
 instance Upcast (VacuumBlowerControl_Off Required) GCodeCmd where
   upcast = Cmd_VacuumBlowerControl_Off
@@ -2563,6 +2677,8 @@ data ExpectedPrinterCheck (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ExpectedPrinterCheck NotDefined)
+
+instance Default (ExpectedPrinterCheck Required)
 
 instance Upcast (ExpectedPrinterCheck Required) GCodeCmd where
   upcast = Cmd_ExpectedPrinterCheck
@@ -2591,6 +2707,8 @@ data EnableSteppers (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (EnableSteppers NotDefined)
+
+instance Default (EnableSteppers Required)
 
 instance Upcast (EnableSteppers Required) GCodeCmd where
   upcast = Cmd_EnableSteppers
@@ -2634,6 +2752,8 @@ data DisableSteppers (f :: Type -> Type)
 
 instance Default (DisableSteppers NotDefined)
 
+instance Default (DisableSteppers Required)
+
 instance Upcast (DisableSteppers Required) GCodeCmd where
   upcast = Cmd_DisableSteppers
 
@@ -2669,6 +2789,8 @@ data ListSDCard (f :: Type -> Type)
 
 instance Default (ListSDCard NotDefined)
 
+instance Default (ListSDCard Required)
+
 instance Upcast (ListSDCard Required) GCodeCmd where
   upcast = Cmd_ListSDCard
 
@@ -2693,6 +2815,8 @@ data InitSDCard (f :: Type -> Type)
 
 instance Default (InitSDCard NotDefined)
 
+instance Default (InitSDCard Required)
+
 instance Upcast (InitSDCard Required) GCodeCmd where
   upcast = Cmd_InitSDCard
 
@@ -2710,6 +2834,8 @@ data ReleaseSDCard (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ReleaseSDCard NotDefined)
+
+instance Default (ReleaseSDCard Required)
 
 instance Upcast (ReleaseSDCard Required) GCodeCmd where
   upcast = Cmd_ReleaseSDCard
@@ -2730,6 +2856,8 @@ data SelectSDFile (f :: Type -> Type)
 
 instance Default (SelectSDFile NotDefined)
 
+instance Default (SelectSDFile Required)
+
 instance Upcast (SelectSDFile Required) GCodeCmd where
   upcast = Cmd_SelectSDFile
 
@@ -2749,6 +2877,8 @@ data StartorResumeSDPrint (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (StartorResumeSDPrint NotDefined)
+
+instance Default (StartorResumeSDPrint Required)
 
 instance Upcast (StartorResumeSDPrint Required) GCodeCmd where
   upcast = Cmd_StartorResumeSDPrint
@@ -2773,6 +2903,8 @@ data PauseSDPrint (f :: Type -> Type)
 
 instance Default (PauseSDPrint NotDefined)
 
+instance Default (PauseSDPrint Required)
+
 instance Upcast (PauseSDPrint Required) GCodeCmd where
   upcast = Cmd_PauseSDPrint
 
@@ -2791,6 +2923,8 @@ data SetSDPosition (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetSDPosition NotDefined)
+
+instance Default (SetSDPosition Required)
 
 instance Upcast (SetSDPosition Required) GCodeCmd where
   upcast = Cmd_SetSDPosition
@@ -2811,6 +2945,8 @@ data ReportSDPrintStatus (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ReportSDPrintStatus NotDefined)
+
+instance Default (ReportSDPrintStatus Required)
 
 instance Upcast (ReportSDPrintStatus Required) GCodeCmd where
   upcast = Cmd_ReportSDPrintStatus
@@ -2836,6 +2972,8 @@ data StartSDWrite (f :: Type -> Type)
 
 instance Default (StartSDWrite NotDefined)
 
+instance Default (StartSDWrite Required)
+
 instance Upcast (StartSDWrite Required) GCodeCmd where
   upcast = Cmd_StartSDWrite
 
@@ -2853,6 +2991,8 @@ data StopSDWrite (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (StopSDWrite NotDefined)
+
+instance Default (StopSDWrite Required)
 
 instance Upcast (StopSDWrite Required) GCodeCmd where
   upcast = Cmd_StopSDWrite
@@ -2873,6 +3013,8 @@ data DeleteSDFile (f :: Type -> Type)
 
 instance Default (DeleteSDFile NotDefined)
 
+instance Default (DeleteSDFile Required)
+
 instance Upcast (DeleteSDFile Required) GCodeCmd where
   upcast = Cmd_DeleteSDFile
 
@@ -2890,6 +3032,8 @@ data ReportPrintTime (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ReportPrintTime NotDefined)
+
+instance Default (ReportPrintTime Required)
 
 instance Upcast (ReportPrintTime Required) GCodeCmd where
   upcast = Cmd_ReportPrintTime
@@ -2910,6 +3054,8 @@ data SelectandStart (f :: Type -> Type)
 
 instance Default (SelectandStart NotDefined)
 
+instance Default (SelectandStart Required)
+
 instance Upcast (SelectandStart Required) GCodeCmd where
   upcast = Cmd_SelectandStart
 
@@ -2928,6 +3074,8 @@ data GetLongPath (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (GetLongPath NotDefined)
+
+instance Default (GetLongPath Required)
 
 instance Upcast (GetLongPath Required) GCodeCmd where
   upcast = Cmd_GetLongPath
@@ -2948,6 +3096,8 @@ data SDCardSorting (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SDCardSorting NotDefined)
+
+instance Default (SDCardSorting Required)
 
 instance Upcast (SDCardSorting Required) GCodeCmd where
   upcast = Cmd_SDCardSorting
@@ -3007,6 +3157,8 @@ data PinsDebugging (f :: Type -> Type)
 
 instance Default (PinsDebugging NotDefined)
 
+instance Default (PinsDebugging Required)
+
 instance Upcast (PinsDebugging Required) GCodeCmd where
   upcast = Cmd_PinsDebugging
 
@@ -3035,6 +3187,8 @@ data TogglePins (f :: Type -> Type)
 
 instance Default (TogglePins NotDefined)
 
+instance Default (TogglePins Required)
+
 instance Upcast (TogglePins Required) GCodeCmd where
   upcast = Cmd_TogglePins
 
@@ -3060,6 +3214,8 @@ data ProbeRepeatabilityTest (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ProbeRepeatabilityTest NotDefined)
+
+instance Default (ProbeRepeatabilityTest Required)
 
 instance Upcast (ProbeRepeatabilityTest Required) GCodeCmd where
   upcast = Cmd_ProbeRepeatabilityTest
@@ -3093,6 +3249,8 @@ data SetPrintProgress (f :: Type -> Type)
 
 instance Default (SetPrintProgress NotDefined)
 
+instance Default (SetPrintProgress Required)
+
 instance Upcast (SetPrintProgress Required) GCodeCmd where
   upcast = Cmd_SetPrintProgress
 
@@ -3118,6 +3276,8 @@ data StartPrintJobTimer (f :: Type -> Type)
 
 instance Default (StartPrintJobTimer NotDefined)
 
+instance Default (StartPrintJobTimer Required)
+
 instance Upcast (StartPrintJobTimer Required) GCodeCmd where
   upcast = Cmd_StartPrintJobTimer
 
@@ -3135,6 +3295,8 @@ data PausePrintJobTimer (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (PausePrintJobTimer NotDefined)
+
+instance Default (PausePrintJobTimer Required)
 
 instance Upcast (PausePrintJobTimer Required) GCodeCmd where
   upcast = Cmd_PausePrintJobTimer
@@ -3154,6 +3316,8 @@ data StopPrintJobTimer (f :: Type -> Type)
 
 instance Default (StopPrintJobTimer NotDefined)
 
+instance Default (StopPrintJobTimer Required)
+
 instance Upcast (StopPrintJobTimer Required) GCodeCmd where
   upcast = Cmd_StopPrintJobTimer
 
@@ -3171,6 +3335,8 @@ data PrintJobStats (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (PrintJobStats NotDefined)
+
+instance Default (PrintJobStats Required)
 
 instance Upcast (PrintJobStats Required) GCodeCmd where
   upcast = Cmd_PrintJobStats
@@ -3191,6 +3357,8 @@ data PowerOn (f :: Type -> Type)
 
 instance Default (PowerOn NotDefined)
 
+instance Default (PowerOn Required)
+
 instance Upcast (PowerOn Required) GCodeCmd where
   upcast = Cmd_PowerOn
 
@@ -3208,6 +3376,8 @@ data PowerOff (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (PowerOff NotDefined)
+
+instance Default (PowerOff Required)
 
 instance Upcast (PowerOff Required) GCodeCmd where
   upcast = Cmd_PowerOff
@@ -3227,6 +3397,8 @@ data EAbsolute (f :: Type -> Type)
 
 instance Default (EAbsolute NotDefined)
 
+instance Default (EAbsolute Required)
+
 instance Upcast (EAbsolute Required) GCodeCmd where
   upcast = Cmd_EAbsolute
 
@@ -3244,6 +3416,8 @@ data ERelative (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ERelative NotDefined)
+
+instance Default (ERelative Required)
 
 instance Upcast (ERelative Required) GCodeCmd where
   upcast = Cmd_ERelative
@@ -3286,6 +3460,8 @@ data HotendIdleTimeout (f :: Type -> Type)
 
 instance Default (HotendIdleTimeout NotDefined)
 
+instance Default (HotendIdleTimeout Required)
+
 instance Upcast (HotendIdleTimeout Required) GCodeCmd where
   upcast = Cmd_HotendIdleTimeout
 
@@ -3310,6 +3486,8 @@ data DisableHotendIdleTimeout (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (DisableHotendIdleTimeout NotDefined)
+
+instance Default (DisableHotendIdleTimeout Required)
 
 instance Upcast (DisableHotendIdleTimeout Required) GCodeCmd where
   upcast = Cmd_DisableHotendIdleTimeout
@@ -3339,6 +3517,8 @@ data SetAxisStepsperunit (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetAxisStepsperunit NotDefined)
+
+instance Default (SetAxisStepsperunit Required)
 
 instance Upcast (SetAxisStepsperunit Required) GCodeCmd where
   upcast = Cmd_SetAxisStepsperunit
@@ -3377,6 +3557,8 @@ data SetHotendTemperature (f :: Type -> Type)
 
 instance Default (SetHotendTemperature NotDefined)
 
+instance Default (SetHotendTemperature Required)
+
 instance Upcast (SetHotendTemperature Required) GCodeCmd where
   upcast = Cmd_SetHotendTemperature
 
@@ -3405,6 +3587,8 @@ data ReportTemperatures (f :: Type -> Type)
 
 instance Default (ReportTemperatures NotDefined)
 
+instance Default (ReportTemperatures Required)
+
 instance Upcast (ReportTemperatures Required) GCodeCmd where
   upcast = Cmd_ReportTemperatures
 
@@ -3432,6 +3616,8 @@ data SetFanSpeed (f :: Type -> Type)
 
 instance Default (SetFanSpeed NotDefined)
 
+instance Default (SetFanSpeed Required)
+
 instance Upcast (SetFanSpeed Required) GCodeCmd where
   upcast = Cmd_SetFanSpeed
 
@@ -3458,6 +3644,8 @@ data FanOff (f :: Type -> Type)
 
 instance Default (FanOff NotDefined)
 
+instance Default (FanOff Required)
+
 instance Upcast (FanOff Required) GCodeCmd where
   upcast = Cmd_FanOff
 
@@ -3475,6 +3663,8 @@ data BreakandContinue (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (BreakandContinue NotDefined)
+
+instance Default (BreakandContinue Required)
 
 instance Upcast (BreakandContinue Required) GCodeCmd where
   upcast = Cmd_BreakandContinue
@@ -3499,6 +3689,8 @@ data WaitforHotendTemperature (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (WaitforHotendTemperature NotDefined)
+
+instance Default (WaitforHotendTemperature Required)
 
 instance Upcast (WaitforHotendTemperature Required) GCodeCmd where
   upcast = Cmd_WaitforHotendTemperature
@@ -3528,6 +3720,8 @@ data SetGetLineNumber (f :: Type -> Type)
 
 instance Default (SetGetLineNumber NotDefined)
 
+instance Default (SetGetLineNumber Required)
+
 instance Upcast (SetGetLineNumber Required) GCodeCmd where
   upcast = Cmd_SetGetLineNumber
 
@@ -3547,6 +3741,8 @@ data DebugLevel (f :: Type -> Type)
 
 instance Default (DebugLevel NotDefined)
 
+instance Default (DebugLevel Required)
+
 instance Upcast (DebugLevel Required) GCodeCmd where
   upcast = Cmd_DebugLevel
 
@@ -3564,6 +3760,8 @@ data FullShutdown (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FullShutdown NotDefined)
+
+instance Default (FullShutdown Required)
 
 instance Upcast (FullShutdown Required) GCodeCmd where
   upcast = Cmd_FullShutdown
@@ -3583,6 +3781,8 @@ data HostKeepalive (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (HostKeepalive NotDefined)
+
+instance Default (HostKeepalive Required)
 
 instance Upcast (HostKeepalive Required) GCodeCmd where
   upcast = Cmd_HostKeepalive
@@ -3604,6 +3804,8 @@ data GetCurrentPosition (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (GetCurrentPosition NotDefined)
+
+instance Default (GetCurrentPosition Required)
 
 instance Upcast (GetCurrentPosition Required) GCodeCmd where
   upcast = Cmd_GetCurrentPosition
@@ -3629,6 +3831,8 @@ data FirmwareInfo (f :: Type -> Type)
 
 instance Default (FirmwareInfo NotDefined)
 
+instance Default (FirmwareInfo Required)
+
 instance Upcast (FirmwareInfo Required) GCodeCmd where
   upcast = Cmd_FirmwareInfo
 
@@ -3647,6 +3851,8 @@ data SetLCDMessage (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetLCDMessage NotDefined)
+
+instance Default (SetLCDMessage Required)
 
 instance Upcast (SetLCDMessage Required) GCodeCmd where
   upcast = Cmd_SetLCDMessage
@@ -3667,6 +3873,8 @@ data SerialPrint (f :: Type -> Type)
 
 instance Default (SerialPrint NotDefined)
 
+instance Default (SerialPrint Required)
+
 instance Upcast (SerialPrint Required) GCodeCmd where
   upcast = Cmd_SerialPrint
 
@@ -3684,6 +3892,8 @@ data EndstopStates (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (EndstopStates NotDefined)
+
+instance Default (EndstopStates Required)
 
 instance Upcast (EndstopStates Required) GCodeCmd where
   upcast = Cmd_EndstopStates
@@ -3703,6 +3913,8 @@ data EnableEndstops (f :: Type -> Type)
 
 instance Default (EnableEndstops NotDefined)
 
+instance Default (EnableEndstops Required)
+
 instance Upcast (EnableEndstops Required) GCodeCmd where
   upcast = Cmd_EnableEndstops
 
@@ -3720,6 +3932,8 @@ data DisableEndstops (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (DisableEndstops NotDefined)
+
+instance Default (DisableEndstops Required)
 
 instance Upcast (DisableEndstops Required) GCodeCmd where
   upcast = Cmd_DisableEndstops
@@ -3740,6 +3954,8 @@ data SetBedTemperature (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetBedTemperature NotDefined)
+
+instance Default (SetBedTemperature Required)
 
 instance Upcast (SetBedTemperature Required) GCodeCmd where
   upcast = Cmd_SetBedTemperature
@@ -3765,6 +3981,8 @@ data SetChamberTemperature (f :: Type -> Type)
 
 instance Default (SetChamberTemperature NotDefined)
 
+instance Default (SetChamberTemperature Required)
+
 instance Upcast (SetChamberTemperature Required) GCodeCmd where
   upcast = Cmd_SetChamberTemperature
 
@@ -3786,6 +4004,8 @@ data WaitforBedTemperature (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (WaitforBedTemperature NotDefined)
+
+instance Default (WaitforBedTemperature Required)
 
 instance Upcast (WaitforBedTemperature Required) GCodeCmd where
   upcast = Cmd_WaitforBedTemperature
@@ -3815,6 +4035,8 @@ data VolumetricExtrusionDiameter (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (VolumetricExtrusionDiameter NotDefined)
+
+instance Default (VolumetricExtrusionDiameter Required)
 
 instance Upcast (VolumetricExtrusionDiameter Required) GCodeCmd where
   upcast = Cmd_VolumetricExtrusionDiameter
@@ -3847,6 +4069,8 @@ data PrintTravelMoveLimits (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (PrintTravelMoveLimits NotDefined)
+
+instance Default (PrintTravelMoveLimits Required)
 
 instance Upcast (PrintTravelMoveLimits Required) GCodeCmd where
   upcast = Cmd_PrintTravelMoveLimits
@@ -3881,6 +4105,8 @@ data SetMaxFeedrate (f :: Type -> Type)
 
 instance Default (SetMaxFeedrate NotDefined)
 
+instance Default (SetMaxFeedrate Required)
+
 instance Upcast (SetMaxFeedrate Required) GCodeCmd where
   upcast = Cmd_SetMaxFeedrate
 
@@ -3910,6 +4136,8 @@ data SetStartingAcceleration (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetStartingAcceleration NotDefined)
+
+instance Default (SetStartingAcceleration Required)
 
 instance Upcast (SetStartingAcceleration Required) GCodeCmd where
   upcast = Cmd_SetStartingAcceleration
@@ -3943,6 +4171,8 @@ data SetAdvancedSettings (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetAdvancedSettings NotDefined)
+
+instance Default (SetAdvancedSettings Required)
 
 instance Upcast (SetAdvancedSettings Required) GCodeCmd where
   upcast = Cmd_SetAdvancedSettings
@@ -3984,6 +4214,8 @@ data SetHomeOffsets (f :: Type -> Type)
 
 instance Default (SetHomeOffsets NotDefined)
 
+instance Default (SetHomeOffsets Required)
+
 instance Upcast (SetHomeOffsets Required) GCodeCmd where
   upcast = Cmd_SetHomeOffsets
 
@@ -4018,6 +4250,8 @@ data SetFeedratePercentage (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetFeedratePercentage NotDefined)
+
+instance Default (SetFeedratePercentage Required)
 
 instance Upcast (SetFeedratePercentage Required) GCodeCmd where
   upcast = Cmd_SetFeedratePercentage
@@ -4068,6 +4302,8 @@ data FinishMoves (f :: Type -> Type)
 
 instance Default (FinishMoves NotDefined)
 
+instance Default (FinishMoves Required)
+
 instance Upcast (FinishMoves Required) GCodeCmd where
   upcast = Cmd_FinishMoves
 
@@ -4088,6 +4324,8 @@ data DeployProbe (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (DeployProbe NotDefined)
+
+instance Default (DeployProbe Required)
 
 instance Upcast (DeployProbe Required) GCodeCmd where
   upcast = Cmd_DeployProbe
@@ -4114,6 +4352,8 @@ data StowProbe (f :: Type -> Type)
 
 instance Default (StowProbe NotDefined)
 
+instance Default (StowProbe Required)
+
 instance Upcast (StowProbe Required) GCodeCmd where
   upcast = Cmd_StowProbe
 
@@ -4131,6 +4371,8 @@ data Quickstop (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (Quickstop NotDefined)
+
+instance Default (Quickstop Required)
 
 instance Upcast (Quickstop Required) GCodeCmd where
   upcast = Cmd_Quickstop
@@ -4150,6 +4392,8 @@ data SaveSettings (f :: Type -> Type)
 
 instance Default (SaveSettings NotDefined)
 
+instance Default (SaveSettings Required)
+
 instance Upcast (SaveSettings Required) GCodeCmd where
   upcast = Cmd_SaveSettings
 
@@ -4168,6 +4412,8 @@ data RestoreSettings (f :: Type -> Type)
 
 instance Default (RestoreSettings NotDefined)
 
+instance Default (RestoreSettings Required)
+
 instance Upcast (RestoreSettings Required) GCodeCmd where
   upcast = Cmd_RestoreSettings
 
@@ -4185,6 +4431,8 @@ data FactoryReset (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FactoryReset NotDefined)
+
+instance Default (FactoryReset Required)
 
 instance Upcast (FactoryReset Required) GCodeCmd where
   upcast = Cmd_FactoryReset
@@ -4205,6 +4453,8 @@ data ReportSettings (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ReportSettings NotDefined)
+
+instance Default (ReportSettings Required)
 
 instance Upcast (ReportSettings Required) GCodeCmd where
   upcast = Cmd_ReportSettings
@@ -4230,6 +4480,8 @@ data STOPRestart (f :: Type -> Type)
 
 instance Default (STOPRestart NotDefined)
 
+instance Default (STOPRestart Required)
+
 instance Upcast (STOPRestart Required) GCodeCmd where
   upcast = Cmd_STOPRestart
 
@@ -4248,6 +4500,8 @@ data FreeMemory (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FreeMemory NotDefined)
+
+instance Default (FreeMemory Required)
 
 instance Upcast (FreeMemory Required) GCodeCmd where
   upcast = Cmd_FreeMemory
@@ -4294,6 +4548,8 @@ data TMCDebugging (f :: Type -> Type)
 
 instance Default (TMCDebugging NotDefined)
 
+instance Default (TMCDebugging Required)
+
 instance Upcast (TMCDebugging Required) GCodeCmd where
   upcast = Cmd_TMCDebugging
 
@@ -4324,6 +4580,8 @@ data FanTachometers (f :: Type -> Type)
 
 instance Default (FanTachometers NotDefined)
 
+instance Default (FanTachometers Required)
+
 instance Upcast (FanTachometers Required) GCodeCmd where
   upcast = Cmd_FanTachometers
 
@@ -4346,6 +4604,8 @@ data ParkHead (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ParkHead NotDefined)
+
+instance Default (ParkHead Required)
 
 instance Upcast (ParkHead Required) GCodeCmd where
   upcast = Cmd_ParkHead
@@ -4374,6 +4634,8 @@ data Baricuda1Open (f :: Type -> Type)
 
 instance Default (Baricuda1Open NotDefined)
 
+instance Default (Baricuda1Open Required)
+
 instance Upcast (Baricuda1Open Required) GCodeCmd where
   upcast = Cmd_Baricuda1Open
 
@@ -4391,6 +4653,8 @@ data Baricuda1Close (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (Baricuda1Close NotDefined)
+
+instance Default (Baricuda1Close Required)
 
 instance Upcast (Baricuda1Close Required) GCodeCmd where
   upcast = Cmd_Baricuda1Close
@@ -4411,6 +4675,8 @@ data Baricuda2Open (f :: Type -> Type)
 
 instance Default (Baricuda2Open NotDefined)
 
+instance Default (Baricuda2Open Required)
+
 instance Upcast (Baricuda2Open Required) GCodeCmd where
   upcast = Cmd_Baricuda2Open
 
@@ -4428,6 +4694,8 @@ data Baricuda2Close (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (Baricuda2Close NotDefined)
+
+instance Default (Baricuda2Close Required)
 
 instance Upcast (Baricuda2Close Required) GCodeCmd where
   upcast = Cmd_Baricuda2Close
@@ -4447,6 +4715,8 @@ data SetLaserCoolerTemperature (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetLaserCoolerTemperature NotDefined)
+
+instance Default (SetLaserCoolerTemperature Required)
 
 instance Upcast (SetLaserCoolerTemperature Required) GCodeCmd where
   upcast = Cmd_SetLaserCoolerTemperature
@@ -4469,6 +4739,8 @@ data SetMaterialPreset (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetMaterialPreset NotDefined)
+
+instance Default (SetMaterialPreset Required)
 
 instance Upcast (SetMaterialPreset Required) GCodeCmd where
   upcast = Cmd_SetMaterialPreset
@@ -4497,6 +4769,8 @@ data SetTemperatureUnits (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetTemperatureUnits NotDefined)
+
+instance Default (SetTemperatureUnits Required)
 
 instance Upcast (SetTemperatureUnits Required) GCodeCmd where
   upcast = Cmd_SetTemperatureUnits
@@ -4530,6 +4804,8 @@ data SetRGBWColor (f :: Type -> Type)
 
 instance Default (SetRGBWColor NotDefined)
 
+instance Default (SetRGBWColor Required)
+
 instance Upcast (SetRGBWColor Required) GCodeCmd where
   upcast = Cmd_SetRGBWColor
 
@@ -4560,6 +4836,8 @@ data PositionAutoReport (f :: Type -> Type)
 
 instance Default (PositionAutoReport NotDefined)
 
+instance Default (PositionAutoReport Required)
+
 instance Upcast (PositionAutoReport Required) GCodeCmd where
   upcast = Cmd_PositionAutoReport
 
@@ -4578,6 +4856,8 @@ data TemperatureAutoReport (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (TemperatureAutoReport NotDefined)
+
+instance Default (TemperatureAutoReport Required)
 
 instance Upcast (TemperatureAutoReport Required) GCodeCmd where
   upcast = Cmd_TemperatureAutoReport
@@ -4598,6 +4878,8 @@ data SetMixFactor (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetMixFactor NotDefined)
+
+instance Default (SetMixFactor Required)
 
 instance Upcast (SetMixFactor Required) GCodeCmd where
   upcast = Cmd_SetMixFactor
@@ -4646,6 +4928,8 @@ data SetMix (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetMix NotDefined)
+
+instance Default (SetMix Required)
 
 instance Upcast (SetMix Required) GCodeCmd where
   upcast = Cmd_SetMix
@@ -4709,6 +4993,8 @@ data WaitforChamberTemperature (f :: Type -> Type)
 
 instance Default (WaitforChamberTemperature NotDefined)
 
+instance Default (WaitforChamberTemperature Required)
+
 instance Upcast (WaitforChamberTemperature Required) GCodeCmd where
   upcast = Cmd_WaitforChamberTemperature
 
@@ -4734,6 +5020,8 @@ data WaitforProbeTemperature (f :: Type -> Type)
 
 instance Default (WaitforProbeTemperature NotDefined)
 
+instance Default (WaitforProbeTemperature Required)
+
 instance Upcast (WaitforProbeTemperature Required) GCodeCmd where
   upcast = Cmd_WaitforProbeTemperature
 
@@ -4758,6 +5046,8 @@ data WaitForLaserCoolerTemperature (f :: Type -> Type)
 
 instance Default (WaitForLaserCoolerTemperature NotDefined)
 
+instance Default (WaitForLaserCoolerTemperature Required)
+
 instance Upcast (WaitForLaserCoolerTemperature Required) GCodeCmd where
   upcast = Cmd_WaitForLaserCoolerTemperature
 
@@ -4779,6 +5069,8 @@ data FirmwareRetractionSettings (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FirmwareRetractionSettings NotDefined)
+
+instance Default (FirmwareRetractionSettings Required)
 
 instance Upcast (FirmwareRetractionSettings Required) GCodeCmd where
   upcast = Cmd_FirmwareRetractionSettings
@@ -4808,6 +5100,8 @@ data FirmwareRecoverSettings (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FirmwareRecoverSettings NotDefined)
+
+instance Default (FirmwareRecoverSettings Required)
 
 instance Upcast (FirmwareRecoverSettings Required) GCodeCmd where
   upcast = Cmd_FirmwareRecoverSettings
@@ -4862,6 +5156,8 @@ data HomingFeedrate (f :: Type -> Type)
 
 instance Default (HomingFeedrate NotDefined)
 
+instance Default (HomingFeedrate Required)
+
 instance Upcast (HomingFeedrate Required) GCodeCmd where
   upcast = Cmd_HomingFeedrate
 
@@ -4893,6 +5189,8 @@ data SoftwareEndstops (f :: Type -> Type)
 
 instance Default (SoftwareEndstops NotDefined)
 
+instance Default (SoftwareEndstops Required)
+
 instance Upcast (SoftwareEndstops Required) GCodeCmd where
   upcast = Cmd_SoftwareEndstops
 
@@ -4911,6 +5209,8 @@ data FilamentSwapParameters (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FilamentSwapParameters NotDefined)
+
+instance Default (FilamentSwapParameters Required)
 
 instance Upcast (FilamentSwapParameters Required) GCodeCmd where
   upcast = Cmd_FilamentSwapParameters
@@ -4933,6 +5233,8 @@ data SetHotendOffset (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetHotendOffset NotDefined)
+
+instance Default (SetHotendOffset Required)
 
 instance Upcast (SetHotendOffset Required) GCodeCmd where
   upcast = Cmd_SetHotendOffset
@@ -4985,6 +5287,8 @@ data TriggerCamera (f :: Type -> Type)
 
 instance Default (TriggerCamera NotDefined)
 
+instance Default (TriggerCamera Required)
+
 instance Upcast (TriggerCamera Required) GCodeCmd where
   upcast = Cmd_TriggerCamera
 
@@ -5003,6 +5307,8 @@ data LCDContrast (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (LCDContrast NotDefined)
+
+instance Default (LCDContrast Required)
 
 instance Upcast (LCDContrast Required) GCodeCmd where
   upcast = Cmd_LCDContrast
@@ -5042,6 +5348,8 @@ data LCDBrightness (f :: Type -> Type)
 
 instance Default (LCDBrightness NotDefined)
 
+instance Default (LCDBrightness Required)
+
 instance Upcast (LCDBrightness Required) GCodeCmd where
   upcast = Cmd_LCDBrightness
 
@@ -5060,6 +5368,8 @@ data I2CSend (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (I2CSend NotDefined)
+
+instance Default (I2CSend Required)
 
 instance Upcast (I2CSend Required) GCodeCmd where
   upcast = Cmd_I2CSend
@@ -5106,6 +5416,8 @@ data ScanI2CBus (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ScanI2CBus NotDefined)
+
+instance Default (ScanI2CBus Required)
 
 instance Upcast (ScanI2CBus Required) GCodeCmd where
   upcast = Cmd_ScanI2CBus
@@ -5201,6 +5513,8 @@ data Babystep (f :: Type -> Type)
 
 instance Default (Babystep NotDefined)
 
+instance Default (Babystep Required)
+
 instance Upcast (Babystep Required) GCodeCmd where
   upcast = Cmd_Babystep
 
@@ -5228,6 +5542,8 @@ data PlayTone (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (PlayTone NotDefined)
+
+instance Default (PlayTone Required)
 
 instance Upcast (PlayTone Required) GCodeCmd where
   upcast = Cmd_PlayTone
@@ -5259,6 +5575,8 @@ data SetHotendPID (f :: Type -> Type)
 
 instance Default (SetHotendPID NotDefined)
 
+instance Default (SetHotendPID Required)
+
 instance Upcast (SetHotendPID Required) GCodeCmd where
   upcast = Cmd_SetHotendPID
 
@@ -5289,6 +5607,8 @@ data ColdExtrude (f :: Type -> Type)
 
 instance Default (ColdExtrude NotDefined)
 
+instance Default (ColdExtrude Required)
+
 instance Upcast (ColdExtrude Required) GCodeCmd where
   upcast = Cmd_ColdExtrude
 
@@ -5316,6 +5636,8 @@ data PIDAutotune (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (PIDAutotune NotDefined)
+
+instance Default (PIDAutotune Required)
 
 instance Upcast (PIDAutotune Required) GCodeCmd where
   upcast = Cmd_PIDAutotune
@@ -5346,6 +5668,8 @@ data SetBedPID (f :: Type -> Type)
 
 instance Default (SetBedPID NotDefined)
 
+instance Default (SetBedPID Required)
+
 instance Upcast (SetBedPID Required) GCodeCmd where
   upcast = Cmd_SetBedPID
 
@@ -5375,6 +5699,8 @@ data UserThermistorParameters (f :: Type -> Type)
 
 instance Default (UserThermistorParameters NotDefined)
 
+instance Default (UserThermistorParameters Required)
+
 instance Upcast (UserThermistorParameters Required) GCodeCmd where
   upcast = Cmd_UserThermistorParameters
 
@@ -5402,6 +5728,8 @@ data ModelPredictiveTempControl (f :: Type -> Type)
 
 instance Default (ModelPredictiveTempControl NotDefined)
 
+instance Default (ModelPredictiveTempControl Required)
+
 instance Upcast (ModelPredictiveTempControl Required) GCodeCmd where
   upcast = Cmd_ModelPredictiveTempControl
 
@@ -5422,6 +5750,8 @@ data SetChamberPID (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetChamberPID NotDefined)
+
+instance Default (SetChamberPID Required)
 
 instance Upcast (SetChamberPID Required) GCodeCmd where
   upcast = Cmd_SetChamberPID
@@ -5448,6 +5778,8 @@ data SetMicrostepping (f :: Type -> Type)
 
 instance Default (SetMicrostepping NotDefined)
 
+instance Default (SetMicrostepping Required)
+
 instance Upcast (SetMicrostepping Required) GCodeCmd where
   upcast = Cmd_SetMicrostepping
 
@@ -5466,6 +5798,8 @@ data SetMicrostepPins (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetMicrostepPins NotDefined)
+
+instance Default (SetMicrostepPins Required)
 
 instance Upcast (SetMicrostepPins Required) GCodeCmd where
   upcast = Cmd_SetMicrostepPins
@@ -5486,6 +5820,8 @@ data CaseLightControl (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (CaseLightControl NotDefined)
+
+instance Default (CaseLightControl Required)
 
 instance Upcast (CaseLightControl Required) GCodeCmd where
   upcast = Cmd_CaseLightControl
@@ -5510,6 +5846,8 @@ data SCARAThetaA (f :: Type -> Type)
 
 instance Default (SCARAThetaA NotDefined)
 
+instance Default (SCARAThetaA Required)
+
 instance Upcast (SCARAThetaA Required) GCodeCmd where
   upcast = Cmd_SCARAThetaA
 
@@ -5527,6 +5865,8 @@ data SCARAThetaB (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SCARAThetaB NotDefined)
+
+instance Default (SCARAThetaB Required)
 
 instance Upcast (SCARAThetaB Required) GCodeCmd where
   upcast = Cmd_SCARAThetaB
@@ -5546,6 +5886,8 @@ data SCARAPsiA (f :: Type -> Type)
 
 instance Default (SCARAPsiA NotDefined)
 
+instance Default (SCARAPsiA Required)
+
 instance Upcast (SCARAPsiA Required) GCodeCmd where
   upcast = Cmd_SCARAPsiA
 
@@ -5564,6 +5906,8 @@ data SCARAPsiB (f :: Type -> Type)
 
 instance Default (SCARAPsiB NotDefined)
 
+instance Default (SCARAPsiB Required)
+
 instance Upcast (SCARAPsiB Required) GCodeCmd where
   upcast = Cmd_SCARAPsiB
 
@@ -5581,6 +5925,8 @@ data SCARAPsiC (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SCARAPsiC NotDefined)
+
+instance Default (SCARAPsiC Required)
 
 instance Upcast (SCARAPsiC Required) GCodeCmd where
   upcast = Cmd_SCARAPsiC
@@ -5601,6 +5947,8 @@ data ActivateSolenoid (f :: Type -> Type)
 
 instance Default (ActivateSolenoid NotDefined)
 
+instance Default (ActivateSolenoid Required)
+
 instance Upcast (ActivateSolenoid Required) GCodeCmd where
   upcast = Cmd_ActivateSolenoid
 
@@ -5619,6 +5967,8 @@ data DeactivateSolenoids (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (DeactivateSolenoids NotDefined)
+
+instance Default (DeactivateSolenoids Required)
 
 instance Upcast (DeactivateSolenoids Required) GCodeCmd where
   upcast = Cmd_DeactivateSolenoids
@@ -5664,6 +6014,8 @@ data FilamentWidthSensorNominalDiameter (f :: Type -> Type)
 
 instance Default (FilamentWidthSensorNominalDiameter NotDefined)
 
+instance Default (FilamentWidthSensorNominalDiameter Required)
+
 instance Upcast (FilamentWidthSensorNominalDiameter Required) GCodeCmd where
   upcast = Cmd_FilamentWidthSensorNominalDiameter
 
@@ -5683,6 +6035,8 @@ data FilamentWidthSensorOn (f :: Type -> Type)
 
 instance Default (FilamentWidthSensorOn NotDefined)
 
+instance Default (FilamentWidthSensorOn Required)
+
 instance Upcast (FilamentWidthSensorOn Required) GCodeCmd where
   upcast = Cmd_FilamentWidthSensorOn
 
@@ -5701,6 +6055,8 @@ data FilamentWidthSensorOff (f :: Type -> Type)
 
 instance Default (FilamentWidthSensorOff NotDefined)
 
+instance Default (FilamentWidthSensorOff Required)
+
 instance Upcast (FilamentWidthSensorOff Required) GCodeCmd where
   upcast = Cmd_FilamentWidthSensorOff
 
@@ -5718,6 +6074,8 @@ data ReadFilamentWidth (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ReadFilamentWidth NotDefined)
+
+instance Default (ReadFilamentWidth Required)
 
 instance Upcast (ReadFilamentWidth Required) GCodeCmd where
   upcast = Cmd_ReadFilamentWidth
@@ -5741,6 +6099,8 @@ data FilamentRunout (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FilamentRunout NotDefined)
+
+instance Default (FilamentRunout Required)
 
 instance Upcast (FilamentRunout Required) GCodeCmd where
   upcast = Cmd_FilamentRunout
@@ -5769,6 +6129,8 @@ data PowerlossRecovery (f :: Type -> Type)
 
 instance Default (PowerlossRecovery NotDefined)
 
+instance Default (PowerlossRecovery Required)
+
 instance Upcast (PowerlossRecovery Required) GCodeCmd where
   upcast = Cmd_PowerlossRecovery
 
@@ -5787,6 +6149,8 @@ data LCDLanguage (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (LCDLanguage NotDefined)
+
+instance Default (LCDLanguage Required)
 
 instance Upcast (LCDLanguage Required) GCodeCmd where
   upcast = Cmd_LCDLanguage
@@ -5811,6 +6175,8 @@ data BedLevelingState (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (BedLevelingState NotDefined)
+
+instance Default (BedLevelingState Required)
 
 instance Upcast (BedLevelingState Required) GCodeCmd where
   upcast = Cmd_BedLevelingState
@@ -5847,6 +6213,8 @@ data SetMeshValue (f :: Type -> Type)
 
 instance Default (SetMeshValue NotDefined)
 
+instance Default (SetMeshValue Required)
+
 instance Upcast (SetMeshValue Required) GCodeCmd where
   upcast = Cmd_SetMeshValue
 
@@ -5881,6 +6249,8 @@ data SetZMotorXY (f :: Type -> Type)
 
 instance Default (SetZMotorXY NotDefined)
 
+instance Default (SetZMotorXY Required)
+
 instance Upcast (SetZMotorXY Required) GCodeCmd where
   upcast = Cmd_SetZMotorXY
 
@@ -5912,6 +6282,8 @@ data XTwistCompensation (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (XTwistCompensation NotDefined)
+
+instance Default (XTwistCompensation Required)
 
 instance Upcast (XTwistCompensation Required) GCodeCmd where
   upcast = Cmd_XTwistCompensation
@@ -5945,6 +6317,8 @@ data BacklashCompensation (f :: Type -> Type)
 
 instance Default (BacklashCompensation NotDefined)
 
+instance Default (BacklashCompensation Required)
+
 instance Upcast (BacklashCompensation Required) GCodeCmd where
   upcast = Cmd_BacklashCompensation
 
@@ -5971,6 +6345,8 @@ data HomeOffsetsHere (f :: Type -> Type)
 
 instance Default (HomeOffsetsHere NotDefined)
 
+instance Default (HomeOffsetsHere Required)
+
 instance Upcast (HomeOffsetsHere Required) GCodeCmd where
   upcast = Cmd_HomeOffsetsHere
 
@@ -5991,6 +6367,8 @@ data PowerMonitor (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (PowerMonitor NotDefined)
+
+instance Default (PowerMonitor Required)
 
 instance Upcast (PowerMonitor Required) GCodeCmd where
   upcast = Cmd_PowerMonitor
@@ -6021,6 +6399,8 @@ data CancelObjects (f :: Type -> Type)
 
 instance Default (CancelObjects NotDefined)
 
+instance Default (CancelObjects Required)
+
 instance Upcast (CancelObjects Required) GCodeCmd where
   upcast = Cmd_CancelObjects
 
@@ -6048,6 +6428,8 @@ data FixedTimeMotion (f :: Type -> Type)
 
 instance Default (FixedTimeMotion NotDefined)
 
+instance Default (FixedTimeMotion Required)
+
 instance Upcast (FixedTimeMotion Required) GCodeCmd where
   upcast = Cmd_FixedTimeMotion
 
@@ -6067,6 +6449,8 @@ data FTMotionTrajectorySmoothing (f :: Type -> Type)
 
 instance Default (FTMotionTrajectorySmoothing NotDefined)
 
+instance Default (FTMotionTrajectorySmoothing Required)
+
 instance Upcast (FTMotionTrajectorySmoothing Required) GCodeCmd where
   upcast = Cmd_FTMotionTrajectorySmoothing
 
@@ -6085,6 +6469,8 @@ data ValidateEEPROMContents (f :: Type -> Type)
 
 instance Default (ValidateEEPROMContents NotDefined)
 
+instance Default (ValidateEEPROMContents Required)
+
 instance Upcast (ValidateEEPROMContents Required) GCodeCmd where
   upcast = Cmd_ValidateEEPROMContents
 
@@ -6102,6 +6488,8 @@ data LockMachine (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (LockMachine NotDefined)
+
+instance Default (LockMachine Required)
 
 instance Upcast (LockMachine Required) GCodeCmd where
   upcast = Cmd_LockMachine
@@ -6141,6 +6529,8 @@ data SetPasscode (f :: Type -> Type)
 
 instance Default (SetPasscode NotDefined)
 
+instance Default (SetPasscode Required)
+
 instance Upcast (SetPasscode Required) GCodeCmd where
   upcast = Cmd_SetPasscode
 
@@ -6158,6 +6548,8 @@ data AbortSDPrint (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (AbortSDPrint NotDefined)
+
+instance Default (AbortSDPrint Required)
 
 instance Upcast (AbortSDPrint Required) GCodeCmd where
   upcast = Cmd_AbortSDPrint
@@ -6197,6 +6589,8 @@ data MachineName (f :: Type -> Type)
 
 instance Default (MachineName NotDefined)
 
+instance Default (MachineName Required)
+
 instance Upcast (MachineName Required) GCodeCmd where
   upcast = Cmd_MachineName
 
@@ -6215,6 +6609,8 @@ data EthernetIPAddressNetworkIF (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (EthernetIPAddressNetworkIF NotDefined)
+
+instance Default (EthernetIPAddressNetworkIF Required)
 
 instance Upcast (EthernetIPAddressNetworkIF Required) GCodeCmd where
   upcast = Cmd_EthernetIPAddressNetworkIF
@@ -6235,6 +6631,8 @@ data EthernetSubnetMask (f :: Type -> Type)
 
 instance Default (EthernetSubnetMask NotDefined)
 
+instance Default (EthernetSubnetMask Required)
+
 instance Upcast (EthernetSubnetMask Required) GCodeCmd where
   upcast = Cmd_EthernetSubnetMask
 
@@ -6254,6 +6652,8 @@ data EthernetGatewayIPAddress (f :: Type -> Type)
 
 instance Default (EthernetGatewayIPAddress NotDefined)
 
+instance Default (EthernetGatewayIPAddress Required)
+
 instance Upcast (EthernetGatewayIPAddress Required) GCodeCmd where
   upcast = Cmd_EthernetGatewayIPAddress
 
@@ -6272,6 +6672,8 @@ data SetTMCSteppingMode (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetTMCSteppingMode NotDefined)
+
+instance Default (SetTMCSteppingMode Required)
 
 instance Upcast (SetTMCSteppingMode Required) GCodeCmd where
   upcast = Cmd_SetTMCSteppingMode
@@ -6320,6 +6722,8 @@ data NonlinearExtrusionControl (f :: Type -> Type)
 
 instance Default (NonlinearExtrusionControl NotDefined)
 
+instance Default (NonlinearExtrusionControl Required)
+
 instance Upcast (NonlinearExtrusionControl Required) GCodeCmd where
   upcast = Cmd_NonlinearExtrusionControl
 
@@ -6349,6 +6753,8 @@ data ZVInputShaping (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ZVInputShaping NotDefined)
+
+instance Default (ZVInputShaping Required)
 
 instance Upcast (ZVInputShaping Required) GCodeCmd where
   upcast = Cmd_ZVInputShaping
@@ -6385,6 +6791,8 @@ data FilamentChange (f :: Type -> Type)
 
 instance Default (FilamentChange NotDefined)
 
+instance Default (FilamentChange Required)
+
 instance Upcast (FilamentChange Required) GCodeCmd where
   upcast = Cmd_FilamentChange
 
@@ -6418,6 +6826,8 @@ data ConfigureFilamentChange (f :: Type -> Type)
 
 instance Default (ConfigureFilamentChange NotDefined)
 
+instance Default (ConfigureFilamentChange Required)
+
 instance Upcast (ConfigureFilamentChange Required) GCodeCmd where
   upcast = Cmd_ConfigureFilamentChange
 
@@ -6443,6 +6853,8 @@ data MultiNozzleMode (f :: Type -> Type)
 
 instance Default (MultiNozzleMode NotDefined)
 
+instance Default (MultiNozzleMode Required)
+
 instance Upcast (MultiNozzleMode Required) GCodeCmd where
   upcast = Cmd_MultiNozzleMode
 
@@ -6461,6 +6873,8 @@ data DeltaConfiguration (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (DeltaConfiguration NotDefined)
+
+instance Default (DeltaConfiguration Required)
 
 instance Upcast (DeltaConfiguration Required) GCodeCmd where
   upcast = Cmd_DeltaConfiguration
@@ -6481,6 +6895,8 @@ data SetDeltaEndstopAdjustments (f :: Type -> Type)
 
 instance Default (SetDeltaEndstopAdjustments NotDefined)
 
+instance Default (SetDeltaEndstopAdjustments Required)
+
 instance Upcast (SetDeltaEndstopAdjustments Required) GCodeCmd where
   upcast = Cmd_SetDeltaEndstopAdjustments
 
@@ -6500,6 +6916,8 @@ data DuetSmartEffectorSensitivity (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (DuetSmartEffectorSensitivity NotDefined)
+
+instance Default (DuetSmartEffectorSensitivity Required)
 
 instance Upcast (DuetSmartEffectorSensitivity Required) GCodeCmd where
   upcast = Cmd_DuetSmartEffectorSensitivity
@@ -6583,6 +7001,8 @@ data ControllerFanSettings (f :: Type -> Type)
 
 instance Default (ControllerFanSettings NotDefined)
 
+instance Default (ControllerFanSettings Required)
+
 instance Upcast (ControllerFanSettings Required) GCodeCmd where
   upcast = Cmd_ControllerFanSettings
 
@@ -6610,6 +7030,8 @@ data RepeatMarker (f :: Type -> Type)
 
 instance Default (RepeatMarker NotDefined)
 
+instance Default (RepeatMarker Required)
+
 instance Upcast (RepeatMarker Required) GCodeCmd where
   upcast = Cmd_RepeatMarker
 
@@ -6629,6 +7051,8 @@ data GcodeMacros (f :: Type -> Type)
 
 instance Default (GcodeMacros NotDefined)
 
+instance Default (GcodeMacros Required)
+
 instance Upcast (GcodeMacros Required) GCodeCmd where
   upcast = Cmd_GcodeMacros
 
@@ -6646,6 +7070,8 @@ data ReportGcodeMacros (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ReportGcodeMacros NotDefined)
+
+instance Default (ReportGcodeMacros Required)
 
 instance Upcast (ReportGcodeMacros Required) GCodeCmd where
   upcast = Cmd_ReportGcodeMacros
@@ -6667,6 +7093,8 @@ data XYZProbeOffset (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (XYZProbeOffset NotDefined)
+
+instance Default (XYZProbeOffset Required)
 
 instance Upcast (XYZProbeOffset Required) GCodeCmd where
   upcast = Cmd_XYZProbeOffset
@@ -6696,6 +7124,8 @@ data BedSkewCompensation (f :: Type -> Type)
 
 instance Default (BedSkewCompensation NotDefined)
 
+instance Default (BedSkewCompensation Required)
+
 instance Upcast (BedSkewCompensation Required) GCodeCmd where
   upcast = Cmd_BedSkewCompensation
 
@@ -6722,6 +7152,8 @@ data I2CPositionEncoders (f :: Type -> Type)
 
 instance Default (I2CPositionEncoders NotDefined)
 
+instance Default (I2CPositionEncoders Required)
+
 instance Upcast (I2CPositionEncoders Required) GCodeCmd where
   upcast = Cmd_I2CPositionEncoders
 
@@ -6740,6 +7172,8 @@ data ProbeTemperatureConfig (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (ProbeTemperatureConfig NotDefined)
+
+instance Default (ProbeTemperatureConfig Required)
 
 instance Upcast (ProbeTemperatureConfig Required) GCodeCmd where
   upcast = Cmd_ProbeTemperatureConfig
@@ -6782,6 +7216,8 @@ data LinearAdvanceFactor (f :: Type -> Type)
 
 instance Default (LinearAdvanceFactor NotDefined)
 
+instance Default (LinearAdvanceFactor Required)
+
 instance Upcast (LinearAdvanceFactor Required) GCodeCmd where
   upcast = Cmd_LinearAdvanceFactor
 
@@ -6813,6 +7249,8 @@ data StepperMotorCurrent (f :: Type -> Type)
 
 instance Default (StepperMotorCurrent NotDefined)
 
+instance Default (StepperMotorCurrent Required)
+
 instance Upcast (StepperMotorCurrent Required) GCodeCmd where
   upcast = Cmd_StepperMotorCurrent
 
@@ -6840,6 +7278,8 @@ data TrimpotStepperMotorCurrent (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (TrimpotStepperMotorCurrent NotDefined)
+
+instance Default (TrimpotStepperMotorCurrent Required)
 
 instance Upcast (TrimpotStepperMotorCurrent Required) GCodeCmd where
   upcast = Cmd_TrimpotStepperMotorCurrent
@@ -6884,6 +7324,8 @@ data ReportDACStepperCurrent (f :: Type -> Type)
 
 instance Default (ReportDACStepperCurrent NotDefined)
 
+instance Default (ReportDACStepperCurrent Required)
+
 instance Upcast (ReportDACStepperCurrent Required) GCodeCmd where
   upcast = Cmd_ReportDACStepperCurrent
 
@@ -6902,6 +7344,8 @@ data CommitDACtoEEPROM (f :: Type -> Type)
 
 instance Default (CommitDACtoEEPROM NotDefined)
 
+instance Default (CommitDACtoEEPROM Required)
+
 instance Upcast (CommitDACtoEEPROM Required) GCodeCmd where
   upcast = Cmd_CommitDACtoEEPROM
 
@@ -6919,6 +7363,8 @@ data TMCOTPreWarnCondition (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (TMCOTPreWarnCondition NotDefined)
+
+instance Default (TMCOTPreWarnCondition Required)
 
 instance Upcast (TMCOTPreWarnCondition Required) GCodeCmd where
   upcast = Cmd_TMCOTPreWarnCondition
@@ -6939,6 +7385,8 @@ data ClearTMCOTPreWarn (f :: Type -> Type)
 
 instance Default (ClearTMCOTPreWarn NotDefined)
 
+instance Default (ClearTMCOTPreWarn Required)
+
 instance Upcast (ClearTMCOTPreWarn Required) GCodeCmd where
   upcast = Cmd_ClearTMCOTPreWarn
 
@@ -6957,6 +7405,8 @@ data SetHybridThresholdSpeed (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (SetHybridThresholdSpeed NotDefined)
+
+instance Default (SetHybridThresholdSpeed Required)
 
 instance Upcast (SetHybridThresholdSpeed Required) GCodeCmd where
   upcast = Cmd_SetHybridThresholdSpeed
@@ -6977,6 +7427,8 @@ data TMCBumpSensitivity (f :: Type -> Type)
 
 instance Default (TMCBumpSensitivity NotDefined)
 
+instance Default (TMCBumpSensitivity Required)
+
 instance Upcast (TMCBumpSensitivity Required) GCodeCmd where
   upcast = Cmd_TMCBumpSensitivity
 
@@ -6996,6 +7448,8 @@ data TMCZAxisCalibration (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (TMCZAxisCalibration NotDefined)
+
+instance Default (TMCZAxisCalibration Required)
 
 instance Upcast (TMCZAxisCalibration Required) GCodeCmd where
   upcast = Cmd_TMCZAxisCalibration
@@ -7021,6 +7475,8 @@ data L6474ThermalWarningTest (f :: Type -> Type)
 
 instance Default (L6474ThermalWarningTest NotDefined)
 
+instance Default (L6474ThermalWarningTest Required)
+
 instance Upcast (L6474ThermalWarningTest Required) GCodeCmd where
   upcast = Cmd_L6474ThermalWarningTest
 
@@ -7039,6 +7495,8 @@ data L6474OvercurrentWarningTest (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (L6474OvercurrentWarningTest NotDefined)
+
+instance Default (L6474OvercurrentWarningTest Required)
 
 instance Upcast (L6474OvercurrentWarningTest Required) GCodeCmd where
   upcast = Cmd_L6474OvercurrentWarningTest
@@ -7059,6 +7517,8 @@ data L6474SpeedWarningTest (f :: Type -> Type)
 
 instance Default (L6474SpeedWarningTest NotDefined)
 
+instance Default (L6474SpeedWarningTest Required)
+
 instance Upcast (L6474SpeedWarningTest Required) GCodeCmd where
   upcast = Cmd_L6474SpeedWarningTest
 
@@ -7077,6 +7537,8 @@ data TMCChopperTiming (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (TMCChopperTiming NotDefined)
+
+instance Default (TMCChopperTiming Required)
 
 instance Upcast (TMCChopperTiming Required) GCodeCmd where
   upcast = Cmd_TMCChopperTiming
@@ -7097,6 +7559,8 @@ data TMCHomingCurrent (f :: Type -> Type)
 
 instance Default (TMCHomingCurrent NotDefined)
 
+instance Default (TMCHomingCurrent Required)
+
 instance Upcast (TMCHomingCurrent Required) GCodeCmd where
   upcast = Cmd_TMCHomingCurrent
 
@@ -7115,6 +7579,8 @@ data StartSDLogging (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (StartSDLogging NotDefined)
+
+instance Default (StartSDLogging Required)
 
 instance Upcast (StartSDLogging Required) GCodeCmd where
   upcast = Cmd_StartSDLogging
@@ -7140,6 +7606,8 @@ data MagneticParkingExtruder (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (MagneticParkingExtruder NotDefined)
+
+instance Default (MagneticParkingExtruder Required)
 
 instance Upcast (MagneticParkingExtruder Required) GCodeCmd where
   upcast = Cmd_MagneticParkingExtruder
@@ -7169,6 +7637,8 @@ data BackUpFlashSettingstoSD (f :: Type -> Type)
 
 instance Default (BackUpFlashSettingstoSD NotDefined)
 
+instance Default (BackUpFlashSettingstoSD Required)
+
 instance Upcast (BackUpFlashSettingstoSD Required) GCodeCmd where
   upcast = Cmd_BackUpFlashSettingstoSD
 
@@ -7186,6 +7656,8 @@ data RestoreFlashfromSD (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (RestoreFlashfromSD NotDefined)
+
+instance Default (RestoreFlashfromSD Required)
 
 instance Upcast (RestoreFlashfromSD Required) GCodeCmd where
   upcast = Cmd_RestoreFlashfromSD
@@ -7205,6 +7677,8 @@ data TouchScreenCalibration (f :: Type -> Type)
 
 instance Default (TouchScreenCalibration NotDefined)
 
+instance Default (TouchScreenCalibration Required)
+
 instance Upcast (TouchScreenCalibration Required) GCodeCmd where
   upcast = Cmd_TouchScreenCalibration
 
@@ -7222,6 +7696,8 @@ data FirmwareUpdate (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (FirmwareUpdate NotDefined)
+
+instance Default (FirmwareUpdate Required)
 
 instance Upcast (FirmwareUpdate Required) GCodeCmd where
   upcast = Cmd_FirmwareUpdate
@@ -7241,6 +7717,8 @@ data MAX7219Control (f :: Type -> Type)
   deriving (Generic)
 
 instance Default (MAX7219Control NotDefined)
+
+instance Default (MAX7219Control Required)
 
 instance Upcast (MAX7219Control Required) GCodeCmd where
   upcast = Cmd_MAX7219Control
