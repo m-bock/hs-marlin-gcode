@@ -49,6 +49,7 @@ library
 executable example
   import: common-opts
   default-language: Haskell2010
+  ghc-options: -Wno-ambiguous-fields
   hs-source-dirs: test
   main-is: Example.hs
   build-depends:
@@ -58,6 +59,7 @@ executable example
 
 test-suite marlin-gcode-test
   import: common-opts
+  ghc-options: -Wno-ambiguous-fields
   default-language: Haskell2010
   type: exitcode-stdio-1.0
   hs-source-dirs: test
